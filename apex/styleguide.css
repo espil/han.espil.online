@@ -1,0 +1,48 @@
+:root { 
+  --bunting: #0f1e47;
+  --white: #ffffff;
+}
+
+:root {
+  --black: rgba(0, 0, 0, 1);
+  --bunting-2: rgba(14, 30, 71, 1);
+  --bunting: rgba(15, 30, 71, 1);
+  --biscay: rgba(21, 44, 108, 1);
+  --eerie-black: rgba(30, 30, 30, 1);
+  --antique-brass: rgba(206, 169, 115, 1);
+  --alto: rgba(217, 217, 217, 1);
+  --brandy: rgba(220, 190, 145, 1);
+  --link-water: rgba(220, 229, 252, 1);
+  --mystic: rgba(229, 237, 244, 1);
+  --alice-blue: rgba(241, 245, 255, 1);
+  --zircon: rgba(244, 250, 255, 1);
+  --white-lilac: rgba(247, 250, 253, 1);
+  --white: rgba(255, 255, 255, 1);
+
+  --font-size-xs: 14px;
+  --font-size-s: 16px;
+  --font-size-m: 18px;
+  --font-size-l: 24px;
+  --font-size-xl: 32px;
+  --font-size-xxxxl: 64px;
+  --font-size-xl2: 36px;
+  --font-size-xl2: 40px;
+  --font-size-xxl2: 48px;
+  --font-size-xxxl2: 96px;
+
+  --font-family-general_sans-medium: "General Sans-Medium";
+  --font-family-general_sans-regular: "General Sans-Regular";
+  --font-family-general_sans-semibold: "General Sans-Semibold";
+  --font-family-helvetica_neue-regular: "Helvetica Neue-Regular";
+  --font-family-nexa-regular: "Nexa-Regular";
+  --font-family-poppins: "Poppins";
+  --font-family-poppins-bold: "Poppins-Bold";
+  --font-family-poppins-light: "Poppins-Light";
+  --font-family-poppins-semibold: "Poppins-SemiBold";
+  --font-family-suisse_works-bold: "Suisse Works-Bold";
+  --font-family-suisse_works-book: "Suisse Works-Book";
+  --font-family-suisse_works-regular: "Suisse Works-Regular";
+  --font-family-tiempos_headline-medium: "Tiempos Headline-Medium";
+}
+
+/* Classes */

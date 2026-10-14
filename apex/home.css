@@ -1,0 +1,144 @@
+/* screen - home */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  background: var(--black);  
+  cursor: url('./logo/cursor.svg'), pointer;
+  cursor: url('./logo/cursor.svg'), default;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden;
+}
+
+.container {
+  width: 240px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 50px);
+  line-height: 52px;
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.home {
+  align-items: flex-start;
+  background-color: var(--white);
+  border: 1px none;
+  display: flex;
+  width: auto;
+}
+
+.home .overlap-group {
+  position: relative;
+  width: 100%;
+}
+
+.home .rectangle-14 {
+  background-color: var(--bunting);
+  border: 1px none;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.reveal{
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: 2s all ease;
+}
+
+.reveal.active{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@font-face {
+  font-family: "General Sans-Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://fonts.animaapp.com/GeneralSans-Medium") format("opentype");
+}
+
+@font-face {
+  font-family: "General Sans-Semibold";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.animaapp.com/GeneralSans-Semibold") format("opentype");
+}
+
+.navigation {
+  align-items: center;
+  background-color:#0e1e47;
+  border: 1px none;
+  justify-content: space-between;
+  padding: 24px;
+  width: 100%;
+}
+
+.frame-970 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  gap: 32px;
+  padding: 0px 0px 0px 10px;
+  width: fit-content;
+}
+
+.frame-961 {
+  align-items: center;
+  border: 1px none;
+  display: flex;
+  gap: 40px;
+  width: 525px;
+}
+
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.frame-961-item {
+  letter-spacing: 0;
+  line-height: 21.6px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.logo-2 {
+  height: 68px;
+  min-width: 42px;
+}
+
+.frame-962 {
+  align-items: center;
+  background-color: 
+#f4faff;
+  border: 1px none;
+  border-radius: 100px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 10px 16px;
+  width: fit-content;
+}
+
+.place {
+  color: var(--bunting);
+  font-family: var(--font-family-general_sans-semibold);
+  font-size: var(--font-size-s);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  text-align: center;
+  width: fit-content;
+}

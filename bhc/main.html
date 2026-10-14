@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body, html {
+            margin: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        .section {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1s;
+            background-image: url("./ssc.gif");
+            background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        #section1 {
+            z-index: 1;
+        }
+
+        #section2 {
+            transform: translateX(-100%);
+            transform: translateY(-100%);
+            background-image: url("./products.webp");
+            background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+        height: 100vh; /* Ensures the section takes up the full viewport height */
+        }
+
+        #section3 {
+            transform: translateX(100%);
+            background-image: url("./expro.webp");
+            background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+        height: 100vh; 
+        }
+
+        #section4 {
+            transform: translateY(-100%);
+            background-image: url("./info.webp");
+            background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+        }
+
+        #section5 {
+            transform: translateY(100%);
+            background-color: fff;
+        }
+
+        #section6 {
+            transform: translateY(200%);
+            background-color: rgb(17, 95, 65);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: 2px solid black; /* Adds a black border */
+            border-width: 3px;
+            border-radius: 100px;
+        }
+
+        #calendar {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        .double-border-button {
+            position: relative;
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: 2px solid black; /* Inner border */
+            cursor: pointer;
+            font-size: 16px; 
+            transition: color 0.3s ease, background-color 0.3s ease;
+          }
+
+        .double-border-button::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 4px solid white; /* Outer border */
+            z-index: -1;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .double-border-button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .double-border-button:hover::before {
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Check if the user is logged in
+            function isLoggedIn() {
+                // You can implement your own logic here to check if the user is logged in
+                // For this example, let's assume the user is logged in if 'isLoggedIn' key is set in localStorage
+                return localStorage.getItem('isLoggedIn') === 'true';
+            }
+
+            // Show or hide the calendar based on the login status
+            function toggleCalendar() {
+                const calendar = document.getElementById('calendar');
+                if (isLoggedIn()) {
+                    calendar.style.display = 'block';
+                } else {
+                    calendar.style.display = 'none';
+                }
+            } // Function to retrieve the schedule from the database and generate appointment options
+            function generateAppointmentOptions() {
+                const appointmentDateTimeSelect = $("#appointmentDateTime");
+                appointmentDateTimeSelect.empty();
+
+                // Fetch the schedule from the database using AJAX
+                $.get("get_schedule.php", function(response) {
+                    const schedule = response.schedule.split(",");
+
+                    // Iterate over the schedule and generate options
+                    for (let i = 0; i < schedule.length; i++) {
+                        const option = document.createElement("option");
+                        option.value = schedule[i];
+                        option.text = formatDate(new Date(schedule[i]));
+                        appointmentDateTimeSelect.append(option);
+                    }
+                });
+            }
+
+
+            // Call generateAppointmentOptions and toggleCalendar function on page load
+            generateAppointmentOptions();
+            toggleCalendar();
+            $("#submitReferral").click(function(event) {
+                event.preventDefault();
+
+                let referralCode = $("#rfrc4").val();
+                let email = $("#email4").val();
+
+                // Add a simple email validation
+                var re = /\S+@\S+\.\S+/;
+                if(!re.test(email)){
+                    alert("Please enter a valid email address.");
+                    return;
+                }
+
+                // Make AJAX POST request
+                $.post('http://localhost/qderm/book_reservation.php', $('#referralForm').serialize(), function(response) {
+                    let result = JSON.parse(response);
+                    if(result.success) {
+                        alert("Booking successful!");
+                        // Collect form data and show on the confirmation page
+                        var formData = $("#referralForm").serializeArray().map(function(item){ return item.name+" : "+item.value }).join(", ");
+                        localStorage.setItem('formData', formData);
+                        goToSection("section6");
+                        $("#formData").text(localStorage.getItem('formData'));
+                    } else {
+                        alert("Booking failed! Please try again.");
+                    }
+                });
+            });
+
+            function goToSection(id) {
+                $("#section1").css({
+                    transform: $("#" + id).css("transform")
+                });
+
+                $("#" + id).css({
+                    transform: "translate(0, 0)"
+                });
+
+                $("#upButton, #downButton, #leftButton, #rightButton").prop("disabled", true);
+            }
+
+            function goToHome(id) {
+                $("#" + id).css({
+                    transform: $("#" + id).data('original-transform')
+                });
+
+                $("#section1").css({
+                    transform: "none"
+                });
+
+                $("#upButton, #downButton, #leftButton, #rightButton").prop("disabled", false);
+            }
+
+            $(".section:not(#section1)").each(function() {
+                $(this).data('original-transform', $(this).css('transform'));
+            });
+
+            $("#leftButton").click(function() {
+                goToSection("section2");
+            });
+
+            $("#rightButton").click(function() {
+                goToSection("section3");
+            });
+
+            $("#upButton").click(function() {
+                goToSection("section4");
+            });
+
+            $("#downButton").click(function() {
+                goToSection("section5");
+            });
+
+            $("#homeButton2").click(function() {
+                goToHome("section2");
+            });
+
+            $("#homeButton3").click(function() {
+                goToHome("section3");
+            });
+
+            $("#homeButton4").click(function() {
+                goToHome("section4");
+            });
+
+            $("#homeButton5").click(function() {
+                goToHome("section5");
+            });
+
+            $("#homeButton6").click(function() {
+                goToHome("section6");
+            });
+
+            $("#submitReferral").click(function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+                let referralCode = $("#rfrc").val();
+                let email = $("#email").val(); // Retrieve the email address
+
+                $.post('http://localhost/qderm/process_referral.php', {referralCode: referralCode, email: email}, function(response) {
+                    let result = JSON.parse(response);
+                    if(result.success) {
+                        alert("Referral code has been used and removed");
+                        // Collect form data
+                        var formData = $("#referralForm").serializeArray().map(function(item){ return item.name+" : "+item.value }).join(", ");
+                        // Store form data in localStorage
+                        localStorage.setItem('formData', formData);
+                        // Go to section 6 to show data
+                        goToSection("section6");
+                    } else {
+                        alert("Invalid referral code");
+                    }
+                });
+            });
+
+            $("#checkReferral").click(function() {
+                let referralCode = $("#rfrc").val();
+
+                $.post('http://localhost/qderm/verify_referral.php', {referralCode: referralCode}, function(response) {
+                    let result = JSON.parse(response);
+                    if(result.success) {
+                        alert("Referral code is valid");
+                    } else {
+                        alert("Invalid referral code");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="section1" class="section">
+        <input type="date" id="calendar">
+        <div class="buttons">
+            <button id="upButton" class="double-border-button">Our Goal</button>
+            <button id="leftButton" class="double-border-button">Retail Products</button>
+            <img src="logo.png">
+            <button id="rightButton" class="double-border-button">Experiential Products</button>
+            <button id="downButton" class="double-border-button">Our Team</button>
+        </div>
+    </div>
+
+    <div id="section2" class="section">
+        <div class="buttons">
+            <button id="homeButton2">Home</button>
+        </div>
+    </div>
+
+    <div id="section3" class="section">
+        <div class="buttons">
+            <button id="homeButton3">Home</button>
+        </div>
+    </div>
+
+    <div id="section4" class="section">
+        
+
+        <div class="buttons">
+            <button id="homeButton4">Home</button>
+            <!-- <button id="backButton4">Back</button> -->
+        </div>
+    </div>
+
+
+
+    <div id="section5" class="section">
+        <form id="NewClientForm">
+            <label for="fname">CEO</label><br>
+            <input type="text" id="fname" name="fname" placeholder="JASON"><br>
+            <label for="lname">CRO</label><br>
+            <input type="text" id="lname" name="lname" placeholder="HAN"><br>
+            <label for="email">CFO</label><br>
+            <input type="email" id="email" name="email" placeholder="KARMA"><br>
+            <label for="phone">COO</label><br>
+            <input type="tel" id="phone" name="phone"  placeholder="LILY" required><br>
+        </form>
+        <div class="buttons">
+            <button id="homeButton5">Home</button>
+        </div>
+    </div>
+
+    <div id="section6" class="section">
+        <div class="buttons">
+            <button id="homeButton6">Home</button>
+        </div>
+        <div class="confirmation">
+            <h2>Confirmation</h2>
+            <p>Thank you for your submission!</p>
+            <p>Your form data:</p>
+            <p id="formData"></p>
+            <button id="deleteCodeButton">Use my Referral Code</button>  
+
+        </div>
+    </div>
+
+</body>
+</html>

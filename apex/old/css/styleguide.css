@@ -1,0 +1,129 @@
+:root { 
+  --antique-brass: #cea973;
+  --black: #000000;
+  --brandy: #dcbe91;
+  --bunting: #0f1e47;
+  --white: #ffffff;
+ 
+  --font-size-l: 20px;
+  --font-size-m: 18px;
+  --font-size-s: 16px;
+  --font-size-xl: 24px;
+  --font-size-xs: 14px;
+  --font-size-xxl: 32px;
+  --font-size-xxxl: 36px;
+ 
+  --font-family-general_sans-medium: "General Sans-Medium", Helvetica;
+  --font-family-general_sans-regular: "General Sans-Regular", Helvetica;
+  --font-family-general_sans-semibold: "General Sans-Semibold", Helvetica;
+  --font-family-helvetica_neue-regular: "Helvetica Neue-Regular", Helvetica;
+  --font-family-poppins-bold: "Poppins-Bold", Helvetica;
+  --font-family-poppins-light: "Poppins-Light", Helvetica;
+  --font-family-poppins-semibold: "Poppins-SemiBold", Helvetica;
+  --font-family-suisse_works-bold: "Suisse Works-Bold", Helvetica;
+  --font-family-suisse_works-book: "Suisse Works-Book", Helvetica;
+  --font-family-tiempos_headline-medium: "Tiempos Headline-Medium", Helvetica;
+}
+.poppins-light-white-14px {
+  color: var(--white);
+  font-family: var(--font-family-poppins-light);
+  font-size: var(--font-size-xs);
+  font-style: normal;
+  font-weight: 300;
+}
+
+.suisseworks-book-normal-white-36px {
+  color: var(--white);
+  font-family: var(--font-family-suisse_works-book);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.generalsans-medium-brandy-16px {
+  color: var(--brandy);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.generalsans-medium-white-16px {
+  color: var(--white);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.suisseworks-bold-brandy-32px {
+  color: var(--brandy);
+  font-family: var(--font-family-suisse_works-bold);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.generalsans-medium-white-18px {
+  color: var(--white);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.generalsans-regular-normal-white-20px {
+  color: var(--white);
+  font-family: var(--font-family-general_sans-regular);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.helveticaneue-regular-normal-black-18px {
+  color: var(--black);
+  font-family: var(--font-family-helvetica_neue-regular);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.generalsans-medium-brandy-18px {
+  color: var(--brandy);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.suisseworks-book-normal-bunting-48px {
+  color: var(--bunting);
+  font-family: var(--font-family-suisse_works-book);
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.tiemposheadline-medium-bunting-18px {
+  color: var(--bunting);
+  font-family: var(--font-family-tiempos_headline-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.helveticaneue-regular-normal-white-18px {
+  color: var(--white);
+  font-family: var(--font-family-helvetica_neue-regular);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.generalsans-medium-antique-brass-18px {
+  color: var(--antique-brass);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}

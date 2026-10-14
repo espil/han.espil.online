@@ -1,0 +1,106 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+.business {
+  align-items: flex-start;
+  background-color: #e5edf4;
+  border: 1px none;
+  display: flex;
+  height: 2650px;
+  min-width: 1440px;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.hidden,
+.hidden * {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.overlap-group1 {
+  height: 2580px;
+  margin-top: -125px;
+  position: relative;
+  width: 2603px;
+}
+
+.overlap-group {
+  height: 2580px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 2603px;
+}
+
+
+.background {
+  height: 1931px;
+  left: 649px;
+  position: absolute;
+  top: 454px;
+  width: 1953px;
+}
+
+.pexels-polina-tankilevitch-3738349-1 {
+  height: 807px;
+  left: 584px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 792px;
+}
+
+.mask-group {
+  height: 805px;
+  left: 72px;
+  position: absolute;
+  top: 477px;
+  width: 792px;
+}
+
+.rectangle-2594 {
+  height: 1px;
+  left: 0;
+  position: absolute;
+  top: 1452px;
+  width: 792px;
+}
+
+.what-we-do {
+  height: 54px;
+  left: 72px;
+  position: absolute;
+  top: 1521px;
+  width: 352px;
+}
+
+.business-1 {
+  height: 27px;
+  left: 73px;
+  position: absolute;
+  top: 1478px;
+  width: 132px;
+}
+
+.at-apexderm-ventures {
+  height: 125px;
+  left: 73px;
+  position: absolute;
+  top: 1725px;
+  width: 547px;
+}
+
+#movers {
+  position: relative;
+  top: 2014px;  
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+#scrolly {
+  display: inline-block;
+}

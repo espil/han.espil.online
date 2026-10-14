@@ -1,0 +1,40 @@
+/* screen - lawrence */
+
+.lawrence {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+  min-height: 300px;
+  min-width: 307px;
+  width: 100%;
+}
+
+.lawrence .name {
+  letter-spacing: -1.44px;
+  line-height: 48.6px;
+  margin-top: -1.00px;
+  white-space: nowrap;
+  width: 307px;
+}
+
+.lawrence .line-5 {
+  height: 1px;
+  min-width: 307px;
+  object-fit: cover;
+}
+
+.lawrence .medical-director {
+  letter-spacing: -0.80px;
+  line-height: 27.0px;
+  white-space: nowrap;
+  width: 307px;
+}
+
+.lawrence .name-1 {
+  letter-spacing: -0.16px;
+  line-height: 24px;
+  width: 307px;
+}

@@ -1,0 +1,244 @@
+@font-face {
+  font-family: "General Sans-Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.teamanimaapp.teamcom/GeneralSans-Regular") format("opentype");
+}
+
+@font-face {
+  font-family: "Suisse Works-Book";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.teamanimaapp.teamcom/SuisseWorks-Book") format("opentype");
+}
+
+@font-face {
+  font-family: "General Sans-Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://fonts.teamanimaapp.teamcom/GeneralSans-Medium") format("opentype");
+}
+
+@font-face {
+  font-family: "Suisse Works-Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://fonts.teamanimaapp.teamcom/SuisseWorks-Bold") format("opentype");
+}
+
+@font-face {
+  font-family: "Helvetica Neue-Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.teamanimaapp.teamcom/HelveticaNeue-Regular")
+    format("truetype");
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --brandy: #dcbe91;
+  --font-size-xl2: 36px;
+  --font-size-s: 16px;
+  --font-size-l: 20px;
+  --font-size-xxxl: 60px;
+  --font-size-m: 18px;
+  --font-family-suisse_works-book: "Suisse Works-Book", Helvetica;
+  --font-family-general_sans-medium: "General Sans-Medium", Helvetica;
+  --font-family-general_sans-regular: "General Sans-Regular", Helvetica;
+  --font-family-suisse_works-bold: "Suisse Works-Bold", Helvetica;
+  --font-family-helvetica_neue-regular: "Helvetica Neue-Regular", Helvetica;
+}
+
+.teamteam {
+  align-items: flex-start;
+  background-color: #0f1e47;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  min-height: 1066px;
+  padding: 80px 0;
+  width: 1440px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.teamrectangle-2592 {
+  background-color: var(--white);
+  border: 1px none;
+  height: 1px;
+  width: 792px;
+}
+
+.teamflex-row {
+  align-items: flex-end;
+  align-self: center;
+  display: flex;
+  gap: 28px;
+  height: 714px;
+  margin-left: 8px;
+  min-width: 1304px;
+}
+
+.teamlawrence {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: fit-content;
+}
+
+.teammedical-director {
+  line-height: 27px;
+  white-space: nowrap;
+  width: 307px;
+}
+
+.teamgeneralsans-regular-normal-white-20px {
+  color: var(--white);
+  font-family: var(--font-family-general_sans-regular);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.teamline-5 {
+  height: 1px;
+  min-width: 307px;
+  object-fit: cover;
+}
+
+.teamname-1 {
+  margin-top: -1px;
+  white-space: nowrap;
+  width: 307px;
+}
+
+.teamsuisseworks-book-normal-white-36px {
+  color: var(--white);
+  font-family: var(--font-family-suisse_works-book);
+  font-size: var(--font-size-xl2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.teamname-2 {
+  line-height: 24px;
+  width: 307px;
+}
+
+.teamgeneralsans-medium-brandy-16px {
+  color: var(--brandy);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.teamflex-col {
+  align-items: flex-start;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 689px;
+  width: 634px;
+}
+
+.teamcontent {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 29px;
+  width: fit-content;
+}
+
+.teamcontent-1 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: fit-content;
+}
+
+.teamtitle {
+  color: var(--white);
+  font-family: var(--font-family-suisse_works-bold);
+  font-size: var(--font-size-xxxl);
+  font-weight: 700;
+  margin-top: -1px;
+  width: 520px;
+}
+
+.teamit-all-began-with-a {
+  color: var(--brandy);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-m);
+  font-weight: 500;
+  line-height: 27px;
+  width: 626px;
+}
+
+.teamteam-1 {
+  height: 20px;
+  width: 75px;
+}
+
+.teamwhee-jae {
+  align-items: flex-start;
+  align-self: flex-end;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 90px;
+  width: fit-content;
+}
+
+.teamwheejae-kim {
+  margin-top: 95px;
+  white-space: nowrap;
+  width: 307px;
+}
+
+.teamname {
+  line-height: 24px;
+  width: 307px;
+}
+
+.teamceo {
+  color: var(--white);
+  font-family: var(--font-family-helvetica_neue-regular);
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  letter-spacing: 0;
+  white-space: nowrap;
+  width: 307px;
+}
+
+.teamjohn {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 24px;
+  width: fit-content;
+}
+
+.teamat-apexderm-ventures {
+  line-height: 24px;
+  width: 307px;
+}
+
+.teamname-3 {
+  margin-top: -1px;
+  white-space: nowrap;
+  width: 307px;
+}

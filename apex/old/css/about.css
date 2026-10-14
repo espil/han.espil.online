@@ -1,0 +1,166 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+@font-face {
+  font-family: "Suisse Works-Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://fonts.animaapp.com/SuisseWorks-Bold") format("opentype");
+}
+
+@font-face {
+  font-family: "General Sans-Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://fonts.animaapp.com/GeneralSans-Medium") format("opentype");
+}
+
+:root {
+  --black: #000000;
+  --brandy: #dcbe91;
+  --white: #ffffff;
+  --font-size-xl3: 32px;
+  --font-size-m: 18px;
+  --font-family-suisse_works-bold: "Suisse Works-Bold", Helvetica;
+  --font-family-general_sans-medium: "General Sans-Medium", Helvetica;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.about {
+  align-items: flex-start;
+  background-color: #0f1e47;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 1779px;
+  padding: 82px 0;
+  width: 1440px;
+}
+
+.hidden,
+.hidden * {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.group-22666 {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  margin-right: 381px;
+  margin-top: 53px;
+  min-height: 311px;
+  width: 509px;
+}
+
+.suisseworks-bold-brandy-32px {
+  color: var(--brandy);
+  font-family: var(--font-family-suisse_works-bold);
+  font-size: var(--font-size-xl3);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.at-apex-derm-we-set {
+  height: 171px;
+  letter-spacing: -1.28px;
+  line-height: 38.4px;
+  width: 505px;
+}
+
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.generalsans-medium-white-18px {
+  color: var(--white);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.just-as-you-wouldnt {
+  height: 98px;
+  letter-spacing: 0;
+  line-height: 24.3px;
+  margin-left: 3px;
+  width: 502px;
+}
+
+.rectangle-2593 {
+  height: 1px;
+  width: 792px;
+}
+
+.about-1 {
+  height: 27px;
+  margin-left: 72px;
+  margin-top: 26px;
+  width: 94px;
+}
+
+.group-22667 {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  margin-right: 207px;
+  margin-top: 119px;
+  min-height: 381px;
+  width: 677px;
+}
+
+.our-team-of-doctors {
+  height: 230px;
+  letter-spacing: -1.28px;
+  line-height: 38.4px;
+  width: 673px;
+}
+
+.our-network-of-colla {
+  height: 109px;
+  letter-spacing: 0;
+  line-height: 24.3px;
+  width: 647px;
+}
+
+.our-value {
+  height: 54px;
+  margin-left: 74.88px;
+  margin-top: 16px;
+  width: 303px;
+}
+
+.group-22668 {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  margin-right: 194px;
+  margin-top: 119px;
+  min-height: 341px;
+  width: 690px;
+}
+
+.at-apex-derm-we-want {
+  height: 144px;
+  letter-spacing: -1.28px;
+  line-height: 38.4px;
+  width: 686px;
+}
+
+.we-achieve-this-rare {
+  height: 155px;
+  letter-spacing: 0;
+  line-height: 24.3px;
+  width: 675px;
+}

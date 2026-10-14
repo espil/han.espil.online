@@ -1,0 +1,183 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+@font-face {
+  font-family: "Suisse Works-Book";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.animaapp.com/SuisseWorks-Book") format("opentype");
+}
+
+@font-face {
+  font-family: "General Sans-Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://fonts.animaapp.com/GeneralSans-Medium") format("opentype");
+}
+
+@font-face {
+  font-family: "General Sans-Semibold";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.animaapp.com/GeneralSans-Semibold") format("opentype");
+}
+
+:root {
+  --bunting: #0f1e47;
+  --black: #000000;
+  --font-size-m: 18px;
+  --font-size-xxl2: 48px;
+  --font-family-general_sans-medium: "General Sans-Medium", Helvetica;
+  --font-family-general_sans-semibold: "General Sans-Semibold", Helvetica;
+  --font-family-suisse_works-book: "Suisse Works-Book", Helvetica;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.hidden,
+.hidden * {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.frame-22616 {
+  border: 1px none;
+  height: 2560px;
+  overflow-x: hidden;
+  position: relative;
+  width: 1439px;
+}
+
+.title {
+  color: var(--bunting);
+  font-family: var(--font-family-suisse_works-book);
+  font-size: var(--font-size-xxl2);
+  font-weight: 400;
+  height: 58px;
+  left: 113px;
+  letter-spacing: -1.92px;
+  line-height: 57.6px;
+  position: absolute;
+  top: 175px;
+  white-space: nowrap;
+  width: 487px;
+}
+
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.overlap-group {
+  height: 2863px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 2150px;
+}
+
+.frame-22642 {
+  height: 2560px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1421px;
+}
+
+.in-this-day-and-age-1 {
+  left: 806px;
+  top: 434px;
+  width: 335px;
+}
+
+.frame-22616 .in-this-day-and-age {
+  height: 303px;
+  letter-spacing: -0.18px;
+  line-height: 27px;
+  position: absolute;
+}
+
+.generalsans-medium-bunting-18px {
+  color: var(--bunting);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.mask-group-3 {
+  left: 113px;
+  top: 1725px;
+}
+
+.frame-22616 .mask-group {
+  height: 457px;
+  position: absolute;
+  width: 450px;
+}
+
+.mask-group-2 {
+  left: 748px;
+  top: 1051px;
+}
+
+.x {
+  height: 56px;
+  left: 1308px;
+  position: absolute;
+  top: 57px;
+  width: 56px;
+}
+
+.in-this-day-and-age-2 {
+  left: 137px;
+  top: 1128px;
+  width: 402px;
+}
+
+.in-this-day-and-age-3 {
+  left: 765px;
+  top: 1823px;
+  width: 402px;
+}
+
+.frame-960 {
+  align-items: center;
+  background-color: var(--bunting);
+  border-radius: 72px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  left: 765px;
+  padding: 16px 24px;
+  position: absolute;
+  top: 2265px;
+  width: fit-content;
+}
+
+.place {
+  color: #ffffff;
+  font-family: var(--font-family-general_sans-semibold);
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  text-align: center;
+  width: fit-content;
+}
+
+.vector {
+  height: 2001px;
+  left: 149px;
+  position: absolute;
+  top: 862px;
+  width: 2001px;
+}
+
+.mask-group-1 {
+  left: 113px;
+  top: 377px;
+}

@@ -1,0 +1,39 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+* {
+  box-sizing: border-box;
+}
+
+.initial {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  width: 100vw;
+}
+
+.hidden,
+.hidden * {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.hero-text {
+  left: 76px;
+  position: absolute;
+  top: 327px;
+  width: 60%;
+}
+
+.initial .group-22669 {
+  align-items: flex-end;
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/631cbf9af11c17b54f52126b/releases/637de317d0a80fdd96257a87/img/pexels-polina-tankilevitch-3738345-1@1x.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  justify-content: flex-end;
+  left: 0;
+  padding: 274.4px 120px;
+  position: absolute;
+  top: 0;
+}

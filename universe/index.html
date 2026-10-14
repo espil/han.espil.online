@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universe — Espil House | Archive</title>
+<link rel="preconnect" href="https://api2.enscape3d.com">
+<link rel="dns-prefetch" href="https://api2.enscape3d.com">
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#0b0b0d;overflow:hidden}
+  #view{position:fixed;inset:0;width:100%;height:100%;border:0}
+  #veil{position:fixed;inset:0;background:#0b0b0d url('render-tree.png') center/cover no-repeat;color:#e8e2d5;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:10px;z-index:10;transition:opacity 1.1s ease;font-family:Georgia,'Times New Roman',serif;text-align:center;padding:24px 24px 7vh;box-shadow:inset 0 -140px 120px -40px rgba(0,0,0,.75)}
+  #veil h1{font-weight:400;font-size:clamp(26px,5vw,44px);letter-spacing:.14em;margin:0;text-transform:uppercase}
+  #veil p{margin:0;font-size:14px;letter-spacing:.22em;text-transform:uppercase;opacity:.65}
+  #veil .bar{width:180px;height:1px;background:rgba(232,226,213,.25);position:relative;overflow:hidden}
+  #veil .bar i{position:absolute;left:-40%;top:0;width:40%;height:100%;background:#e8e2d5;animation:sweep 1.4s infinite}
+  @keyframes sweep{to{left:100%}}
+  #veil.gone{opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<iframe id="view" src="enter.html" title="Universe — Enscape 3D house viewer" allow="fullscreen; autoplay" allowfullscreen></iframe>
+<div id="veil">
+  <h1>Universe</h1>
+  <div class="bar"><i></i></div>
+  <p>Preparing the house</p>
+</div>
+<script>
+  // The Enscape viewer starts loading the moment this page opens, behind the
+  // veil. The veil lifts only once the viewer page has loaded, so visitors
+  // see the finished house, not a loading screen.
+  var veil = document.getElementById('veil');
+  var lifted = false;
+  function lift(){ if(lifted) return; lifted = true; setTimeout(function(){ veil.classList.add('gone'); }, 900); }
+  document.getElementById('view').addEventListener('load', lift);
+  setTimeout(lift, 15000); // fallback: never trap the visitor behind the veil
+</script>
+</body>
+</html>

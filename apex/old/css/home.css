@@ -1,0 +1,259 @@
+/* screen - home */
+
+.home {
+  align-items: flex-start;
+  background-color: var(--white);
+  border: 1px none;
+  display: flex;
+  gap: 427px;
+  height: 5565px;
+  overflow: hidden;
+  width: 1440px;
+}
+
+.home .flex-col {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 5565px;
+  width: 1440px;
+}
+
+.home .overlap-group2 {
+  height: 3689px;
+  position: relative;
+  width: 1440px;
+}
+
+.home .business {
+  height: 2775px;
+  left: 0;
+  position: absolute;
+  top: 914px;
+  width: 1440px;
+}
+
+.home .group-22650 {
+  height: 566px;
+  left: 859px;
+  position: absolute;
+  top: 2963px;
+  width: 467px;
+}
+
+.home .group-22651 {
+  height: 566px;
+  left: 1363px;
+  position: absolute;
+  top: 2963px;
+  width: 77px;
+}
+
+.home .group-22644 {
+  height: 566px;
+  left: 355px;
+  position: absolute;
+  top: 2963px;
+  width: 467px;
+}
+
+.home .pexels-polina-tankilevitch-3738345-1 {
+  height: 1039px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.home .hero-text {
+  height: 587px;
+  left: 53px;
+  position: absolute;
+  top: 177px;
+  width: 1267px;
+}
+
+.home .navigation {
+  height: 116px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.home .group-22654 {
+  height: 805px;
+  left: 72px;
+  position: absolute;
+  top: 1426px;
+  width: 792px;
+}
+
+.home .about {
+  height: 23px;
+  left: 1338px;
+  position: absolute;
+  top: 865px;
+  width: 82px;
+}
+
+.home .rectangle-2592 {
+  height: 1px;
+  left: 648px;
+  position: absolute;
+  top: 845px;
+  width: 792px;
+}
+
+.home .business-1 {
+  height: 23px;
+  left: 73px;
+  position: absolute;
+  top: 2423px;
+  width: 116px;
+}
+
+.home .what-we-do {
+  height: 75px;
+  left: 72px;
+  position: absolute;
+  top: 2469px;
+  width: 495px;
+}
+
+.home .at-apexderm-ventures {
+  height: 125px;
+  left: 73px;
+  position: absolute;
+  top: 2674px;
+  width: 547px;
+}
+
+.home .rectangle-2592-1 {
+  height: 1px;
+  left: 0;
+  position: absolute;
+  top: 2399px;
+  width: 792px;
+}
+
+.home .team {
+  height: 1066px;
+  width: 1440px;
+}
+
+.home .contact-form1 {
+  height: 810px;
+  width: 1440px;
+}
+
+.home .group-22652 {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 2963px;
+  min-width: 467px;
+}
+
+.home .frame-22618 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  min-width: 467px;
+}
+
+.home .overlap-group1 {
+  height: 566px;
+  position: relative;
+  width: 469px;
+}
+
+.home .group-22642 {
+  align-items: flex-start;
+  display: flex;
+  gap: 8278px;
+  height: 566px;
+  left: 0;
+  min-width: 469px;
+  position: absolute;
+  top: 0;
+}
+
+.home .overlap-group {
+  align-items: flex-start;
+  background-color: var(--white);
+  display: flex;
+  height: 566px;
+  min-width: 467px;
+  padding: 35px 36.8px;
+}
+
+.home .number {
+  letter-spacing: 0;
+  line-height: 26.1px;
+  white-space: nowrap;
+}
+
+.home .line-4 {
+  height: 1px;
+  margin-top: -9912px;
+  width: 376px;
+}
+
+.home .frame-984 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  left: 31px;
+  position: absolute;
+  top: 136px;
+  width: fit-content;
+}
+
+.home .frame-983 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 405px;
+}
+
+.home .cosmetics {
+  align-self: stretch;
+  letter-spacing: -1.92px;
+  line-height: 57.6px;
+  margin-top: -1.00px;
+  white-space: nowrap;
+}
+
+.home .enhance-your-medical {
+  align-self: stretch;
+  letter-spacing: -0.18px;
+  line-height: 27px;
+}
+
+.home .frame-661 {
+  align-items: center;
+  border: 1px none;
+  display: flex;
+  gap: 8px;
+  width: fit-content;
+}
+
+.home .learn-more {
+  letter-spacing: 0;
+  line-height: 18px;
+  margin-top: -1.00px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.home .vector {
+  height: 5px;
+  margin-right: -8682.00px;
+  margin-top: -10406.00px;
+  min-width: 10px;
+}

@@ -1,0 +1,376 @@
+/* screen - website-final */
+
+.website-final {
+  align-items: flex-start;
+  background-color: var(--white);
+  border: 1px none;
+  display: flex;
+  height: 7501px;
+  overflow: hidden;
+  width: 1440px;
+}
+
+.website-final .flex-col {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin-left: -761px;
+  margin-top: -150px;
+  min-height: 7651px;
+  width: 2201px;
+}
+
+.website-final .overlap-group3 {
+  height: 1189px;
+  position: relative;
+  width: 2201px;
+}
+
+.website-final .hero-text {
+  height: 587px;
+  left: 814px;
+  position: absolute;
+  top: 327px;
+  width: 1267px;
+}
+
+.website-final .overlap-group2 {
+  align-items: flex-start;
+  background-image: url(../img/pexels-polina-tankilevitch-3738345-1@1x.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  height: 1039px;
+  left: 761px;
+  min-width: 1440px;
+  padding: 177.4px 53px;
+  position: absolute;
+  top: 150px;
+}
+
+.website-final .hero-text-1 {
+  height: 587px;
+  width: 1267px;
+}
+
+.website-final .navigation {
+  height: 116px;
+  left: 761px;
+  position: absolute;
+  top: 150px;
+  width: 1440px;
+}
+
+.website-final .overlap-group4 {
+  height: 4429px;
+  position: relative;
+  width: 1440px;
+}
+
+.website-final .about {
+  align-items: flex-start;
+  background-color: var(--bunting);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 1779px;
+  left: 0;
+  padding: 82px 0;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.website-final .rectangle-2593 {
+  height: 1px;
+  width: 792px;
+}
+
+.website-final .about-1 {
+  height: 27px;
+  margin-left: 72px;
+  margin-top: 26px;
+  width: 94px;
+}
+
+.website-final .our-value {
+  height: 54px;
+  margin-left: 74.88px;
+  margin-top: 16px;
+  width: 303px;
+}
+
+.website-final .group-22666 {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  margin-right: 381.0px;
+  margin-top: 53px;
+  min-height: 311px;
+  width: 509px;
+}
+
+.website-final .at-apex-derm-we-set {
+  height: 171px;
+  letter-spacing: -1.28px;
+  line-height: 38.4px;
+  width: 505px;
+}
+
+.website-final .just-as-you-wouldnt {
+  height: 98px;
+  letter-spacing: 0;
+  line-height: 24.3px;
+  margin-left: 3px;
+  width: 502px;
+}
+
+.website-final .group-22667 {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  margin-right: 207.0px;
+  margin-top: 119px;
+  min-height: 381px;
+  width: 677px;
+}
+
+.website-final .our-team-of-doctors {
+  height: 230px;
+  letter-spacing: -1.28px;
+  line-height: 38.4px;
+  width: 673px;
+}
+
+.website-final .our-network-of-colla {
+  height: 109px;
+  letter-spacing: 0;
+  line-height: 24.3px;
+  width: 647px;
+}
+
+.website-final .group-22668 {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  margin-right: 194.0px;
+  margin-top: 119px;
+  min-height: 341px;
+  width: 690px;
+}
+
+.website-final .at-apex-derm-we-want {
+  height: 144px;
+  letter-spacing: -1.28px;
+  line-height: 38.4px;
+  width: 686px;
+}
+
+.website-final .we-achieve-this-rare {
+  height: 155px;
+  letter-spacing: 0;
+  line-height: 24.3px;
+  width: 675px;
+}
+
+.website-final .business {
+  height: 2775px;
+  left: 0;
+  position: absolute;
+  top: 1654px;
+  width: 1440px;
+}
+
+.website-final .group-22650 {
+  height: 566px;
+  left: 859px;
+  position: absolute;
+  top: 3668px;
+  width: 467px;
+}
+
+.website-final .group-22651 {
+  height: 566px;
+  left: 1363px;
+  position: absolute;
+  top: 3668px;
+  width: 77px;
+}
+
+.website-final .group-22644 {
+  height: 566px;
+  left: 355px;
+  position: absolute;
+  top: 3668px;
+  width: 467px;
+}
+
+.website-final .business-1 {
+  height: 27px;
+  left: 73px;
+  position: absolute;
+  top: 3132px;
+  width: 132px;
+}
+
+.website-final .what-we-do {
+  height: 54px;
+  left: 72px;
+  position: absolute;
+  top: 3175px;
+  width: 352px;
+}
+
+.website-final .at-apexderm-ventures {
+  height: 125px;
+  left: 73px;
+  position: absolute;
+  top: 3379px;
+  width: 547px;
+}
+
+.website-final .rectangle-2592 {
+  height: 1px;
+  left: 0;
+  position: absolute;
+  top: 3106px;
+  width: 792px;
+}
+
+.website-final .team {
+  height: 1066px;
+  width: 1440px;
+}
+
+.website-final .contact-form1 {
+  height: 967px;
+  width: 1440px;
+}
+
+.website-final .group-22652 {
+  align-items: flex-start;
+  display: flex;
+  margin-left: 427px;
+  margin-top: 4707px;
+  min-width: 467px;
+}
+
+.website-final .frame-22618 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  min-width: 467px;
+}
+
+.website-final .overlap-group1 {
+  height: 566px;
+  position: relative;
+  width: 469px;
+}
+
+.website-final .group-22642 {
+  align-items: flex-start;
+  display: flex;
+  gap: 9974px;
+  height: 566px;
+  left: 0;
+  min-width: 469px;
+  position: absolute;
+  top: 0;
+}
+
+.website-final .overlap-group {
+  align-items: flex-start;
+  background-color: var(--white);
+  display: flex;
+  height: 566px;
+  min-width: 467px;
+  padding: 35px 36.8px;
+}
+
+.website-final .number {
+  letter-spacing: 0;
+  line-height: 26.1px;
+  white-space: nowrap;
+}
+
+.website-final .line-4 {
+  height: 1px;
+  margin-top: -20764px;
+  width: 376px;
+}
+
+.website-final .frame-984 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  left: 31px;
+  position: absolute;
+  top: 136px;
+  width: fit-content;
+}
+
+.website-final .frame-983 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 405px;
+}
+
+.website-final .cosmetics {
+  align-self: stretch;
+  letter-spacing: -1.92px;
+  line-height: 57.6px;
+  margin-top: -1.00px;
+  white-space: nowrap;
+}
+
+.website-final .enhance-your-medical {
+  align-self: stretch;
+  letter-spacing: -0.18px;
+  line-height: 27px;
+}
+
+.website-final .frame-661 {
+  align-items: center;
+  border: 1px none;
+  display: flex;
+  gap: 8px;
+  width: fit-content;
+}
+
+.website-final .learn-more {
+  color: var(--bunting);
+  font-family: var(--font-family-general_sans-medium);
+  font-size: var(--font-size-m);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin-top: -1.00px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.website-final .vector {
+  height: 5px;
+  margin-right: -10378.00px;
+  margin-top: -21258.00px;
+  min-width: 10px;
+}
+
+.website-final .pexels-polina-tankilevitch-3738345-2 {
+  height: 301px;
+  margin-left: 9176px;
+  margin-top: -15396px;
+  width: 2201px;
+}

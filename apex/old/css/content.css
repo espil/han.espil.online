@@ -1,0 +1,40 @@
+/* screen - content */
+
+.content {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  height: 100vh;
+  min-height: 229px;
+  min-width: 669px;
+  width: 100%;
+}
+
+.content .content-1 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: fit-content;
+}
+
+.content .title {
+  color: var(--white);
+  font-family: var(--font-family-suisse_works-bold);
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -1.60px;
+  line-height: 64px;
+  margin-top: -1.00px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.content .it-all-began-with-a {
+  letter-spacing: -0.18px;
+  line-height: 27px;
+  width: 626px;
+}

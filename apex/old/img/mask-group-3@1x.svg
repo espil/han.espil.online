@@ -1,0 +1,21 @@
+<svg width="700" height="105" viewBox="0 0 700 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_244_2655" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="700" height="105">
+<rect width="700" height="105" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_244_2655)">
+<g filter="url(#filter0_d_244_2655)">
+<path d="M743.052 85.6646L733.678 104.601L722.115 101.008L732.555 83.9911L743.052 85.6646Z" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_244_2655" x="693.115" y="52.9912" width="80.9365" height="80.6099" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="1" dy="-1"/>
+<feGaussianBlur stdDeviation="15"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.7 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_244_2655"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_244_2655" result="shape"/>
+</filter>
+</defs>
+</svg>

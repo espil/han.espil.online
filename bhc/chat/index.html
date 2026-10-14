@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Boundless Horizon Campground LTD.
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Page styles - make your own! -->
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Peekobot custom properties (CSS variable) - set these! -->
+    <style>
+        :root {
+            --peekobot-height: 80vh;
+            --peekobot-avatar: url("./cta-logo.svg"); /* Replace with your game's logo */
+        }
+    </style>
+    <!-- Peekobot styles -->
+    <link rel="stylesheet" href="./peekobot.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+    <!-- These provide in-browser transpilation of ES6 JS code to ES5 to support IE11 -->
+    <script src="https://unpkg.com/@babel/polyfill@7.6.0/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    
+    <header class="text-center">
+        <h1 class="xl reset-margin large-margin">Boundless Horizon Campground</h1>
+        <p>
+            Explore Boundless, Limitless thrilling Glamping-inspired adventure!
+        </p>
+        
+        <audio controls autoplay>
+            <source src="nxt.mp3" type="audio/mpeg" />
+          </audio>
+    </header>
+
+    <main id="main">
+        <div id="peekobot-container">
+            <div id="peekobot-inner">
+                <div id="peekobot"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="conversation.js"></script>
+    <script src="peekobot.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+</body>
+
+</html>

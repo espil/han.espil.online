@@ -1,0 +1,44 @@
+/* screen - navigation */
+
+.navigation {
+  align-items: center;
+  background-color: #0e1e47;
+  border: 1px none;
+  display: flex;
+  gap: 374px;
+  height: 100vh;
+  justify-content: center;
+  min-height: 116px;
+  min-width: 1440px;
+  padding: 24px;
+  width: 100%;
+}
+
+.navigation .frame-970 {
+  align-items: flex-start;
+  border: 1px none;
+  display: flex;
+  gap: 32px;
+  padding: 0px 0px 0px 10px;
+  width: fit-content;
+}
+
+.navigation .navbar {
+  align-items: center;
+  border: 1px none;
+  display: flex;
+  gap: 40px;
+  width: 454px;
+}
+
+.navigation .navbar-link {
+  letter-spacing: 0;
+  line-height: 21.6px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.navigation .logo-2 {
+  height: 68px;
+  min-width: 42px;
+}
