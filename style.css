@@ -20,9 +20,9 @@
   --masthead-fg:#f0eee9;
   --sans:Helvetica,Arial,"Helvetica Neue",sans-serif;
   --serif:Georgia,"Times New Roman",serif;
-  --cursor:url("assets/usedesign-cursor-light.svg") 24 22, auto;
-  --cursor-link:url("assets/usedesign-cursor-light-hover.svg") 24 22, pointer;
-  --cursor-active:url("assets/usedesign-cursor-light-active.svg") 24 22, auto;
+  --cursor:url("assets/usedesign-cursor-light.svg") 12 11, auto;
+  --cursor-link:url("assets/usedesign-cursor-light-hover.svg") 12 11, pointer;
+  --cursor-active:url("assets/usedesign-cursor-light-active.svg") 12 11, auto;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -36,9 +36,9 @@
     --card:#1c1c19;
     --masthead-bg:#f0eee9;
     --masthead-fg:#161616;
-    --cursor:url("assets/usedesign-cursor-dark.svg") 24 22, auto;
-    --cursor-link:url("assets/usedesign-cursor-dark-hover.svg") 24 22, pointer;
-    --cursor-active:url("assets/usedesign-cursor-dark-active.svg") 24 22, auto;
+    --cursor:url("assets/usedesign-cursor-dark.svg") 12 11, auto;
+    --cursor-link:url("assets/usedesign-cursor-dark-hover.svg") 12 11, pointer;
+    --cursor-active:url("assets/usedesign-cursor-dark-active.svg") 12 11, auto;
   }
 }
 html[data-theme="dark"]{
@@ -52,9 +52,9 @@ html[data-theme="dark"]{
     --card:#1c1c19;
     --masthead-bg:#f0eee9;
     --masthead-fg:#161616;
-    --cursor:url("assets/usedesign-cursor-dark.svg") 24 22, auto;
-    --cursor-link:url("assets/usedesign-cursor-dark-hover.svg") 24 22, pointer;
-    --cursor-active:url("assets/usedesign-cursor-dark-active.svg") 24 22, auto;
+    --cursor:url("assets/usedesign-cursor-dark.svg") 12 11, auto;
+    --cursor-link:url("assets/usedesign-cursor-dark-hover.svg") 12 11, pointer;
+    --cursor-active:url("assets/usedesign-cursor-dark-active.svg") 12 11, auto;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -116,15 +116,7 @@ nav.contents{
 }
 nav.contents a{color:var(--ink); margin:0 10px; white-space:nowrap; display:inline-block; padding:3px 0}
 nav.contents a:hover{color:var(--highlight-ink); text-decoration:none; box-shadow:inset 0 -2px 0 var(--highlight)}
-nav.contents a .vnum{
-  font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--highlight-ink); margin-right:7px; vertical-align:1px;
-}
 nav.contents a.active{color:var(--highlight-ink); box-shadow:inset 0 -2px 0 var(--highlight)}
-/* Screens (Views): with JS on, one View shows at a time; the Contents bar
-   switches Views and the reader's View is restored when they return.
-   Without JS nothing is hidden — every section reads top to bottom. */
-html.screens-on section.view:not(.active){display:none!important}
 
 /* ---- Sections: each one opens like a magazine department ---- */
 section{padding:56px 0 12px; scroll-margin-top:64px; border-top:4px solid var(--ink); margin-top:44px}
@@ -411,20 +403,17 @@ body.loading{overflow:hidden}
    pointer; on links its spiral screws in and out, on press the feather
    grows outward. Falls back to the static url() cursors without JS. ---- */
 #espil-cursor{
-  position:fixed; left:0; top:0; width:48px; height:45px; margin:-22px 0 0 -24px;
+  position:fixed; left:0; top:0; width:24px; height:23px; margin:-11px 0 0 -12px;
   pointer-events:none; z-index:2147483200; opacity:0; transition:opacity .18s ease;
-  color:#161616; will-change:transform;
+  color:#000; will-change:transform;
 }
 #espil-cursor.on{opacity:1}
-html[data-theme="dark"] #espil-cursor{color:#f0eee9}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) #espil-cursor{color:#f0eee9}
-}
+#espil-cursor.on-dark{color:#fff}
 html.uc-on, html.uc-on *{cursor:none!important}
 /* Hover: the spiral screws IN — an extension curve draws itself toward
    the centre — then screws back out. The original curves never change. */
 #espil-cursor .screw-ext{stroke-dasharray:100; stroke-dashoffset:100}
-#espil-cursor.is-hover .screw-ext{animation:uc-screw 2s ease-in-out infinite}
+#espil-cursor.is-hover .screw-ext{animation:uc-screw 1.6s ease-in-out infinite}
 @keyframes uc-screw{
   0%{stroke-dashoffset:100}
   50%{stroke-dashoffset:0}
