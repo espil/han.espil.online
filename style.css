@@ -155,3 +155,9 @@ footer{
   .toolbox ul{columns:1}
   ol.works li{padding-left:44px}
 }
+
+.house-renders{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.house-renders img{width:100%;height:auto;display:block;border:1px solid #d8d2c2}
+.house-renders img:first-child{grid-column:1/-1}
+.house-renders figcaption{grid-column:1/-1;font-size:13px;font-style:italic;opacity:.75}
+@media (max-width:640px){.house-renders{grid-template-columns:1fr}}
