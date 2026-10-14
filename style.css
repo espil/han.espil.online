@@ -1,163 +1,364 @@
-/* han.espil.online — Monocle-editorial portfolio */
+/* han.espil.online — fully Monocle-fitted edition
+   Colour system (per Han, 2026-10-14):
+   - Canvas: PANTONE 11-4201 Cloud Dancer — Pantone Color of the Year 2026,
+     digital approx. #F0EEE9 (RGB 240 238 233). The "blank canvas" white.
+   - Highlight: editorial red #C8102E — links, kickers, numerals, cursor ring.
+   - Ink: #161616. Everything else is a tone between Cloud Dancer and ink.
+   Custom mouse icons: assets/cursor.svg (arrow) + assets/cursor-link.svg (ring),
+   with native fallbacks; disabled on coarse pointers / touch. */
 :root{
-  --paper:#faf8f4; --ink:#1a1815; --muted:#6f6a61; --rule:#d8d2c6;
-  --accent:#8a3324; --card:#f1ede4;
+  --paper:#f0eee9;            /* Cloud Dancer */
+  --paper-2:#e8e4da;          /* deeper cloud tone — cards, bands */
+  --ink:#161616;
+  --muted:#6e6a61;
+  --rule:#d5d0c4;
+  --highlight:#c8102e;
+  --highlight-ink:#a50d26;
+  --card:#e8e4da;
+  --masthead-bg:#161616;
+  --masthead-fg:#f0eee9;
+  --sans:Helvetica,Arial,"Helvetica Neue",sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+  --cursor:url("assets/cursor.svg") 7 3, auto;
+  --cursor-link:url("assets/cursor-link.svg") 18 18, pointer;
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --paper:#14120f; --ink:#ece7dd; --muted:#a39c8f; --rule:#3a352d;
-    --accent:#d98a76; --card:#1d1a16;
+    --paper:#141412;
+    --paper-2:#1c1c19;
+    --ink:#f0eee9;
+    --muted:#a8a296;
+    --rule:#3b3a35;
+    --highlight:#ef6461;
+    --highlight-ink:#ef6461;
+    --card:#1c1c19;
+    --masthead-bg:#f0eee9;
+    --masthead-fg:#161616;
   }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0; background:var(--paper); color:var(--ink);
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:var(--serif);
   font-size:17px; line-height:1.65;
   -webkit-font-smoothing:antialiased;
+  cursor:var(--cursor);
 }
-a{color:var(--accent); text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:860px; margin:0 auto; padding:0 22px}
+::selection{background:var(--highlight); color:#f0eee9}
+a{color:var(--highlight-ink); text-decoration:none; cursor:var(--cursor-link)}
+a:hover{text-decoration:underline; text-underline-offset:3px}
+img{max-width:100%}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px}
 
-/* Masthead */
-.masthead{border-bottom:3px double var(--ink); padding:34px 0 18px; text-align:center}
-.masthead .brand{font-size:clamp(34px,7vw,54px); font-weight:700; letter-spacing:.01em; line-height:1.05}
-.masthead .brand span{color:var(--accent)}
-.masthead .tagline{font-style:italic; color:var(--muted); margin-top:6px; font-size:16px}
+/* ---- Folio bar: the magazine's running head ---- */
+.folio{
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  padding:9px 0 8px; border-bottom:1px solid var(--ink);
+  font-family:var(--sans); font-size:10.5px; font-weight:700;
+  letter-spacing:.24em; text-transform:uppercase;
+}
+.folio .folio-mid{color:var(--highlight-ink)}
+
+/* ---- Masthead: a magazine cover, not a page header ---- */
+.masthead{
+  background:var(--masthead-bg); color:var(--masthead-fg);
+  margin:0 -28px; padding:44px 28px 30px; text-align:center;
+}
+.masthead .brand{
+  font-family:var(--sans); font-size:clamp(52px,10vw,104px); font-weight:800;
+  letter-spacing:-.02em; line-height:.95; text-transform:uppercase;
+}
+.masthead .brand span{color:var(--highlight)}
+.masthead .tagline{font-style:italic; margin-top:12px; font-size:clamp(16px,2.4vw,20px); opacity:.85}
 .masthead .issue{
-  margin-top:14px; font-family:Helvetica,Arial,sans-serif; font-size:11px;
-  letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
+  margin:22px auto 0; max-width:760px; padding-top:12px;
+  border-top:1px solid var(--highlight);
+  font-family:var(--sans); font-size:11px; font-weight:700;
+  letter-spacing:.26em; text-transform:uppercase;
 }
-nav.contents{
-  position:sticky; top:0; z-index:10; background:var(--paper);
-  border-bottom:1px solid var(--rule); padding:10px 0;
-  font-family:Helvetica,Arial,sans-serif; font-size:12px;
-  letter-spacing:.14em; text-transform:uppercase; text-align:center;
-}
-nav.contents a{color:var(--ink); margin:0 9px; white-space:nowrap; display:inline-block; padding:3px 0}
-nav.contents a:hover{color:var(--accent); text-decoration:none}
 
-/* Sections */
-section{padding:44px 0 8px}
-.kicker{
-  font-family:Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:.24em;
-  text-transform:uppercase; color:var(--accent); margin:0 0 6px;
+/* ---- Contents: sticky index bar ---- */
+nav.contents{
+  position:sticky; top:0; z-index:20; background:var(--paper);
+  border-bottom:3px double var(--ink); padding:11px 0;
+  font-family:var(--sans); font-size:11.5px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase; text-align:center;
 }
+nav.contents a{color:var(--ink); margin:0 10px; white-space:nowrap; display:inline-block; padding:3px 0}
+nav.contents a:hover{color:var(--highlight-ink); text-decoration:none; box-shadow:inset 0 -2px 0 var(--highlight)}
+
+/* ---- Sections: each one opens like a magazine department ---- */
+section{padding:56px 0 12px; scroll-margin-top:64px; border-top:4px solid var(--ink); margin-top:44px}
+section:first-of-type{border-top:none; margin-top:0}
+.kicker{
+  display:inline-block; background:var(--ink); color:var(--paper);
+  font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.24em;
+  text-transform:uppercase; margin:0 0 14px; padding:5px 10px 4px;
+}
+.kicker::after{content:""; }
 h2{
-  font-size:clamp(26px,5vw,38px); line-height:1.15; margin:0 0 18px;
-  padding-bottom:12px; border-bottom:1px solid var(--ink); font-weight:700;
+  font-size:clamp(30px,5.4vw,46px); line-height:1.08; margin:0 0 20px;
+  font-weight:700; letter-spacing:-.01em; max-width:22ch;
 }
 h3{font-size:21px; margin:26px 0 6px; line-height:1.3}
 p{margin:0 0 14px}
-.lede{font-size:19px; line-height:1.6}
+.lede{font-size:19.5px; line-height:1.62}
+#briefing .lede::first-letter, #cover-story .lede::first-letter{
+  float:left; font-size:64px; line-height:.82; padding:6px 10px 0 0;
+  font-weight:700; color:var(--highlight);
+}
 .small{font-size:14.5px; color:var(--muted)}
 hr.rule{border:none; border-top:1px solid var(--rule); margin:30px 0}
 
-/* Fact box */
-.factbox{
-  border:1px solid var(--ink); padding:18px 22px; margin:22px 0;
-  background:var(--card);
+/* ---- Briefing layout: text + sidebar fact box (desktop magazine grid) ---- */
+@media (min-width:900px){
+  #briefing{display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); column-gap:44px}
+  #briefing .kicker, #briefing h2{grid-column:1/-1}
+  #briefing .factbox{grid-column:2; grid-row:3/span 3; align-self:start; margin:0}
+  #briefing > p, #briefing > h3{grid-column:1}
 }
-.factbox dl{margin:0; display:grid; grid-template-columns:130px 1fr; gap:6px 16px}
+
+/* Fact box — the magazine's "at a glance" panel */
+.factbox{border:2px solid var(--ink); padding:20px 22px; margin:22px 0; background:var(--card)}
+.factbox dl{margin:0; display:grid; grid-template-columns:118px 1fr; gap:8px 16px}
 .factbox dt{
-  font-family:Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--muted); padding-top:4px;
+  font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--highlight-ink); padding-top:4px;
 }
 .factbox dd{margin:0}
 
 /* Pull quote */
 .pullquote{
-  font-size:clamp(24px,5vw,34px); font-style:italic; text-align:center;
-  line-height:1.35; margin:30px auto; max-width:640px;
+  font-size:clamp(26px,5vw,38px); font-style:italic; text-align:center;
+  line-height:1.3; margin:38px auto; max-width:700px;
 }
-.pullquote .attrib{display:block; font-size:14px; font-style:normal; color:var(--muted); margin-top:10px; font-family:Helvetica,Arial,sans-serif; letter-spacing:.12em; text-transform:uppercase}
+.pullquote::before{content:""; display:block; width:54px; height:4px; background:var(--highlight); margin:0 auto 20px}
+.pullquote .attrib{display:block; font-size:13px; font-style:normal; color:var(--muted); margin-top:12px; font-family:var(--sans); font-weight:700; letter-spacing:.14em; text-transform:uppercase}
 
-/* Connected world panel */
-.panel{border:1px solid var(--rule); padding:6px 22px 12px; margin:24px 0; background:var(--card)}
-.panel h3{text-align:center; font-size:23px}
+/* Connected-world panel — the issue's centre spread */
+.panel{background:var(--masthead-bg); color:var(--masthead-fg); padding:28px 30px 18px; margin:28px 0}
+.panel h3{text-align:center; font-size:25px; margin-top:0}
+.panel .small{color:inherit; opacity:.75}
 .panel ol{margin:0; padding-left:22px}
 .panel li{margin:0 0 10px}
-.panel li strong{font-variant:small-caps; letter-spacing:.03em}
+.panel li strong{font-variant:small-caps; letter-spacing:.03em; color:inherit}
+.panel a{color:inherit; text-decoration:underline}
 
-/* Timeline & entries */
-.entry{padding:14px 0; border-bottom:1px solid var(--rule)}
+/* Record entries — date column + story column, like a magazine chronology */
+.entry{padding:16px 0; border-bottom:1px solid var(--rule)}
 .entry:last-child{border-bottom:none}
-.entry .when{
-  font-family:Helvetica,Arial,sans-serif; font-size:11.5px; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--muted);
+@media (min-width:760px){
+  .entry{display:grid; grid-template-columns:178px minmax(0,1fr); column-gap:28px}
+  .entry h3, .entry p{grid-column:2}
+  .entry .when{grid-row:1/span 2}
 }
-.entry h3{margin:4px 0 6px; font-size:20px}
+.entry .when{
+  font-family:var(--sans); font-size:11.5px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--highlight-ink); padding-top:5px;
+}
+.entry h3{margin:0 0 6px; font-size:20px}
 .entry p{margin:0 0 8px}
-.connects{font-style:italic; color:var(--accent)}
 
-/* Works numbering */
+/* Selected works — a two-column magazine index */
 ol.works{list-style:none; margin:0; padding:0; counter-reset:work}
-ol.works li{counter-increment:work; padding:14px 0 14px 58px; border-bottom:1px solid var(--rule); position:relative}
-ol.works li:last-child{border-bottom:none}
+@media (min-width:860px){
+  ol.works{display:grid; grid-template-columns:1fr 1fr; column-gap:44px}
+}
+ol.works li{counter-increment:work; padding:16px 0 16px 62px; border-top:1px solid var(--ink); position:relative}
 ol.works li::before{
   content:counter(work,decimal-leading-zero);
-  position:absolute; left:0; top:16px;
-  font-family:Helvetica,Arial,sans-serif; font-size:15px; font-weight:700; color:var(--accent);
+  position:absolute; left:0; top:14px;
+  font-family:var(--sans); font-size:22px; font-weight:800; color:var(--highlight);
 }
 ol.works h3{margin:0 0 4px; font-size:19px}
 ol.works p{margin:0}
+.connects{font-style:italic; color:var(--highlight-ink)}
 
-/* Full index */
-.index-group{margin:0 0 8px}
+/* Full index — compact, ruled, dated */
+.index-group{margin:0 0 10px}
 .index-group h3{
-  font-family:Helvetica,Arial,sans-serif; font-size:12.5px; letter-spacing:.2em;
-  text-transform:uppercase; border-bottom:1px solid var(--ink); padding-bottom:6px;
+  font-family:var(--sans); font-size:12.5px; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; border-bottom:2px solid var(--ink); padding-bottom:7px;
 }
-ul.index{list-style:none; margin:0 0 20px; padding:0}
-ul.index li{padding:7px 0; border-bottom:1px dotted var(--rule); font-size:15.5px}
+ul.index{list-style:none; margin:0 0 22px; padding:0}
+ul.index li{padding:8px 0; border-bottom:1px dotted var(--rule); font-size:15.5px}
 ul.index li:last-child{border-bottom:none}
-ul.index .yr{font-family:Helvetica,Arial,sans-serif; font-size:12px; color:var(--muted); letter-spacing:.08em}
+ul.index .yr{
+  display:inline-block; font-family:var(--sans); font-size:11px; font-weight:700; color:var(--paper);
+  background:var(--highlight); letter-spacing:.06em; padding:1px 6px; margin:0 2px; vertical-align:1px;
+}
+@media (prefers-color-scheme: dark){ ul.index .yr{color:#161616} }
 .footnote{font-size:13.5px; color:var(--muted); font-style:italic}
 
-/* Capabilities */
-.dept{padding:12px 0; border-bottom:1px solid var(--rule)}
+/* Capabilities — departments with lettered badges */
+.dept{padding:14px 0; border-bottom:1px solid var(--rule); display:grid; grid-template-columns:52px minmax(0,1fr); column-gap:16px}
 .dept:last-child{border-bottom:none}
-.dept h3{margin:0 0 4px; font-size:19px}
-.dept h3 .letter{color:var(--accent); font-family:Helvetica,Arial,sans-serif; font-size:14px; margin-right:8px}
-.dept p{margin:0}
-.toolbox{margin-top:30px}
-.toolbox h3{font-size:22px; border-bottom:1px solid var(--ink); padding-bottom:8px}
-.toolbox h4{
-  font-family:Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--accent); margin:20px 0 6px;
+.dept h3{margin:0 0 4px; font-size:19px; grid-column:2}
+.dept p{margin:0; grid-column:2}
+.dept h3 .letter{
+  display:flex; align-items:center; justify-content:center;
+  width:40px; height:40px; margin-left:-68px; float:left;
+  background:var(--highlight); color:#f0eee9; border-radius:50%;
+  font-family:var(--sans); font-size:16px; font-weight:800;
 }
-.toolbox ul{list-style:none; margin:0; padding:0; columns:2; column-gap:34px}
-.toolbox li{padding:4px 0; border-bottom:1px dotted var(--rule); font-size:15.5px; break-inside:avoid}
+.toolbox{margin-top:34px; border-top:4px solid var(--ink); padding-top:10px}
+.toolbox h3{font-size:22px}
+.toolbox h4{
+  font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--highlight-ink); margin:22px 0 6px;
+}
+.toolbox ul{list-style:none; margin:0; padding:0; columns:2; column-gap:40px}
+.toolbox li{padding:5px 0; border-bottom:1px dotted var(--rule); font-size:15.5px; break-inside:avoid}
 
-/* Cover image */
-figure.cover{margin:26px 0}
-figure.cover img{width:100%; height:auto; display:block; border:1px solid var(--rule)}
-figure.cover figcaption{font-size:13px; color:var(--muted); font-style:italic; margin-top:8px; text-align:center}
+/* Images — captioned like magazine plates */
+figure.cover{margin:28px 0}
+figure.cover img{width:100%; height:auto; display:block; border:1px solid var(--ink)}
+figure.cover figcaption{
+  font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted); margin-top:9px; text-align:left;
+}
+figure.cover figcaption::before{content:""; display:inline-block; width:9px; height:9px; background:var(--highlight); margin-right:8px}
 
-/* Correspondence / footer */
+/* Espil House renders (kept from v1, re-toned) */
+.house-renders{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0}
+.house-renders img{width:100%; height:auto; display:block; border:1px solid var(--ink)}
+.house-renders img:first-child{grid-column:1/-1}
+.house-renders figcaption{grid-column:1/-1; font-size:13px; font-style:italic; color:var(--muted)}
+@media (max-width:640px){.house-renders{grid-template-columns:1fr}}
+
+/* Correspondence / footer — colophon */
 .contact-list{list-style:none; margin:0; padding:0}
-.contact-list li{padding:9px 0; border-bottom:1px solid var(--rule); font-size:16.5px}
+.contact-list li{padding:10px 0; border-bottom:1px solid var(--rule); font-size:16.5px}
 .contact-list .label{
-  font-family:Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:.18em;
-  text-transform:uppercase; color:var(--muted); display:inline-block; width:110px;
+  font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--highlight-ink); display:inline-block; width:118px;
 }
 footer{
-  margin-top:50px; border-top:3px double var(--ink); padding:18px 0 40px;
-  text-align:center; font-size:13.5px; color:var(--muted); font-style:italic;
+  margin:56px -28px 0; padding:26px 28px 44px;
+  background:var(--masthead-bg); color:var(--masthead-fg);
+  text-align:center; font-size:13.5px; font-style:italic;
 }
+footer .colophon{
+  display:block; font-family:var(--sans); font-style:normal; font-weight:700;
+  font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; opacity:.75; margin-top:10px;
+}
+footer a{color:inherit; text-decoration:underline}
 
-@media (max-width:560px){
+/* Small screens: single column, swipeable contents */
+@media (max-width:899px){
+  .wrap{padding:0 18px}
+  .masthead{margin:0 -18px; padding:34px 18px 24px}
+  footer{margin:48px -18px 0; padding:22px 18px 36px}
   body{font-size:16px}
   .factbox dl{grid-template-columns:1fr; gap:2px}
   .factbox dd{margin-bottom:8px}
   .toolbox ul{columns:1}
-  ol.works li{padding-left:44px}
+  ol.works li{padding-left:50px}
+  nav.contents{text-align:left; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .folio .folio-mid{display:none}
+}
+/* ---- Loading screen: the supplied house render + a glass of water ----
+   Full-screen cover shown while the page's real assets load. The glass
+   circle fills with water in step with measured load progress (JS at the
+   end of index.html sets --p and the % counter); waves, bubbles and the
+   glass shine sell the water. Fades out on completion; a no-JS page never
+   traps the reader (noscript rule in index.html hides it). */
+#loader{
+  position:fixed; inset:0; z-index:100; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:22px;
+  background:#141412; overflow:hidden;
+  transition:opacity .6s ease, visibility .6s;
+}
+#loader.done{opacity:0; visibility:hidden; pointer-events:none}
+#loader .loader-bg{
+  position:absolute; inset:0;
+  background:url("universe/render-tree.png") center/cover no-repeat;
+  opacity:.55; transform:scale(1.04);
+}
+#loader .loader-scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(20,20,18,.42), rgba(20,20,18,.18) 40%, rgba(20,20,18,.55));
+}
+#loader .glass{
+  position:relative; width:98px; height:98px; border-radius:50%;
+  overflow:hidden; isolation:isolate;
+  background:rgba(240,238,233,.02);
+  border:none;
+  box-shadow:inset 0 0 17px rgba(240,238,233,.07), inset 0 -9px 15px rgba(0,0,0,.12), 0 12px 30px rgba(0,0,0,.4);
+  -webkit-backdrop-filter:blur(1px); backdrop-filter:blur(1px);
+}
+#loader .water{
+  position:absolute; left:0; right:0; bottom:0; height:calc(var(--p,0)*1%);
+  background:linear-gradient(180deg, rgba(190,242,100,.42), rgba(74,222,128,.46) 55%, rgba(21,128,61,.5));
+  transition:height .12s linear; /* JS tick already eases; a long CSS transition makes the water trail the % counter */
+  z-index:1;
+}
+#loader .wave{
+  position:absolute; left:0; top:-7px; width:200%; height:8px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M0 8 Q 15 1 30 8 T 60 8 T 90 8 T 120 8 V14 H0 Z' fill='%23bef264' fill-opacity='0.42'/%3E%3C/svg%3E") repeat-x;
+  background-size:120px 8px;
+  animation:waveSlide 2.6s linear infinite;
+}
+#loader .wave.back{top:-6px; opacity:.22; animation-duration:4.4s; animation-direction:reverse}
+/* Swirl: a slow rotating light-disc inside the liquid, clipped to the water's own box */
+#loader .swirl{
+  position:absolute; left:0; right:0; bottom:0; height:calc(var(--p,0)*1%);
+  overflow:hidden; z-index:2; transition:height .12s linear; pointer-events:none;
+}
+#loader .swirl i{
+  position:absolute; left:50%; top:50%; width:220px; height:220px; margin:-110px 0 0 -110px;
+  border-radius:50%;
+  background:conic-gradient(from 0deg, transparent 0deg, rgba(255,244,150,.3) 40deg, transparent 95deg, rgba(255,255,255,.16) 165deg, transparent 215deg, rgba(190,242,100,.26) 300deg, transparent 345deg);
+  animation:swirlSpin 6s linear infinite;
+}
+@keyframes swirlSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes waveSlide{from{transform:translateX(0)}to{transform:translateX(-120px)}}
+#loader .bubble{
+  position:absolute; bottom:8px; border-radius:50%; z-index:3;
+  background:radial-gradient(circle at 32% 32%, rgba(255,255,255,.95), rgba(255,255,255,.15) 65%);
+  animation:bubbleRise 3.2s ease-in infinite;
+}
+#loader .bubble.b1{left:38%; width:5px; height:5px; animation-delay:0s}
+#loader .bubble.b2{left:55%; width:3px; height:3px; animation-delay:1.1s}
+#loader .bubble.b3{left:47%; width:6px; height:6px; animation-delay:2s}
+@keyframes bubbleRise{
+  0%{transform:translateY(0) translateX(0); opacity:0}
+  12%{opacity:.85}
+  88%{opacity:.7}
+  100%{transform:translateY(-74px) translateX(3px); opacity:0}
+}
+#loader .glass-shine{
+  position:absolute; inset:0; border-radius:50%; z-index:4; pointer-events:none;
+  background:
+    radial-gradient(60px 31px at 30% 16%, rgba(255,255,255,.42), rgba(255,255,255,0) 62%),
+    radial-gradient(100px 100px at 78% 88%, rgba(255,255,255,.1), rgba(255,255,255,0) 55%);
+}
+#loader .pct{
+  position:absolute; inset:0; z-index:5; display:flex; align-items:center; justify-content:center;
+  font-family:var(--sans); font-weight:800; font-size:22px; color:#f0eee9;
+  text-shadow:0 1px 10px rgba(10,30,45,.55); letter-spacing:.01em;
+}
+#loader .pct small{font-size:11px; margin-left:1px; margin-top:6px}
+#loader .loader-status{
+  position:relative; font-family:var(--sans); font-size:11px; font-weight:700;
+  letter-spacing:.26em; text-transform:uppercase; color:#f0eee9; opacity:.85; text-align:center;
+}
+body.loading{overflow:hidden}
+@media (prefers-reduced-motion: reduce){
+  #loader .wave, #loader .bubble, #loader .swirl i{animation:none}
+  #loader{transition:opacity .2s}
 }
 
-.house-renders{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
-.house-renders img{width:100%;height:auto;display:block;border:1px solid #d8d2c2}
-.house-renders img:first-child{grid-column:1/-1}
-.house-renders figcaption{grid-column:1/-1;font-size:13px;font-style:italic;opacity:.75}
-@media (max-width:640px){.house-renders{grid-template-columns:1fr}}
+/* Touch / reduced motion: native cursor and no smooth scroll */
+@media (pointer:coarse){
+  body, a{cursor:auto}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+}
+@media print{
+  body, a{cursor:auto}
+  nav.contents{position:static}
+  .masthead, .panel, footer{background:#fff; color:#000}
+}

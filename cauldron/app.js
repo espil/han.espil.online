@@ -1403,7 +1403,7 @@ function createMap(center) {
     if (mapReady) return;
     mapReady = true;
     state.mapLoaded = true;
-    setBootStatus('Map loaded. Waiting for UseDesign gate animation to finish...');
+    setBootStatus('Map loaded. Waiting for Espil gate animation to finish...');
     setFadeBounds(center);
     addMapboxBuildingDepth();
     lowerBuildingOpacityForVisibility();

@@ -56,7 +56,7 @@ const chat = {
         options: [
             {
                 text: "Please fill out our form here",
-                url: "http://reservation.usedesign.rf.gd/form1.html"
+                url: "form1.html"
             }
         ]
     },
@@ -65,7 +65,7 @@ const chat = {
         options: [
             {
                 text: "Please fill out our form here",
-                url: "http://reservation.usedesign.rf.gd/form2.html"
+                url: "form2.html"
             }
         ]
     },
@@ -74,7 +74,7 @@ const chat = {
         options: [
             {
                 text: "Please fill out our form here",
-                url: "http://reservation.usedesign.rf.gd/form3.html"
+                url: "form3.html"
             }
         ]
     },
@@ -83,7 +83,7 @@ const chat = {
         options: [
             {
                 text: "Please fill out our form here",
-                url: "http://reservation.usedesign.rf.gd/form4.html"
+                url: "form4.html"
             }
         ]
     },    

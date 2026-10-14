@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Espil. — Web Developer &amp; Designer | HanBin Im</title>
 <meta name="description" content="The portfolio of HanBin Im — web developer & designer in Vancouver, BC. I build Espil.Online, an interactive 3D map, and a decade of client sites, systems and experiments.">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=6">
+<noscript><style>#loader{display:none}</style></noscript>
 <link rel="canonical" href="https://han.espil.online/">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -55,7 +56,25 @@
 </script>
 </head>
 <body>
-<div class="wrap">
+<div id="loader" role="status" aria-label="Loading the portfolio">
+  <div class="loader-bg"></div>
+  <div class="loader-scrim"></div>
+  <div class="glass" aria-hidden="true">
+    <div class="water"><div class="wave"></div><div class="wave back"></div></div>
+    <div class="swirl"><i></i></div>
+    <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span>
+    <div class="glass-shine"></div>
+    <div class="pct"><span id="loader-pct">0</span><small>%</small></div>
+  </div>
+  <div class="loader-status" id="loader-status">Opening the issue</div>
+</div>
+<div class="wrap" id="top">
+
+<div class="folio">
+  <span>han.espil.online</span>
+  <span class="folio-mid">The Portfolio Issue</span>
+  <span>Vancouver, BC — Nº 01 · 2026</span>
+</div>
 
 <header class="masthead">
   <div class="brand">Espil<span>.</span></div>
@@ -273,15 +292,14 @@
     <h3>Portfolio Lineage &amp; Houses</h3>
     <ul class="index">
       <li><a href="/hbi/">HBI — HighSchool Artworks</a> <span class="yr">2021</span> — a 3D flip-book of my 2006 charcoal works; from the same school years when my designs were already in real use (Coquitlam Hall of Fame, school soccer team).</li>
-      <li><a href="https://resume.usedesign.rf.gd">Resume — Minihompi / Recruiter Dossier</a> — my single-page interactive resume and dossier site.</li>
+      <li>Resume — Minihompi / Recruiter Dossier — my single-page interactive resume and dossier site.</li>
       <li><a href="/media/">Media — Bieclipse Design, Immersive Web Development</a> <span class="yr">2021</span> — my early immersive portfolio, with Enscape 3D embedded.</li>
       <li><a href="/roadmap/">Roadmap — Bieclipse Designs</a> <span class="yr">2022</span> — a portfolio built on Pannellum 360° panoramas.</li>
       <li><a href="/mros/">MROS</a> — an Enscape 3D architectural viewer; also the free sample house for my OpenSea collection.</li>
       <li><a href="/universe/">Universe</a> <span class="yr">2022</span> — an Enscape 3D viewer for the &ldquo;Universe&rdquo; house, item #2 of the House Collection.</li>
       <li>Hexagon Palace — house #1 of my Espil House Collection on OpenSea; its showcase lives with the collection.</li>
-      <li><a href="https://hanbin.usedesign.rf.gd">HanBin</a> <span class="yr">2023</span> — a 3D flip-book that opens into MROS.</li>
-      <li><a href="https://fishbowl.usedesign.rf.gd">Fish Bowl</a> <span class="yr">2023</span> — a CSS fish-bowl animation study.</li>
-      <li><a href="https://pantro.usedesign.rf.gd">Pantro — The Secret Diary of Espil Ceil</a> — a 3D flip-book introduction to the Espil Ceil diary world, animated with GSAP.</li>
+      <li>HanBin <span class="yr">2023</span> — a 3D flip-book that opens into MROS.</li>
+      <li>Fish Bowl <span class="yr">2023</span> — a CSS fish-bowl animation study.</li>
     </ul>
   </div>
 
@@ -294,10 +312,8 @@
       <li><a href="/qderm/">QDerm Clinic</a> <span class="yr">2023</span> — online booking for the dermatology clinic, with calendar sync and email notifications.</li>
       <li>Monicahan — a website I built for a client, Monica, a PhD.</li>
       <li>Through Bieclipse Design, I also contributed to numerous other client design and website projects beyond those listed here — including builds that were delivered but never launched.</li>
-      <li><a href="/bhc/">Boundless Horizon Camps</a> <span class="yr">2025</span> — a parallax camping site with a chatbot demo.</li>
-      <li><a href="/boundless/">Boundless Horizon Campground</a> <span class="yr">2025</span> — a glamping site with chatbot, tied to my documented security &amp; IP framework.</li>
-      <li><a href="https://cwa.usedesign.rf.gd">CWA</a> <span class="yr">2024–25</span> — a full WordPress build, cache-tuned.</li>
-      <li><a href="https://vanbridge.usedesign.rf.gd">Vanbridge</a> <span class="yr">2024</span> — a full WordPress site build.</li>
+      <li>CWA <span class="yr">2024–25</span> — a full WordPress build, cache-tuned.</li>
+      <li>Vanbridge <span class="yr">2024</span> — a full WordPress site build.</li>
     </ul>
   </div>
 
@@ -306,10 +322,9 @@
     <ul class="index">
       <li><a href="/cauldron/">Cauldron — ESPIL Online | The Cauldron</a> <span class="yr">2025</span> — the Mapbox RPG prototype; see Selected Works.</li>
       <li><a href="/cta/">Capilano Theft Auto</a> <span class="yr">2024</span> — a GTA-inspired game concept for Capilano University, with its own CTA Bot.</li>
-      <li><a href="https://openai.usedesign.rf.gd">OpenAI Presentation</a> <span class="yr">2023</span> — &ldquo;OpenAI — Decision Making&rdquo;, presented as a 3D flip-book.</li>
-      <li><a href="/sabai/">Sabai — Beats and Bridges</a> <span class="yr">2024</span> — a multimedia project on Vancouver's EDM scene and the artist SABAI: interview, 360° and 3D.</li>
+      <li>OpenAI Presentation <span class="yr">2023</span> — &ldquo;OpenAI — Decision Making&rdquo;, presented as a 3D flip-book.</li>
       <li><a href="/umi/">Sushi Umi — flip-book</a> <span class="yr">2023</span> — a 3D flip-book story promo for the restaurant.</li>
-      <li><a href="https://jehb.usedesign.rf.gd">JEHB</a> — a small personal progressive web app, built with Vite.</li>
+      <li>JEHB — a small personal progressive web app, built with Vite.</li>
     </ul>
   </div>
 
@@ -323,14 +338,25 @@
   </div>
 
   <div class="index-group">
+    <h3>School Projects</h3>
+    <ul class="index">
+      <li><a href="/bhc/">Boundless Horizon Camps</a> <span class="yr">2025</span> — a parallax camping site with a chatbot demo.</li>
+      <li><a href="/boundless/">Boundless Horizon Campground</a> <span class="yr">2025</span> — a glamping site with chatbot, tied to my documented security &amp; IP framework.</li>
+      <li><a href="/sabai/">Sabai — Beats and Bridges</a> <span class="yr">2024</span> — a multimedia project on Vancouver's EDM scene and the artist SABAI: interview, 360° and 3D.</li>
+      <li>Ryde — a BCIT transit project that integrated the TransLink API wholesale: real routes, real data, end to end.</li>
+      <li>Pantro — The Secret Diary of Espil Ceil — a 3D flip-book introduction to the Espil Ceil diary world, animated with GSAP.</li>
+      <li>coffee_spies — a BCIT app prototype.</li>
+      <li>MusicPond <span class="yr">2021</span> — an interactive music project.</li>
+    </ul>
+  </div>
+
+  <div class="index-group">
     <h3>Code Archives — GitHub</h3>
     <ul class="index">
       <li><a href="https://github.com/espil">github.com/espil</a> — my public code, including:</li>
       <li>react-crm <span class="yr">2019</span> — a CRM app built in React.</li>
       <li>Capilano-Theft-Auto — the C# game project behind the CTA concept site.</li>
-      <li>coffee_spies — a BCIT app prototype.</li>
       <li>COVID19 Data Visualization for HoloLens 2 — mixed-reality data visualisation.</li>
-      <li>MusicPond <span class="yr">2021</span> — an interactive music project.</li>
       <li>paragram — a social app experiment.</li>
       <li>Plus smaller coursework and utility repositories.</li>
     </ul>
@@ -437,8 +463,50 @@
 
 <footer>
   han.espil.online — my portfolio. Built and maintained by me.
+  <span class="colophon">Espil. — Issue Nº 01 · Set in a Monocle-fitted edition · Canvas: Pantone 11-4201 Cloud Dancer · <a href="#top">Back to the cover ↑</a></span>
 </footer>
 
 </div>
+<script>
+(function(){
+  var loader=document.getElementById('loader'); if(!loader) return;
+  document.body.classList.add('loading');
+  var pctEl=document.getElementById('loader-pct'),
+      statusEl=document.getElementById('loader-status'),
+      shown=0, real=0, start=Date.now(), finished=false;
+  var words=[[0,'Opening the issue'],[30,'Pouring the water'],[60,'Setting the type'],[85,'Polishing the cover']];
+  function render(){
+    loader.style.setProperty('--p', shown);
+    pctEl.textContent=Math.floor(shown);
+    for(var i=words.length-1;i>=0;i--){ if(shown>=words[i][0]){ statusEl.textContent=words[i][1]; break; } }
+  }
+  function measure(){
+    var imgs=document.images, done=0;
+    for(var i=0;i<imgs.length;i++){ if(imgs[i].complete) done++; }
+    var imgPart=imgs.length? (done/imgs.length)*80 : 80;
+    var docPart=(document.readyState==='complete')?20:(document.readyState==='interactive'?12:4);
+    real=Math.min(100, imgPart+docPart);
+  }
+  var tick=setInterval(function(){
+    measure();
+    var target=Math.max(real, Math.min(92, (Date.now()-start)/45)); /* time floor, capped until truly loaded */
+    if(document.readyState==='complete') target=100;
+    shown+=(target-shown)*0.14; if(target-shown<0.4) shown=target;
+    render();
+    if(shown>=99.5 && document.readyState==='complete' && Date.now()-start>=1000) finish();
+    if(Date.now()-start>5000) finish(); /* never trap the reader */
+  },50);
+  function finish(){
+    if(finished) return; finished=true;
+    shown=100; render(); clearInterval(tick);
+    setTimeout(function(){
+      loader.classList.add('done');
+      document.body.classList.remove('loading');
+      setTimeout(function(){ loader.remove(); },700);
+    },350);
+  }
+  render();
+})();
+</script>
 </body>
 </html>
