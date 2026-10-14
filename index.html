@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Espil. — Web Developer &amp; Designer | HanBin Im</title>
 <meta name="description" content="The portfolio of HanBin Im — web developer & designer in Vancouver, BC. I build Espil.Online, an interactive 3D map, and a decade of client sites, systems and experiments.">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 <noscript><style>#loader{display:none}</style></noscript>
 <link rel="canonical" href="https://han.espil.online/">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -321,7 +321,7 @@
     <h3>Worlds, Games &amp; Experiments</h3>
     <ul class="index">
       <li><a href="/cauldron/">Cauldron — ESPIL Online | The Cauldron</a> <span class="yr">2025</span> — the Mapbox RPG prototype; see Selected Works.</li>
-      <li><a href="/cta/">Capilano Theft Auto</a> <span class="yr">2024</span> — a GTA-inspired game concept for Capilano University, with its own CTA Bot.</li>
+      <li><a href="/cta/">Capilano Theft Auto</a> <span class="yr">2024</span> — a GTA-inspired game concept for Capilano University, with its own CTA Bot. Its online twin, <em>Capilano Theft Online</em>, was my real-earth experiment: Unity + Photon multiplayer over a Google Earth map (Cesium), a character set loose on the real city — VR was the goal; practical limits said otherwise. The experiment the current Espil.Online map grew from.</li>
       <li>OpenAI Presentation <span class="yr">2023</span> — &ldquo;OpenAI — Decision Making&rdquo;, presented as a 3D flip-book.</li>
       <li><a href="/umi/">Sushi Umi — flip-book</a> <span class="yr">2023</span> — a 3D flip-book story promo for the restaurant.</li>
       <li>JEHB — a small personal progressive web app, built with Vite.</li>
@@ -355,7 +355,7 @@
     <ul class="index">
       <li><a href="https://github.com/espil">github.com/espil</a> — my public code, including:</li>
       <li>react-crm <span class="yr">2019</span> — a CRM app built in React.</li>
-      <li>Capilano-Theft-Auto — the C# game project behind the CTA concept site.</li>
+      <li>Capilano-Theft-Auto — the Unity project behind Capilano Theft Online: Photon PUN multiplayer + Cesium Google-Earth 3D tiles.</li>
       <li>COVID19 Data Visualization for HoloLens 2 — mixed-reality data visualisation.</li>
       <li>paragram — a social app experiment.</li>
       <li>Plus smaller coursework and utility repositories.</li>
@@ -506,6 +506,32 @@
     },350);
   }
   render();
+})();
+</script>
+<script>
+/* Exit transition: show the water-glass loader while leaving for a sub-site. */
+(function(){
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented || e.button!==0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a || (a.target && a.target!=='_self')) return;
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0)==='#' || /^(mailto:|tel:|javascript:)/i.test(href)) return;
+    var url; try{ url=new URL(a.href, location.href); }catch(_){ return; }
+    if(url.origin!==location.origin || url.pathname===location.pathname) return;
+    e.preventDefault();
+    if(document.getElementById('loader')){ location.href=a.href; return; }
+    var d=document.createElement('div');
+    d.id='loader'; d.className='exit'; d.setAttribute('role','status'); d.setAttribute('aria-label','Loading');
+    d.innerHTML='<div class="loader-bg"></div><div class="loader-scrim"></div>'
+      +'<div class="glass" aria-hidden="true"><div class="water"><div class="wave"></div><div class="wave back"></div></div>'
+      +'<div class="swirl"><i></i></div><span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span>'
+      +'<div class="glass-shine"></div><div class="pct"><span>0</span><small>%</small></div></div>'
+      +'<div class="loader-status">Turning the page</div>';
+    document.body.appendChild(d);
+    document.body.style.overflow='hidden';
+    setTimeout(function(){ location.href=a.href; }, 380);
+  });
 })();
 </script>
 </body>
