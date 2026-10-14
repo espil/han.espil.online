@@ -1,0 +1,21 @@
+{
+  "id": "vancouver_lidar_2022",
+  "kind": "lidar_index",
+  "status": "manifest_only",
+  "coverage_note": "City of Vancouver and UBC Endowment Lands LiDAR tiles should be indexed here.",
+  "classes": [
+    "ground",
+    "water",
+    "vegetation",
+    "buildings",
+    "structures"
+  ],
+  "cauldron_outputs": [
+    "building_height_estimates",
+    "tree_height_estimates",
+    "canopy_surface",
+    "ground_slope",
+    "water_edges"
+  ],
+  "tiles": []
+}

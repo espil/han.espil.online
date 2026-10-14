@@ -1,0 +1,44 @@
+{
+  "id": "overture_buildings",
+  "kind": "parquet_manifest",
+  "status": "requires_real_download",
+  "expected_file": "overture_buildings.parquet",
+  "theme": "buildings",
+  "required_fields": [
+    "id",
+    "geometry",
+    "height",
+    "num_floors",
+    "class",
+    "names",
+    "addresses",
+    "sources"
+  ],
+  "cauldron_object_shape": {
+    "type": "building",
+    "footprint": "polygon",
+    "height_estimate": 18,
+    "style": "downtown_glass_midrise",
+    "collision": true,
+    "shadow": true,
+    "entrance_candidates": []
+  },
+  "merge_policy": {
+    "prefer_geometry_order": [
+      "overture",
+      "city_of_vancouver",
+      "osm"
+    ],
+    "height_order": [
+      "lidar",
+      "overture.height",
+      "overture.num_floors",
+      "style_rule_estimate"
+    ],
+    "dedupe_keys": [
+      "id",
+      "address",
+      "centroid_tile_hash"
+    ]
+  }
+}

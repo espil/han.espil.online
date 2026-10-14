@@ -1,0 +1,22 @@
+{
+  "schema": "cauldron.mapboxCapture.v0.1",
+  "city": "Vancouver",
+  "center": [
+    -123.11498,
+    49.260975
+  ],
+  "placeName": "Vancouver, British Columbia, Canada",
+  "radiusMeters": 3000,
+  "diameterMeters": 6000,
+  "sizePixels": [
+    1280,
+    1280
+  ],
+  "metersPerPixel": 4.6875,
+  "zoom": 14.41168432704105,
+  "bearing": 0,
+  "style": "mapbox://styles/mapbox/streets-v12",
+  "source": "mapbox-static-images-api",
+  "imagePath": "./cauldron-vancouver/data/captures/vancouver_3000m_mapbox_streets_v12.png",
+  "generatedAt": "2026-06-15T14:56:21.513Z"
+}

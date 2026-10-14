@@ -1,0 +1,11 @@
+{
+  "name": "cauldron-vancouver",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "npm run test:reality && npm run test:performance && npm run test:production",
+    "test:reality": "node --experimental-strip-types tests/reality-compiler-smoke.ts",
+    "test:performance": "node --experimental-strip-types tests/runtime-performance-smoke.ts",
+    "test:production": "node --experimental-strip-types tests/production-wiring-smoke.ts"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "layers": {
+    "tree_layer_1_public_trees": {
+      "source": "City of Vancouver public trees",
+      "verification": 3,
+      "geometry": "point",
+      "private_trees_included": false
+    },
+    "tree_layer_2_canopy": {
+      "sources": [
+        "Urban Forest Canopy Coverage",
+        "Metro Vancouver canopy",
+        "LiDAR vegetation surface"
+      ],
+      "verification": 2,
+      "geometry": "polygon_or_raster"
+    },
+    "tree_layer_3_user_capture": {
+      "sources": [
+        "mobile_photo",
+        "mobile_video",
+        "gps",
+        "heading",
+        "timestamp"
+      ],
+      "verification": 1,
+      "geometry": "point"
+    }
+  },
+  "species_to_render": {
+    "Acer": {
+      "common_group": "maple",
+      "terrain_class": "tree_deciduous",
+      "sprite": "maple_sprite_cluster",
+      "seasonal": true
+    },
+    "Thuja": {
+      "common_group": "cedar",
+      "terrain_class": "tree_conifer",
+      "sprite": "cedar_sprite_cluster",
+      "seasonal": false
+    },
+    "Pseudotsuga": {
+      "common_group": "douglas_fir",
+      "terrain_class": "tree_conifer",
+      "sprite": "cedar_sprite_cluster",
+      "seasonal": false
+    },
+    "default_deciduous": {
+      "terrain_class": "tree_deciduous",
+      "sprite": "maple_sprite_cluster"
+    },
+    "default_conifer": {
+      "terrain_class": "tree_conifer",
+      "sprite": "cedar_sprite_cluster"
+    }
+  },
+  "collision": {
+    "public_tree_radius_m": 1.8,
+    "canopy_cluster_min_radius_m": 3.5,
+    "canopy_cluster_max_radius_m": 12
+  }
+}

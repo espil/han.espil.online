@@ -1,0 +1,166 @@
+{
+  "type": "FeatureCollection",
+  "name": "vancouver_demo_v0_1",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "osm-road-burrard-demo",
+      "properties": {
+        "source": "osm",
+        "highway": "residential",
+        "name": "Demo Residential Street"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1207, 49.2827],
+          [-123.120148, 49.2827]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "overture-building-demo",
+      "properties": {
+        "source": "overture",
+        "building": "commercial",
+        "height": "30",
+        "name": "Demo Explicit Height Building"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-123.120562, 49.282790],
+          [-123.120424, 49.282790],
+          [-123.120424, 49.282881],
+          [-123.120562, 49.282881],
+          [-123.120562, 49.282790]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-building-height-m-demo",
+      "properties": {
+        "source": "osm",
+        "building": "commercial",
+        "height_m": "30 m",
+        "name": "Demo Height M Building"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-123.120700, 49.283016],
+          [-123.120617, 49.283016],
+          [-123.120617, 49.283089],
+          [-123.120700, 49.283089],
+          [-123.120700, 49.283016]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-building-levels-demo",
+      "properties": {
+        "source": "osm",
+        "building": "commercial",
+        "building:levels": 10,
+        "name": "Demo Ten Level Commercial"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-123.120424, 49.282971],
+          [-123.120341, 49.282971],
+          [-123.120341, 49.283044],
+          [-123.120424, 49.283044],
+          [-123.120424, 49.282971]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-building-estimated-demo",
+      "properties": {
+        "source": "osm",
+        "building": "detached",
+        "name": "Demo Detached House"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-123.120258, 49.282971],
+          [-123.120189, 49.282971],
+          [-123.120189, 49.283026],
+          [-123.120258, 49.283026],
+          [-123.120258, 49.282971]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-water-demo",
+      "properties": {
+        "source": "osm",
+        "natural": "water",
+        "name": "Demo False Creek Water"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-123.120286, 49.282790],
+          [-123.120079, 49.282790],
+          [-123.120079, 49.282926],
+          [-123.120286, 49.282926],
+          [-123.120286, 49.282790]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-park-demo",
+      "properties": {
+        "source": "osm",
+        "leisure": "park",
+        "name": "Demo Pocket Park"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-123.120700, 49.282926],
+          [-123.120534, 49.282926],
+          [-123.120534, 49.283062],
+          [-123.120700, 49.283062],
+          [-123.120700, 49.282926]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "public-tree-demo",
+      "properties": {
+        "source": "public_trees",
+        "species": "Acer rubrum",
+        "common_name": "Red Maple",
+        "verification": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.120631, 49.282971]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-poi-demo",
+      "properties": {
+        "source": "osm",
+        "amenity": "restaurant",
+        "name": "Demo Restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.120493, 49.282745]
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "defaults": {
+    "collision": true,
+    "shadow": true,
+    "entrance_detection": true,
+    "opacity_when_occluding_player": 0.1
+  },
+  "styles": {
+    "downtown_glass_midrise": {
+      "height_min_m": 12,
+      "height_max_m": 80,
+      "areas": [
+        "Downtown Vancouver",
+        "Coal Harbour",
+        "Yaletown",
+        "Waterfront"
+      ],
+      "render": {
+        "terrain_class": "building_downtown",
+        "facade": "blue_glass",
+        "roof": "flat_dark",
+        "window_pattern": "vertical_grid"
+      }
+    },
+    "heritage_brick_lowrise": {
+      "height_min_m": 5,
+      "height_max_m": 28,
+      "areas": [
+        "Gastown",
+        "Yaletown"
+      ],
+      "render": {
+        "terrain_class": "building_downtown",
+        "facade": "brick_red",
+        "roof": "flat_warm",
+        "window_pattern": "arched_grid"
+      }
+    },
+    "residential_wood_house": {
+      "height_min_m": 3,
+      "height_max_m": 15,
+      "areas": [
+        "Stanley Park edge",
+        "False Creek edge"
+      ],
+      "render": {
+        "terrain_class": "building_house",
+        "facade": "wood_warm",
+        "roof": "pitched",
+        "window_pattern": "small"
+      }
+    }
+  },
+  "height_estimation": {
+    "floor_height_m": 3,
+    "fallbacks": [
+      "lidar_height",
+      "overture_height",
+      "overture_num_floors * floor_height_m",
+      "style_default"
+    ]
+  },
+  "entrance_candidates": {
+    "prefer": [
+      "address_point_nearest_road",
+      "door_sample_nearest_footway",
+      "longest_facade_midpoint",
+      "centroid_to_nearest_road"
+    ],
+    "max_distance_to_walkable_m": 18
+  }
+}

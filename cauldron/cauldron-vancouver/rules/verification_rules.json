@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "levels": {
+    "V0": {
+      "name": "record_only",
+      "requirements": [
+        "user note or capture exists"
+      ],
+      "canonical": false
+    },
+    "V1": {
+      "name": "gps_time_media",
+      "requirements": [
+        "gps",
+        "timestamp",
+        "photo_or_video"
+      ],
+      "canonical": false
+    },
+    "V2": {
+      "name": "ai_basic_match",
+      "requirements": [
+        "V1",
+        "ai_detected_object",
+        "location_reasonable_for_subject"
+      ],
+      "canonical": false
+    },
+    "V3": {
+      "name": "community_confirmed",
+      "requirements": [
+        "V2",
+        "two_or_more_distinct_users",
+        "similar_place_and_subject"
+      ],
+      "canonical": false
+    },
+    "V4": {
+      "name": "official_or_admin_confirmed",
+      "requirements": [
+        "official_data_match_or_admin_review"
+      ],
+      "canonical": false
+    },
+    "V5": {
+      "name": "cauldron_canonical",
+      "requirements": [
+        "V4",
+        "accepted_into_tile_cache"
+      ],
+      "canonical": true
+    }
+  },
+  "capture_schema": {
+    "capture_type": "photo | video | note",
+    "lat": "number",
+    "lng": "number",
+    "heading": "number",
+    "timestamp": "ISO-8601",
+    "subject": "tree | building | poi | road | water | other",
+    "detected_object": "string",
+    "user_note": "string",
+    "verification_level": "V0-V5"
+  }
+}

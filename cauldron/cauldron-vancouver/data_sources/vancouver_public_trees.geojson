@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+  "name": "vancouver_public_trees",
+  "status": "schema_container",
+  "schema": {
+    "species": "scientific species name",
+    "common_name": "human readable species name",
+    "location": "Point coordinate [lng, lat]",
+    "source": "city_public_trees",
+    "verification": 3
+  },
+  "features": []
+}

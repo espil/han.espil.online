@@ -1,0 +1,64 @@
+{
+  "id": "osm_vancouver",
+  "kind": "source_manifest",
+  "status": "manifest_only",
+  "coverage": {
+    "name": "Vancouver MVP",
+    "focus_areas": [
+      "Downtown Vancouver",
+      "Coal Harbour",
+      "Stanley Park east",
+      "False Creek",
+      "Yaletown",
+      "Gastown",
+      "Waterfront"
+    ]
+  },
+  "expected_raw_formats": [
+    "osm.pbf",
+    "geojson",
+    "pmtiles"
+  ],
+  "priority_layers": {
+    "transportation": [
+      "motorway",
+      "primary",
+      "secondary",
+      "residential",
+      "service",
+      "footway",
+      "cycleway",
+      "pedestrian"
+    ],
+    "land": [
+      "park",
+      "grass",
+      "forest",
+      "plaza",
+      "water",
+      "waterway"
+    ],
+    "places": [
+      "restaurant",
+      "cafe",
+      "shop",
+      "landmark",
+      "museum",
+      "tourism",
+      "public_transport"
+    ]
+  },
+  "cauldron_outputs": [
+    "walkable_routes",
+    "spawn_candidates",
+    "npc_paths",
+    "poi_interactions",
+    "water_blockers",
+    "park_terrain"
+  ],
+  "notes": [
+    "Use OSM transportation as the first pass for movement routes.",
+    "Merge buildings with Overture and Vancouver footprints instead of trusting a single source.",
+    "Use Google Maps only as visual reference; do not store Google-derived geometry."
+  ]
+}
