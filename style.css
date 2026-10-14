@@ -1,0 +1,157 @@
+/* han.espil.online — Monocle-editorial portfolio */
+:root{
+  --paper:#faf8f4; --ink:#1a1815; --muted:#6f6a61; --rule:#d8d2c6;
+  --accent:#8a3324; --card:#f1ede4;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#14120f; --ink:#ece7dd; --muted:#a39c8f; --rule:#3a352d;
+    --accent:#d98a76; --card:#1d1a16;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:17px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:860px; margin:0 auto; padding:0 22px}
+
+/* Masthead */
+.masthead{border-bottom:3px double var(--ink); padding:34px 0 18px; text-align:center}
+.masthead .brand{font-size:clamp(34px,7vw,54px); font-weight:700; letter-spacing:.01em; line-height:1.05}
+.masthead .brand span{color:var(--accent)}
+.masthead .tagline{font-style:italic; color:var(--muted); margin-top:6px; font-size:16px}
+.masthead .issue{
+  margin-top:14px; font-family:Helvetica,Arial,sans-serif; font-size:11px;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
+}
+nav.contents{
+  position:sticky; top:0; z-index:10; background:var(--paper);
+  border-bottom:1px solid var(--rule); padding:10px 0;
+  font-family:Helvetica,Arial,sans-serif; font-size:12px;
+  letter-spacing:.14em; text-transform:uppercase; text-align:center;
+}
+nav.contents a{color:var(--ink); margin:0 9px; white-space:nowrap; display:inline-block; padding:3px 0}
+nav.contents a:hover{color:var(--accent); text-decoration:none}
+
+/* Sections */
+section{padding:44px 0 8px}
+.kicker{
+  font-family:Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--accent); margin:0 0 6px;
+}
+h2{
+  font-size:clamp(26px,5vw,38px); line-height:1.15; margin:0 0 18px;
+  padding-bottom:12px; border-bottom:1px solid var(--ink); font-weight:700;
+}
+h3{font-size:21px; margin:26px 0 6px; line-height:1.3}
+p{margin:0 0 14px}
+.lede{font-size:19px; line-height:1.6}
+.small{font-size:14.5px; color:var(--muted)}
+hr.rule{border:none; border-top:1px solid var(--rule); margin:30px 0}
+
+/* Fact box */
+.factbox{
+  border:1px solid var(--ink); padding:18px 22px; margin:22px 0;
+  background:var(--card);
+}
+.factbox dl{margin:0; display:grid; grid-template-columns:130px 1fr; gap:6px 16px}
+.factbox dt{
+  font-family:Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted); padding-top:4px;
+}
+.factbox dd{margin:0}
+
+/* Pull quote */
+.pullquote{
+  font-size:clamp(24px,5vw,34px); font-style:italic; text-align:center;
+  line-height:1.35; margin:30px auto; max-width:640px;
+}
+.pullquote .attrib{display:block; font-size:14px; font-style:normal; color:var(--muted); margin-top:10px; font-family:Helvetica,Arial,sans-serif; letter-spacing:.12em; text-transform:uppercase}
+
+/* Connected world panel */
+.panel{border:1px solid var(--rule); padding:6px 22px 12px; margin:24px 0; background:var(--card)}
+.panel h3{text-align:center; font-size:23px}
+.panel ol{margin:0; padding-left:22px}
+.panel li{margin:0 0 10px}
+.panel li strong{font-variant:small-caps; letter-spacing:.03em}
+
+/* Timeline & entries */
+.entry{padding:14px 0; border-bottom:1px solid var(--rule)}
+.entry:last-child{border-bottom:none}
+.entry .when{
+  font-family:Helvetica,Arial,sans-serif; font-size:11.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted);
+}
+.entry h3{margin:4px 0 6px; font-size:20px}
+.entry p{margin:0 0 8px}
+.connects{font-style:italic; color:var(--accent)}
+
+/* Works numbering */
+ol.works{list-style:none; margin:0; padding:0; counter-reset:work}
+ol.works li{counter-increment:work; padding:14px 0 14px 58px; border-bottom:1px solid var(--rule); position:relative}
+ol.works li:last-child{border-bottom:none}
+ol.works li::before{
+  content:counter(work,decimal-leading-zero);
+  position:absolute; left:0; top:16px;
+  font-family:Helvetica,Arial,sans-serif; font-size:15px; font-weight:700; color:var(--accent);
+}
+ol.works h3{margin:0 0 4px; font-size:19px}
+ol.works p{margin:0}
+
+/* Full index */
+.index-group{margin:0 0 8px}
+.index-group h3{
+  font-family:Helvetica,Arial,sans-serif; font-size:12.5px; letter-spacing:.2em;
+  text-transform:uppercase; border-bottom:1px solid var(--ink); padding-bottom:6px;
+}
+ul.index{list-style:none; margin:0 0 20px; padding:0}
+ul.index li{padding:7px 0; border-bottom:1px dotted var(--rule); font-size:15.5px}
+ul.index li:last-child{border-bottom:none}
+ul.index .yr{font-family:Helvetica,Arial,sans-serif; font-size:12px; color:var(--muted); letter-spacing:.08em}
+.footnote{font-size:13.5px; color:var(--muted); font-style:italic}
+
+/* Capabilities */
+.dept{padding:12px 0; border-bottom:1px solid var(--rule)}
+.dept:last-child{border-bottom:none}
+.dept h3{margin:0 0 4px; font-size:19px}
+.dept h3 .letter{color:var(--accent); font-family:Helvetica,Arial,sans-serif; font-size:14px; margin-right:8px}
+.dept p{margin:0}
+.toolbox{margin-top:30px}
+.toolbox h3{font-size:22px; border-bottom:1px solid var(--ink); padding-bottom:8px}
+.toolbox h4{
+  font-family:Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--accent); margin:20px 0 6px;
+}
+.toolbox ul{list-style:none; margin:0; padding:0; columns:2; column-gap:34px}
+.toolbox li{padding:4px 0; border-bottom:1px dotted var(--rule); font-size:15.5px; break-inside:avoid}
+
+/* Cover image */
+figure.cover{margin:26px 0}
+figure.cover img{width:100%; height:auto; display:block; border:1px solid var(--rule)}
+figure.cover figcaption{font-size:13px; color:var(--muted); font-style:italic; margin-top:8px; text-align:center}
+
+/* Correspondence / footer */
+.contact-list{list-style:none; margin:0; padding:0}
+.contact-list li{padding:9px 0; border-bottom:1px solid var(--rule); font-size:16.5px}
+.contact-list .label{
+  font-family:Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--muted); display:inline-block; width:110px;
+}
+footer{
+  margin-top:50px; border-top:3px double var(--ink); padding:18px 0 40px;
+  text-align:center; font-size:13.5px; color:var(--muted); font-style:italic;
+}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .factbox dl{grid-template-columns:1fr; gap:2px}
+  .factbox dd{margin-bottom:8px}
+  .toolbox ul{columns:1}
+  ol.works li{padding-left:44px}
+}
