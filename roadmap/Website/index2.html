@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>    
+<title>DesignFund_Final</title>
+<head>
+    <style>
+    
+        body{
+        background-image: url("bg.jpg");
+        }
+        
+        #wrapper {
+            border: 10px black;
+            width: 1000px;
+            margin: auto;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            padding:50px;
+            background-color: #E4FCFF;
+            filter: opacity(90%);
+            border-radius: 35px;
+            box-shadow: 10px 10px 5px black;
+            align-content: center;           
+        }
+        
+            
+        h1 {
+            font-family: 'Modak', cursive;
+            color: #0f0f0f;
+            font-size: 1.75em;
+            font-weight: 100;
+            text-align: center;
+            text-shadow: 3px 3px #f8f8f8;
+        }
+        
+        nav {
+            font-family: 'Abril Fatface', cursive;
+            color: #0f0f0f;
+            text-shadow: 3px 3px #f8f8f8;
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            padding-top: 55px;
+            }
+        
+        nav ul {
+            margin: 15px;
+            padding: 15px;
+        
+        }
+        
+        nav li {
+            list-style-type: none;
+            display: inline;
+            margin: 50px;
+        }
+        
+        nav a {
+            padding: 0px 0px 0px 0px;
+            margin: 0px;
+        }
+        
+        nav a:hover {
+        }
+            
+        .transition1:hover {
+             transform: scale(1.4);
+        }
+       
+        label .menu {
+  position: absolute;
+  right: -100px;
+  top: -100px;
+  z-index: 100;
+  width: 200px;
+  height: 200px;
+  background: #FFF;
+  border-radius: 50% 50% 50% 50%;
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  box-shadow: 0 0 0 0 #FFF, 0 0 0 0 #FFF;
+  cursor: pointer;
+}
+label .hamburger {
+  position: absolute;
+  top: 135px;
+  left: 50px;
+  width: 30px;
+  height: 2px;
+  background: #000;
+  display: block;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+}
+label .hamburger:after, label .hamburger:before {
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+label .hamburger:before {
+  top: -10px;
+}
+label .hamburger:after {
+  bottom: -10px;
+}
+label input {
+  display: none;
+}
+label input:checked + .menu {
+  box-shadow: 0 0 0 100vw #FFF, 0 0 0 100vh #FFF;
+  border-radius: 0;
+}
+label input:checked + .menu .hamburger {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+label input:checked + .menu .hamburger:after {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  bottom: 0;
+}
+label input:checked + .menu .hamburger:before {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  top: 0;
+}
+label input:checked + .menu + ul {
+  opacity: 1;
+}
+label ul {
+  z-index: 200;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  opacity: 0;
+  -webkit-transition: .25s 0s ease-in-out;
+  transition: .25s 0s ease-in-out;
+}
+label a {
+  margin-bottom: 1em;
+  display: block;
+  color: #000;
+  text-decoration: none;
+}
+
+h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 80%;
+  text-align: center;
+}
+      
+ .footerholder {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 100px;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+.footer {
+    background: none repeat scroll 0 0 transparent;
+    height: 100px;
+    margin: auto;
+    width: 400px;
+}
+    </style>
+</head>
+<body>
+    
+<label>
+  <input type='checkbox'>
+  <span class='menu'>
+    <span class='hamburger'></span>
+  </span>
+  <ul>
+      About Us
+  </ul>
+</label>
+    
+
+<div id="wrapper">
+    <form action="" method="post">
+    <fieldset>
+        <legend>Building Details</legend>
+        <input type="text" id="name" name="name" value="" required="required"
+          placeholder="Number of Rooms" pattern="[A-Za-z]{2,20}">
+        <input type="email" id="email" name="email"
+          placeholder="Number of Containers" required="required"/>
+        <input type="password" id="password" name="password" pattern="[A-Za-z0-9]{8,20}"
+          placeholder="Number of Washrooms" required="required"/>
+        <input min="18" max="99" type="number" id="number" name="number" step="2" placeholder="Floor"/>
+        <br/><br/>
+        <input id="submit" name="submit" value="Submit" type="submit"/>
+        <input id="reset" name="reset" value="Reset" type="reset"/>
+    </fieldset>
+</form>
+    <br/>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+   
+    
+<nav>
+    <ul>
+        <li><a href="index.html"><img src="cart.png" class="transition1"></a></li>
+        <li><a href="https://build.everblocksystems.com/" target="_blank"><img src="Logo4.png" class="transition1"</a></li>
+        <li><a href="shopping.html" target="_blank"><img src="box.png" class="transition1"></a></li>
+    </ul>
+</nav>    
+</div>     
+    <div class="footerholder">
+    <div class="footer">
+    <a href="index.html"><img src="Logo1.png"></a>
+    </div>
+</div>
+    
+</body>
+
+</html>
