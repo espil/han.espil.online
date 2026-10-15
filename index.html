@@ -61,9 +61,12 @@
   <div class="loader-bg"></div>
   <div class="loader-scrim"></div>
   <div class="glass" aria-hidden="true">
-    <div class="water"><div class="wave"></div><div class="wave back"></div></div>
-    <div class="swirl"><i></i></div>
-    <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span>
+    <div class="slosh">
+      <div class="water"><div class="surface"></div><div class="wave"></div><div class="wave back"></div><div class="wave deep"></div></div>
+      <div class="swirl"><i></i></div>
+      <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span><span class="bubble b5"></span>
+    </div>
+    <div class="glass-shade"></div>
     <div class="glass-shine"></div>
     <div class="pct"><span id="loader-pct">0</span><small>%</small></div>
   </div>
@@ -527,9 +530,9 @@
     var d=document.createElement('div');
     d.id='loader'; d.className='exit'; d.setAttribute('role','status'); d.setAttribute('aria-label','Loading');
     d.innerHTML='<div class="loader-bg"></div><div class="loader-scrim"></div>'
-      +'<div class="glass" aria-hidden="true"><div class="water"><div class="wave"></div><div class="wave back"></div></div>'
-      +'<div class="swirl"><i></i></div><span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span>'
-      +'<div class="glass-shine"></div><div class="pct"><span>0</span><small>%</small></div></div>'
+      +'<div class="glass" aria-hidden="true"><div class="slosh"><div class="water"><div class="surface"></div><div class="wave"></div><div class="wave back"></div><div class="wave deep"></div></div>'
+      +'<div class="swirl"><i></i></div><span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span><span class="bubble b5"></span></div>'
+      +'<div class="glass-shade"></div><div class="glass-shine"></div><div class="pct"><span>0</span><small>%</small></div></div>'
       +'<div class="loader-status">Turning the page</div>';
     document.body.appendChild(d);
     document.body.style.overflow='hidden';

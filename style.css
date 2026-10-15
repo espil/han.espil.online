@@ -314,24 +314,78 @@ footer a{color:inherit; text-decoration:underline}
 #loader .glass{
   position:relative; width:98px; height:98px; border-radius:50%;
   overflow:hidden; isolation:isolate;
-  background:rgba(240,238,233,.02);
+  background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.1), rgba(255,255,255,0) 56%), rgba(240,238,233,.02);
   border:none;
-  box-shadow:inset 0 0 17px rgba(240,238,233,.07), inset 0 -9px 15px rgba(0,0,0,.12), 0 12px 30px rgba(0,0,0,.4);
+  box-shadow:
+    inset 0 0 0 1px rgba(240,238,233,.16),
+    inset 0 10px 18px rgba(255,255,255,.07),
+    inset 0 -16px 24px rgba(0,0,0,.3),
+    inset 0 0 17px rgba(240,238,233,.07),
+    0 12px 30px rgba(0,0,0,.4);
+  filter:drop-shadow(0 16px 16px rgba(0,0,0,.35));
   -webkit-backdrop-filter:blur(1px); backdrop-filter:blur(1px);
+}
+/* The liquid mass: everything wet lives in .slosh and rocks as one body,
+   pivoting low in the glass — the fill stays put, the liquid moves. */
+#loader .slosh{
+  position:absolute; inset:0; z-index:1;
+  transform-origin:50% 88%;
+  animation:sloshRock 3.4s ease-in-out infinite alternate;
+}
+@keyframes sloshRock{
+  from{transform:rotate(-2.4deg) translateX(-1.6px)}
+  to{transform:rotate(2.4deg) translateX(1.6px)}
 }
 #loader .water{
   position:absolute; left:0; right:0; bottom:0; height:calc(var(--p,0)*1%);
-  background:linear-gradient(180deg, rgba(190,242,100,.42), rgba(74,222,128,.46) 55%, rgba(21,128,61,.5));
+  background:linear-gradient(180deg, rgba(216,252,150,.5), rgba(120,230,110,.42) 30%, rgba(34,160,80,.5) 74%, rgba(14,105,52,.6));
   transition:height .12s linear; /* JS tick already eases; a long CSS transition makes the water trail the % counter */
   z-index:1;
+}
+#loader .water::before{ /* caustic glow pooled at the bottom of the glass */
+  content:""; position:absolute; left:6%; right:6%; bottom:2px; height:34%;
+  background:radial-gradient(ellipse at 50% 100%, rgba(210,255,180,.28), rgba(210,255,180,0) 70%);
+}
+#loader .water::after{ /* a slow light streak travelling through the liquid */
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(105deg, transparent 28%, rgba(255,255,255,.14) 45%, rgba(255,255,255,.03) 55%, transparent 68%);
+  background-size:260% 100%;
+  animation:streakSlide 5.5s ease-in-out infinite alternate;
+}
+@keyframes streakSlide{from{background-position:110% 0}to{background-position:-30% 0}}
+/* The surface: an ellipse the light catches — this is what makes it read as liquid in a round glass */
+#loader .surface{
+  position:absolute; left:-4%; right:-4%; top:-7px; height:14px; border-radius:50%;
+  background:radial-gradient(ellipse at 50% 42%, rgba(236,255,205,.85), rgba(196,244,120,.34) 55%, rgba(196,244,120,0) 74%);
+  animation:surfaceBob 1.7s ease-in-out infinite alternate;
+}
+@keyframes surfaceBob{
+  from{transform:translateY(-1.4px) rotate(-1.7deg)}
+  to{transform:translateY(1.6px) rotate(1.7deg)}
 }
 #loader .wave{
   position:absolute; left:0; top:-7px; width:200%; height:8px;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M0 8 Q 15 1 30 8 T 60 8 T 90 8 T 120 8 V14 H0 Z' fill='%23bef264' fill-opacity='0.42'/%3E%3C/svg%3E") repeat-x;
   background-size:120px 8px;
-  animation:waveSlide 2.6s linear infinite;
+  animation:waveMove1 2.6s linear infinite;
 }
-#loader .wave.back{top:-6px; opacity:.22; animation-duration:4.4s; animation-direction:reverse}
+#loader .wave.back{top:-6px; opacity:.22; animation:waveMove2 4.4s linear infinite}
+#loader .wave.deep{top:-5px; opacity:.15; background-size:170px 10px; height:10px; animation:waveMove3 7s linear infinite}
+@keyframes waveMove1{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(-60px,1.9px)}
+  100%{transform:translate(-120px,0)}
+}
+@keyframes waveMove2{
+  0%{transform:translate(-120px,1.6px)}
+  50%{transform:translate(-60px,-1px)}
+  100%{transform:translate(0,1.6px)}
+}
+@keyframes waveMove3{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(-85px,2.6px)}
+  100%{transform:translate(-170px,0)}
+}
 /* Swirl: a slow rotating light-disc inside the liquid, clipped to the water's own box */
 #loader .swirl{
   position:absolute; left:0; right:0; bottom:0; height:calc(var(--p,0)*1%);
@@ -344,7 +398,6 @@ footer a{color:inherit; text-decoration:underline}
   animation:swirlSpin 6s linear infinite;
 }
 @keyframes swirlSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes waveSlide{from{transform:translateX(0)}to{transform:translateX(-120px)}}
 #loader .bubble{
   position:absolute; bottom:8px; border-radius:50%; z-index:3;
   background:radial-gradient(circle at 32% 32%, rgba(255,255,255,.95), rgba(255,255,255,.15) 65%);
@@ -353,11 +406,19 @@ footer a{color:inherit; text-decoration:underline}
 #loader .bubble.b1{left:38%; width:5px; height:5px; animation-delay:0s}
 #loader .bubble.b2{left:55%; width:3px; height:3px; animation-delay:1.1s}
 #loader .bubble.b3{left:47%; width:6px; height:6px; animation-delay:2s}
+#loader .bubble.b4{left:63%; width:4px; height:4px; animation-delay:.6s}
+#loader .bubble.b5{left:29%; width:3.5px; height:3.5px; animation-delay:1.7s}
 @keyframes bubbleRise{
-  0%{transform:translateY(0) translateX(0); opacity:0}
+  0%{transform:translate(0,0); opacity:0}
   12%{opacity:.85}
+  38%{transform:translate(-2.4px,-28px)}
+  62%{transform:translate(2.2px,-50px)}
   88%{opacity:.7}
-  100%{transform:translateY(-74px) translateX(3px); opacity:0}
+  100%{transform:translate(-1px,-74px); opacity:0}
+}
+#loader .glass-shade{
+  position:absolute; inset:0; border-radius:50%; z-index:3; pointer-events:none;
+  box-shadow:inset -14px -12px 26px rgba(0,0,0,.2), inset 12px 14px 22px rgba(255,255,255,.05);
 }
 #loader .glass-shine{
   position:absolute; inset:0; border-radius:50%; z-index:4; pointer-events:none;
@@ -377,12 +438,13 @@ footer a{color:inherit; text-decoration:underline}
 }
 body.loading{overflow:hidden}
 @media (prefers-reduced-motion: reduce){
-  #loader .wave, #loader .bubble, #loader .swirl i{animation:none}
+  #loader .wave, #loader .bubble, #loader .swirl i, #loader .slosh, #loader .surface, #loader .water::after{animation:none}
   #loader{transition:opacity .2s}
 }
 /* Exit transition: the loader re-appears while the browser leaves for a sub-site.
    Water sways indeterminately (no fake percentage), bubbles and counter hidden. */
 #loader.exit .water{transition:none; animation:exitSway 1.1s ease-in-out infinite alternate}
+#loader.exit .slosh{animation-duration:2.1s}
 #loader.exit .pct, #loader.exit .bubble{display:none}
 @keyframes exitSway{from{height:30%}to{height:56%}}
 
