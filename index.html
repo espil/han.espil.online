@@ -1,64 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Espil. — Web Developer &amp; Designer | HanBin Im</title>
-<meta name="description" content="The portfolio of HanBin Im — web developer & designer in Vancouver, BC. I build Espil.Online, an interactive 3D map, and a decade of client sites, systems and experiments.">
-<link rel="stylesheet" href="style.css?v=8">
-<noscript><style>#loader{display:none}</style></noscript>
-<script>try{var _t=localStorage.getItem('espil-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
+<meta name="description" content="HanBin Im (Espil Ceil) — Vancouver web developer and designer since 2015. Builder of Espil.Online, The World in the Cauldron. Stories, works and the full index.">
 <link rel="canonical" href="https://han.espil.online/">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-<meta property="og:type" content="profile">
-<meta property="og:site_name" content="Espil">
-<meta property="og:title" content="Espil. — Web Developer & Designer | HanBin Im">
-<meta property="og:description" content="The portfolio of HanBin Im — web developer & designer in Vancouver, BC. I build Espil.Online, an interactive 3D map, and a decade of client sites, systems and experiments.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Espil. — Web Developer &amp; Designer | HanBin Im">
+<meta property="og:description" content="The World in the Cauldron. Stories, selected works and the full index of a decade of building.">
+<meta property="og:image" content="https://han.espil.online/universe/render-day.jpg">
 <meta property="og:url" content="https://han.espil.online/">
-<meta property="og:image" content="https://han.espil.online/assets/og-cover.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Espil. — Web Developer & Designer | HanBin Im">
-<meta name="twitter:description" content="The portfolio of HanBin Im — web developer & designer in Vancouver, BC. I build Espil.Online, an interactive 3D map, and a decade of client sites, systems and experiments.">
-<meta name="twitter:image" content="https://han.espil.online/assets/og-cover.jpg">
-
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/site.css">
+<script>try{var _t=localStorage.getItem('espil-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
+<style>
+#loader{position:fixed;inset:0;z-index:200;background:#0c0d10;display:flex;align-items:center;justify-content:center;transition:opacity .7s ease}
+#loader.done{opacity:0;pointer-events:none}
+#loader .el-num{position:absolute;left:50%;top:calc(50% + 118px);transform:translateX(-50%);color:rgba(238,231,215,.72);font:600 15px/1 Georgia,serif;letter-spacing:.14em;text-align:center;filter:url(#espil-warp)}
+#loader .el-pct{display:block;margin-top:6px;font:600 8px/1 Inter,Arial,sans-serif;letter-spacing:.34em;color:rgba(238,231,215,.5)}
+body.loading{overflow:hidden}
+#cursorFollower{position:fixed;left:0;top:0;z-index:120;pointer-events:none;opacity:0;transition:opacity .25s}
+</style>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "dateModified": "2026-10-14",
-  "mainEntity": {
-    "@type": "Person",
-    "name": "HanBin Im",
-    "alternateName": "Espil",
-    "jobTitle": "Web Developer & Designer",
-    "description": "Web developer & designer in Vancouver, BC. Builder of Espil.Online — an interactive 3D map of a living world (The World in the Cauldron).",
-    "url": "https://han.espil.online/",
-    "image": "https://han.espil.online/assets/og-cover.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Vancouver",
-      "addressRegion": "BC",
-      "addressCountry": "CA"
-    },
-    "sameAs": [
-      "https://espil.online",
-      "https://github.com/espil",
-      "https://www.instagram.com/espil_online/",
-      "https://blog.naver.com/espil_online",
-      "https://www.facebook.com/EspilCeiB",
-      "https://www.youtube.com/@espil_online",
-      "https://www.twitch.tv/espilceil"
-    ]
-  }
-}
+{"@context":"https://schema.org","@type":"Person","name":"HanBin Im","alternateName":"Espil Ceil","jobTitle":"Web Developer & Designer","url":"https://han.espil.online/","address":{"@type":"PostalAddress","addressLocality":"Vancouver","addressRegion":"BC","addressCountry":"CA"},"sameAs":["https://espil.online","https://www.youtube.com/@EspilOnline","https://www.twitch.tv/espilceil","https://www.instagram.com/espil_online","https://soundcloud.com/quad-clipse"]}
 </script>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="espil-fisheye" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB"><feImage href="data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Cdefs%3E%3ClinearGradient%20id='gx'%20x1='0'%20y1='0'%20x2='1'%20y2='0'%3E%3Cstop%20offset='0'%20stop-color='rgb%280,128,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28255,128,0%29'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='gy'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='rgb%28128,0,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28128,255,0%29'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gx%29'/%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gy%29'%20opacity='0.55'/%3E%3C/svg%3E" x="0" y="0" width="100" height="100" preserveAspectRatio="none" result="map"/><feDisplacementMap in="SourceGraphic" in2="map" scale="10" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
 <div id="loader" role="status" aria-label="Loading the portfolio">
   <div class="loader-bg"></div>
   <div class="loader-scrim"></div>
@@ -74,237 +42,144 @@
   </div>
   <div class="loader-status" id="loader-status">Opening the issue</div>
 </div>
-<div class="wrap" id="top">
-
-<div class="folio">
-  <span>han.espil.online</span>
-  <span class="folio-mid">The Portfolio Issue</span>
-  <span class="folio-end">Vancouver, BC — Nº 01 · 2026 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch between day and night mode">☾ Night</button></span>
-</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="espil-fisheye" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB"><feImage href="data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Cdefs%3E%3ClinearGradient%20id='gx'%20x1='0'%20y1='0'%20x2='1'%20y2='0'%3E%3Cstop%20offset='0'%20stop-color='rgb%280,128,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28255,128,0%29'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='gy'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='rgb%28128,0,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28128,255,0%29'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gx%29'/%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gy%29'%20opacity='0.55'/%3E%3C/svg%3E" x="0" y="0" width="100" height="100" preserveAspectRatio="none" result="map"/><feDisplacementMap in="SourceGraphic" in2="map" scale="10" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
 
 <header class="masthead">
-  <div class="brand">Espil<span>.</span></div>
-  <div class="tagline">Web Developer &amp; Designer — the portfolio of HanBin Im</div>
-  <div class="issue">Issue Nº 01 — Portfolio · Vancouver, BC</div>
+  <div class="wrap masthead-in">
+    <a class="brand" href="/">
+      <span class="mark"><img src="/assets/usedesign-logo.svg" alt="UseDesign logo"></span>
+      <span class="wordmark">Espil.</span>
+    </a>
+    <nav class="main">
+      <a href="#posts">Posts</a><a href="#works">Works</a><a href="#index">Index</a>
+      <a class="keep" href="/resume/">Résumé</a><a class="keep" href="https://espil.online">Espil.Online</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch between day and night mode">☾ Night</button>
+    </nav>
+  </div>
 </header>
+<div class="band"><div class="wrap band-in"><span>The World in the Cauldron</span><span>Personal Edition · Vancouver</span></div></div>
 
-<nav class="contents">
-  <a href="#briefing">The Briefing</a>
-  <a href="#cover-story">01 Cover Story</a>
-  <a href="#record">02 The Record</a>
-  <a href="#works">03 Selected Works</a>
-  <a href="#archive">Full Index</a>
-  <a href="#capabilities">04 Capabilities</a>
-  <a href="#correspondence">05 Correspondence</a>
-</nav>
+<main class="wrap">
 
-<!-- ============ THE BRIEFING ============ -->
-<section id="briefing">
-  <p class="kicker">The Briefing</p>
-  <h2>A proven builder who converted to vibe coding</h2>
-  <p class="lede">I am a web developer and designer based in Vancouver, BC. I have been building for the web since 2015 — and on computers since the DOS era. My headline skill today is AI-assisted development: I direct the tools, review and edit the code myself, and ship end-to-end. I currently build <strong>Espil.Online</strong>, a live interactive 3D map, on top of a decade of client sites, internal systems and experiments — most of which I scoped, designed, built and ran myself.</p>
+  <article class="lead" data-tick>
+    <p class="kicker">The Cover Story · Espil.Online</p>
+    <h1><a href="/posts/the-house-that-started-a-world/">The House That Started a World</a></h1>
+    <p class="standfirst">Espil Online began with a single obsession: a 3D-printed house in nature, powered by its own water and sun, with a room inside that copies any place on Earth. This is the story of how a house became a world.</p>
+    <div class="chips"><span class="chip">Cover Story</span><span class="chip">3 min read</span><span class="chip">Est. 2015</span></div>
+    <figure class="hero">
+      <a href="/posts/the-house-that-started-a-world/"><img src="/universe/render-day.jpg" alt="A minimal white interior - an Espil Universe render"></a>
+      <figcaption><b>The quiet house.</b> A render from the Espil Universe - architecture first, world second. <i>(Image: Espil Universe)</i></figcaption>
+    </figure>
+    <p class="readmore"><a class="btn primary" href="/posts/the-house-that-started-a-world/">Read the cover story</a></p>
+  </article>
 
-  <div class="factbox">
-    <dl>
-      <dt>Based</dt><dd>Vancouver, BC, Canada</dd>
-      <dt>Experience</dt><dd>Building for the web since 2015; computers since the DOS era</dd>
-      <dt>Focus</dt><dd>Espil.Online — an interactive 3D map of a living world</dd>
-      <dt>Strength</dt><dd>Cultural fluency — Korean / Mandarin / English, all fluent</dd>
-      <dt>Status</dt><dd>Open work permit (PGWP) valid until October 2028 — no LMIA or sponsorship required</dd>
-    </dl>
-  </div>
+  <section class="block" id="posts" data-tick>
+    <div class="sec-head">
+      <p class="kicker">Latest Posts</p>
+      <h2>Stories, explored in depth</h2>
+      <p>Every post takes one chapter of the record and follows the stories tangled inside it, all the way through.</p>
+    </div>
+    
+    <article class="post">
+      <div class="no">01</div>
+      <div>
+        <p class="kicker">The Record · Backend</p>
+        <h3><a href="/posts/the-backend-years/">The Backend Years: From an Excel Sheet to Serverless</a></h3>
+        <p>An Excel customer list became a database with full CRUD at HAN Mobile. A booking system ran on PHP at QDerm. An intranet rose on the MERN stack at HMC. Then Ryde moved the work to APIs - and Espil.Online's own serverless proxies closed the loop.</p>
+        <div class="chips"><span class="chip">3 min read</span><span class="chip">Databases</span><span class="chip">APIs</span></div>
+      </div>
+      <a href="/posts/the-backend-years/"><img class="thumb" src="/media/img/ryde.png" alt="Ryde logo"></a>
+    </article>
+    <article class="post">
+      <div class="no">02</div>
+      <div>
+        <p class="kicker">The Record · Nohproblem</p>
+        <h3><a href="/posts/the-only-employee/">The Only Employee</a></h3>
+        <p>Hired to write a blog, he was the company's only employee, in his first remote job. The posts took thirty minutes; everything else followed - websites, lecture series subtitled for CELPIP and IELTS, clients met in person, a YouTube channel grown to its first thousand subscribers, and a Slack that grew from two people to ten.</p>
+        <div class="chips"><span class="chip">2 min read</span><span class="chip">2020 - 2021</span><span class="chip">Remote</span></div>
+      </div>
+      <div class="panel-thumb" aria-hidden="true"><span>NP</span></div>
+    </article>
+    <article class="post">
+      <div class="no">03</div>
+      <div>
+        <p class="kicker">The Record · The Kitchens</p>
+        <h3><a href="/posts/eight-years-at-the-pass/">Eight Years at the Pass</a></h3>
+        <p>It started behind a bar at FANTACITY and at his aunt's famous restaurant in Korea. At Tawara the interest took hold; Sushi Umi scouted him, and eight years on the hot foods followed - a 21-recipe system of his own, a QR menu refused on principle, and one more return, in the summer of 2026.</p>
+        <div class="chips"><span class="chip">3 min read</span><span class="chip">2014 - 2026</span><span class="chip">Cooking</span></div>
+      </div>
+      <div class="panel-thumb" aria-hidden="true"><span>UMI</span></div>
+    </article>
+    <article class="post">
+      <div class="no">04</div>
+      <div>
+        <p class="kicker">The Briefing · The Senses</p>
+        <h3><a href="/posts/the-eye-the-ear-the-hand/">The Eye, the Ear, the Hand</a></h3>
+        <p>A high-school fashion portfolio. A saxophone, a samulnori troupe, bands every year, dozens of EDM tracks since 2016, musicals in leading roles. And a hand that learned the kitchen the way it learned design - by making beautiful things, constantly. It ends with a compass.</p>
+        <div class="chips"><span class="chip">2 min read</span><span class="chip">Design</span><span class="chip">Music</span></div>
+      </div>
+      <a href="/posts/the-eye-the-ear-the-hand/"><img class="thumb" src="/ongijongi/img/web/1.jpg" alt="Onggijonggi musical poster"></a>
+    </article>
+    <article class="post">
+      <div class="no">05</div>
+      <div>
+        <p class="kicker">Longer Reads · The Dreams</p>
+        <h3><a href="/posts/two-dreams-for-the-cauldron/">Two Dreams for the Cauldron</a></h3>
+        <p>Two school concepts wait for their second life inside Espil.Online: RAM, a memorial company that lets you speak with a soul through VR, and BHC, a game of drones and headsets played in a real forest. Both began with a conviction about travel - that a culture is only shared on foot.</p>
+        <div class="chips"><span class="chip">3 min read</span><span class="chip">RAM</span><span class="chip">BHC</span></div>
+      </div>
+      <div class="panel-thumb" aria-hidden="true"><span>RAM</span></div>
+    </article>
+  </section>
 
-  <h3>Origins</h3>
-  <p>I was born in South Korea, but I only lived there until I was seven — my elementary schooling was in China, before Canada. I have been on computers since the DOS era, learning from grade 3 and building my first HTML pages as a child. Photoshop and Illustrator since high school, Dreamweaver in my web toolkit — and my high-school design work was already in use, by the Coquitlam Hall of Fame and my school soccer team.</p>
-  <p>Growing up across Korea, China and Canada gave me the cultural fluency I still work with every day: I read rooms, clients and audiences in three languages and three cultures, and I have run four-language web channels single-handedly. It is one of my real professional strengths, not a footnote.</p>
+  <section class="block" id="works" data-tick>
+    <div class="sec-head">
+      <p class="kicker">Selected Works</p>
+      <h2>The doors into the world</h2>
+      <p>Every project is a door; every door opens to the same world.</p>
+    </div>
+    <div class="strip">
+      <div class="card"><div class="prev"><span>EO</span></div>
+        <div class="chips"><span class="chip">Live</span><span class="chip">Key Project</span></div>
+        <h3>Espil.Online</h3><p>The World in the Cauldron - a walkable Earth in the browser.</p>
+        <a class="btn" href="https://espil.online">Enter</a></div>
+      <div class="card"><div class="prev"><span>Z</span></div>
+        <div class="chips"><span class="chip">In Development</span><span class="chip">Game</span></div>
+        <h3>Zealandia</h3><p>A dungeon to be built on New Zealand's hidden, sunken continent.</p>
+        <a class="btn" href="/posts/two-dreams-for-the-cauldron/">Read the post</a></div>
+      <div class="card"><div class="prev"><span>R</span></div>
+        <div class="chips"><span class="chip">Live</span><span class="chip">BCIT</span></div>
+        <h3>Ryde</h3><p>A transit app on the live TransLink API, running on this site.</p>
+        <a class="btn" href="/ryde/">Open</a></div>
+      <div class="card"><div class="prev"><span>UD</span></div>
+        <div class="chips"><span class="chip">Archive</span><span class="chip">Design House</span></div>
+        <h3>UseDesign</h3><p>A decade of client sites from Bieclipse Design House.</p>
+        <a class="btn" href="#index">Browse</a></div>
+    </div>
+  </section>
 
-  <h3>The Eye, the Ear, the Hand</h3>
-  <p>The wanting of beautiful things has been constant, and I try the new ones first - an early adopter with fashion and the newest design objects. I kept a fashion portfolio in high school, and the design creation has never really stopped since.</p>
-  <p>Music is the other constant. The saxophone was my first instrument, learned in elementary school; in middle school I sang in a neighbourhood choir and performed with a samulnori troupe - buk, janggu, mask dance - on many stages. I played in bands every year of high school and stayed in bands through university. Since 2016 I have been hunting for my own EDM sound: dozens of tracks produced in FL Studio and released on SoundCloud (quad-clipse), and I taught myself piano to compose. On stage I perform with Onggijonggi, Vancouver's Korean musical club - in leading roles in its yearly small-theatre musicals, Korean year-end specials and nursing-home performances.</p>
-  <p>And I cook. My first F&B work was bartending, at FANTACITY; in Korea I served and managed at Hwatongsam, my aunt's well-known restaurant. Tawara Sushi is where the interest took hold, and Sushi Umi scouted me from it - eight years on its hot foods followed. At home I cook whatever Japanese or Western dish I am craving, at any difficulty, with ease. My profession is IT and design, but the cooking would hold up as a profession of its own.</p>
+  <section class="block" id="capabilities">
+    <div class="sec-head">
+      <p class="kicker">Capabilities</p>
+      <h2>What the record proves</h2>
+      <p>Four disciplines, each with receipts in the posts above and the index below.</p>
+    </div>
+    <div class="ledger">
+      <div><p class="n">A</p><h4>Design &amp; Interface</h4><p>Art direction, design systems, and UI audiences actually read - judged by eye, finished by hand.</p></div>
+      <div><p class="n">B</p><h4>Full-Stack &amp; Data</h4><p>Legacy databases and CRUD from the ground up; APIs extracted, integrated and shipped serverless.</p></div>
+      <div><p class="n">C</p><h4>AI-Assisted Development</h4><p>Fast, AI-assisted building under one person's direction - specced, reviewed and finished by hand.</p></div>
+      <div><p class="n">D</p><h4>Security &amp; IP</h4><p>A documented framework for protecting the work - architecture, rights and AI governance.</p></div>
+    </div>
+    <p class="center"><a class="btn primary" href="/resume/">Open the résumé - the full record, 16 entries</a></p>
+  </section>
 
-  <h3>The Compass</h3>
-  <p>I believe humanity today should spend less of itself on trivial problems, and instead work through the world's great challenges one by one - with a spirit of adventure, a spirit of challenge, and plain curiosity. Space travel. Deep-sea travel. It is the horizon everything I build points toward.</p>
-</section>
-
-<!-- ============ 01 COVER STORY ============ -->
-<section id="cover-story">
-  <p class="kicker">01 — Cover Story</p>
-  <h2>Espil.Online</h2>
-  <figure class="cover">
-    <img src="assets/espil-city.png" alt="Espil.Online — an interactive 3D city map">
-    <figcaption>Espil.Online — walk the streets of a living 3D world, in the browser.</figcaption>
-  </figure>
-  <p class="lede">Espil.Online began in 2015, at Bieclipse Design House — my own design practice — and it has been growing ever since. Today it is a live, interactive 3D map at <a href="https://espil.online">espil.online</a> — a Three.js world of real cities where you can walk the streets, and shop, drive, fly and dive with friends. I studied tourism for exactly this: social channels try to share a country's culture, but I am convinced only going there truly shares it - walking its streets yourself. This world is built on that conviction. I design it, build it AI-assisted, and ship it end-to-end myself: engine, interface, pipeline, sound and channels.</p>
-    <p>It started with a single obsession: I wanted to build a house. The design I aimed at was a 3D-printed house - minimalist, standing in nature without disturbing it, powered by its own water and sun, off the grid entirely. And because a house you never leave could grow dull, I imagined a VR chamber inside it: a room that copies a place completely - its temperature, its humidity, its wind - until you feel you are standing there. Everything in that house would be 3D-printed, and the models for all of it bought inside an online world - this one - traded not in real money but in Leo Coin, a currency that grows as knowledge is shared.</p>
-  <p>The name I sign this world with is <strong>Espil Ceil</strong>. Spell Bieclipse backward and you get <em>espil ceib</em> — I removed the &ldquo;o&rdquo; from cei&rsquo;b&rsquo;, as o is Earth.</p>
-  <div class="pullquote">&ldquo;The world is listening.&rdquo;<span class="attrib">Espil.Online — its own title line</span></div>
-
-  <div class="panel">
-    <h3>The World in the Cauldron (가마솥안 세상)</h3>
-    <p class="small" style="text-align:center">Everything I make is one connected world. Every project is a door; every door opens to the same world. The Cauldron is that space itself - the one you enter at espil.online.</p>
-    <ol>
-      <li><strong>The Cauldron</strong> — my 2025 browser-RPG prototype; the first form of that space, and the seed Espil.Online grew from.</li>
-      <li><strong>VODS — Virtual Online Department Store</strong> — the retail layer of the world.</li>
-      <li><strong>Zealandia</strong> — a 2D side-scrolling game extension of the same universe, built as a dungeon on New Zealand's hidden land.</li>
-      <li><strong>Espil House Collection</strong> — my OpenSea 3D houses; the future housing layer of Espil.Online.</li>
-      <li><strong>The Secret Diary of Espil Ceil</strong> — the story layer, published on my Naver blog.</li>
-      <li><strong>Plushy AI + City Studio</strong> — my own image-to-3D and sprite pipeline; the tooling layer.</li>
-      <li><strong>Music by Espil Ceil</strong> — I compose and produce the BGM myself, a theme per city.</li>
-      <li><strong>Channels</strong> — Instagram, YouTube, Naver and Facebook, speaking in one voice.</li>
-    </ol>
-  </div>
-</section>
-
-<!-- ============ 02 THE RECORD ============ -->
-<section id="record">
-  <p class="kicker">02 — The Record</p>
-  <h2>What I have done, in order</h2>
-
-  <div class="entry">
-    <div class="when">Pre-2010 — Origins</div>
-    <h3>First Computers, First Pages</h3>
-    <p>I was born in South Korea and lived there until I was seven; my elementary schooling was in China, before Canada. I have been on computers since the DOS era — learning from grade 3, building my first HTML pages as a child. Photoshop and Illustrator since high school, Dreamweaver in my web toolkit — and my high-school designs were already in real use, by the Coquitlam Hall of Fame and my school soccer team.</p>
-  </div>
-
-  <div class="entry">
-    <div class="when">May 2024 – Feb 2026</div>
-    <h3>Operations Coordinator — Discover Holidays</h3>
-    <p>I alone produced the entire Alaska + Canada tariffs under the Founder's direction — hundreds of pages of price sourcing, data entry, image work and posters. To escape the manual workflow I built my own Python tool on the company intranet API (bulk typo-finding and correction, price and property search) and wrote macros that finished a job estimated at several months in one day. The tariff content itself is company-confidential; the scale and the process are the story. Operations taught me that accuracy is paramount — and exactly which steps buy speed.</p>
-  </div>
-
-  <div class="entry">
-    <div class="when">May 2014 – Dec 2024</div>
-    <h3>Web Designer — Bieclipse Design + UseDesign</h3>
-    <p>My own design practice for a decade: client websites, portfolios and systems — including a dermatology clinic's complete web system (design, landing, chatbot reservations, online booking) and a website for a PhD client, Monicahan. Through Bieclipse Design I also contributed to numerous other client design and website projects, including builds that were delivered but never launched. Espil.Online also began here, in 2015.</p>
-  </div>
-
-  <div class="entry">
-    <div class="when">Jan 2018 – Jan 2026</div>
-    <h3>Cook — Sushi Umi</h3>
-    <p>I started at the same address a year earlier, as a server at Tawara Sushi, where my interest in cooking took hold. When Sushi Umi scouted me, I asked the Tawara owner's understanding and joined the Umi team - and spent eight steady years on its hot foods. The trust runs both ways: in July 2026, at the owner's earnest request, I returned for three months as emergency staff. I documented the kitchen's recipes into a standardized, bilingual (Korean/English) recipe system — 21 recipes, one format, any cook, same taste. When a digital QR menu was requested, I declined it: the shop exists for its locals and for real taste, and a screen menu clashed with that philosophy.</p>
-  </div>
-
-  <div class="entry">
-    <div class="when">Jun 2019 – Dec 2021</div>
-    <h3>Full Stack Developer — HAN Mobile</h3>
-    <p>I was hired in sales. I grew through marketing and design work into the company's full-stack developer — and its backend person. I migrated the entire Excel-based customer list into a real database, fully manageable through CRUD, on top of an intranet CMS, dashboards and OCR-based PDF data entry.</p>
-  </div>
-
-  <div class="entry">
-    <div class="when">2022 – 2023</div>
-    <h3>IT Specialist — Higgs Creative Inc</h3>
-    <p>I was headhunted and funded by dermatology doctors and business owners to test healthcare software — electronic medical records, CRM tooling and OCR — and to cover the company's IT needs.</p>
-  </div>
-
-  <div class="entry">
-    <div class="when">Dec 2020 – Dec 2021</div>
-    <h3>Marketer — Nohproblem Consulting</h3>
-    <p>I was the company's only employee when I started - my first remote job, handed over by a predecessor who left within days. Hired as a marketer, I ended up running far more: I managed all of the company's websites — including four different language channels — plus its YouTube channel, which I grew to its first 1,000 subscribers, its SNS and blogs, video editing and official documents. I also handled total landing-service care for immigration clients: house search, cars, furniture, schools, driver's licences. The videos I produced for that channel are still its most-watched, with over 500,000 views between them, and the channel has since grown to 15,000 subscribers. By the time I left, the two-person Slack had grown to about ten people.</p>
-  </div>
-
-  <div class="entry">
-    <div class="when">Sep 2019 – Apr 2020</div>
-    <h3>Sales Representative — Freedom Mobile</h3>
-    <p>Front-line sales and customer service — and after the sales work, I designed and developed the store's intranet.</p>
-  </div>
-
-  <div class="entry">
-    <div class="when">May 2015 – May 2016</div>
-    <h3>Graphic Designer — OK Tour</h3>
-    <p>I was hired as a graphic designer and worked as a travel rep, producing the daily brochures customers travelled with — trip plans and personalised infographics, designed to be read at a glance.</p>
-  </div>
-
-  <hr class="rule">
-  <h3>Education</h3>
-  <div class="entry"><div class="when">2023 – 2025</div><p><strong>Tourism Diploma — Capilano University.</strong> Culture, heritage, environment and tourism planning.</p></div>
-  <div class="entry"><div class="when">2017 – 2021</div><p><strong>Digital Design Development — BCIT.</strong> Graphic design, web development, web-based marketing and project management.</p></div>
-  <div class="entry"><div class="when">2016 – 2017</div><p><strong>Chinese Medicine studies — PCU College of Holistic Medicine.</strong> Herbalism, acupuncture, anatomy.</p></div>
-  <div class="entry"><div class="when">2010 – 2012</div><p><strong>Fine Arts studies — Emily Carr University of Art + Design.</strong> Drawing, painting, photography, design.</p></div>
-  <div class="entry"><div class="when">2007 – 2009</div><p><strong>Sentinel Secondary School</strong> — West Vancouver. Before that, Balmoral Junior Secondary; in 2006–2008 I served in the 103 Thunderbird Squadron, Royal Canadian Air Cadets (rank: Corporal).</p></div>
-</section>
-
-<!-- ============ 03 SELECTED WORKS ============ -->
-<section id="works">
-  <p class="kicker">03 — Selected Works</p>
-  <h2>Fourteen doors into the same world</h2>
-  <ol class="works">
-    <li>
-      <h3>Espil.Online</h3>
-      <p>A live interactive 3D map of a living world, built with Three.js and shipped end-to-end by me — engine, UI, pipeline, sound, channels. <span class="connects">→ This issue's cover story.</span></p>
-    </li>
-    <li>
-      <h3>The Cauldron</h3>
-      <p>My 2025 Mapbox browser-RPG prototype — character creation, start regions from Tokyo to Vancouver, a world map and an in-world AI guide. <span class="connects">→ The seed Espil.Online grew from.</span></p>
-    </li>
-    <li>
-      <h3>Zealandia</h3>
-      <p>A 2D side-scrolling adventure in development - a game dungeon set on Zealandia, New Zealand's hidden land, the sunken continent beneath the sea. <span class="connects">→ The game extension of Espil.Online.</span></p>
-    </li>
-    <li>
-      <h3>Plushy AI</h3>
-      <p>My local image-to-3D/sprite pipeline: I built it to generate game assets on my own hardware, solving a cost and IP problem instead of renting one. <span class="connects">→ The tooling layer of Espil.Online.</span></p>
-    </li>
-    <li>
-      <h3>City Studio — Vancouver Sprite Pack</h3>
-      <p>Using my City Studio pipeline I produced a 44-building Vancouver sprite pack — towers, houses, civic and commercial buildings — and I sell it on itch.io. <span class="connects">→ The production pipeline behind the Espil.Online city.</span></p>
-    </li>
-    <li>
-      <h3>Espil Ceil — Animation Series</h3>
-      <p>An animated series in production, carrying Espil's characters and music out of the map and onto the screen. <span class="connects">→ The world of Espil.Online, animated.</span></p>
-    </li>
-    <li>
-      <h3>The Secret Diary of Espil Ceil</h3>
-      <p>My novel — the original diary of the world, published on Naver Blog (espil_online). The Cauldron's name and its stories start here. <span class="connects">→ The story layer of Espil.Online.</span></p>
-    </li>
-    <li>
-      <h3>Apex Dermatology — Complete Web System</h3>
-      <p>For a dermatology clinic I built the whole web presence as one system: the Figma design, the Apex Derm landing site, a chatbot reservation flow, and QDerm online booking with calendar sync and email notifications.</p>
-    </li>
-    <li>
-      <h3>Sushi Umi — Kitchen Recipe System</h3>
-      <p>I wrote and formatted the Sushi Umi kitchen's standardized bilingual recipe book — 21 recipes in one consistent format (the format is the work; the quantities stay in the kitchen). When a digital QR menu was proposed, I declined it — it clashed with the shop's philosophy.</p>
-    </li>
-    <li>
-      <h3>Kuro Sushi</h3>
-      <p>A sushi bar identity and web design in Figma — an original concept and a revised &ldquo;Live&rdquo; version — and I also produced the restaurant's physical signboard.</p>
-    </li>
-    <li>
-      <h3>Ongijongi</h3>
-      <p>For Ongijongi, a non-profit Korean musical organisation in Vancouver, I performed in leading roles in its yearly small-theatre musicals, led the marketing team, and for a period ran its website, member registration and media platform. Our original production was covered by YTN.</p>
-    </li>
-    <li>
-      <h3>Ryde × TransLink</h3>
-      <p>A BCIT transit project that integrated the TransLink API wholesale — real routes, real data, end to end. My backend-and-API proof from school, built like a product. <span class="connects">&rarr; <a href="/ryde/">The SkyTrain database, live</a></span></p>
-    </li>
-    <li>
-      <h3>Espil House Collection</h3>
-      <p>Two OpenSea collections (2022) of my 3D houses — VR-ready homes with full trait sheets, built with SketchUp, Enscape, Blender and the web. <span class="connects">→ The future housing layer of Espil.Online.</span></p>
-      <figure class="house-renders">
-        <img src="/universe/render-tree.png" alt="Universe house — courtyard with the red maple, Enscape render">
-        <img src="/universe/render-day.jpg" alt="Universe house interior by day, Enscape render">
-        <img src="/universe/render-night.jpg" alt="Universe house interior at night, Enscape render">
-        <figcaption>The Universe house, rendered in Enscape — walk through it in 3D at <a href="/universe/">/universe/</a>.</figcaption>
-      </figure>
-    </li>
-    <li>
-      <h3>VODS — Virtual Online Department Store</h3>
-      <p>A retail layer concept derived from Espil.Online: the world's shops, gathered into one department store. <span class="connects">→ A branch of Espil.Online.</span></p>
-    </li>
-  </ol>
-  <figure class="cover">
-    <img src="assets/espil-night.png" alt="Espil.Online at night">
-    <figcaption>The same world, after dark.</figcaption>
-  </figure>
-</section>
-
-<!-- ============ FULL INDEX ============ -->
-<section id="archive">
-  <p class="kicker">Full Index</p>
-  <h2>The Complete Archive</h2>
-  <p>Everything else I have made and kept — every subdomain of my old network was one of my records, so all of it is listed. Compact, dated, and honest about what each thing is.</p>
-
-  <div class="index-group">
+  <section class="block" id="index" data-tick>
+    <div class="sec-head">
+      <p class="kicker">The Full Index</p>
+      <h2>Everything, on the record</h2>
+      <p>The complete archive: client work, exhibits, worlds, school projects and writing. Nothing held back.</p>
+    </div>
+    <div class="index-group">
     <h3>Portfolio Lineage &amp; Houses</h3>
     <ul class="index">
       <li><a href="/hbi/">HBI — HighSchool Artworks</a> <span class="yr">2021</span> — a 3D flip-book of my 2006 charcoal works; from the same school years when my designs were already in real use (Coquitlam Hall of Fame, school soccer team).</li>
@@ -380,111 +255,17 @@
   </div>
 
   <p class="footnote">…plus several reserved project codenames, kept for worlds not yet opened.</p>
-</section>
+  </section>
 
-<!-- ============ 04 CAPABILITIES ============ -->
-<section id="capabilities">
-  <p class="kicker">04 — Capabilities</p>
-  <h2>Seven departments, one person</h2>
+</main>
 
-  <div class="dept">
-    <h3><span class="letter">A</span>Web &amp; Interface</h3>
-    <p>I design and build responsive websites and interfaces end-to-end — from first sketch to shipped page — in HTML, CSS and JavaScript, with React and Three.js/WebGL where the work calls for them.</p>
+<footer class="site">
+  <div class="wrap">
+    <p class="f1">Espil. / Bieclipse Design House</p>
+    <p>Designed and built by HanBin Im · Vancouver · <a href="https://espil.online">espil.online</a> · <a href="/resume/">Résumé</a></p>
   </div>
-  <div class="dept">
-    <h3><span class="letter">B</span>Design &amp; Visual</h3>
-    <p>Twenty years of visual craft: brand, layout, 2D and 3D. My high-school designs were already in real use; my clinic, restaurant and retail clients still run on systems I designed.</p>
-  </div>
-  <div class="dept">
-    <h3><span class="letter">C</span>Full-Stack &amp; Data</h3>
-    <p>Backend runs through my whole career. At HAN Mobile I migrated an entire Excel customer list into a database with full CRUD. QDerm's booking ran on a PHP/MySQL database I managed, and I built a distributor's intranet - HMC - on the MERN stack. Ryde took the same work to APIs, integrating TransLink wholesale; today I build on Firebase and Vercel API processing, Espil.Online's own serverless endpoints included. Given a company's existing CRUD system, in PHP or Java, I can draw an API out of it and build on that.</p>
-  </div>
-  <div class="dept">
-    <h3><span class="letter">D</span>AI-Assisted Development</h3>
-    <p>My headline workflow. I build with AI assistance — directing the tools, reviewing and editing the code myself, and choosing the right stack for each job. It is how Espil.Online ships, and how I built Plushy AI, my own local image-to-3D pipeline.</p>
-  </div>
-  <div class="dept">
-    <h3><span class="letter">E</span>Operations &amp; Automation</h3>
-    <p>Operations work taught me where hours actually go. At Discover Holidays I wrote Python tooling on the intranet API and macros that cut a months-long job to one day — accuracy first, then speed, in that order.</p>
-  </div>
-  <div class="dept">
-    <h3><span class="letter">F</span>Music &amp; Sound</h3>
-    <p>As Espil Ceil, I compose and produce original BGM — including a per-city theme system for Espil.Online. Sound is part of the product, not an afterthought.</p>
-  </div>
-  <div class="dept">
-    <h3><span class="letter">G</span>Languages &amp; Cultural Fluency</h3>
-    <p>I grew up across Korea, China and Canada. Korean, Mandarin and English — all fluent. At Nohproblem I ran four-language web channels alone; cultural fluency is a working tool for me, not a line on a form.</p>
-  </div>
-
-  <div class="toolbox">
-    <h3>My Toolbox — Everything I Use</h3>
-    <h4>Design &amp; Media</h4>
-    <ul>
-      <li>Adobe Photoshop</li>
-      <li>Adobe Illustrator</li>
-      <li>Adobe Dreamweaver</li>
-      <li>Adobe video editing</li>
-      <li>Blender</li>
-      <li>Google SketchUp &amp; V-Ray</li>
-      <li>Meta Spark</li>
-      <li>Figma</li>
-    </ul>
-    <h4>Development</h4>
-    <ul>
-      <li>HTML / CSS / JavaScript</li>
-      <li>React</li>
-      <li>React Native</li>
-      <li>MERN stack (MongoDB, Express, React, Node.js)</li>
-      <li>WebGL / Three.js</li>
-      <li>WordPress</li>
-      <li>Git</li>
-      <li>Node.js</li>
-      <li>Command line</li>
-      <li>Python (automation &amp; API tooling)</li>
-      <li>Computer hardware diagnosis &amp; repair</li>
-    </ul>
-    <h4>Platforms &amp; Business</h4>
-    <ul>
-      <li>AWS (as listed on my resume)</li>
-      <li>Azure (as listed on my resume)</li>
-      <li>Kubernetes (as listed on my resume)</li>
-      <li>Web analytics</li>
-      <li>Big data</li>
-      <li>Web administration</li>
-      <li>Project management</li>
-      <li>Presentation</li>
-      <li>Sales</li>
-    </ul>
-    <h4>Languages</h4>
-    <ul>
-      <li>Korean — fluent</li>
-      <li>Mandarin — fluent</li>
-      <li>English — fluent</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============ 05 CORRESPONDENCE ============ -->
-<section id="correspondence">
-  <p class="kicker">05 — Correspondence</p>
-  <h2>Write to me</h2>
-  <p>I am looking for full-time remote web development work. The fastest way to reach me is email; the fastest way to judge me is the live project.</p>
-  <ul class="contact-list">
-    <li><span class="label">Email</span><a href="mailto:info@usedesign.rf.gd">info@usedesign.rf.gd</a></li>
-    <li><span class="label">GitHub</span><a href="https://github.com/espil">github.com/espil</a></li>
-    <li><span class="label">Live project</span><a href="https://espil.online">espil.online</a></li>
-    <li><span class="label">Instagram</span><a href="https://instagram.com/espil_online">instagram.com/espil_online</a></li>
-    <li><span class="label">Blog</span><a href="https://blog.naver.com/espil_online">blog.naver.com/espil_online</a></li>
-    <li><span class="label">Twitch</span><a href="https://www.twitch.tv/espilceil">twitch.tv/espilceil</a></li>
-  </ul>
-</section>
-
-<footer>
-  han.espil.online — my portfolio. Built and maintained by me.
-  <span class="colophon">Espil. — Issue Nº 01 · Set in a Monocle-fitted edition · Canvas: Pantone 11-4201 Cloud Dancer · <a href="#top">Back to the cover ↑</a></span>
 </footer>
 
-</div>
 <script>
 (function(){
   var loader=document.getElementById('loader'); if(!loader) return;
@@ -606,25 +387,6 @@
   document.addEventListener('mouseup', function(){ el.classList.remove('is-active'); }, {passive:true});
 })();
 </script>
-<script>
-/* One-page scrollspy: the Contents bar marks the section being read. */
-(function(){
-  var links = {};
-  document.querySelectorAll('nav.contents a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if(en.isIntersecting){
-        Object.keys(links).forEach(function(k){ links[k].classList.toggle('active', k === en.target.id); });
-      }
-    });
-  }, {rootMargin: '-38% 0px -55% 0px'});
-  ['briefing','cover-story','record','works','archive','capabilities','correspondence'].forEach(function(id){
-    var s = document.getElementById(id); if(s) io.observe(s);
-  });
-})();
-</script>
-
-<div id="scroll-track" aria-hidden="true" data-tick-for="#briefing,#cover-story,#record,#works,#archive,#capabilities,#correspondence"><span class="cap top"></span><span id="scroll-shadow"></span><span id="scroll-diamond"></span><span class="cap bot"></span></div>
 <script>
 /* Genshin-style scroll indicator: a hairline with a diamond marker
    replaces the native scrollbar (hidden in style.css). Where the track
