@@ -467,10 +467,9 @@ body.loading{overflow:hidden}
 #espil-cursor{
   position:fixed; left:0; top:0; width:24px; height:23px; margin:-11px 0 0 -12px;
   pointer-events:none; z-index:2147483200; opacity:0; transition:opacity .18s ease;
-  color:#000; will-change:transform;
+  color:#fff; mix-blend-mode:difference; will-change:transform;
 }
 #espil-cursor.on{opacity:1}
-#espil-cursor.on-dark{color:#fff}
 html.uc-on, html.uc-on *{cursor:none!important}
 /* Hover: the spiral screws IN — an extension curve draws itself toward
    the centre — then screws back out. The original curves never change. */

@@ -172,7 +172,7 @@
   <div class="entry">
     <div class="when">Jan 2018 – Jan 2026</div>
     <h3>Cook — Sushi Umi</h3>
-    <p>Eight years in a working kitchen alongside everything else. I documented the kitchen's recipes into a standardized, bilingual (Korean/English) recipe system — 21 recipes, one format, any cook, same taste. When a digital QR menu was requested, I declined it: the shop exists for its locals and for real taste, and a screen menu clashed with that philosophy.</p>
+    <p>I started at the same address a year earlier, as a server at Tawara Sushi; the owner and the sign changed, I stayed — and moved into the kitchen. Eight years in a working kitchen alongside everything else. I documented the kitchen's recipes into a standardized, bilingual (Korean/English) recipe system — 21 recipes, one format, any cook, same taste. When a digital QR menu was requested, I declined it: the shop exists for its locals and for real taste, and a screen menu clashed with that philosophy.</p>
   </div>
 
   <div class="entry">
@@ -580,25 +580,7 @@
   el.id = 'espil-cursor'; el.setAttribute('aria-hidden','true'); el.innerHTML = SVG;
   document.body.appendChild(el);
   var x = innerWidth/2, y = innerHeight/2, raf = null, shown = false;
-  var lastEl = null;
-  function sampleSurface(){
-    var t = document.elementFromPoint(x, y);
-    if(t === lastEl) return; lastEl = t;
-    var el = t, luma = 1, hops = 0;
-    while(el && hops < 7){
-      var bg = getComputedStyle(el).backgroundColor;
-      var m = bg && bg.match(/[\d.]+/g);
-      if(m && (m.length < 4 || parseFloat(m[3]) > 0)){
-        luma = (0.2126 * (+m[0]) + 0.7152 * (+m[1]) + 0.0722 * (+m[2])) / 255;
-        break;
-      }
-      el = el.parentElement; hops++;
-    }
-    el = document.getElementById('espil-cursor');
-    if(el) el.classList.toggle('on-dark', luma < 0.45);
-  }
-
-  function draw(){ el.style.transform = 'translate(' + x + 'px,' + y + 'px)'; raf = null; sampleSurface(); }
+  function draw(){ el.style.transform = 'translate(' + x + 'px,' + y + 'px)'; raf = null; }
   function queue(){ if(!raf) raf = requestAnimationFrame(draw); }
   document.addEventListener('mousemove', function(e){
     x = e.clientX; y = e.clientY; queue();
