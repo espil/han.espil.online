@@ -485,3 +485,36 @@ html.uc-on, html.uc-on *{cursor:none!important}
 @media (prefers-reduced-motion: reduce){
   #espil-cursor.is-hover .screw-ext{animation:none}
 }
+
+/* Scroll indicator (per Han, 2026-10-14): the native scrollbar is removed;
+   a Genshin-style hairline with a line-drawn diamond marks the position. */
+html{scrollbar-width:none; -ms-overflow-style:none}
+html::-webkit-scrollbar, body::-webkit-scrollbar{width:0; height:0; display:none}
+#scroll-track{
+  position:fixed; right:17px; top:50%; transform:translateY(-50%);
+  width:13px; height:min(46vh,430px); z-index:900; pointer-events:none;
+  opacity:0; transition:opacity .3s ease;
+}
+#scroll-track.on{opacity:1}
+#scroll-track::before{
+  content:""; position:absolute; left:50%; top:0; bottom:0; width:1px;
+  margin-left:-.5px; background:var(--ink); opacity:.45;
+}
+#scroll-track .cap{
+  position:absolute; left:50%; width:5px; height:5px; border:1px solid var(--ink);
+  transform:translate(-50%,-50%) rotate(45deg);
+}
+#scroll-track .cap.top{top:0}
+#scroll-track .cap.bot{top:100%}
+#scroll-track .tick{
+  position:absolute; left:50%; width:7px; height:1px; background:var(--ink);
+  opacity:.45; transform:translate(-50%,-50%);
+}
+#scroll-track .tick.active{width:11px; opacity:1}
+#scroll-diamond{
+  position:absolute; left:50%; top:12px; width:11px; height:11px;
+  border:1.5px solid var(--ink); background:transparent;
+  transform:translate(-50%,-50%) scale(1,1.5) rotate(45deg); transition:background .15s ease;
+}
+#scroll-track.moving #scroll-diamond{background:var(--ink)}
+@media (max-width:719px){#scroll-track{display:none}}
