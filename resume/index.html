@@ -2,670 +2,437 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Resume — HanBin Im | han.espil.online</title>
-<meta name="description" content="The full resume of HanBin Im (Espil) — every role and school in order: operations, web design and development, IT, marketing, and the studies underneath.">
-<link rel="stylesheet" href="../style.css?v=8">
-<script>try{var _t=localStorage.getItem('espil-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>임한빈님의 미니홈피 - The Resume | han.espil.online</title>
+<meta name="description" content="HanBin Im's resume, rebuilt as a Cyworld minihompy. Full experience record, selected work and contact.">
 <style>
-  .cv-wrap{max-width:880px; margin:0 auto; padding:0 28px 70px}
-  .cv-head{padding:34px 0 6px}
-  .cv-head h1{font-family:var(--serif); font-size:clamp(34px,5.6vw,52px); line-height:1.05; margin:8px 0 10px}
-  .cv-entry{border-top:2px solid var(--ink); padding:22px 0 6px; margin-top:26px}
-  .cv-period{font-family:var(--sans); font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 6px}
-  .cv-no{color:var(--highlight-ink); margin-right:8px}
-  .cv-entry h2{font-family:var(--serif); font-size:clamp(23px,3.4vw,30px); line-height:1.15; margin:0 0 4px}
-  .cv-tagline{font-family:var(--serif); font-style:italic; font-size:17px; color:var(--muted); margin:0 0 6px}
-  .cv-focus{font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--highlight-ink); margin:0 0 12px}
-  .cv-sub h3{font-family:var(--sans); font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:14px 0 4px}
-  .cv-sub p{font-size:16.5px; line-height:1.55; margin:0; max-width:62ch}
-  .cv-note{margin-top:30px; font-size:15px; color:var(--muted)}
-  .backline{margin-top:34px; font-family:var(--sans); font-size:12px; letter-spacing:.14em; text-transform:uppercase}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cy-orange:#f26d21; --cy-orange-dk:#d35400; --cy-blue:#3b6ea5; --cy-line:#b7c9d8;
+  --cy-ink:#33383d; --cy-soft:#6b7683; --skin:#9dbfdd;
+}
+body{
+  font-family:"Malgun Gothic","Apple SD Gothic Neo",Dotum,"돋움",sans-serif;
+  font-size:12px; color:var(--cy-ink); line-height:1.55;
+  background:
+    radial-gradient(circle at 18px 18px, rgba(255,255,255,.5) 2px, transparent 2.6px) 0 0/36px 36px,
+    linear-gradient(180deg,#7fa8cf 0%, #a8c6e0 30%, #c3d9ec 100%);
+  height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:14px 0; overflow:hidden;
+}
+a{color:var(--cy-blue); text-decoration:none}
+a:hover{text-decoration:underline}
+.topbar{width:80vw;margin:0 auto 8px;display:flex;justify-content:space-between;color:#fff;font-size:11px;text-shadow:0 1px 2px rgba(30,60,90,.45)}
+.topbar a{color:#fff;font-weight:bold}
+/* ===== minihompy frame: fixed at 80% x 80% of the visible screen, inner scroll ===== */
+.hompy{position:relative;width:80vw;height:80vh;background:#fff;border:2px solid #5f87a8;border-radius:12px;box-shadow:0 14px 40px rgba(23,48,74,.4);padding:18px 22px 14px;display:flex;flex-direction:column}
+.scrollwrap{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;padding-right:6px;scrollbar-width:thin;scrollbar-color:#8fb0cc #e8eff5}
+.scrollwrap::-webkit-scrollbar{width:14px}
+.scrollwrap::-webkit-scrollbar-track{background:#e8eff5;border:1px solid var(--cy-line);border-radius:7px}
+.scrollwrap::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#a9c6de,#7fa3c4);border:2px solid #e8eff5;border-radius:7px}
+.scrollwrap::-webkit-scrollbar-thumb:hover{background:var(--cy-orange)}
+/* home avatar window - the miniroom frame, now an Espil.Online preview */
+.avatarwin{border:1px solid var(--cy-line);border-radius:6px;padding:6px;background:#fdfdf8;margin-bottom:14px}
+.avatarwin .stage{position:relative;height:190px;border:1px solid #d8e2ec;overflow:hidden;background:#dfeaf3}
+.avatarwin .stage img.room{width:100%;height:100%;object-fit:cover;display:block}
+.avatarwin .avatar{position:absolute;left:16px;bottom:2px;height:150px;width:auto}
+.avatarwin .nametag{position:absolute;left:100px;bottom:14px;background:rgba(255,255,255,.88);border:1px solid var(--cy-line);border-radius:3px;padding:1px 7px;font-weight:bold;color:var(--cy-ink)}
+.avatarwin .openbar{display:flex;justify-content:space-between;align-items:center;padding-top:6px}
+.avatarwin .openbar .lbl{color:var(--cy-orange-dk);font-weight:bold;font-size:11px}
+.avatarwin .openbar a{font-weight:bold}
+.hompy-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px double var(--cy-line);padding-bottom:8px}
+.hompy-title{font-size:19px;font-weight:bold;color:var(--cy-ink)}
+.hompy-title .house{color:var(--cy-orange)}
+.hompy-title small{display:block;font-size:11px;color:var(--cy-soft);font-weight:normal;margin-top:2px}
+.counter{border:1px solid var(--cy-line);background:#f4f8fb;border-radius:4px;padding:4px 10px;font-size:11px;color:var(--cy-soft);white-space:nowrap}
+.counter b{color:var(--cy-orange-dk);font-size:12px}
+/* right-side tabs */
+.tabs{position:absolute;right:-27px;top:120px;display:flex;flex-direction:column;gap:5px}
+.tabs a{display:flex;align-items:center;justify-content:center;width:34px;padding:12px 0;text-align:center;background:var(--cy-blue);color:#fff;font-weight:bold;font-size:12px;border-radius:0 6px 6px 0;box-shadow:2px 2px 5px rgba(23,48,74,.3);writing-mode:vertical-rl;letter-spacing:3px;transition:width .15s ease,padding .15s ease}
+.tabs a.t1{background:#f26d21}.tabs a.t2{background:#5b8c5a}.tabs a.t3{background:#3b6ea5}.tabs a.t4{background:#8a6d3b}.tabs a.t5{background:#7a5ba6}
+.tabs a:hover{text-decoration:none;filter:brightness(1.12)}
+.tabs a.active{width:46px;padding:20px 0;font-size:14px;filter:brightness(1.13);box-shadow:3px 3px 8px rgba(23,48,74,.4);position:relative;z-index:2}
+/* tab views: one section at a time, like the real minihompy */
+.view{display:none}
+.view.on{display:block}
+/* portfolio album (사진첩 = portfolio page) */
+.pf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pf-card{border:1px solid var(--cy-line);background:#fdfdf8;padding:6px}
+.pf-card img{width:100%;height:150px;object-fit:cover;display:block;border:1px solid #e2eaf1}
+.pf-card .typo{height:150px;display:flex;align-items:center;justify-content:center;background:#20211f;color:#f0eee9;font-family:Georgia,serif;font-size:19px;letter-spacing:2px;border:1px solid #e2eaf1;text-align:center;padding:0 10px}
+.pf-card h4{font-size:12.5px;margin:7px 2px 2px;color:var(--cy-ink)}
+.pf-card p{font-size:11.5px;color:var(--cy-soft);margin:0 2px 4px}
+.pf-card .go{font-size:11px;font-weight:bold;margin:0 2px 2px}
+/* ===== columns ===== */
+.cols{display:flex;gap:0;margin-top:14px}
+.rail{width:208px;flex:none;padding-right:14px;border-right:1px dotted var(--cy-line)}
+.main{flex:1;padding-left:16px;min-width:0}
+.box{border:1px solid var(--cy-line);border-radius:6px;padding:9px 10px;margin-bottom:12px;background:#fff}
+.box h4{font-size:11px;color:var(--cy-orange-dk);border-bottom:1px dotted var(--cy-line);padding-bottom:4px;margin-bottom:7px;letter-spacing:.4px}
+.profile-photo{border:1px solid var(--cy-line);padding:5px;background:#fdfdf8;text-align:center}
+.profile-photo img{width:100%;height:150px;object-fit:contain;display:block;background:#fff}
+.profile-photo .cap{font-size:11px;color:var(--cy-soft);padding-top:5px}
+.mood{background:#fffbe9;border-color:#e6d9a8}
+.mood p{font-size:12px}
+.mood .en{color:var(--cy-soft);font-size:11px}
+.info li{list-style:none;padding:2.5px 0;border-bottom:1px dotted #e3ebf2}
+.info li:last-child{border-bottom:none}
+.info .k{display:inline-block;width:44px;color:var(--cy-soft);font-size:11px}
+.status{background:#eef7ee;border-color:#bcd8bc}
+.status p b{color:#2e6b2e}
+.bgm{background:#f2f0fa;border-color:#cfc8ea;text-align:center}
+.bgm .note{color:#7a5ba6;font-size:14px}
+.surf li{list-style:none;padding:2px 0}
+.surf li::before{content:"» ";color:var(--cy-orange);font-weight:bold}
+.miniroom{background:#fdf6ec;border-color:#e8d3ae}
+.miniroom .room{border:1px dotted #d8bd8a;background:#fffdf6;padding:8px;font-size:11px;color:var(--cy-soft)}
+/* ===== main sections ===== */
+.sec{margin-bottom:22px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--cy-orange);padding-bottom:4px;margin-bottom:9px}
+.sec-head h3{font-size:14px;color:var(--cy-orange-dk)}
+.sec-head .more{font-size:11px;color:var(--cy-soft)}
+table.board{width:100%;border-collapse:collapse;font-size:12px}
+table.board th{background:#fdf1e7;color:var(--cy-orange-dk);border-top:1px solid var(--cy-line);border-bottom:1px solid var(--cy-line);padding:5px 8px;text-align:left;font-size:11px}
+table.board td{border-bottom:1px dotted var(--cy-line);padding:5px 8px;vertical-align:top}
+table.board td.no{color:var(--cy-soft);text-align:center;width:38px}
+table.board td.when{color:var(--cy-soft);white-space:nowrap;width:128px}
+table.board td a{color:var(--cy-ink);font-weight:bold}
+table.board td a:hover{color:var(--cy-orange-dk)}
+.new-badge{display:inline-block;background:var(--cy-orange);color:#fff;font-size:9px;font-weight:bold;border-radius:2px;padding:0 4px;margin-left:6px;vertical-align:2px}
+.profile-body p{margin-bottom:8px;font-size:12.5px}
+.profile-body ul{list-style:none}
+.profile-body li{padding:3px 0 3px 14px;position:relative}
+.profile-body li::before{content:"•";position:absolute;left:2px;color:var(--cy-orange);font-weight:bold}
+/* post cards */
+.post{border:1px solid var(--cy-line);border-radius:6px;margin-bottom:12px;overflow:hidden}
+.post-head{background:#fdf6ee;border-bottom:1px dotted var(--cy-line);padding:7px 12px;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.post-head .t{font-size:13px;font-weight:bold;color:var(--cy-ink)}
+.post-head .t .no{color:var(--cy-orange-dk);margin-right:6px}
+.post-head .when{color:var(--cy-soft);font-size:11px;white-space:nowrap}
+.post-body{padding:10px 12px 12px}
+.post-body .tagline{color:var(--cy-orange-dk);font-weight:bold;font-size:12px}
+.post-body .focus{color:var(--cy-soft);font-size:11px;margin:2px 0 8px}
+.post-body h5{font-size:12px;color:var(--cy-blue);margin:9px 0 3px}
+.post-body h5::before{content:"▸ "}
+.post-body p{font-size:12.5px;color:#454c53}
+/* photo album */
+.album{display:flex;gap:10px}
+.album figure{flex:1;border:1px solid var(--cy-line);padding:5px;background:#fdfdf8}
+.album img{width:100%;height:130px;object-fit:cover;display:block}
+.album figcaption{font-size:11px;color:var(--cy-soft);text-align:center;padding-top:4px}
+/* guestbook */
+.guest{border:1px solid var(--cy-line);border-radius:6px;background:#fbfcfe;padding:12px}
+.guest .entry{border-bottom:1px dotted var(--cy-line);padding:7px 2px}
+.guest .entry:last-of-type{border-bottom:none}
+.guest .who{color:var(--cy-blue);font-weight:bold}
+.guest .write{margin-top:10px;display:flex;gap:8px}
+.guest .write .fakeinput{flex:1;border:1px solid var(--cy-line);border-radius:4px;background:#fff;color:var(--cy-soft);padding:8px 10px}
+.btn{display:inline-block;background:var(--cy-orange);color:#fff;font-weight:bold;border-radius:4px;padding:8px 14px}
+.btn:hover{background:var(--cy-orange-dk);text-decoration:none}
+.hompy-foot{border-top:3px double var(--cy-line);margin-top:6px;padding-top:8px;display:flex;justify-content:space-between;color:var(--cy-soft);font-size:11px}
+@media (max-width:820px){
+  .cols{flex-direction:column}
+  .rail{width:100%;border-right:none;padding-right:0}
+  .main{padding-left:0}
+  .tabs{right:-14px}
+  .album{flex-direction:column}
+  .hompy{width:94vw;height:86vh}
+  .topbar{width:94vw}
+}
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- espil-loader v10 (injected 2026-10-16) -->
-<style>
-@property --p{syntax:"<number>"; inherits:true; initial-value:0}
-#espil-loader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0b0b0b url("/universe/render-tree.png") center/cover no-repeat;transition:opacity .45s ease}
-#espil-loader::before{content:"";position:absolute;inset:0;background:rgba(8,8,8,.55)}
-#espil-loader.done{opacity:0;pointer-events:none}
-#espil-loader .el-card{position:relative;text-align:center}
-#espil-loader .el-glass{position:relative;width:98px;height:98px;margin:0 auto;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 32% 24%,rgba(255,255,255,.34),rgba(255,255,255,.10) 26%,rgba(255,255,255,0) 48%),linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.16) 45%,rgba(255,255,255,.03) 52%,rgba(255,255,255,0) 62%),linear-gradient(165deg,rgba(255,255,255,.08),rgba(255,255,255,0) 42%,rgba(120,200,255,.06) 78%,rgba(190,242,100,.08)),rgba(240,238,233,.02);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),inset 0 10px 18px rgba(255,255,255,.14),inset 0 -16px 24px rgba(0,0,0,.38),inset 0 0 17px rgba(240,238,233,.10),0 0 18px rgba(220,255,190,.10),0 12px 30px rgba(0,0,0,.4);filter:drop-shadow(0 16px 16px rgba(0,0,0,.35));--p:0;--rock:calc(0.5deg + var(--p,0) * .02deg + var(--agit,0.7) * (1.1deg + var(--p,0) * .055deg));--sway:calc(0.4px + var(--p,0) * .016px + var(--agit,0.7) * (0.9px + var(--p,0) * .05px));--bob:calc(.8px + var(--p,0) * .032px)}
-#espil-loader .el-glass::before{content:"";position:absolute;inset:0;border-radius:50%;z-index:4;pointer-events:none;background:conic-gradient(from 215deg,rgba(255,255,255,.62),rgba(255,255,255,.10) 20%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 74%,rgba(190,242,100,.24) 90%,rgba(255,255,255,.5));-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px))}
-#espil-loader .el-glass::after{content:"";position:absolute;left:10%;right:10%;bottom:4px;height:18px;border-radius:50%;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 100%,rgba(216,252,170,.34),rgba(216,252,170,0) 70%)}
-#espil-loader .el-slosh{position:absolute;inset:-6px;z-index:1;transform-origin:50% 88%;animation:elSlosh 3.4s ease-in-out infinite alternate}
-@keyframes elSlosh{from{transform:rotate(calc(var(--rock) * -1)) translateX(calc(var(--sway) * -1))}to{transform:rotate(var(--rock)) translateX(var(--sway))}}
-#espil-loader .el-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;display:none;filter:brightness(1.24) saturate(1.38)}
-#espil-loader.physics-on .el-canvas{display:block}
-#espil-loader.physics-on .el-slosh{display:none}
-#espil-loader .el-water{position:absolute;left:0;right:0;bottom:0;height:calc(var(--p)*1%);background:linear-gradient(100deg,rgba(255,255,255,.12),rgba(255,255,255,0) 36%,rgba(255,255,255,.07) 60%,rgba(255,255,255,0) 82%),linear-gradient(180deg, rgba(255,245,155,.78), rgba(254,246,160,.72) 22%, rgba(224,252,175,.70) 45%, rgba(198,244,120,.68) 66%, rgba(172,232,70,.70) 85%, rgba(148,214,50,.74));filter:brightness(1.24) saturate(1.38);transition:height .12s linear}
-#espil-loader .el-water::before{content:"";position:absolute;left:6%;right:6%;bottom:2px;height:34%;background:radial-gradient(ellipse at 50% 100%,rgba(232,255,200,.68),rgba(210,255,180,0) 70%)}
-#espil-loader .el-water::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 28%,rgba(255,255,255,.22) 45%,rgba(255,255,255,.05) 55%,transparent 68%);background-size:260% 100%;animation:elStreak 5.5s ease-in-out infinite alternate}
-@keyframes elStreak{from{background-position:110% 0}to{background-position:-30% 0}}
-
-
-
-#espil-loader .el-surface{position:absolute;left:-4%;right:-4%;top:-7px;height:14px;border-radius:50%;background:radial-gradient(ellipse at 50% 42%,rgba(236,255,205,.85),rgba(196,244,120,.34) 55%,rgba(196,244,120,0) 74%);animation:elSurface 1.7s ease-in-out infinite alternate}
-@keyframes elSurface{from{transform:translateY(calc(var(--bob) * -1)) rotate(calc(var(--rock) * -.5))}to{transform:translateY(var(--bob)) rotate(calc(var(--rock) * .5))}}
-#espil-loader .el-wave{position:absolute;top:-7px;left:0;width:200%;height:8px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M0 8 Q 15 1 30 8 T 60 8 T 90 8 T 120 8 V14 H0 Z' fill='%23bef264' fill-opacity='0.42'/%3E%3C/svg%3E") repeat-x;background-size:60px 8px;animation:elWave1 2.6s linear infinite}
-#espil-loader .el-wave.back{top:-6px;opacity:.22;animation:elWave2 4.4s linear infinite}
-#espil-loader .el-wave.deep{top:-5px;opacity:.15;background-size:85px 10px;height:10px;animation:elWave3 7s linear infinite}
-@keyframes elWave1{0%{transform:translate(0,0)}50%{transform:translate(-30px,calc(.9px + var(--p,0) * .028px))}100%{transform:translate(-60px,0)}}
-@keyframes elWave2{0%{transform:translate(-60px,calc(.8px + var(--p,0) * .02px))}50%{transform:translate(-30px,-1px)}100%{transform:translate(0,calc(.8px + var(--p,0) * .02px))}}
-@keyframes elWave3{0%{transform:translate(0,0)}50%{transform:translate(-42px,calc(1.2px + var(--p,0) * .03px))}100%{transform:translate(-85px,0)}}
-#espil-loader .el-swirl{position:absolute;left:0;right:0;bottom:0;height:calc(var(--p)*1%);overflow:hidden;transition:height .12s linear;pointer-events:none}
-#espil-loader .el-swirl i{position:absolute;left:50%;top:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg,rgba(255,244,150,.3) 40deg,transparent 95deg,rgba(255,255,255,.16) 165deg,transparent 215deg,rgba(190,242,100,.26) 300deg,transparent 345deg);animation:elSwirl 6s linear infinite}
-@keyframes elSwirl{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-#espil-loader .el-b{position:absolute;bottom:8px;border-radius:50%;z-index:3;background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.95),rgba(255,255,255,.25));opacity:0;animation:elRise 2.8s ease-in infinite}
-#espil-loader .b1{left:38%;width:4px;height:4px;animation-delay:0s}
-#espil-loader .b2{left:52%;width:3px;height:3px;animation-delay:.7s}
-#espil-loader .b3{left:60%;width:5px;height:5px;animation-delay:1.3s}
-#espil-loader .b4{left:45%;width:2.5px;height:2.5px;animation-delay:1.9s}
-#espil-loader .b5{left:56%;width:3.5px;height:3.5px;animation-delay:2.4s}
-@keyframes elRise{0%{transform:translate(0,0);opacity:0}12%{opacity:.85}38%{transform:translate(calc(var(--sway,0px) * -.8),-24px)}62%{transform:translate(calc(var(--sway,0px) * .75),-42px)}100%{transform:translate(calc(var(--sway,0px) * -.35),-58px);opacity:0}}
-#espil-loader .el-shade{position:absolute;inset:0;border-radius:50%;z-index:3;pointer-events:none;box-shadow:inset -14px -12px 26px rgba(0,0,0,.28),inset 12px 14px 22px rgba(255,255,255,.05),inset 0 -18px 26px rgba(4,32,16,.25),inset 0 0 22px rgba(190,242,100,.05)}
-#espil-loader .el-shine{position:absolute;inset:0;border-radius:50%;z-index:4;pointer-events:none;background:radial-gradient(64px 36px at 30% 15%,rgba(255,255,255,.55),rgba(255,255,255,0) 62%),radial-gradient(26px 13px at 24% 11%,rgba(255,255,255,.5),rgba(255,255,255,0) 70%),radial-gradient(90px 34px at 50% 108%,rgba(216,252,170,.16),rgba(216,252,170,0) 70%),linear-gradient(115deg,transparent 32%,rgba(255,255,255,.13) 47%,rgba(255,255,255,.03) 55%,transparent 68%);background-size:auto,auto,auto,260% 100%;animation:elSheen 7s ease-in-out infinite alternate}
-@keyframes elSheen{from{background-position:0 0,0 0,0 0,115% 0}to{background-position:0 0,0 0,0 0,-35% 0}}
-#espil-loader .el-pct{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.72);font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:15px;letter-spacing:.02em;text-shadow:0 1px 6px rgba(0,0,0,.3);filter:url(#espil-fisheye)}
-#espil-loader .el-pct .pctsym{font-size:8px;font-weight:600;margin-left:2px;transform:translateY(2px)}
-#espil-loader .el-status{margin-top:20px;color:rgba(255,255,255,.85);font-family:'Helvetica Neue',Arial,sans-serif;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase}
-.el-lock{overflow:hidden!important}
-@media (prefers-reduced-motion:reduce){#espil-loader .el-wave,#espil-loader .el-swirl i,#espil-loader .el-b,#espil-loader .el-slosh,#espil-loader .el-surface,#espil-loader .el-water::after,#espil-loader .el-shine{animation:none}}
-</style>
-<noscript><style>#espil-loader{display:none}</style></noscript>
 </head>
 <body>
-<!-- espil-loader v10 (injected 2026-10-16) -->
-<div id="espil-loader" role="status" aria-label="Loading">
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="espil-fisheye" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB"><feImage href="data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Cdefs%3E%3ClinearGradient%20id='gx'%20x1='0'%20y1='0'%20x2='1'%20y2='0'%3E%3Cstop%20offset='0'%20stop-color='rgb%280,128,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28255,128,0%29'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='gy'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='rgb%28128,0,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28128,255,0%29'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gx%29'/%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gy%29'%20opacity='0.55'/%3E%3C/svg%3E" x="0" y="0" width="100" height="100" preserveAspectRatio="none" result="map"/><feDisplacementMap in="SourceGraphic" in2="map" scale="10" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
-  <div class="el-card">
-    <div class="el-glass">
-      <canvas class="el-canvas" width="196" height="196"></canvas>
-      <div class="el-slosh">
-        <div class="el-water"><div class="el-surface"></div><div class="el-wave"></div><div class="el-wave back"></div><div class="el-wave deep"></div></div>
-        
-        <div class="el-swirl"><i></i></div>
-        <span class="el-b b1"></span><span class="el-b b2"></span><span class="el-b b3"></span><span class="el-b b4"></span><span class="el-b b5"></span>
+<div class="topbar"><span>han.espil.online/resume</span><span><a href="https://han.espil.online/">포트폴리오 홈</a> · <a href="https://espil.online">Espil.Online</a></span></div>
+
+<div class="hompy">
+  <nav class="tabs">
+    <a class="t1 active" href="#home" data-view="home">홈</a>
+    <a class="t2" href="#profile" data-view="profile">프로필</a>
+    <a class="t3" href="#board" data-view="board">게시판</a>
+    <a class="t4" href="#album" data-view="album">사진첩</a>
+    <a class="t5" href="#guestbook" data-view="guestbook">방명록</a>
+  </nav>
+
+  <div class="hompy-head">
+    <div class="hompy-title"><span class="house">⌂</span> 임한빈님의 미니홈피
+      <small>HanBin Im - Web Developer · Designer · Vancouver, BC</small>
+    </div>
+    <div class="counter">TODAY <b id="cnt-today">-</b> · TOTAL <b id="cnt-total">-</b></div>
+  </div>
+
+  <div class="scrollwrap">
+  <div class="cols">
+    <!-- ===== left rail ===== -->
+    <aside class="rail">
+      <div class="box profile-photo">
+        <img src="usedesign-logo.svg" alt="HanBin Im - UseDesign logo">
+        <div class="cap">HanBin Im (임한빈)</div>
       </div>
-      <div class="el-shade"></div>
-      <div class="el-shine"></div>
-      <div class="el-pct"><span class="n">0</span><span class="pctsym">%</span></div>
-    </div>
-    <div class="el-status">Opening the issue</div>
+
+      <div class="box mood">
+        <h4>오늘의 한마디</h4>
+        <p>가마솥에 세상을 담는 중입니다.</p>
+        <p class="en">Building the World in the Cauldron.</p>
+      </div>
+
+      <div class="box">
+        <h4>프로필</h4>
+        <ul class="info">
+          <li><span class="k">직업</span> Web Developer · Designer</li>
+          <li><span class="k">지역</span> Vancouver, BC, Canada</li>
+          <li><span class="k">이메일</span> <a href="mailto:han@espil.online">han@espil.online</a></li>
+          <li><span class="k">홈피</span> <a href="https://han.espil.online/">han.espil.online</a></li>
+          <li><span class="k">경력</span> Building for the web since 2015</li>
+        </ul>
+      </div>
+
+      <div class="box status">
+        <h4>구직 상태</h4>
+        <p><b>Open work permit (PGWP)</b>, valid through <b>October 2028</b>.<br>No LMIA required to hire me in Canada.</p>
+      </div>
+
+      <div class="box bgm">
+        <h4>BGM</h4>
+        <p><span class="note">♬</span> Espil Ceil - my own tracks<br>
+        <a href="https://soundcloud.com/quad-clipse" target="_blank" rel="noopener">SoundCloud에서 듣기</a></p>
+      </div>
+
+      <div class="box">
+        <h4>파도타기</h4>
+        <ul class="surf">
+          <li><a href="https://espil.online">Espil.Online - 라이브 프로젝트</a></li>
+          <li><a href="https://github.com/espil">GitHub - github.com/espil</a></li>
+          <li><a href="https://instagram.com/espil_online">Instagram - @espil_online</a></li>
+          <li><a href="https://blog.naver.com/espil_online">Naver Blog - espil_online</a></li>
+          <li><a href="https://www.twitch.tv/espilceil">Twitch - espilceil</a></li>
+        </ul>
+      </div>
+
+      <div class="box miniroom">
+        <h4>미니룸</h4>
+        <div class="room">Espil House - a 3D-printed house in nature, powered by its own water and sun. The room is being built at espil.online.</div>
+      </div>
+    </aside>
+
+    <!-- ===== main ===== -->
+    <main class="main">
+      <!-- HOME -->
+      <div class="view on" id="view-home">
+      <section class="sec">
+        <div class="sec-head"><h3>홈 - 미니룸</h3><span class="more">아바타 창 · Espil.Online 미리보기</span></div>
+        <div class="avatarwin">
+          <div class="stage">
+            <img class="room" src="room-composite.jpg" alt="Espil.Online preview - the Espil Universe house, with Han's character standing beside the bench">
+          </div>
+          <div class="openbar"><span class="lbl">Espil.Online 미리보기</span><a href="https://espil.online">espil.online에서 열기 →</a></div>
+        </div>
+        <div class="sec-head"><h3>최근 게시물 - Selected Work</h3><span class="more">대표작 먼저 보기</span></div>
+        <table class="board">
+          <tr><th style="width:38px;text-align:center">번호</th><th>제목</th><th style="width:128px">기간</th></tr>
+          <tr><td class="no">4</td><td><a href="https://espil.online">Espil.Online</a><span class="new-badge">NEW</span><div style="color:var(--cy-soft);font-size:11px">A live interactive 3D map of a living world - the World in the Cauldron, built and run end to end.</div></td><td class="when">2015 - present</td></tr>
+<tr><td class="no">3</td><td><a href="https://han.espil.online">han.espil.online</a><div style="color:var(--cy-soft);font-size:11px">This portfolio and minihompy - the full archive of a decade of work, designed and built by hand.</div></td><td class="when">2026</td></tr>
+<tr><td class="no">2</td><td><a href="#board">Plushy AI</a><div style="color:var(--cy-soft);font-size:11px">A local, private image-to-3D pipeline that turns original designs into game-ready models.</div></td><td class="when">2026</td></tr>
+<tr><td class="no">1</td><td><a href="#board">UseDesign / Bieclipse</a><div style="color:var(--cy-soft);font-size:11px">A decade of client websites through my design house - scoped, designed, built and maintained.</div></td><td class="when">2014 - 2024</td></tr>
+        </table>
+      </section>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="view" id="view-profile">
+      <section class="sec profile-body">
+        <div class="sec-head"><h3>프로필 - The Briefing</h3><span class="more">자기소개</span></div>
+        <p>I am a web developer and designer based in Vancouver, BC. I have been building for the web since 2015, and on computers since the DOS era. My headline skill today is AI-assisted development: I direct the tools, review and edit the code myself, and ship end-to-end. I currently build Espil.Online, a live interactive 3D map, on top of a decade of client sites, internal systems and experiments - most of which I scoped, designed, built and ran myself.</p>
+        <ul>
+          <li>AI-assisted development - directing the tools, editing the code myself, shipping end-to-end.</li>
+          <li>Range - restaurants, tourism, mobile retail and health care, all met through IT and design.</li>
+          <li>Design and code in one hand - from a high-school design portfolio to a decade of client work.</li>
+          <li>Full-stack evidence - CRUD databases, a MERN intranet, PHP/MySQL systems, Firebase and Vercel APIs.</li>
+        </ul>
+        <div class="sec-head" style="margin-top:16px"><h3>한눈에 보기 - At a Glance</h3><span class="more">기본 정보</span></div>
+        <table class="board">
+          <tr><td class="no">위치</td><td>Vancouver, BC, Canada</td></tr>
+          <tr><td class="no">경력</td><td>Building for the web since 2015 · Computers since the DOS era</td></tr>
+          <tr><td class="no">현재</td><td>Building Espil.Online - an interactive 3D map of a living world</td></tr>
+          <tr><td class="no">취업</td><td>Open work permit (PGWP) through October 2028 · No LMIA required</td></tr>
+          <tr><td class="no">연락</td><td><a href="mailto:han@espil.online">han@espil.online</a> · <a href="https://github.com/espil">github.com/espil</a></td></tr>
+        </table>
+      </section>
+      </div>
+
+      <!-- BOARD -->
+      <div class="view" id="view-board">
+      <section class="sec">
+        <div class="sec-head"><h3>경력 게시판 - Full Record</h3><span class="more">전 경력 15건 · 제목을 누르면 글로 이동합니다</span></div>
+        <table class="board">
+          <tr><th style="width:38px;text-align:center">번호</th><th>제목</th><th style="width:128px">기간</th></tr>
+          <tr><td class="no">01</td><td><a href="#post-01">Operations Coordinator / Discover Holidays</a><div style="color:var(--cy-soft);font-size:11px">Tariffs · Supplier Data · Quality Control</div></td><td class="when">May 2024 - February 2026</td></tr>
+<tr><td class="no">02</td><td><a href="#post-02">Cook / Sushi Umi</a><div style="color:var(--cy-soft);font-size:11px">Service Quality · Quality Control · Teamwork · Service Pace</div></td><td class="when">January 2018 - January 2026</td></tr>
+<tr><td class="no">03</td><td><a href="#post-03">Server / Tawara Sushi</a><div style="color:var(--cy-soft);font-size:11px">Japanese Restaurant · Front-of-House</div></td><td class="when">2017 - 2018</td></tr>
+<tr><td class="no">04</td><td><a href="#post-04">Tourism Diploma / Capilano University</a><div style="color:var(--cy-soft);font-size:11px">Culture · Tour Product · Entrepreneurship</div></td><td class="when">September 2023 - May 2025</td></tr>
+<tr><td class="no">05</td><td><a href="#post-05">Web Designer / Bieclipse Design + UseDesign</a><div style="color:var(--cy-soft);font-size:11px">Design House · 2D / 3D · Animation</div></td><td class="when">May 2014 - December 2024</td></tr>
+<tr><td class="no">06</td><td><a href="#post-06">IT Specialist / Higgs Creative Inc</a><div style="color:var(--cy-soft);font-size:11px">Product Thinking · Healthcare · Workflow · Planning · Stakeholders</div></td><td class="when">2022 - 2023</td></tr>
+<tr><td class="no">07</td><td><a href="#post-07">Marketer / Nohproblem Consulting</a><div style="color:var(--cy-soft);font-size:11px">Marketing · Immigration · Websites</div></td><td class="when">December 2020 - December 2021</td></tr>
+<tr><td class="no">08</td><td><a href="#post-08">Full Stack Developer / HMC (Han Mobility)</a><div style="color:var(--cy-soft);font-size:11px">Mobile Distribution · Retail · Intranet · Database · OCR</div></td><td class="when">June 2019 - December 2021</td></tr>
+<tr><td class="no">09</td><td><a href="#post-09">Digital Design Development / BCIT</a><div style="color:var(--cy-soft);font-size:11px">Adobe · Web Dev · Project Management</div></td><td class="when">September 2017 - May 2021</td></tr>
+<tr><td class="no">10</td><td><a href="#post-10">Chinese Medicine / PCU College</a><div style="color:var(--cy-soft);font-size:11px">Human Systems · Anatomy · Herbalism · Natural Science</div></td><td class="when">September 2016 - May 2017</td></tr>
+<tr><td class="no">11</td><td><a href="#post-11">Server &amp; Manager / HWATONGSAM</a><div style="color:var(--cy-soft);font-size:11px">Korean Restaurant · Server · Manager</div></td><td class="when">2016 - 2017</td></tr>
+<tr><td class="no">12</td><td><a href="#post-12">Graphic Designer / OK Tour</a><div style="color:var(--cy-soft);font-size:11px">Travel Design · Itinerary · Infographic</div></td><td class="when">May 2015 - May 2016</td></tr>
+<tr><td class="no">13</td><td><a href="#post-13">Bartender / FANTACITY</a><div style="color:var(--cy-soft);font-size:11px">Bartending · Service</div></td><td class="when">2014 - 2015</td></tr>
+<tr><td class="no">14</td><td><a href="#post-14">Fine Arts / Emily Carr University</a><div style="color:var(--cy-soft);font-size:11px">Visual Foundation · Drawing · Photography · Product Design</div></td><td class="when">September 2010 - May 2012</td></tr>
+<tr><td class="no">15</td><td><a href="#post-15">High School Diploma / Sentinel Secondary</a><div style="color:var(--cy-soft);font-size:11px">Origin · North Shore · Foundation · Visual Growth</div></td><td class="when">September 2007 - April 2009</td></tr>
+        </table>
+      </section>
+      <section class="sec">
+        <div class="sec-head"><h3>게시글 - Every Entry, in Full</h3><span class="more">최신순</span></div>
+        
+<article class="post" id="post-01">
+  <div class="post-head"><span class="t"><span class="no">No.01</span>Operations Coordinator / Discover Holidays</span><span class="when">May 2024 – February 2026</span></div>
+  <div class="post-body"><div class="focus">Tariffs · Supplier Data · Quality Control</div><h5>Operations Coordinator</h5><p>Supported travel-product tariff production, internal product information, supplier data, and operational document accuracy for Discover Holidays in Vancouver.</p><h5>Workflow modernization</h5><p>Proposed moving tariff production from InDesign-based documents into a more accessible online platform, connecting tourism operations with product-facing web systems.</p></div>
+</article>
+<article class="post" id="post-02">
+  <div class="post-head"><span class="t"><span class="no">No.02</span>Cook / Sushi Umi</span><span class="when">January 2018 – January 2026</span></div>
+  <div class="post-body"><div class="tagline">Service Quality</div><div class="focus">Quality Control · Teamwork · Service Pace</div><h5>High-pressure service discipline</h5><p>Eight steady years on the restaurant's hot foods, maintaining quality standards in a busy kitchen - holiday rushes, ingredient delivery control, and consistent team communication.</p><h5>Why it matters digitally</h5><p>In July 2026, at the owner's earnest request, I returned for three months as emergency staff - eight years of trust, called back. The role adds operational reliability: pace, detail, quality control, and team trust under pressure.</p></div>
+</article>
+<article class="post" id="post-03">
+  <div class="post-head"><span class="t"><span class="no">No.03</span>Server / Tawara Sushi</span><span class="when">2017 – 2018</span></div>
+  <div class="post-body"><div class="focus">Japanese Restaurant · Front-of-House</div><h5>Server at Tawara Sushi</h5><p>Worked as a server at Tawara Sushi, a Japanese restaurant  -  in the same location where Sushi Umi stands now. It was there that my interest in cooking itself took hold.</p><h5>Scouted by the incoming team</h5><p>When Sushi Umi took over the room, its team scouted me. With the Tawara owner's understanding, I joined Umi - and moved into its kitchen as a cook.</p></div>
+</article>
+<article class="post" id="post-04">
+  <div class="post-head"><span class="t"><span class="no">No.04</span>Tourism Diploma / Capilano University</span><span class="when">September 2023 – May 2025</span></div>
+  <div class="post-body"><div class="focus">Culture · Tour Product · Entrepreneurship</div><h5>Tourism studies</h5><p>Studied cultural studies, communications, environmental stewardship, tour product development, and entrepreneurship.</p><h5>Connection to Zealandia</h5><p>The tourism and product-development layer behind Zealandia, Fiji Gateway, Cauldron travel logic, and the travel blog. The studies themselves began with Espil.Online in mind - the tourism future I am building toward.</p></div>
+</article>
+<article class="post" id="post-05">
+  <div class="post-head"><span class="t"><span class="no">No.05</span>Web Designer / Bieclipse Design + UseDesign</span><span class="when">May 2014 – December 2024</span></div>
+  <div class="post-body"><div class="tagline">Design House</div><div class="focus">2D / 3D · Animation</div><h5>Bieclipse Design House</h5><p>Built the non-commercial creative brand behind UseDesign, focused on discovering unique identities and hidden value in everyday objects.</p><h5>Portfolio-driven execution</h5><p>Created digital works across 2D, 3D, animation, creative software, and fine-art tools, using freelance independence for portfolio-driven execution.</p></div>
+</article>
+<article class="post" id="post-06">
+  <div class="post-head"><span class="t"><span class="no">No.06</span>IT Specialist / Higgs Creative Inc</span><span class="when">2022 – 2023</span></div>
+  <div class="post-body"><div class="tagline">Product Thinking</div><div class="focus">Healthcare · Workflow · Planning · Stakeholders</div><h5>Healthcare software project</h5><p>Worked with medical professionals, executives, and a design team on early-stage healthcare software direction, technical planning, and workflow design.</p><h5>Product lesson</h5><p>The project strengthened product thinking beyond features: operational constraints, user workflows, and planning under stakeholder pressure.</p></div>
+</article>
+<article class="post" id="post-07">
+  <div class="post-head"><span class="t"><span class="no">No.07</span>Marketer / Nohproblem Consulting</span><span class="when">December 2020 – December 2021</span></div>
+  <div class="post-body"><div class="tagline">Marketing</div><div class="focus">Immigration · Websites</div><h5>The only employee</h5><p>I joined as the company's only employee - my first remote job - taking over from a predecessor who left within days. Hired to write blog posts, I was soon finishing them in under thirty minutes, and the work kept widening: building and managing the websites, running the SNS channels, growing its YouTube channel to its first 1,000 subscribers, and, for additional pay, editing the CELPIP and IELTS lecture series and subtitling them.</p><h5>Clients, and a company growing</h5><p>For additional pay I also met clients directly and ran the all-in-one landing service end to end - home search, contract management, school registration and licence registrations. The two-person Slack I joined had about ten people by the time I left: an administrator, a web developer, a blog writer, and immigration consultants in several countries. The videos I produced for the channel are still its most-watched, with over 500,000 views between them.</p></div>
+</article>
+<article class="post" id="post-08">
+  <div class="post-head"><span class="t"><span class="no">No.08</span>Full Stack Developer / HMC (Han Mobility)</span><span class="when">June 2019 – December 2021</span></div>
+  <div class="post-body"><div class="tagline">Mobile Distribution</div><div class="focus">Retail · Intranet · Database · OCR</div><h5>Hired in sales</h5><p>I joined HMC - Han Mobility, a mobile distributor - in sales, and grew through marketing and design work into the company's full-stack developer, and its backend person.</p><h5>The franchise floor</h5><p>On the company's Freedom Mobile franchise floor (September 2019 - April 2020) I sold Rogers, Telus and Fido lines: customer service, up-to-date tech information, support for the manager's marketing strategies, and advertisement graphics I designed myself.</p><h5>The company's systems</h5><p>I migrated the entire Excel-based customer list into a real database, fully manageable through CRUD, and designed and built the company's intranet - CMS, databases, dashboards and automated PDF data entry using OCR - its web platform on the MERN stack (MongoDB, Express, React, Node.js).</p><h5>Design to workflow</h5><p>Where visual design became internal tools, automation, data handling, and business workflow.</p></div>
+</article>
+<article class="post" id="post-09">
+  <div class="post-head"><span class="t"><span class="no">No.09</span>Digital Design Development / BCIT</span><span class="when">September 2017 – May 2021</span></div>
+  <div class="post-body"><div class="focus">Adobe · Web Dev · Project Management</div><h5>Digital Design Development</h5><p>Studied graphic design with Adobe Suite, web-based marketing, business communication, accounting, web development, application development, and project management.</p><h5>Bridge skill</h5><p>The education connected visual presentation, practical development, marketing, and project delivery.</p></div>
+</article>
+<article class="post" id="post-10">
+  <div class="post-head"><span class="t"><span class="no">No.10</span>Chinese Medicine / PCU College</span><span class="when">September 2016 – May 2017</span></div>
+  <div class="post-body"><div class="tagline">Human Systems</div><div class="focus">Anatomy · Herbalism · Natural Science</div><h5>Human-centered study</h5><p>Studied acupuncture, natural science, anatomy, and herbalism at PCU College of Holistic Medicine.</p><h5>Design relevance</h5><p>Adds human-centered observation, body systems, care logic, and attention to practical usability.</p></div>
+</article>
+<article class="post" id="post-11">
+  <div class="post-head"><span class="t"><span class="no">No.11</span>Server &amp; Manager / HWATONGSAM</span><span class="when">2016 – 2017</span></div>
+  <div class="post-body"><div class="focus">Korean Restaurant · Server · Manager</div><h5>My aunt's restaurant</h5><p>In Korea I worked at Hwatongsam, the well-known restaurant my aunt ran - serving tables and managing the floor.</p><h5>The F&amp;B foundation</h5><p>Front-of-house service and management in a busy Korean dining room - the groundwork for the restaurant years that followed, at Tawara and Sushi Umi.</p></div>
+</article>
+<article class="post" id="post-12">
+  <div class="post-head"><span class="t"><span class="no">No.12</span>Graphic Designer / OK Tour</span><span class="when">May 2015 – May 2016</span></div>
+  <div class="post-body"><div class="tagline">Travel Design</div><div class="focus">Itinerary · Infographic</div><h5>Travel graphics and coordination</h5><p>Curated customer trips, coordinated detailed plans for international destinations, and created timeline infographics for travelers.</p><h5>Interface lesson</h5><p>The work turned complex travel schedules into clearer visual guidance, which now connects directly to tourism UX.</p></div>
+</article>
+<article class="post" id="post-13">
+  <div class="post-head"><span class="t"><span class="no">No.13</span>Bartender / FANTACITY</span><span class="when">2014 – 2015</span></div>
+  <div class="post-body"><div class="focus">Bartending · Service</div><h5>Bartender</h5><p>Worked as a bartender at FANTACITY in 2014–15.</p><h5>Kept as a skill</h5><p>Brief as it was, bartending remains a working skill I can still use.</p></div>
+</article>
+<article class="post" id="post-14">
+  <div class="post-head"><span class="t"><span class="no">No.14</span>Fine Arts / Emily Carr University</span><span class="when">September 2010 – May 2012</span></div>
+  <div class="post-body"><div class="tagline">Visual Foundation</div><div class="focus">Drawing · Photography · Product Design</div><h5>Fine Arts foundation</h5><p>Studied art history, drawing and painting, photography, graphics, and product design.</p><h5>Design memory</h5><p>The visual foundation behind the portfolio: composition, material sense, photography, and product-form thinking.</p></div>
+</article>
+<article class="post" id="post-15">
+  <div class="post-head"><span class="t"><span class="no">No.15</span>High School Diploma / Sentinel Secondary</span><span class="when">September 2007 – April 2009</span></div>
+  <div class="post-body"><div class="tagline">Origin</div><div class="focus">North Shore · Foundation · Visual Growth</div><h5>Education origin</h5><p>Completed high school at Sentinel Secondary School in West Vancouver.</p><h5>Portfolio origin</h5><p>The earliest timeline anchor before fine arts, web design, tourism operations, and Zealandia.</p></div>
+</article>
+      </section>
+      </div>
+
+      <!-- ALBUM = PORTFOLIO -->
+      <div class="view" id="view-album">
+      <section class="sec">
+        <div class="sec-head"><h3>사진첩 - Portfolio</h3><span class="more">작업 앨범 · 카드를 누르면 열립니다</span></div>
+        <div class="pf-grid">
+          <div class="pf-card"><a href="https://espil.online"><img src="render-day.jpg" alt="Espil.Online"></a><h4>Espil.Online</h4><p>A live interactive 3D map of a living world - the World in the Cauldron.</p><p class="go"><a href="https://espil.online">열어보기 →</a></p></div>
+          <div class="pf-card"><a href="https://han.espil.online/"><img src="render-night.jpg" alt="han.espil.online"></a><h4>han.espil.online</h4><p>This portfolio - the full archive of a decade of work, after dark.</p><p class="go"><a href="https://han.espil.online/">열어보기 →</a></p></div>
+          <div class="pf-card"><a href="https://han.espil.online/ryde/"><img src="pf-ryde.png" alt="Ryde"></a><h4>Ryde</h4><p>A ride-share app project - my move from database work to API-based work.</p><p class="go"><a href="https://han.espil.online/ryde/">열어보기 →</a></p></div>
+          <div class="pf-card"><a href="https://han.espil.online/ongijongi/"><img src="pf-ongijongi.jpg" alt="Ongijongi"></a><h4>Ongijongi</h4><p>The Vancouver Korean musical club - performing, posters and marketing.</p><p class="go"><a href="https://han.espil.online/ongijongi/">열어보기 →</a></p></div>
+          <div class="pf-card"><div class="typo">ZEALANDIA</div><h4>Zealandia</h4><p>A dungeon to be made on New Zealand's hidden, sunken land - in development.</p><p class="go"><a href="https://han.espil.online/">포트폴리오에서 보기 →</a></p></div>
+          <div class="pf-card"><div class="typo">PLUSHY AI</div><h4>Plushy AI</h4><p>A local, private image-to-3D pipeline for original game assets.</p><p class="go"><a href="https://han.espil.online/">포트폴리오에서 보기 →</a></p></div>
+        </div>
+      </section>
+      </div>
+
+      <!-- GUESTBOOK -->
+      <div class="view" id="view-guestbook">
+      <section class="sec">
+        <div class="sec-head"><h3>방명록 - Guestbook</h3><span class="more">채용 문의는 방명록 대신 메일로</span></div>
+        <div class="guest">
+          <div class="entry"><span class="who">주인장</span> · 반갑습니다. 채용이나 프로젝트 문의는 아래 메일로 남겨 주세요. 포트폴리오 본편은 han.espil.online 에 있습니다.</div>
+          <div class="entry"><span class="who">연락처</span> · Email <a href="mailto:han@espil.online">han@espil.online</a> · GitHub <a href="https://github.com/espil">github.com/espil</a> · Live project <a href="https://espil.online">espil.online</a></div>
+          <div class="write">
+            <span class="fakeinput">방명록 글은 메일로 받습니다 - han@espil.online</span>
+            <a class="btn" href="mailto:han@espil.online">글 남기기</a>
+          </div>
+        </div>
+      </section>
+      </div>
+    </main>
   </div>
-</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="cv-wrap">
-  <div class="folio">
-    <span><a href="/">han.espil.online</a></span>
-    <span class="folio-mid">The Resume</span>
-    <span class="folio-end">Recruiter Dossier <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch between day and night mode">☾ Night</button></span>
+  <div class="hompy-foot">
+    <span>Copyright © HanBin Im · han.espil.online</span>
+    <span>이 페이지는 2000년대 싸이월드 미니홈피 스타일의 오마주입니다.</span>
   </div>
-
-  <header class="cv-head">
-    <p class="kicker">The Resume — Recruiter Dossier</p>
-    <h1>HanBin Im, in full</h1>
-    <p class="lede">The complete record — every role and every school, most recent first. This page carries the full content of my interactive resume, the Recruiter Dossier, set in the portfolio's print format; the <a href="/#record">front page</a> holds the short version.</p>
-  </header>
-
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">01</span> May 2024 – February 2026</p>
-    <h2>Operations Coordinator / Discover Holidays</h2>
-    <p class="cv-focus">Tariffs · Supplier Data · Quality Control</p>
-    <div class="cv-sub">
-      <h3>Operations Coordinator</h3>
-      <p>Supported travel-product tariff production, internal product information, supplier data, and operational document accuracy for Discover Holidays in Vancouver.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Workflow modernization</h3>
-      <p>Proposed moving tariff production from InDesign-based documents into a more accessible online platform, connecting tourism operations with product-facing web systems.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">02</span> January 2018 – January 2026</p>
-    <h2>Cook / Sushi Umi</h2>
-    <p class="cv-tagline">Service Quality</p>
-    <p class="cv-focus">Quality Control · Teamwork · Service Pace</p>
-    <div class="cv-sub">
-      <h3>High-pressure service discipline</h3>
-      <p>Eight steady years on the restaurant's hot foods, maintaining quality standards in a busy kitchen - holiday rushes, ingredient delivery control, and consistent team communication.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Why it matters digitally</h3>
-      <p>In July 2026, at the owner's earnest request, I returned for three months as emergency staff - eight years of trust, called back. The role adds operational reliability: pace, detail, quality control, and team trust under pressure.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">03</span> 2017 – 2018</p>
-    <h2>Server / Tawara Sushi</h2>
-    <p class="cv-focus">Japanese Restaurant · Front-of-House</p>
-    <div class="cv-sub">
-      <h3>Server at Tawara Sushi</h3>
-      <p>Worked as a server at Tawara Sushi, a Japanese restaurant — in the same location where Sushi Umi stands now. It was there that my interest in cooking itself took hold.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Scouted by the incoming team</h3>
-      <p>When Sushi Umi took over the room, its team scouted me. With the Tawara owner's understanding, I joined Umi - and moved into its kitchen as a cook.</p>
-    </div>
-  </article><article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">04</span> September 2023 – May 2025</p>
-    <h2>Tourism Diploma / Capilano University</h2>
-    <p class="cv-focus">Culture · Tour Product · Entrepreneurship</p>
-    <div class="cv-sub">
-      <h3>Tourism studies</h3>
-      <p>Studied cultural studies, communications, environmental stewardship, tour product development, and entrepreneurship.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Connection to Zealandia</h3>
-      <p>The tourism and product-development layer behind Zealandia, Fiji Gateway, Cauldron travel logic, and the travel blog. The studies themselves began with Espil.Online in mind - the tourism future I am building toward.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">05</span> May 2014 – December 2024</p>
-    <h2>Web Designer / Bieclipse Design + UseDesign</h2>
-    <p class="cv-tagline">Design House</p>
-    <p class="cv-focus">2D / 3D · Animation</p>
-    <div class="cv-sub">
-      <h3>Bieclipse Design House</h3>
-      <p>Built the non-commercial creative brand behind UseDesign, focused on discovering unique identities and hidden value in everyday objects.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Portfolio-driven execution</h3>
-      <p>Created digital works across 2D, 3D, animation, creative software, and fine-art tools, using freelance independence for portfolio-driven execution.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">06</span> 2022 – 2023</p>
-    <h2>IT Specialist / Higgs Creative Inc</h2>
-    <p class="cv-tagline">Product Thinking</p>
-    <p class="cv-focus">Healthcare · Workflow · Planning · Stakeholders</p>
-    <div class="cv-sub">
-      <h3>Healthcare software project</h3>
-      <p>Worked with medical professionals, executives, and a design team on early-stage healthcare software direction, technical planning, and workflow design.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Product lesson</h3>
-      <p>The project strengthened product thinking beyond features: operational constraints, user workflows, and planning under stakeholder pressure.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">07</span> December 2020 – December 2021</p>
-    <h2>Marketer / Nohproblem Consulting</h2>
-    <p class="cv-tagline">Marketing</p>
-    <p class="cv-focus">Immigration · Websites</p>
-    <div class="cv-sub">
-      <h3>The only employee</h3>
-      <p>I joined as the company's only employee - my first remote job - taking over from a predecessor who left within days. Hired to write blog posts, I was soon finishing them in under thirty minutes, and the work kept widening: building and managing the websites, running the SNS channels, growing its YouTube channel to its first 1,000 subscribers, and, for additional pay, editing the CELPIP and IELTS lecture series and subtitling them.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Clients, and a company growing</h3>
-      <p>For additional pay I also met clients directly and ran the all-in-one landing service end to end - home search, contract management, school registration and licence registrations. The two-person Slack I joined had about ten people by the time I left: an administrator, a web developer, a blog writer, and immigration consultants in several countries. The videos I produced for the channel are still its most-watched, with over 500,000 views between them.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">08</span> June 2019 – December 2021</p>
-    <h2>Full Stack Developer / HMC (Han Mobility)</h2>
-    <p class="cv-tagline">Mobile Distribution</p>
-    <p class="cv-focus">Retail · Intranet · Database · OCR</p>
-    <div class="cv-sub">
-      <h3>Hired in sales</h3>
-      <p>I joined HMC - Han Mobility, a mobile distributor - in sales, and grew through marketing and design work into the company's full-stack developer, and its backend person.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>The franchise floor</h3>
-      <p>On the company's Freedom Mobile franchise floor (September 2019 - April 2020) I sold Rogers, Telus and Fido lines: customer service, up-to-date tech information, support for the manager's marketing strategies, and advertisement graphics I designed myself.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>The company's systems</h3>
-      <p>I migrated the entire Excel-based customer list into a real database, fully manageable through CRUD, and designed and built the company's intranet - CMS, databases, dashboards and automated PDF data entry using OCR - its web platform on the MERN stack (MongoDB, Express, React, Node.js).</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Design to workflow</h3>
-      <p>Where visual design became internal tools, automation, data handling, and business workflow.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">09</span> September 2017 – May 2021</p>
-    <h2>Digital Design Development / BCIT</h2>
-    <p class="cv-focus">Adobe · Web Dev · Project Management</p>
-    <div class="cv-sub">
-      <h3>Digital Design Development</h3>
-      <p>Studied graphic design with Adobe Suite, web-based marketing, business communication, accounting, web development, application development, and project management.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Bridge skill</h3>
-      <p>The education connected visual presentation, practical development, marketing, and project delivery.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">10</span> September 2016 – May 2017</p>
-    <h2>Chinese Medicine / PCU College</h2>
-    <p class="cv-tagline">Human Systems</p>
-    <p class="cv-focus">Anatomy · Herbalism · Natural Science</p>
-    <div class="cv-sub">
-      <h3>Human-centered study</h3>
-      <p>Studied acupuncture, natural science, anatomy, and herbalism at PCU College of Holistic Medicine.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Design relevance</h3>
-      <p>Adds human-centered observation, body systems, care logic, and attention to practical usability.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">11</span> 2016 – 2017</p>
-    <h2>Server &amp; Manager / HWATONGSAM</h2>
-    <p class="cv-focus">Korean Restaurant · Server · Manager</p>
-    <div class="cv-sub">
-      <h3>My aunt's restaurant</h3>
-      <p>In Korea I worked at Hwatongsam, the well-known restaurant my aunt ran - serving tables and managing the floor.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>The F&amp;B foundation</h3>
-      <p>Front-of-house service and management in a busy Korean dining room - the groundwork for the restaurant years that followed, at Tawara and Sushi Umi.</p>
-    </div>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">12</span> May 2015 – May 2016</p>
-    <h2>Graphic Designer / OK Tour</h2>
-    <p class="cv-tagline">Travel Design</p>
-    <p class="cv-focus">Itinerary · Infographic</p>
-    <div class="cv-sub">
-      <h3>Travel graphics and coordination</h3>
-      <p>Curated customer trips, coordinated detailed plans for international destinations, and created timeline infographics for travelers.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Interface lesson</h3>
-      <p>The work turned complex travel schedules into clearer visual guidance, which now connects directly to tourism UX.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">13</span> 2014 – 2015</p>
-    <h2>Bartender / FANTACITY</h2>
-    <p class="cv-focus">Bartending · Service</p>
-    <div class="cv-sub">
-      <h3>Bartender</h3>
-      <p>Worked as a bartender at FANTACITY in 2014–15.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Kept as a skill</h3>
-      <p>Brief as it was, bartending remains a working skill I can still use.</p>
-    </div>
-  </article><article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">14</span> September 2010 – May 2012</p>
-    <h2>Fine Arts / Emily Carr University</h2>
-    <p class="cv-tagline">Visual Foundation</p>
-    <p class="cv-focus">Drawing · Photography · Product Design</p>
-    <div class="cv-sub">
-      <h3>Fine Arts foundation</h3>
-      <p>Studied art history, drawing and painting, photography, graphics, and product design.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Design memory</h3>
-      <p>The visual foundation behind the portfolio: composition, material sense, photography, and product-form thinking.</p>
-    </div>
-  </article>
-  <article class="cv-entry">
-    <p class="cv-period"><span class="cv-no">15</span> September 2007 – April 2009</p>
-    <h2>High School Diploma / Sentinel Secondary</h2>
-    <p class="cv-tagline">Origin</p>
-    <p class="cv-focus">North Shore · Foundation · Visual Growth</p>
-    <div class="cv-sub">
-      <h3>Education origin</h3>
-      <p>Completed high school at Sentinel Secondary School in West Vancouver.</p>
-    </div>
-    <div class="cv-sub">
-      <h3>Portfolio origin</h3>
-      <p>The earliest timeline anchor before fine arts, web design, tourism operations, and Zealandia.</p>
-    </div>
-  </article>
-
-  <p class="cv-note">The original interactive edition — the Minihompi / Recruiter Dossier, with a chapter for each entry — lives at <a href="http://resume.usedesign.rf.gd/?company=generic&amp;source=usedesign&amp;i=1">resume.usedesign.rf.gd</a>.</p>
-  <p class="backline"><a href="/#archive">&larr; Back to the Full Index</a> &nbsp;·&nbsp; <a href="/#correspondence">Correspondence</a></p>
+  </div><!-- /scrollwrap -->
 </div>
 <script>
 (function(){
-  var btn=document.getElementById('themeToggle');
-  function effective(){ var t=document.documentElement.getAttribute('data-theme'); if(t) return t; return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark':'light'; }
-  function paint(){ if(btn) btn.textContent = effective()==='dark' ? '\u2600 Day' : '\u263E Night'; }
-  if(btn) btn.addEventListener('click', function(){ var n=effective()==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',n); try{localStorage.setItem('espil-theme',n);}catch(e){} paint(); });
-  paint();
-})();
-</script>
-<script>
-/* Animated UseDesign-logo cursor: follows the pointer (fine pointers only).
-   Hovering anything interactive screws the hat's spiral in and out;
-   pressing grows the feather outward. Static url() cursors remain the
-   no-JS fallback. */
-(function(){
-  if(!window.matchMedia || !matchMedia('(pointer:fine)').matches) return;
-  var SVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"23\" viewBox=\"0 0 223.5 211.493\" aria-hidden=\"true\" role=\"img\" aria-labelledby=\"logoTitle logoDesc\">\n  <title id=\"logoTitle\">UseDesign logo</title>\n  <desc id=\"logoDesc\">Primary UseDesign logo converted from the original Adobe Illustrator artwork.</desc>\n  <g transform=\"translate(0 211.493) scale(1 -1)\" fill=\"currentColor\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n    <g transform=\"translate(30.9272 49.879)\">\n      <path fill=\"none\" stroke-width=\"5\" d=\"M0 0 C0 51.409 41.676 93.085 93.085 93.085 C134.213 93.085 167.554 59.745 167.554 18.617 C167.554 -14.285 140.881 -40.958 107.979 -40.958 C81.657 -40.958 60.319 -19.62 60.319 6.702 C60.319 27.76 77.39 44.83 98.447 44.83 C115.293 44.83 128.95 31.174 128.95 14.327 C128.95 0.851 118.025 -10.074 104.547 -10.074 C93.766 -10.074 85.026 -1.334 85.026 9.447 C85.026 18.072 92.018 25.064 100.643 25.064 C107.543 25.064 113.137 19.471 113.137 12.57\"/><path class=\"screw-ext\" pathLength=\"100\" fill=\"none\" stroke-width=\"5\" d=\"M113.137 12.57 C113.472 6.393 107.329 3.476 102.476 3.213 C97.623 2.950 95.219 7.761 95.010 11.621 C94.801 15.482 98.669 17.328 101.703 17.492 C104.736 17.656 106.165 14.604 106.294 12.233 C106.422 9.861 104.059 8.707 102.184 8.605 C100.309 8.503 99.385 10.365 99.304 11.854 C99.223 13.343 100.728 14.034 101.886 14.097\"/>\n    </g>\n    <g transform=\"translate(221 42.6329)\">\n      <path stroke-width=\"1\" d=\"M0 0 C0 9.185 -8.406 17.647 -22.537 24.411 C-23.309 -7.82 -49.677 -33.712 -82.094 -33.712 C-108.416 -33.712 -129.753 -12.374 -129.753 13.948 L-190.073 7.246 C-190.073 14.345 -189.274 21.257 -187.769 27.901 C-206.791 20.679 -218.5 10.843 -218.5 0 C-218.5 -22.165 -169.587 -40.133 -109.25 -40.133 C-48.913 -40.133 0 -22.165 0 0 Z\"/>\n    </g>\n    <g transform=\"translate(138.5049 115.6519)\">\n      <path stroke-width=\"1\" d=\"M0 0 C35.334 0 39.988 -39.05 59.958 -48.608 C59.97 -48.125 59.977 -47.641 59.977 -47.156 C59.977 -6.028 26.636 27.312 -14.492 27.312 C-58.803 27.312 -95.878 -3.649 -105.274 -45.118 C-85.412 -37.577 -30.821 0 0 0 Z\"/>\n    </g>\n    <g class=\"feather-all\"><g transform=\"translate(204.9785 200.5792)\">\n      <path stroke-width=\"1\" d=\"M0 0 C1.946 -4.958 3.412 -10.657 2.548 -16.035 C2.004 -19.414 1.331 -22.889 -0.492 -25.74 C-2.572 -28.994 -33.954 -60.186 -40.813 -62.924 L0 0 Z\"/>\n    </g>\n    <g transform=\"translate(161.2725 140.024)\">\n      <path stroke-width=\"1\" d=\"M0 0 C-3.595 25.997 11.896 47.391 30.228 62.685 L0 0 Z\"/>\n    </g>\n  </g></g>\n</svg>\n";
-  var el = document.createElement('div');
-  el.id = 'espil-cursor'; el.setAttribute('aria-hidden','true'); el.innerHTML = SVG;
-  document.body.appendChild(el);
-  var x = innerWidth/2, y = innerHeight/2, raf = null, shown = false;
-  function draw(){ el.style.transform = 'translate(' + x + 'px,' + y + 'px)'; raf = null; }
-  function queue(){ if(!raf) raf = requestAnimationFrame(draw); }
-  document.addEventListener('mousemove', function(e){
-    x = e.clientX; y = e.clientY; queue();
-    if(!shown){ shown = true; document.documentElement.classList.add('uc-on'); el.classList.add('on'); draw(); }
-  }, {passive:true});
-  document.addEventListener('mouseleave', function(){ el.classList.remove('on'); });
-  document.addEventListener('mouseenter', function(){ if(shown) el.classList.add('on'); });
-  var SEL = 'a, button, input, select, textarea, label, [role="button"], .chip';
-  document.addEventListener('mouseover', function(e){ if(e.target.closest && e.target.closest(SEL)) el.classList.add('is-hover'); }, {passive:true});
-  document.addEventListener('mouseout', function(e){ if(e.target.closest && e.target.closest(SEL)) el.classList.remove('is-hover'); }, {passive:true});
-  document.addEventListener('mousedown', function(){ el.classList.add('is-active'); }, {passive:true});
-  document.addEventListener('mouseup', function(){ el.classList.remove('is-active'); }, {passive:true});
-})();
-</script>
-
-
-
-<div id="scroll-track" aria-hidden="true" data-tick-for=".cv-entry"><span class="cap top"></span><span id="scroll-shadow"></span><span id="scroll-diamond"></span><span class="cap bot"></span></div>
-<script>
-/* Genshin-style scroll indicator: a hairline with a diamond marker
-   replaces the native scrollbar (hidden in style.css). Where the track
-   carries data-tick-for, each matching section gets a stop line (tick)
-   at the scroll fraction where that section reaches the top. */
-(function(){
-  var track = document.getElementById('scroll-track');
-  var dia = document.getElementById('scroll-diamond');
-  var shadow = document.getElementById('scroll-shadow');
-  if(!track || !dia) return;
-  var ticking = false, idleTimer = null, tickEls = [], anchors = [];
-  function maxScroll(){ return document.documentElement.scrollHeight - innerHeight; }
-  function fracFor(top){ var m = maxScroll(); return m > 0 ? Math.min(1, Math.max(0, top / m)) : 0; }
-  function yFor(frac){ return 12 + frac * (track.clientHeight - 24); }
-  function buildTicks(){
-    tickEls.forEach(function(t){ t.remove(); }); tickEls = []; anchors = [];
-    var sel = track.getAttribute('data-tick-for');
-    if(!sel) return;
-    document.querySelectorAll(sel).forEach(function(el){
-      var top = el.getBoundingClientRect().top + window.scrollY;
-      var t = document.createElement('span');
-      t.className = 'tick';
-      t.style.top = yFor(fracFor(top)) + 'px';
-      track.appendChild(t); tickEls.push(t); anchors.push(top);
+  var names = ["home","profile","board","album","guestbook"];
+  function show(name){
+    if (names.indexOf(name) < 0) name = "home";
+    names.forEach(function(n){
+      document.getElementById("view-" + n).classList.toggle("on", n === name);
     });
+    document.querySelectorAll(".tabs a").forEach(function(a){
+      a.classList.toggle("active", a.getAttribute("data-view") === name);
+    });
+    var sw = document.querySelector(".scrollwrap");
+    if (sw) sw.scrollTop = 0;
   }
-  function update(){
-    ticking = false;
-    var m = maxScroll();
-    if(m <= 40){ track.classList.remove('on'); return; }
-    track.classList.add('on');
-    var y = window.scrollY || document.documentElement.scrollTop;
-    var dy = yFor(Math.min(1, Math.max(0, y / m)));
-    dia.style.top = dy + 'px';
-    if(shadow) shadow.style.top = (dy + 11) + 'px';
-    var active = -1;
-    for(var i = 0; i < anchors.length; i++){ if(anchors[i] <= y + 2) active = i; }
-    if(y >= m - 2 && anchors.length) active = anchors.length - 1;
-    tickEls.forEach(function(t, i){ t.classList.toggle('active', i === active); });
+  document.querySelectorAll(".tabs a").forEach(function(a){
+    a.addEventListener("click", function(ev){
+      ev.preventDefault();
+      var name = a.getAttribute("data-view");
+      show(name);
+      try { history.replaceState(null, "", "#" + name); } catch(e) {}
+    });
+  });
+  // board rows jump to a post inside the board view
+  document.querySelectorAll('#view-board a[href^="#post-"]').forEach(function(a){
+    a.addEventListener("click", function(ev){
+      var t = document.querySelector(a.getAttribute("href"));
+      if (t) { ev.preventDefault(); t.scrollIntoView({block:"start"}); }
+    });
+  });
+  // real visitor counter (abacus): once per session counts as a visit
+  var NS = "han-espil-resume";
+  var nowD = new Date();
+  var dkey = "today-" + nowD.getFullYear() + "-" + String(nowD.getMonth() + 1).padStart(2, "0") + "-" + String(nowD.getDate()).padStart(2, "0");
+  var counted = false;
+  try { counted = !!sessionStorage.getItem("cy-counted"); } catch (e) {}
+  var mode = counted ? "get" : "hit";
+  function setCount(id, url) {
+    fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+      var el = document.getElementById(id);
+      if (el && typeof j.value === "number") el.textContent = j.value.toLocaleString("en-US");
+    }).catch(function () {});
   }
-  function onScroll(){
-    if(!ticking){ ticking = true; requestAnimationFrame(update); }
-    track.classList.add('moving');
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(function(){ track.classList.remove('moving'); }, 160);
-  }
-  addEventListener('scroll', onScroll, {passive:true});
-  addEventListener('resize', function(){ buildTicks(); update(); });
-  addEventListener('load', function(){ buildTicks(); update(); });
-  buildTicks(); update();
-})();
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- espil-loader v10 (injected 2026-10-16) -->
-<script>
-(function(){
-  var L=document.getElementById('espil-loader'); if(!L) return;
-  var G=L.querySelector('.el-glass'), N=L.querySelector('.n'), S=L.querySelector('.el-status');
-  var lines=['Opening the issue','Pouring the water','Setting the type','Polishing the cover'];
-  document.documentElement.classList.add('el-lock');
-  var start=Date.now(), shown=0, finished=false;
-  setTimeout(function(){ finish(); }, 7000); /* absolute failsafe */
-  function real(){
-    var imgs=document.images, t=imgs.length, c=0;
-    for(var i=0;i<t;i++){ if(imgs[i].complete) c++; }
-    var imgP = t ? c/t : 1;
-    if(document.readyState==='complete') return 1;
-    return Math.min(imgP, document.readyState==='interactive' ? 0.96 : 0.6);
-  }
-  function finish(){
-    if(finished) return; finished=true;
-    shown=100; paint();
-    setTimeout(function(){
-      L.classList.add('done');
-      document.documentElement.classList.remove('el-lock');
-      setTimeout(function(){ if(L.parentNode) L.parentNode.removeChild(L); }, 500);
-    }, 160);
-  }
-  function paint(){ G.style.setProperty('--p', Math.round(shown)); N.textContent=Math.round(shown); }
-  var tick=setInterval(function(){
-    try{
-      var el=Date.now()-start, target=real()*100;
-      var stallCap=document.readyState==='complete'?100:45;
-      var creep=stallCap*(1-Math.exp(-el/1200));
-      if(target<creep) target=creep; if(target>99) target=99;
-      shown += Math.max(0.6, (target-shown)*0.14);
-      if(shown>target) shown=target;
-      if(shown>99) shown=99;
-      paint();
-      S.textContent=lines[Math.min(lines.length-1, Math.floor(el/1100))];
-      if((real()>=1 && el>900) || el>6000){ clearInterval(tick); finish(); }
-    }catch(e){ clearInterval(tick); finish(); }
-  }, 50);
-})();
-</script>
-
-<!-- espil-loader v10 physics (injected 2026-10-16) -->
-<script>
-/* Liquid physics for the loading glass (2026-10-15, Han): the surface is a
-   spring chain — each column pulls on its neighbours — rocked by an
-   oscillating lateral force that grows with --p. Fast crests throw
-   droplets; droplets arc under gravity and splash back in with a ripple.
-   Pure enhancement: any failure here leaves the CSS liquid untouched. */
-(function(){
-  var loader=document.getElementById('espil-loader'); if(!loader) return;
-  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  /* Luminous yellow-to-green gradient (Han 2026-10-16): the stops are drawn
-     fresh on every load along yellow -> green and lifted in luminance so
-     the liquid glows inside the glass. Shared by the CSS liquid (inline
-     style) and the physics canvas, so both always match. */
-  var YC=[255,245,155], GC=[202,248,118], stops=[[0,YC[0],YC[1],YC[2],0.76]], k;
-  for(k=1;k<=4;k++){
-    var t=k/5+(Math.random()-0.5)*0.09;
-    stops.push([t, Math.round(YC[0]+(GC[0]-YC[0])*t), Math.round(YC[1]+(GC[1]-YC[1])*t), Math.round(YC[2]+(GC[2]-YC[2])*t), 0.68+Math.random()*0.08]);
-  }
-  stops.push([1,172,230,64,0.78]);
-  var waterEl=loader.querySelector('.el-water');
-  if(waterEl){
-    var parts=[];
-    for(k=0;k<stops.length;k++){ var s0=stops[k]; parts.push('rgba('+s0[1]+','+s0[2]+','+s0[3]+','+s0[4].toFixed(2)+') '+(s0[0]*100).toFixed(1)+'%'); }
-    waterEl.style.background='linear-gradient(100deg, rgba(255,255,255,.12), rgba(255,255,255,0) 36%, rgba(255,255,255,.07) 60%, rgba(255,255,255,0) 82%), linear-gradient(180deg, '+parts.join(', ')+')';
-  }
-  var canvas=loader.querySelector('.el-canvas'); if(!canvas) return;
-  var ctx=null; try{ ctx=canvas.getContext('2d'); }catch(e){}
-  if(!ctx) return;
-  loader.classList.add('physics-on');
-  var glassEl=loader.querySelector('.el-glass'); if(!glassEl) return;
-  var W=196, H=196, N=30, K=90, C=1.6, COUPLE=150, GRAV=1600;
-  var h=[], v=[], i;
-  for(i=0;i<N;i++){ h.push(0); v.push(0); }
-  var drops=[], bubbles=[];
-  var baseY=H+4, phase=0, budget=0, last=performance.now(), prevDrive=0, speedSm=0, agit=0.7, agitTick=0;
-  function progress(){
-    var p=parseFloat(glassEl.style.getPropertyValue('--p'));
-    return isNaN(p)?0:Math.max(0,Math.min(100,p));
-  }
-  function colAt(x){ var c=Math.floor(x/W*N); return c<0?0:(c>=N?N-1:c); }
-  function surfY(x){ return baseY+h[colAt(x)]; }
-  function spawnDrop(x,y,vy,vx,r){
-    if(drops.length>=60) return;
-    drops.push({x:x,y:y,vy:vy,vx:vx,r:r});
-  }
-  function frame(now){
-    if(!document.body.contains(loader) || loader.classList.contains('done')) return;
-    var dt=(now-last)/1000; last=now;
-    if(dt>0.05) dt=0.05;
-    if(dt<=0){ requestAnimationFrame(frame); return; }
-    var p=progress(), energy=0.3+0.7*agit;
-    phase+=dt*1.85;
-    var amp=(0.5+p*0.02+agit*(1.1+p*0.055))/9.1; /* rock fraction, speed-led */
-    var drive=Math.cos(phase)*amp;
-    if(prevDrive!==0 && Math.sign(drive)!==Math.sign(prevDrive) && p>50){
-      /* rock reversal at high fill: a burst off the leading side — inset
-         from the rim, where the round glass does not clip the droplets */
-      var ex=(drive>0?0.22:0.78)*W;
-      for(var b=0;b<3+Math.round(3*agit);b++) spawnDrop(ex+(Math.random()*14-7), surfY(ex), -(230+Math.random()*190)*(0.45+0.75*agit), (Math.random()*90-45), 2.2+Math.random()*2.6);
-    }
-    prevDrive=drive;
-    /* fill level eases toward the driver's --p */
-    var targetY=H-(p/100)*H, prevBase=baseY;
-    baseY+=(targetY-baseY)*Math.min(1,dt*2.6);
-    var rise=(prevBase-baseY)/Math.max(dt,0.001); /* px/s the line climbs */
-    /* Agitation follows the loading SPEED (Han 2026-10-16): fast progress
-       churns the liquid, a stall lets it settle. agit also feeds the CSS
-       fallback rock through the --agit variable. */
-    speedSm+=((rise>0?rise:0)-speedSm)*Math.min(1,dt*2.2);
-    agit=Math.max(0,Math.min(1,speedSm/55));
-    if(++agitTick>=9){ agitTick=0; try{ loader.style.setProperty('--agit', agit.toFixed(2)); }catch(e){} }
-    /* spring chain, two substeps */
-    for(var s=0;s<2;s++){
-      var dts=dt/2, a=[], c;
-      for(c=0;c<N;c++){
-        var left=c>0?h[c-1]:h[c], right=c<N-1?h[c+1]:h[c];
-        a[c]=-K*h[c]-C*v[c]+COUPLE*(left+right-2*h[c]);
-      }
-      for(c=0;c<N;c++){
-        var nx=(c/(N-1))*2-1;
-        v[c]+=(a[c]-drive*820*nx)*dts;
-        h[c]+=v[c]*dts;
-      }
-    }
-    if(rise>50){ /* pouring in fast: the surface gets thrown around */
-      for(var r2=0;r2<4;r2++){ var rc=Math.floor(Math.random()*N); v[rc]-=rise*0.55*Math.random(); }
-      if(Math.random()<0.75) spawnDrop(Math.random()*W, baseY, -(200+Math.random()*200)*energy, (Math.random()*70-35), 1.7+Math.random()*2.2);
-    }
-    /* crest ejection: fast-rising crests throw droplets */
-    budget+=dt*(2+9*agit);
-    for(var c2=2;c2<N-2;c2++){
-      if(budget>=1 && v[c2]<-80*energy && h[c2]<=h[c2-1] && h[c2]<=h[c2+1] && Math.random()<0.6){
-        budget-=1;
-        spawnDrop((c2+0.5)/N*W, baseY+h[c2]-2, v[c2]*1.05-(110+Math.random()*120), ((c2/(N-1))*2-1)*58+(Math.random()*76-38), 2+Math.random()*2.6);
-      }
-    }
-    /* bubbles inside the liquid: rise, wobble, pop at the surface */
-    if(bubbles.length<7 && Math.random()<dt*3.2) bubbles.push({x:26+Math.random()*(W-52), y:H-8, r:1.4+Math.random()*2.2, vy:-(16+Math.random()*22), seed:Math.random()*6.28});
-    for(var bi=bubbles.length-1;bi>=0;bi--){
-      var bb=bubbles[bi]; bb.y+=bb.vy*dt; bb.x+=Math.sin(now/300+bb.seed)*7*dt;
-      if(bb.y<=surfY(bb.x)+3){ v[colAt(bb.x)]-=16; bubbles.splice(bi,1); }
-    }
-    /* droplets under gravity; landing pushes a ripple into the surface */
-    for(var di=drops.length-1;di>=0;di--){
-      var d=drops[di];
-      d.vy+=GRAV*dt; d.x+=d.vx*dt; d.y+=d.vy*dt;
-      if(d.x<2){ d.x=2; d.vx=Math.abs(d.vx)*0.5; }
-      if(d.x>W-2){ d.x=W-2; d.vx=-Math.abs(d.vx)*0.5; }
-      if(d.vy>0 && d.y>=surfY(d.x)){
-        v[colAt(d.x)]+=d.vy*0.20;
-        if(d.vy>300){ /* hard landing: a small crown splash */
-          spawnDrop(d.x, surfY(d.x)-2, -(70+Math.random()*80), (Math.random()*50-25), 1.2+Math.random()*1.4);
-          spawnDrop(d.x, surfY(d.x)-2, -(55+Math.random()*60), (Math.random()*50-25), 1+Math.random()*1.2);
-        } else if(Math.random()<0.3) spawnDrop(d.x, surfY(d.x)-2, -(50+Math.random()*70), (Math.random()*44-22), 1+Math.random()*1.2);
-        drops.splice(di,1);
-      } else if(d.y>H+10){ drops.splice(di,1); }
-    }
-    /* ---- render ---- */
-    ctx.clearRect(0,0,W,H);
-    var grad=ctx.createLinearGradient(0,Math.max(0,baseY-30),0,H);
-    for(var gs=0;gs<stops.length;gs++){ var st=stops[gs]; grad.addColorStop(st[0],'rgba('+st[1]+','+st[2]+','+st[3]+','+st[4]+')'); }
-    ctx.beginPath();
-    ctx.moveTo(-4,H+4);
-    for(var px=0;px<N;px++) ctx.lineTo((px+0.5)/N*W, baseY+h[px]);
-    ctx.lineTo(W+4,H+4);
-    ctx.closePath();
-    ctx.fillStyle=grad; ctx.fill();
-    /* luminous sheen pooled in the upper liquid, so it glows in the glass */
-    var sheen=ctx.createLinearGradient(0,Math.max(0,baseY-8),0,Math.min(H,baseY+64));
-    sheen.addColorStop(0,'rgba(255,255,232,0.36)');
-    sheen.addColorStop(1,'rgba(255,255,232,0)');
-    ctx.fillStyle=sheen; ctx.fill();
-    /* surface glint along the simulated line */
-    ctx.beginPath();
-    for(var gx=0;gx<N;gx++){ var gy=baseY+h[gx]; if(gx===0) ctx.moveTo((gx+0.5)/N*W,gy); else ctx.lineTo((gx+0.5)/N*W,gy); }
-    ctx.strokeStyle='rgba(245,255,220,0.75)'; ctx.lineWidth=2; ctx.stroke();
-    /* bubbles */
-    ctx.strokeStyle='rgba(255,255,255,0.45)'; ctx.lineWidth=1;
-    for(var bu=0;bu<bubbles.length;bu++){ var q=bubbles[bu]; ctx.beginPath(); ctx.arc(q.x,q.y,q.r,0,6.2832); ctx.stroke(); }
-    /* droplets */
-    for(var dr=0;dr<drops.length;dr++){
-      var o=drops[dr];
-      ctx.beginPath(); ctx.arc(o.x,o.y,o.r,0,6.2832);
-      ctx.fillStyle='rgba(250,255,224,0.95)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(o.x-o.r*0.3,o.y-o.r*0.3,o.r*0.38,0,6.2832);
-      ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.fill();
-    }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
+  setCount("cnt-total", "https://abacus.jasoncameron.dev/" + mode + "/" + NS + "/total");
+  setCount("cnt-today", "https://abacus.jasoncameron.dev/" + mode + "/" + NS + "/" + dkey);
+  if (!counted) { try { sessionStorage.setItem("cy-counted", "1"); } catch (e) {} }
+  var start = (location.hash || "#home").slice(1);
+  show(start);
 })();
 </script>
 </body>
