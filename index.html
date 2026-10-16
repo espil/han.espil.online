@@ -66,7 +66,6 @@
     <canvas class="water-canvas" width="196" height="196"></canvas>
     <div class="slosh">
       <div class="water"><div class="surface"></div><div class="wave"></div><div class="wave back"></div><div class="wave deep"></div></div>
-      <div class="pour"></div>
       <div class="swirl"><i></i></div>
       <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span><span class="bubble b5"></span>
     </div>
@@ -561,7 +560,7 @@
   var h=[], v=[], i;
   for(i=0;i<N;i++){ h.push(0); v.push(0); }
   var drops=[], bubbles=[];
-  var baseY=H+4, phase=0, budget=0, last=performance.now(), prevDrive=0, pour=0, speedSm=0, agit=0.7, agitTick=0;
+  var baseY=H+4, phase=0, budget=0, last=performance.now(), prevDrive=0, speedSm=0, agit=0.7, agitTick=0;
   function progress(){
     var p=parseFloat(loader.style.getPropertyValue('--p'));
     return isNaN(p)?0:Math.max(0,Math.min(100,p));
@@ -610,16 +609,6 @@
         v[c]+=(a[c]-drive*820*nx)*dts;
         h[c]+=v[c]*dts;
       }
-    }
-    /* the pour (Han 2026-10-16, from the bottle film): while the level is
-       actually climbing, a stream falls in - it pushes the surface down at
-       the impact point and throws small droplets */
-    var px0=W*0.5+Math.sin(now/900)*7;
-    var pourTarget=(rise>10 && p<93)?Math.min(1,(rise-8)/50):0;
-    pour+=(pourTarget-pour)*Math.min(1,dt*5);
-    if(pour>0.05){
-      v[colAt(px0)]+=(200+420*agit)*pour*dt;
-      if(Math.random()<dt*(8+30*agit)*pour) spawnDrop(px0+(Math.random()*12-6), surfY(px0)-2, -(170+Math.random()*190)*pour, (Math.random()*60-30), 1.4+Math.random()*1.9);
     }
     if(rise>50){ /* pouring in fast: the surface gets thrown around */
       for(var r2=0;r2<4;r2++){ var rc=Math.floor(Math.random()*N); v[rc]-=rise*0.55*Math.random(); }
@@ -673,24 +662,6 @@
     ctx.beginPath();
     for(var gx=0;gx<N;gx++){ var gy=baseY+h[gx]; if(gx===0) ctx.moveTo((gx+0.5)/N*W,gy); else ctx.lineTo((gx+0.5)/N*W,gy); }
     ctx.strokeStyle='rgba(245,255,220,0.75)'; ctx.lineWidth=2; ctx.stroke();
-    /* the pour stream, from the top of the glass down to the surface */
-    if(pour>0.04){
-      var sy2=surfY(px0), topY=98-Math.sqrt(Math.max(0,9604-(px0-98)*(px0-98)))+2;
-      if(sy2>topY+10){
-        ctx.beginPath();
-        var q2, yy, xx, ww;
-        for(q2=0;q2<=10;q2++){ yy=topY+(sy2-topY)*(q2/10); xx=px0+Math.sin(yy*0.055+now/95)*1.6*(q2/10); ww=(3.4-1.1*(q2/10))*pour; if(q2===0) ctx.moveTo(xx-ww,yy); else ctx.lineTo(xx-ww,yy); }
-        for(q2=10;q2>=0;q2--){ yy=topY+(sy2-topY)*(q2/10); xx=px0+Math.sin(yy*0.055+now/95)*1.6*(q2/10); ww=(3.4-1.1*(q2/10))*pour; ctx.lineTo(xx+ww,yy); }
-        ctx.closePath();
-        var pv=pour*(0.45+0.55*agit);
-        var pg2=ctx.createLinearGradient(0,topY,0,sy2);
-        pg2.addColorStop(0,'rgba(255,251,205,'+(0.30*pv).toFixed(3)+')');
-        pg2.addColorStop(1,'rgba(230,255,175,'+(0.92*pv).toFixed(3)+')');
-        ctx.fillStyle=pg2; ctx.fill();
-        ctx.beginPath(); ctx.ellipse(px0,sy2,9*pour+3,3.2,0,0,6.2832);
-        ctx.fillStyle='rgba(240,255,210,'+(0.35*pour).toFixed(3)+')'; ctx.fill();
-      }
-    }
     /* bubbles */
     ctx.strokeStyle='rgba(255,255,255,0.45)'; ctx.lineWidth=1;
     for(var bu=0;bu<bubbles.length;bu++){ var q=bubbles[bu]; ctx.beginPath(); ctx.arc(q.x,q.y,q.r,0,6.2832); ctx.stroke(); }
