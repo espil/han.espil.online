@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AIO - All-in-One Service | Houses, Food, Shopping, Travel</title>
-<meta name="description" content="AIO is my all-in-one service in five rooms: the Espil House Collection introduced like a realtor's listings, Kuro Sushi's real menu with the Sushi Umi recipe system behind it, the IMCHOICHOI cart rebuilt as the shop, Servo as the guide, and Espil Online - the game that is travel, walking real cities yourself.">
+<title>AIO - All-in-One Service | Imagination, Travel, Production, the Land</title>
+<meta name="description" content="AIO is my all-in-one service on a Korean compass: above, imagination - Espil Online, the world in the Cauldron; to the left, travel, which is freedom; to the right, production - Kuro Sushi's real menu, the Sushi Umi recipe system in format only, and the IMCHOICHOI cart rebuilt; below, the land - the Espil House Collection. Servo guides all of it.">
 <style>
   :root{
     --ink:#141311; --paper:#f4f1ea; --card:#fffdf8; --red:#c8102e; --gold:#b98a2f;
-    --mut:#6f6a5e; --line:#d8d2c4; --teal:#175e54;
+    --mut:#6f6a5e; --line:#d8d2c4; --teal:#175e54; --cheong:#17586e;
   }
   *{box-sizing:border-box}
   html,body{margin:0; height:100%; overflow:hidden; background:var(--ink);
@@ -178,18 +178,245 @@
   .city h3{margin:0 0 6px; font-size:21px}
   .city p{margin:0; font-size:14.5px; line-height:1.6; color:#4a463c}
   .city .status{font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); margin-top:10px}
+
+  /* ---------- obangsaek compass, daemun gate, taegeuk intro ---------- */
+  :root{--cheong:#17586e; --cc:#b98a2f}
+  .roof{width:100%; height:auto; display:block}
+  .compass{border-left:5px solid var(--cc)}
+  .trim{height:5px; opacity:.55; margin:2px 0 14px; background:linear-gradient(90deg,#a41226 0 25%, #b98a2f 25% 50%, #17586e 50% 75%, #241f19 75% 100%)}
+  .edge.up{background:#141311; border-color:#000}
+  .edge.down{background:#c8102e; border-color:#7d0a1f}
+  .edge.left{background:#fbf8f1; color:#141311; border-color:#141311}
+  .edge.right{background:#17586e; border-color:#0d3a4a}
+  .edge.up:hover{background:#000}
+  .edge.down:hover{background:#a50d29}
+  .edge.left:hover{background:#ffffff}
+  .edge.right:hover{background:#0f4256}
+  .tile.ink{border-top-color:#141311}
+  .tile.white{border-top-color:#cfc9b8; background:#fffefb}
+  .tile.cheong{border-top-color:#17586e}
+  .tiles.wall{background:#ece5d3; border:1px solid var(--line); padding:14px; box-shadow:inset 0 -14px 0 #ddd3ba}
+  /* the gate (daemun) on the home landing */
+  .gate{max-width:820px; margin:1vh auto 4px; text-align:center}
+  .gatebeam{height:7px; margin-top:-4px; opacity:.8; background:linear-gradient(90deg,#a41226 0 25%, #b98a2f 25% 50%, #17586e 50% 75%, #241f19 75% 100%)}
+  .plaque{display:inline-block; margin-top:20px; background:#221d15; color:#eadfc6; border:2px solid var(--gold); outline:1px solid #171310; outline-offset:4px; padding:12px 38px 10px}
+  .plq-name{font-size:46px; letter-spacing:.2em; line-height:1}
+  .plq-sub{font-size:10px; letter-spacing:.44em; color:#c9a94e; margin-top:5px}
+  .doors{position:relative; display:flex; gap:6px; max-width:540px; height:178px; margin:18px auto 0}
+  .door{flex:1; background:linear-gradient(180deg,#2e2822,#231e17); border:1px solid #14100b; position:relative}
+  .door::before{content:""; position:absolute; inset:12px; border:1px solid rgba(234,223,198,.28);
+    background:repeating-linear-gradient(0deg, rgba(234,223,198,.16) 0 2px, transparent 2px 24px), repeating-linear-gradient(90deg, rgba(234,223,198,.16) 0 2px, transparent 2px 24px)}
+  .knob{position:absolute; top:50%; width:32px; height:32px; margin-top:-16px; border-radius:50%; z-index:2;
+    background:radial-gradient(circle at 35% 32%, #f0d488, #8a6d1f 72%); border:1px solid #5e4a12}
+  .knob.l{left:calc(50% - 42px)} .knob.r{left:calc(50% + 10px)}
+  /* obangsaek section themes */
+  #sec-home{background:linear-gradient(180deg,#f7f0dc,#f2ead2)}
+  #sec-home .kicker{color:#8a6d1f}
+  #sec-imagine{color:#ece7da; background-color:#15130e; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Cg fill='none' stroke='%23e8b13c' stroke-opacity='0.07' stroke-width='1.6'%3E%3Cpath d='M10 62a12 12 0 1 1 12-12 9 9 0 1 0 9 9'/%3E%3Cpath d='M52 30a12 12 0 1 1 12-12 9 9 0 1 0 9 9'/%3E%3C/g%3E%3C/svg%3E")}
+  #sec-imagine h2{color:#f2ecdc}
+  #sec-imagine .kicker{color:#e8b13c}
+  #sec-imagine .secsub, #sec-imagine .tale p{color:#d8d2c0}
+  #sec-imagine .city{background:#1e1b14; border-color:#3a3527; border-top-color:#e8b13c}
+  #sec-imagine .city p{color:#cfc9b8}
+  #sec-imagine .city .status{color:#e8b13c}
+  #sec-imagine .foot{color:#97917f}
+  #sec-imagine .homebtn{border:1px solid #ece7da}
+  #sec-imagine .visitbtn{background:#b98a2f; color:#171310}
+  #sec-imagine .visitbtn:hover{background:#d3a243}
+  #sec-travel{background:#fbf8f1}
+  #sec-travel .city{border-top-color:#141311}
+  #sec-production .kicker{color:#17586e}
+  #sec-production .addbtn{background:#17586e}
+  #sec-production .addbtn:hover{background:#0f4256}
+  #sec-production .addbtn:disabled{background:#a49c8a}
+  #sec-production .chip.on{background:#17586e; border-color:#17586e}
+  #sec-production table.cart th{background:#17586e}
+  #sec-production .basket{border-color:#17586e}
+  #sec-production .checkout{background:#17586e}
+  #sec-houses .listing{border-top:3px solid #c8102e}
+  /* taegeuk gate intro (first entry) */
+  #gateIntro{position:fixed; inset:0; z-index:200; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(120% 90% at 50% 30%, #f7f1e0 0%, #efe6cf 55%, #e2d3b0 100%); transition:opacity .55s ease}
+  .gi-gate{width:min(600px,88vw); text-align:center; transition:transform 1.3s ease}
+  #gateIntro.open .gi-gate{transform:scale(1.07)}
+  .gi-doors{position:relative; display:flex; height:min(44vh,360px); margin-top:16px}
+  .gi-door{flex:1; position:relative; z-index:1; background:linear-gradient(180deg,#2e2822,#221c14); border:1px solid #14100b;
+    transition:transform 1.15s cubic-bezier(.72,0,.18,1)}
+  .gi-door::before{content:""; position:absolute; inset:12px; border:1px solid rgba(234,223,198,.28);
+    background:repeating-linear-gradient(0deg, rgba(234,223,198,.16) 0 2px, transparent 2px 24px), repeating-linear-gradient(90deg, rgba(234,223,198,.16) 0 2px, transparent 2px 24px)}
+  #gateIntro.open .gi-l{transform:translateX(-104%)}
+  #gateIntro.open .gi-r{transform:translateX(104%)}
+  .gi-medallion{position:absolute; z-index:2; left:50%; top:50%; width:118px; height:118px; transform:translate(-50%,-50%);
+    transition:opacity .5s ease .6s, transform 1.15s ease}
+  #gateIntro.open .gi-medallion{opacity:0; transform:translate(-50%,-50%) scale(1.5)}
+  .gi-hint{margin-top:18px; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#6f6a5e}
+  #gateIntro.done{opacity:0; pointer-events:none}
 </style>
 </head>
 <body>
+<div id="gateIntro" role="button" aria-label="Enter AIO" title="Click to enter">
+  <div class="gi-gate">
+    <svg class="roof" viewBox="0 0 1200 190" role="img" aria-label="Tiled roof of the gate">
+  <path d="M28 176 C240 100 430 60 600 52 C770 60 960 100 1172 176 L1106 176 C938 116 788 86 600 82 C412 86 262 116 94 176 Z" fill="#1b1813"/>
+  <path d="M70 158 C268 96 446 64 600 60 C754 64 932 96 1130 158" fill="none" stroke="#f4f1ea" stroke-opacity=".10" stroke-width="5"/>
+  <path d="M120 140 C300 88 462 66 600 64" fill="none" stroke="#f4f1ea" stroke-opacity=".07" stroke-width="5"/>
+  <path d="M1080 140 C900 88 738 66 600 64" fill="none" stroke="#f4f1ea" stroke-opacity=".07" stroke-width="5"/>
+  <rect x="438" y="30" width="324" height="17" rx="7" fill="#1b1813"/>
+  <circle cx="600" cy="24" r="9" fill="#1b1813"/>
+  <circle cx="30" cy="172" r="10" fill="#1b1813"/>
+  <circle cx="1170" cy="172" r="10" fill="#1b1813"/>
+</svg>
+    <div class="gatebeam"></div>
+    <div class="plaque"><div class="plq-name">AIO</div><div class="plq-sub">ALL-IN-ONE SERVICE</div></div>
+    <div class="gi-doors">
+      <div class="gi-door gi-l"></div><div class="gi-door gi-r"></div>
+      <div class="gi-medallion"><svg viewBox="-50 -50 100 100" aria-label="Taegeuk"><circle cx="0" cy="0" r="50" fill="#1d4f91"/><path d="M-50 0 a50 50 0 0 1 100 0 a25 25 0 0 1 -50 0 a25 25 0 0 0 -50 0 Z" fill="#c8102e"/><circle cx="0" cy="0" r="48.5" fill="none" stroke="#b98a2f" stroke-width="2.5"/></svg></div>
+    </div>
+    <p class="gi-hint">The gate is opening - click anywhere to step through now</p>
+  </div>
+</div>
 <div class="viewport">
   <div class="world" id="world">
 
-    <!-- HOUSES : UP -->
-    <section class="sec" data-pos="0,-1" id="sec-houses">
+    <!-- IMAGINATION - ESPIL ONLINE : UP -->
+    <section class="sec" data-pos="0,-1" id="sec-imagine">
       <div class="inner">
-        <div class="sechead"><div><p class="kicker">Up - The Houses</p><h2>The Houses</h2></div>
+        <div class="sechead"><div><p class="kicker">Up - Imagination</p><h2>Imagination - Espil Online</h2></div>
         <button class="homebtn" data-go="0,0">Home (Down)</button></div>
-        <p class="secsub">The Espil House Collection, introduced the way a realtor wishes houses could be shown: full listings, spec sheets, and the parts that fit them out. The houses lived scattered on someone else's marketplace once. Their home is here now, introduced in full on my own platform.</p>
+        <div class="trim"></div>
+        <div class="tale">
+          <p>Up is where ideas live, so up is Espil Online. Everything in AIO began as imagination before it became a thing I made: a house, a menu, a journey. The largest of those ideas is a world - Espil Online, the world I am building inside the Cauldron.</p>
+          <p>The Cauldron is the space itself, entered through espil.online. Inside it sits the World in the Cauldron: real cities rebuilt to be walked, the weather and light of real places, and room for everything the imagination keeps adding. It is not finished, and it is not meant to be finished quickly - a world is the work of a life, and this one is mine.</p>
+        </div>
+        <div class="cities">
+          <div class="city"><h3>The Cauldron</h3><p>The space you enter at espil.online: the container of the world, the way a gate is the container of a house. Everything imagined here is kept inside it.</p><p class="status">The space itself</p></div>
+          <div class="city"><h3>The World in the Cauldron</h3><p>The world inside the space: cities you enter at street level and walk yourself. Vancouver stands there today, rebuilt from the city's own map data.</p><p class="status">The world as it stands</p></div>
+          <div class="city"><h3>Zealandia</h3><p>The future land: a game dungeon set on Zealandia, New Zealand's hidden sunken land, starting at Auckland. What is imagined up here becomes ground to walk on the left, and a home down below.</p><p class="status">The land still being imagined</p></div>
+        </div>
+        <div class="tale" style="margin-top:22px">
+          <p>The houses on the land below are this imagination made solid - and one day they are the housing layer of this same world, where your website is your house. Imagination first: the rest of AIO is what it looks like when I sit down and make it.</p>
+        </div>
+        <a class="visitbtn" href="https://espil.online" target="_blank" rel="noopener">Enter Espil Online</a>
+        <p class="foot">Espil Online is entered at espil.online - the Cauldron is the space, and the world inside it is the imagination at work.</p>
+      </div>
+    </section>
+
+    <!-- TRAVEL, FREEDOM : LEFT -->
+    <section class="sec" data-pos="-1,0" id="sec-travel">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Left - Travel, Freedom</p><h2>The game is a journey</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Right)</button></div>
+        <div class="trim"></div>
+        <p class="secsub">Left is freedom: of the four directions, this is the one that leaves the house. It holds the journey - the game that is travel, played on your own two feet.</p>
+        <div class="tale">
+          <p>People ask what the game in AIO is. It is travel. Espil Online is the world I am building inside the Cauldron, and you do not watch it from above: you enter a real city and walk it yourself, at street level, on your own two feet.</p>
+          <p>I studied tourism because I hold a conviction about it. A screen can introduce a culture, and social channels do their best at sharing one, but they only attempt it. Only visiting a place in person and walking its streets yourself truly shares a culture. So the game is built as traveling: real streets, real building footprints and heights, real weather of a place - a journey first, and a game because the journey is one.</p>
+        </div>
+        <div class="cities">
+          <div class="city"><h3>Vancouver</h3><p>The first city, and my home. The living world of Espil Online today: enter it and walk the downtown I rebuilt from the city's own map data, street by street.</p><p class="status">The world as it stands</p></div>
+          <div class="city"><h3>Auckland - Zealandia</h3><p>Zealandia, the hidden sunken land under New Zealand, gets its game - and it starts in Auckland, the capital of 1841 to 1865, where the old maps fit the story. The Queen Street corridor is its first ground.</p><p class="status">The starting city of Zealandia</p></div>
+        </div>
+        <div class="tale" style="margin-top:22px">
+          <p>The houses below, down on the land, are the other end of this journey. They are the future housing layer of the same world: travel far enough through Espil Online, and one of those houses is your home in it. Imagination above, the journey to the left, the making to the right, home ground below - one service, because in the end they are one world.</p>
+        </div>
+        <a class="visitbtn" href="https://espil.online" target="_blank" rel="noopener">Enter Espil Online</a>
+        <p class="foot">Espil Online is entered at espil.online - the Cauldron is the space, and the world inside it is the journey.</p>
+      </div>
+    </section>
+
+    <!-- HOME - THE GATE : CENTER -->
+    <section class="sec" data-pos="0,0" id="sec-home">
+      <div class="inner">
+        <div class="gate" aria-hidden="true">
+          <svg class="roof" viewBox="0 0 1200 190" role="img" aria-label="Tiled roof of the gate">
+  <path d="M28 176 C240 100 430 60 600 52 C770 60 960 100 1172 176 L1106 176 C938 116 788 86 600 82 C412 86 262 116 94 176 Z" fill="#1b1813"/>
+  <path d="M70 158 C268 96 446 64 600 60 C754 64 932 96 1130 158" fill="none" stroke="#f4f1ea" stroke-opacity=".10" stroke-width="5"/>
+  <path d="M120 140 C300 88 462 66 600 64" fill="none" stroke="#f4f1ea" stroke-opacity=".07" stroke-width="5"/>
+  <path d="M1080 140 C900 88 738 66 600 64" fill="none" stroke="#f4f1ea" stroke-opacity=".07" stroke-width="5"/>
+  <rect x="438" y="30" width="324" height="17" rx="7" fill="#1b1813"/>
+  <circle cx="600" cy="24" r="9" fill="#1b1813"/>
+  <circle cx="30" cy="172" r="10" fill="#1b1813"/>
+  <circle cx="1170" cy="172" r="10" fill="#1b1813"/>
+</svg>
+          <div class="gatebeam"></div>
+          <div class="plaque"><div class="plq-name">AIO</div><div class="plq-sub">ALL-IN-ONE SERVICE</div></div>
+          <div class="doors"><div class="door"></div><div class="door"></div><span class="knob l"></span><span class="knob r"></span></div>
+        </div>
+        <div class="brand">
+          <p class="kicker">AIO - All-in-One Service</p>
+          <h1>One service, four directions and a guide.</h1>
+          <p class="lede" style="margin:0 auto">I call it AIO, my all-in-one service, and its compass is the old Korean one. Above is imagination: Espil Online, the world I am building. To the left is travel, which is freedom. To the right is production, the things I make as I move forward. Below is the land, where my houses stand. You arrive at the gate; Servo, at the bottom right, is your guide to all of it.</p>
+        </div>
+        <div class="tiles wall">
+          <div class="tile ink"><h3>Imagination - Up</h3><p>Espil Online: the world I am building inside the Cauldron, with Zealandia as its future land. Everything here began as an idea.</p></div>
+          <div class="tile white"><h3>Travel, Freedom - Left</h3><p>The game is a journey: enter a real city and walk it yourself. Vancouver today, Auckland for Zealandia.</p></div>
+          <div class="tile cheong"><h3>Production - Right</h3><p>The things I make: Kuro Sushi's real menu, all 272 items from the shop's own 2020 document, the Sushi Umi recipe system in format only, and the IMCHOICHOI cart rebuilt as the shop.</p></div>
+          <div class="tile red"><h3>The Land - Down</h3><p>The Espil House Collection on its own ground: four houses with spec sheets, the capsule-room addons that fit them out, and the doors that already open.</p></div>
+          <div class="tile gold"><h3>Servo - Your Guide</h3><p>UseDesign Servo, my Peekobot-based chatbot, guides the whole of AIO: ask where anything is, ask about any room, or say a dish name and Servo fills your basket.</p></div>
+        </div>
+        <p class="hint">Move with the edge buttons, the arrow keys, or the buttons inside each room. Escape returns to the gate. The demo shop inside AIO is Kuro Sushi; its hours are Tuesday to Sunday, 11:30 am to 10:00 pm.</p>
+      </div>
+    </section>
+
+    <!-- PRODUCTION : RIGHT -->
+    <section class="sec" data-pos="1,0" id="sec-production">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Right - Production</p><h2>Production</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Left)</button></div>
+        <div class="trim"></div>
+        <p class="secsub">Production is the direction of moving forward: the things I make. Gathered here is a restaurant's whole working set, made by my hands - the menu I designed for Kuro Sushi, the recipe system I wrote and formatted at Sushi Umi, and the cart I built to sell from it. Two sides of one counter: what the guest orders from, and the system that makes it come out the same every time. The recipe book is shown in format only.</p>
+        <h3 class="subh">The Menu - Kuro Sushi</h3>
+        <p class="secsub">The menu I designed for Kuro Sushi in Figma - an original version and a revised "Live" version - rebuilt here as a working order page. It runs on the drag-to-cart I first built for the IMCHOICHOI cosmetics demo in December 2022: drag a dish into the basket, or tap Add. The basket is my cart, rebuilt for sushi. The items and prices below are loaded from the shop's own menu document, 메뉴 1123 (2020).</p>
+        <div class="chips" id="catChips"></div>
+        <p class="menunote" id="menuNote"></p>
+        <div class="grid" id="dishGrid"></div>
+        <div class="basket" id="basket">
+          <b>Drop dishes here - your basket</b>
+          <span id="basketLine">The basket is empty. Drag a dish in, or tap Add on any dish.</span>
+        </div>
+        <p class="foot">Menu source: the shop's own menu document, 메뉴 1123 (2020). Items and prices are loaded from that document. Where the document lists two servings or sizes, both prices are shown and the basket uses the first listed price. The two Kid's Combo entries are printed without prices in the document, so this page does not invent one for them.</p>
+        <p class="menunote">The menu design itself lives in Figma: <a href="https://www.figma.com/design/dgwMOLld1HBSVVE88GnZuc/kuro-sushi-and-japanese-bar?t=H9277MVoxMAhjGvu-0" target="_blank" rel="noopener">the original</a> and <a href="https://www.figma.com/design/A6dYoWOF2okjR2JGBTFUDd/kuro-sushi---bar?t=9j9pWheZy2nEtZsV-0" target="_blank" rel="noopener">the revised "Live" version</a>. The shop's physical signboard is also my work.</p>
+        <h3 class="subh">The Ingredients - the Sushi Umi recipe system</h3>
+        <p class="secsub">Alongside my design work I cooked part-time on hot foods at Sushi Umi for eight years, and I wrote and formatted the kitchen's recipe book: 21 standardized recipes, Korean and English side by side, every one in the same fixed format. The format is the portfolio piece. The quantities stay in the kitchen, so the document below shows its structure with the contents redacted.</p>
+        <div class="doc">
+          <div class="docband">SUSHI UMI RECIPE</div>
+          <div class="docbody">
+            <h3>Standardized Kitchen Recipe Book</h3>
+            <p style="margin:0; color:#4a463c; font-size:14px">One format for every recipe: name, ingredients in Korean and English, quantity, and method notes. Written at bulk kitchen scale so any cook on the line produces the same result.</p>
+            <div class="specs">
+              <span class="spec">21 recipes</span><span class="spec">Bilingual KO / EN</span>
+              <span class="spec">Fixed table format</span><span class="spec">4 pages</span><span class="spec">Format shown - contents redacted</span>
+            </div>
+            <div id="recipeGroups"></div>
+            <p class="locknote">These are a working restaurant's trade recipes. I show the document system I built - the categories, the bilingual layout, the discipline - and nothing of the recipes themselves.</p>
+          </div>
+        </div>
+        <p class="foot">The hot dishes on the menu above run on this system: the teriyaki, the katsu, the calamari, the gyoza, the udon.</p>
+      <h3 class="subh">The Shop - the IMCHOICHOI cart, rebuilt</h3>
+        <p class="secsub">The IMCHOICHOI cart, rebuilt: the same drag-and-drop basket, now with quantities, totals and a checkout. You can also drop dishes straight onto the table below.</p>
+        <div class="basket" id="basket2"><b>Drop dishes here</b><span>Drag any dish from the menu above onto this basket.</span></div>
+        <div id="cartArea"></div>
+        <div class="totals" id="totals" style="display:none">
+          <div class="tr"><span>Subtotal</span><span id="tSub">$0.00</span></div>
+          <div class="tr"><span>GST (5%)</span><span id="tGst">$0.00</span></div>
+          <div class="tr grand"><span>Total</span><span id="tAll">$0.00</span></div>
+          <button class="checkout" id="checkoutBtn">Place the order</button>
+        </div>
+        <div class="confirm" id="confirmBox">
+          <h3>Order placed - thank you.</h3>
+          <p id="confirmText" style="margin:0; line-height:1.6"></p>
+          <p style="margin:10px 0 0"><button class="homebtn" data-go="0,0">Back to Home</button></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE LAND - HOUSE COLLECTION : DOWN -->
+    <section class="sec" data-pos="0,1" id="sec-houses">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Down - The Land</p><h2>The Land - the House Collection</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Up)</button></div>
+        <div class="trim"></div>
+        <p class="secsub">Down is the land, and the land holds the houses. The Espil House Collection, introduced the way a realtor wishes houses could be shown: full listings, spec sheets, and the parts that fit them out. The houses lived scattered on someone else's marketplace once. Their home is here now, introduced in full on my own platform.</p>
         <h3 class="subh">Full listings</h3>
         <p class="lede">Every house in the collection, introduced properly: what it is, how it was made, and what comes with it. These pages are the houses' home now - nothing here sends you elsewhere to understand them.</p>
 
@@ -302,120 +529,21 @@
       </div>
     </section>
 
-    <!-- FOOD AND INGREDIENTS : LEFT -->
-    <section class="sec" data-pos="-1,0" id="sec-food">
-      <div class="inner">
-        <div class="sechead"><div><p class="kicker">Left - Food and Ingredients</p><h2>Food and Ingredients</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Right)</button></div>
-        <p class="secsub">Two sides of one counter: what the guest orders from, and the system that makes it come out the same every time. The menu is Kuro Sushi's, designed by me in Figma; the recipe book behind it is the one I wrote and formatted at Sushi Umi, and it is shown in format only.</p>
-        <h3 class="subh">The Menu - Kuro Sushi</h3>
-        <p class="secsub">The menu I designed for Kuro Sushi in Figma - an original version and a revised "Live" version - rebuilt here as a working order page. It runs on the drag-to-cart I first built for the IMCHOICHOI cosmetics demo in December 2022: drag a dish into the basket, or tap Add. The basket is my cart, rebuilt for sushi. The items and prices below are loaded from the shop's own menu document, 메뉴 1123 (2020).</p>
-        <div class="chips" id="catChips"></div>
-        <p class="menunote" id="menuNote"></p>
-        <div class="grid" id="dishGrid"></div>
-        <div class="basket" id="basket">
-          <b>Drop dishes here - your basket</b>
-          <span id="basketLine">The basket is empty. Drag a dish in, or tap Add on any dish.</span>
-        </div>
-        <p class="foot">Menu source: the shop's own menu document, 메뉴 1123 (2020). Items and prices are loaded from that document. Where the document lists two servings or sizes, both prices are shown and the basket uses the first listed price. The two Kid's Combo entries are printed without prices in the document, so this page does not invent one for them.</p>
-        <p class="menunote">The menu design itself lives in Figma: <a href="https://www.figma.com/design/dgwMOLld1HBSVVE88GnZuc/kuro-sushi-and-japanese-bar?t=H9277MVoxMAhjGvu-0" target="_blank" rel="noopener">the original</a> and <a href="https://www.figma.com/design/A6dYoWOF2okjR2JGBTFUDd/kuro-sushi---bar?t=9j9pWheZy2nEtZsV-0" target="_blank" rel="noopener">the revised "Live" version</a>. The shop's physical signboard is also my work.</p>
-        <h3 class="subh">The Ingredients - the Sushi Umi recipe system</h3>
-        <p class="secsub">Alongside my design work I cooked part-time on hot foods at Sushi Umi for eight years, and I wrote and formatted the kitchen's recipe book: 21 standardized recipes, Korean and English side by side, every one in the same fixed format. The format is the portfolio piece. The quantities stay in the kitchen, so the document below shows its structure with the contents redacted.</p>
-        <div class="doc">
-          <div class="docband">SUSHI UMI RECIPE</div>
-          <div class="docbody">
-            <h3>Standardized Kitchen Recipe Book</h3>
-            <p style="margin:0; color:#4a463c; font-size:14px">One format for every recipe: name, ingredients in Korean and English, quantity, and method notes. Written at bulk kitchen scale so any cook on the line produces the same result.</p>
-            <div class="specs">
-              <span class="spec">21 recipes</span><span class="spec">Bilingual KO / EN</span>
-              <span class="spec">Fixed table format</span><span class="spec">4 pages</span><span class="spec">Format shown - contents redacted</span>
-            </div>
-            <div id="recipeGroups"></div>
-            <p class="locknote">These are a working restaurant's trade recipes. I show the document system I built - the categories, the bilingual layout, the discipline - and nothing of the recipes themselves.</p>
-          </div>
-        </div>
-        <p class="foot">The hot dishes on the menu above run on this system: the teriyaki, the katsu, the calamari, the gyoza, the udon.</p>
-      </div>
-    </section>
-
-    <!-- HOME : CENTER -->
-    <section class="sec" data-pos="0,0" id="sec-home">
-      <div class="inner">
-        <div class="brand">
-          <p class="kicker">AIO - All-in-One Service</p>
-          <div class="mark"><div class="kuro">AIO</div><div class="sub">ALL-IN-ONE SERVICE</div></div>
-          <h1>One service, five rooms: a house, a table, a shop, a guide, and a journey.</h1>
-          <p class="lede" style="margin:0 auto">I call it AIO, my all-in-one service. It began as everything a small restaurant needs - a menu, a recipe system, a cart, an assistant - and it grew: the houses I design, and the game that is travel itself. The rooms sit up, down, left and right of here, the way you move through Boundless Horizon, and Servo, at the bottom right, is your guide to all of them.</p>
-        </div>
-        <div class="tiles">
-          <div class="tile"><h3>The Houses - Up</h3><p>The Espil House Collection introduced like a realtor's listings: four houses with spec sheets, the capsule-room addons that fit them out, and the doors that already open.</p></div>
-          <div class="tile red"><h3>Food and Ingredients - Left</h3><p>Kuro Sushi's real menu, all 272 items from the shop's own 2020 document, and behind it the Sushi Umi recipe system in format only.</p></div>
-          <div class="tile gold"><h3>Shopping - Right</h3><p>My IMCHOICHOI drag-to-cart from 2022, rebuilt for this menu. Drag dishes in, set quantities, check out.</p></div>
-          <div class="tile teal"><h3>Travel, the Game - Down</h3><p>Espil Online: the game is travel. Enter a real city inside the Cauldron and walk it yourself - Vancouver today, Auckland for Zealandia.</p></div>
-          <div class="tile teal"><h3>Servo - Your Guide</h3><p>UseDesign Servo, my Peekobot-based chatbot, is no longer just on the counter. Servo guides the whole of AIO: ask where anything is, ask about any room, or say a dish name and Servo fills your basket.</p></div>
-        </div>
-        <p class="hint">Move with the edge buttons, the arrow keys, or the buttons inside each room. Escape returns here. The demo shop inside AIO is Kuro Sushi; its hours are Tuesday to Sunday, 11:30 am to 10:00 pm.</p>
-      </div>
-    </section>
-
-    <!-- SHOPPING : RIGHT -->
-    <section class="sec" data-pos="1,0" id="sec-cart">
-      <div class="inner">
-        <div class="sechead"><div><p class="kicker">Right - Shopping</p><h2>Shopping - Your Basket</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Left)</button></div>
-        <p class="secsub">The IMCHOICHOI cart, rebuilt: the same drag-and-drop basket, now with quantities, totals and a checkout. You can also drop dishes straight onto the table below.</p>
-        <div class="basket" id="basket2"><b>Drop dishes here</b><span>Drag any dish from the menu (Left) onto this basket.</span></div>
-        <div id="cartArea"></div>
-        <div class="totals" id="totals" style="display:none">
-          <div class="tr"><span>Subtotal</span><span id="tSub">$0.00</span></div>
-          <div class="tr"><span>GST (5%)</span><span id="tGst">$0.00</span></div>
-          <div class="tr grand"><span>Total</span><span id="tAll">$0.00</span></div>
-          <button class="checkout" id="checkoutBtn">Place the order</button>
-        </div>
-        <div class="confirm" id="confirmBox">
-          <h3>Order placed - thank you.</h3>
-          <p id="confirmText" style="margin:0; line-height:1.6"></p>
-          <p style="margin:10px 0 0"><button class="homebtn" data-go="0,0">Back to Home</button></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- TRAVEL, THE GAME : DOWN -->
-    <section class="sec" data-pos="0,1" id="sec-travel">
-      <div class="inner">
-        <div class="sechead"><div><p class="kicker">Down - Travel, the Game</p><h2>The game is a journey</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Up)</button></div>
-        <div class="tale">
-          <p>People ask what the game in AIO is. It is travel. Espil Online is the world I am building inside the Cauldron, and you do not watch it from above: you enter a real city and walk it yourself, at street level, on your own two feet.</p>
-          <p>I studied tourism because I hold a conviction about it. A screen can introduce a culture, and social channels do their best at sharing one, but they only attempt it. Only visiting a place in person and walking its streets yourself truly shares a culture. So the game is built as traveling: real streets, real building footprints and heights, real weather of a place - a journey first, and a game because the journey is one.</p>
-        </div>
-        <div class="cities">
-          <div class="city"><h3>Vancouver</h3><p>The first city, and my home. The living world of Espil Online today: enter it and walk the downtown I rebuilt from the city's own map data, street by street.</p><p class="status">The world as it stands</p></div>
-          <div class="city"><h3>Auckland - Zealandia</h3><p>Zealandia, the hidden sunken land under New Zealand, gets its game - and it starts in Auckland, the capital of 1841 to 1865, where the old maps fit the story. The Queen Street corridor is its first ground.</p><p class="status">The starting city of Zealandia</p></div>
-        </div>
-        <div class="tale" style="margin-top:22px">
-          <p>The houses above are the other end of this journey. They are the future housing layer of the same world: travel far enough through Espil Online, and one of those houses is your home in it. House, table, shop, guide, journey - one service, because in the end they are one world.</p>
-        </div>
-        <a class="visitbtn" href="https://espil.online" target="_blank" rel="noopener">Enter Espil Online</a>
-        <p class="foot">Espil Online is entered at espil.online - the Cauldron is the space, and the world inside it is the journey.</p>
-      </div>
-    </section>
-
   </div>
 </div>
 
 <div class="compass" id="compass">You are at: AIO Home</div>
-<button class="edge up" id="edgeUp">Up - The Houses</button>
-<button class="edge left" id="edgeLeft">Left - Food and Ingredients</button>
-<button class="edge right" id="edgeRight">Right - Shopping</button>
-<button class="edge down" id="edgeDown">Down - Travel, the Game</button>
+<button class="edge up" id="edgeUp">Up - Imagination</button>
+<button class="edge left" id="edgeLeft">Left - Travel</button>
+<button class="edge right" id="edgeRight">Right - Production</button>
+<button class="edge down" id="edgeDown">Down - The Houses</button>
 
 <button id="servoBtn" type="button">Ask Servo</button>
 <div id="servoPanel" role="dialog" aria-label="Servo, your guide to AIO">
-  <div class="sv-head"><b>Servo</b><span class="badge" style="margin-left:0">UseDesign Servo - Your Guide</span><span>Your guide to all of AIO: the houses, the food, the shopping and the journey - and the counter assistant for Kuro Sushi's real menu. Ask me where anything is.</span></div>
+  <div class="sv-head"><b>Servo</b><span class="badge" style="margin-left:0">UseDesign Servo - Your Guide</span><span>Your guide to all of AIO: imagination up in Espil Online, travel to the left, production to the right, the houses down on the land - and the counter assistant for Kuro Sushi's real menu. Ask me where anything is.</span></div>
   <div class="sv-log" id="svLog"></div>
   <div class="sv-chips" id="svChips"></div>
-  <form class="sv-in" id="svForm"><input id="svInput" type="text" placeholder="Ask Servo: the houses, travel, the menu, or say: add tuna nigiri" autocomplete="off"><button type="submit">Send</button></form>
+  <form class="sv-in" id="svForm"><input id="svInput" type="text" placeholder="Ask Servo: imagination, travel, the houses, the menu, or say: add tuna nigiri" autocomplete="off"><button type="submit">Send</button></form>
 </div>
 
 <script>
@@ -707,7 +835,7 @@ var RECIPE_PAGES = [
 
 /* ================= DIRECTIONAL NAVIGATION (Boundless Horizon pattern) ================= */
 var world = document.getElementById("world");
-var NAMES = {"0,0":"AIO Home","0,-1":"The Houses - Up","-1,0":"Food and Ingredients - Left","1,0":"Shopping - Right","0,1":"Travel, the Game - Down"};
+var NAMES = {"0,0":"AIO Home","0,-1":"Imagination - Up","-1,0":"Travel - Left","1,0":"Production - Right","0,1":"The Houses - Down"};
 var cur = [0,0];
 var compass = document.getElementById("compass");
 var edges = {up:document.getElementById("edgeUp"), down:document.getElementById("edgeDown"),
@@ -716,6 +844,7 @@ function goTo(x,y){
   cur = [x,y];
   world.style.transform = "translate(" + (-x*100) + "vw," + (-y*100) + "vh)";
   compass.textContent = "You are at: " + NAMES[x+","+y];
+  document.documentElement.style.setProperty("--cc", {"0,0":"#b98a2f","0,-1":"#454037","-1,0":"#f4f1ea","1,0":"#17586e","0,1":"#c8102e"}[x+","+y] || "#b98a2f");
   var home = (x===0 && y===0);
   edges.up.hidden = !home; edges.down.hidden = !home;
   edges.left.hidden = !home; edges.right.hidden = !home;
@@ -819,7 +948,7 @@ function flashBasket(){
   var line = document.getElementById("basketLine");
   var n = cartCount();
   line.textContent = n === 0 ? "The basket is empty. Drag a dish in, or tap Add on any dish."
-    : n + (n===1 ? " dish" : " dishes") + " in the basket - subtotal " + money(cartSubtotal()) + ". Press Right to check out.";
+    : n + (n===1 ? " dish" : " dishes") + " in the basket - subtotal " + money(cartSubtotal()) + ". The basket and checkout are below, in this same room.";
 }
 function renderCart(){
   flashBasket();
@@ -827,7 +956,7 @@ function renderCart(){
   var totals = document.getElementById("totals");
   var ids = Object.keys(cart);
   if(ids.length === 0){
-    area.innerHTML = "<p class='empty'>Your basket is empty. Press Left for the menu and drag something in.</p>";
+    area.innerHTML = "<p class='empty'>Your basket is empty. The menu is above, in this same room - drag something in.</p>";
     totals.style.display = "none"; return;
   }
   var rows = ids.map(function(id){
@@ -881,7 +1010,7 @@ var svInput = document.getElementById("svInput");
 document.getElementById("servoBtn").addEventListener("click", function(){
   svPanel.classList.toggle("open");
   if(svPanel.classList.contains("open") && svLog.children.length === 0){
-    botSay("Hello, I am Servo, your guide to AIO. I can walk you to any of its rooms - the houses up, food and ingredients to the left, shopping to the right, and the travel game down - and I still work the shop counter. Ask me where anything is, ask about Kuro Sushi's real menu, or say 'add tuna nigiri' and I will put it in your basket.");
+    botSay("Hello, I am Servo, your guide to AIO. Its compass: up is imagination - Espil Online; left is travel, which is freedom; right is production - the menu, the recipe system and your basket; and down is the land, where the houses stand. I still work the shop counter too. Ask me where anything is, ask about Kuro Sushi's real menu, or say 'add tuna nigiri' and I will put it in your basket.");
   }
 });
 function botSay(t){ var d = document.createElement("div"); d.className = "msg bot"; d.textContent = t; svLog.appendChild(d); svLog.scrollTop = svLog.scrollHeight; }
@@ -922,19 +1051,22 @@ function servoAnswer(raw){
   if(q.indexOf("add") >= 0){
     var d = findDish(q);
     if(d && d.price == null) return d.name + " is on the real menu, but 메뉴 1123 prints it without a price, so I will not invent one or add it to the basket.";
-    if(d){ addToCart(d.id, 1); return "Done - one " + d.name + " is in your basket (" + money(d.price) + "). Your basket now holds " + cartCount() + (cartCount()===1 ? " dish" : " dishes") + ", subtotal " + money(cartSubtotal()) + ". Press Right any time to check out."; }
+    if(d){ addToCart(d.id, 1); return "Done - one " + d.name + " is in your basket (" + money(d.price) + "). Your basket now holds " + cartCount() + (cartCount()===1 ? " dish" : " dishes") + ", subtotal " + money(cartSubtotal()) + ". Your basket and the checkout wait in Production, to the right."; }
     return "I could not match that to a dish on the real menu. Try 'add edamame', 'add tuna nigiri', or 'add chef's choice roll'.";
   }
   if(q.indexOf("houses") >= 0 || q.indexOf("hexagon") >= 0 || q.indexOf("tree of life") >= 0 || q.indexOf("universe") >= 0 || q.indexOf("addon") >= 0 || q.indexOf("capsule") >= 0 || q.indexOf("mros") >= 0 || q.indexOf("realtor") >= 0 || q.indexOf("house collection") >= 0)
-    return "The houses are up. Press Up for the Espil House Collection, introduced the way a realtor would: full listings and spec sheets for Hexagon Palace, Universe, Tree of Life and Flower, the Espil Ceil addon parts that fit them out, and the two doors that open today - the Universe viewer and the MROS sample house. Universe is the one you can already walk through.";
-  if(q.indexOf("travel") >= 0 || q.indexOf("game") >= 0 || q.indexOf("espil online") >= 0 || q.indexOf("cauldron") >= 0 || q.indexOf("vancouver") >= 0 || q.indexOf("auckland") >= 0 || q.indexOf("zealandia") >= 0 || q.indexOf("journey") >= 0 || q.indexOf("tourism") >= 0)
-    return "The game is travel, and it waits below. Press Down: Espil Online is the world I am building inside the Cauldron, where you enter a real city and walk it yourself - Vancouver today, and Auckland as the starting city of Zealandia. Walking a place yourself is the whole point; the door itself is espil.online.";
+    return "The houses are down, on the land. Press Down for the Espil House Collection, introduced the way a realtor would: full listings and spec sheets for Hexagon Palace, Universe, Tree of Life and Flower, the Espil Ceil addon parts that fit them out, and the two doors that open today - the Universe viewer and the MROS sample house. Universe is the one you can already walk through.";
+  if(q.indexOf("espil online") >= 0 || q.indexOf("cauldron") >= 0 || q.indexOf("imagination") >= 0 || q.indexOf("imagine") >= 0 || q.indexOf("zealandia") >= 0)
+    return "Imagination is up. Press Up: Espil Online is the world I am building inside the Cauldron - the space where the ideas live, with Zealandia as its future land and the houses below as its future homes. The door itself is espil.online.";
+  if(q.indexOf("travel") >= 0 || q.indexOf("game") >= 0 || q.indexOf("vancouver") >= 0 || q.indexOf("auckland") >= 0 || q.indexOf("journey") >= 0 || q.indexOf("tourism") >= 0 || q.indexOf("freedom") >= 0 || q.indexOf("walk") >= 0)
+    return "Travel is to your left, because travel is freedom. Press Left: the game is a journey - a real city entered at street level and walked on your own two feet, Vancouver today and Auckland as the starting city of Zealandia. Only visiting a place in person and walking its streets yourself truly shares a culture; the game is built to honour that.";
   if(q.indexOf("where is") >= 0 || q.indexOf("where are") >= 0 || q.indexOf("how do i get") >= 0 || q.indexOf("directions") >= 0 || q.indexOf("guide me") >= 0 || q.indexOf("show me around") >= 0 || q.indexOf("what can you do") >= 0 || q === "help"){
-    if(q.indexOf("menu") >= 0 || q.indexOf("food") >= 0 || q.indexOf("ingredient") >= 0 || q.indexOf("recipe") >= 0) return "The food is to your left. Press Left for Food and Ingredients: the full Kuro Sushi menu, and below it the Sushi Umi recipe book, shown in format only.";
-    if(q.indexOf("house") >= 0) return "The houses are up. Press Up for the listings, the addon parts, and the doors that open today.";
-    if(q.indexOf("cart") >= 0 || q.indexOf("basket") >= 0 || q.indexOf("shop") >= 0 || q.indexOf("checkout") >= 0 || q.indexOf("check out") >= 0) return "Shopping is to your right. Press Right for your basket, quantities, totals and checkout.";
-    if(q.indexOf("travel") >= 0 || q.indexOf("game") >= 0) return "Travel is down. Press Down for the game: Espil Online, where you walk real cities yourself.";
-    return "Here is the map of AIO: Up for the Houses, Left for Food and Ingredients, Right for Shopping, and Down for Travel, the Game. I am your guide - ask me about any of them, or about the menu, and say 'add' with a dish name to fill your basket.";
+    if(q.indexOf("menu") >= 0 || q.indexOf("food") >= 0 || q.indexOf("ingredient") >= 0 || q.indexOf("recipe") >= 0) return "Food and the making are to your right. Press Right for Production: the full Kuro Sushi menu, and below it the Sushi Umi recipe book, shown in format only - the cart and checkout are in the same room.";
+    if(q.indexOf("house") >= 0) return "The houses are down, on the land. Press Down for the listings, the addon parts, and the doors that open today.";
+    if(q.indexOf("cart") >= 0 || q.indexOf("basket") >= 0 || q.indexOf("shop") >= 0 || q.indexOf("checkout") >= 0 || q.indexOf("check out") >= 0) return "Your basket is to your right, inside Production. Press Right for the menu, your basket, quantities, totals and checkout.";
+    if(q.indexOf("travel") >= 0 || q.indexOf("game") >= 0) return "Travel is to your left. Press Left for the journey: Espil Online walked at street level, real cities on your own two feet.";
+    if(q.indexOf("espil") >= 0 || q.indexOf("imagination") >= 0 || q.indexOf("online") >= 0) return "Imagination is up. Press Up for Espil Online, the world inside the Cauldron.";
+    return "Here is the map of AIO: Up for Imagination - Espil Online; Left for Travel, which is freedom; Right for Production - the menu, the recipes and the shop; and Down for the Houses, on the land. I am your guide - ask me about any of them, or about the menu, and say 'add' with a dish name to fill your basket.";
   }
   if(q.indexOf("hour") >= 0 || q.indexOf("open") >= 0 || q.indexOf("close") >= 0)
     return "Demo hours: Tuesday to Sunday, 11:30 am to 10:00 pm. The kitchen's last order is 9:30 pm. (Demo information for this staging build.)";
@@ -961,13 +1093,13 @@ function servoAnswer(raw){
   }
   if(q.indexOf("cart") >= 0 || q.indexOf("basket") >= 0 || q.indexOf("checkout") >= 0 || q.indexOf("check out") >= 0){
     var n = cartCount();
-    return n === 0 ? "Your basket is empty. Press Left for the menu, drag a dish into the basket, or ask me to add one."
-      : "Your basket holds " + n + (n===1 ? " dish" : " dishes") + ", subtotal " + money(cartSubtotal()) + ". Press Right to see it and check out.";
+    return n === 0 ? "Your basket is empty. Press Right for Production, drag a dish into the basket, or ask me to add one."
+      : "Your basket holds " + n + (n===1 ? " dish" : " dishes") + ", subtotal " + money(cartSubtotal()) + ". Press Right for Production to see it and check out.";
   }
   if(q.indexOf("recipe") >= 0 || q.indexOf("kitchen") >= 0)
-    return "Press Left for Food and Ingredients and scroll past the menu: the kitchen system is there - 21 standardized bilingual recipes from my Sushi Umi years. The format is on show; the recipes themselves stay in the kitchen, so I cannot recite one.";
+    return "Press Right for Production and scroll past the menu: the kitchen system is there - 21 standardized bilingual recipes from my Sushi Umi years. The format is on show; the recipes themselves stay in the kitchen, so I cannot recite one.";
   if(q.indexOf("menu") >= 0)
-    return "Press Left for the full menu: " + MENU.length + " items in " + (CATS.length - 1) + " sections, from Appetizers and Sashimi through Rolls, Donburi, Party Tray and Drinks - all loaded from 메뉴 1123 (2020).";
+    return "Press Right for Production and its full menu: " + MENU.length + " items in " + (CATS.length - 1) + " sections, from Appetizers and Sashimi through Rolls, Donburi, Party Tray and Drinks - all loaded from 메뉴 1123 (2020).";
   if(q.indexOf("book") >= 0 || q.indexOf("reserv") >= 0 || q.indexOf("table") >= 0 || q.indexOf("appointment") >= 0 || q.indexOf("intake") >= 0)
     return "Servo's original Apex Derm flow handled client intake and appointment steps, but this AIO store demo does not take reservations.";
   if(q.indexOf("peekobot") >= 0 || q.indexOf("conversation") >= 0 || q.indexOf("framework") >= 0 || q.indexOf("apex") >= 0)
@@ -975,13 +1107,13 @@ function servoAnswer(raw){
   if(q.indexOf("deliver") >= 0)
     return "No delivery in this demo. The AIO service bundle is dine-in and takeout at the counter.";
   if(q.indexOf("hello") >= 0 || q.indexOf("hi") === 0 || q.indexOf("hey") >= 0)
-    return "Hello. Hungry? Ask me for a recommendation, or press Left and drag a dish into the basket.";
+    return "Hello. Hungry? Ask me for a recommendation, or press Right for Production and drag a dish into the basket.";
   if(q.indexOf("who are you") >= 0 || q.indexOf("servo") >= 0)
-    return "I am Servo, from UseDesign Servo, my Peekobot-based chatbot framework. The original conversation.js used an option tree for Apex Derm Clinic intake; in AIO I am the guide of the whole service - the houses, the food, the shopping and the journey - and I also work the shop counter, grounded in Kuro Sushi's real menu, where I can add dishes to your basket.";
+    return "I am Servo, from UseDesign Servo, my Peekobot-based chatbot framework. The original conversation.js used an option tree for Apex Derm Clinic intake; in AIO I am the guide of the whole service - imagination up in Espil Online, travel to the left, production to the right, and the houses down on the land - and I also work the shop counter, grounded in Kuro Sushi's real menu, where I can add dishes to your basket.";
   if(q.indexOf("thank") >= 0) return "You are welcome. Enjoy the meal.";
   var any = findDish(q);
   if(any) return any.name + " - " + any.desc + " " + (any.price == null ? "It is printed without a price in the source." : (any.priceLabel || money(any.price)) + ". Say 'add " + any.name.toLowerCase() + "' and I will put it in your basket.");
-  return "I can guide you around AIO - the houses up, the food to the left, the shopping to the right, the travel game down - and help with the real menu, prices and your basket. Try 'tell me about the houses', 'recommend something' or 'add edamame'.";
+  return "I can guide you around AIO - imagination up, travel to the left, production to the right, and the houses down on the land - and help with the real menu, prices and your basket. Try 'tell me about the houses', 'recommend something' or 'add edamame'.";
 }
 
 document.getElementById("svForm").addEventListener("submit", function(e){
@@ -990,11 +1122,34 @@ document.getElementById("svForm").addEventListener("submit", function(e){
   meSay(v); svInput.value = "";
   setTimeout(function(){ botSay(servoAnswer(v)); }, 220);
 });
-[["The houses","Tell me about the houses"],["Travel","What is the travel game?"],["Recommend","Recommend something"],["Hours","What are the hours?"],["Where is the menu?","Where is the menu?"],["My basket","What is in my basket?"]].forEach(function(pair){
+[["Imagination","Tell me about Espil Online"],["Travel","What is the travel game?"],["The houses","Tell me about the houses"],["Where is the menu?","Where is the menu?"],["Where are the houses?","Where are the houses?"],["Recommend","Recommend something"],["My basket","What is in my basket?"]].forEach(function(pair){
   var b = document.createElement("button"); b.type = "button"; b.textContent = pair[0];
   b.addEventListener("click", function(){ meSay(pair[1]); setTimeout(function(){ botSay(servoAnswer(pair[1])); }, 220); });
   document.getElementById("svChips").appendChild(b);
 });
+</script>
+<script>
+(function(){
+  var gi = document.getElementById("gateIntro");
+  if(!gi) return;
+  var done = false, t1 = null, t2 = null, t3 = null;
+  function remove(){ if(gi.parentNode) gi.parentNode.removeChild(gi); window.__gateDone = true; }
+  function finish(){
+    if(done) return; done = true;
+    clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
+    gi.classList.add("open"); gi.classList.add("done");
+    setTimeout(remove, 80);
+  }
+  function open(){
+    if(done) return;
+    gi.classList.add("open");
+    t2 = setTimeout(function(){ gi.classList.add("done"); t3 = setTimeout(remove, 600); }, 1200);
+  }
+  gi.addEventListener("click", finish);
+  document.addEventListener("keydown", function(){ if(!done) finish(); });
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){ finish(); return; }
+  t1 = setTimeout(open, 850);
+})();
 </script>
 </body>
 </html>
