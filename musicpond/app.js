@@ -6,12 +6,12 @@
 var TEACHERS = [
   { id:"lorenzo", name:"Lorenzo de Sequera", instrument:"Guitar",
     genre:"Rock, Metal, and Blues", cost:"$40 per 60 minute lesson", years:10,
-    avail:"Every Friday", days:[5],
+    avail:"Every Friday", days:[4],
     bio:"My name is Lorenzo, and I have been teaching guitar for over 10 years. I have experience playing and touring with many bands. I also post video game covers on YouTube.",
     photo:"assets/LorenzoHeadshotSmall.jpg", location:"Vancouver, BC" },
   { id:"pond", name:"Firstname Lastname", instrument:"Piano",
     genre:"Classical and Contemporary", cost:"$35 per 60 minute lesson", years:5,
-    avail:"Wednesdays and Saturdays", days:[3,6],
+    avail:"Wednesdays and Saturdays", days:[2,5],
     bio:"Piano lessons for every level, from first notes to exam preparation. Lessons are built around the music you actually want to play.",
     photo:"assets/Profile.png", location:"Burnaby, BC" }
 ];
