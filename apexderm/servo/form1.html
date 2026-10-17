@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Information Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Information Form Type 1</h1>
+        <form action="#" method="post">
+            <fieldset>
+                <legend>General Patient Information</legend>
+                <label for="patientGender">Patient Gender*</label>
+                <select name="patientGender" id="patientGender" required>
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <br>
+                <label for="patientName">Patient Name*</label>
+                <input type="text" name="patientName" id="patientName" placeholder="Patient Name" required>
+                <br>
+                <label for="patientBirthDate">Patient Birth Date*</label>
+                <input type="date" name="patientBirthDate" id="patientBirthDate" required>
+                <br>
+                <label for="patientHeight">Patient Height (cm's)*</label>
+                <input type="number" name="patientHeight" id="patientHeight" placeholder="ex: 176" required>
+                <br>
+                <label for="patientWeight">Patient Weight (kg's)*</label>
+                <input type="number" name="patientWeight" id="patientWeight" placeholder="ex: 70" required>
+                <br>
+                <label for="patientEmail">Patient E-Mail*</label>
+                <input type="email" name="patientEmail" id="patientEmail" placeholder="ex: myname@example.com" required>
+                <br>
+                <label for="reasonForSeeingDoctor">Reason for seeing the doctor:*</label>
+                <textarea name="reasonForSeeingDoctor" id="reasonForSeeingDoctor" rows="4" cols="50" required></textarea>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Patient Medical History</legend>
+                <label for="drugAllergies">Please list any drug allergies</label>
+                <input type="text" name="drugAllergies" id="drugAllergies" placeholder="Drug Allergies">
+                <br>
+                <p>Have you ever had (Please check all that apply)</p>
+                <label for="anemia">Anemia</label>
+                <input type="checkbox" name="medicalConditions[]" id="anemia" value="Anemia">
+                <label for="asthma">Asthma</label>
+                <input type="checkbox" name="medicalConditions[]" id="asthma" value="Asthma">
+                <label for="arthritis">Arthritis</label>
+                <input type="checkbox" name="medicalConditions[]" id="arthritis" value="Arthritis">
+                <label for="cancer">Cancer</label>
+                <input type="checkbox" name="medicalConditions[]" id="cancer" value="Cancer">
+                <!-- Add more checkboxes for the other medical conditions -->
+                <br>
+                <label for="otherIllnesses">Other illnesses:</label>
+                <input type="text" name="otherIllnesses" id="otherIllnesses" placeholder="Other Illness">
+                <br>
+                <label for="operations">Please list any Operations and Dates of Each</label>
+                <textarea name="operations" id="operations" rows="4" cols="50"></textarea>
+                <br>
+                <label for="currentMedications">Please list your Current Medications</label>
+                <textarea name="currentMedications" id="currentMedications" rows="4" cols="50"></textarea>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Healthy & Unhealthy Habits</legend>
+                <p>Exercise</p>
+                <label for="exerciseNever">Never</label>
+                <input type="radio" name="exercise" id="exerciseNever" value="Never">
+                <label for="exercise1to2">1-2 days</label>
+                <input type="radio" name="exercise" id="exercise1to2" value="1-2 days">
+                <label for="exercise3to4">3-4 days</label>
+                <input type="radio" name="exercise" id="exercise3to4" value="3-4 days">
+                <label for="exercise5plus">5+ days</label>
+                <input type="radio" name="exercise" id="exercise5plus" value="5+ days">
+                <br>
+                <!-- Add more radio buttons and labels for other habits -->
+                <br>
+                <label for="otherComments">Include other comments regarding your Medical History</label>
+                <textarea name="otherComments" id="otherComments" rows="4" cols="50"></textarea>
+            </fieldset>
+            <br>
+            <input type="submit" value="Submit" href="javascript:history.back()">
+        </form>
+    </div>
+</body>
+</html>
+
