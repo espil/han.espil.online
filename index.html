@@ -28,32 +28,75 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "dateModified": "2026-10-14",
-  "mainEntity": {
-    "@type": "Person",
-    "name": "HanBin Im",
-    "alternateName": "Espil",
-    "jobTitle": "Web Developer & Designer",
-    "description": "Web developer & designer in Vancouver, BC. Builder of Espil.Online — an interactive 3D map of a living world (The World in the Cauldron).",
-    "url": "https://han.espil.online/",
-    "image": "https://han.espil.online/universe/render-day.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Vancouver",
-      "addressRegion": "BC",
-      "addressCountry": "CA"
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://han.espil.online/#profilepage",
+      "dateModified": "2026-10-17",
+      "mainEntity": {
+        "@id": "https://han.espil.online/#person"
+      }
     },
-    "sameAs": [
-      "https://espil.online",
-      "https://github.com/espil",
-      "https://www.instagram.com/espil_online/",
-      "https://blog.naver.com/espil_online",
-      "https://www.facebook.com/EspilCeiB",
-      "https://www.youtube.com/@espil_online",
-      "https://www.twitch.tv/espilceil"
-    ]
-  }
+    {
+      "@type": "Person",
+      "@id": "https://han.espil.online/#person",
+      "name": "HanBin Im",
+      "alternateName": "Espil",
+      "jobTitle": "Web Developer & Designer",
+      "description": "Web developer & designer in Vancouver, BC. Builder of Espil.Online — an interactive 3D map of a living world (The World in the Cauldron).",
+      "url": "https://han.espil.online/",
+      "image": "https://han.espil.online/universe/render-day.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Vancouver",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      },
+      "worksFor": {
+        "@id": "https://espil.online/#org"
+      },
+      "sameAs": [
+        "https://espil.online",
+        "https://github.com/espil",
+        "https://www.instagram.com/espil_online/",
+        "https://blog.naver.com/espil_online",
+        "https://www.facebook.com/EspilCeiB",
+        "https://www.youtube.com/@espil_online",
+        "https://www.twitch.tv/espilceil"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://espil.online/#org",
+      "name": "Espil Online",
+      "url": "https://espil.online/",
+      "logo": "https://espil.online/apple-touch-icon.png",
+      "founder": {
+        "@id": "https://han.espil.online/#person"
+      },
+      "sameAs": [
+        "https://www.instagram.com/espil_online/",
+        "https://blog.naver.com/espil_online",
+        "https://www.facebook.com/EspilCeiB",
+        "https://www.youtube.com/@espil_online",
+        "https://han.espil.online",
+        "https://www.twitch.tv/espilceil"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://han.espil.online/#website",
+      "url": "https://han.espil.online/",
+      "name": "Espil.",
+      "publisher": {
+        "@id": "https://espil.online/#org"
+      },
+      "author": {
+        "@id": "https://han.espil.online/#person"
+      },
+      "inLanguage": "en"
+    }
+  ]
 }
 </script>
 </head>
