@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Music Pond - Interactive Archive</title>
+<meta name="description" content="Music Pond, a 2018 BCIT school project app connecting music students and teachers. Interactive web revival: Firebase bypassed, every screen navigable. UI designed by HanBin Im (Espil).">
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stage">
+  <div class="phone" id="phone">
+    <div class="notch"></div>
+    <header class="appbar" id="appbar" hidden>
+      <button class="iconbtn" id="menuBtn" aria-label="Menu"><img src="assets/Menu_Icon.png" alt=""></button>
+      <img class="barlogo" src="assets/MusicPondlogo.png" alt="Music Pond">
+      <span class="bartitle" id="barTitle">Music Pond</span>
+      <button class="iconbtn" id="outBtn" aria-label="Sign out"><img src="assets/Sign_Out_Icon.png" alt=""></button>
+    </header>
+    <div class="drawer" id="drawer" hidden></div>
+    <main class="screen" id="screen"></main>
+    <nav class="tabbar" id="tabbar" hidden></nav>
+  </div>
+  <p class="caption">Music Pond (2018) - interactive web revival. The original React Native app ran on Firebase; this archive build bypasses sign-in so every screen can be explored. UI designed by Espil.</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
