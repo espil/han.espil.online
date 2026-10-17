@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIO - All-in-One Service | Houses, Food, Shopping, Travel</title>
+<meta name="description" content="AIO is my all-in-one service in five rooms: the Espil House Collection introduced like a realtor's listings, Kuro Sushi's real menu with the Sushi Umi recipe system behind it, the IMCHOICHOI cart rebuilt as the shop, Servo as the guide, and Espil Online - the game that is travel, walking real cities yourself.">
+<style>
+  :root{
+    --ink:#141311; --paper:#f4f1ea; --card:#fffdf8; --red:#c8102e; --gold:#b98a2f;
+    --mut:#6f6a5e; --line:#d8d2c4; --teal:#175e54;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; height:100%; overflow:hidden; background:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; color:var(--ink)}
+  button{font-family:inherit; cursor:pointer}
+  /* ---------- directional stage (Boundless Horizon pattern) ---------- */
+  .viewport{position:fixed; inset:0; overflow:hidden; background:var(--ink)}
+  .world{position:absolute; width:300vw; height:300vh; left:-100vw; top:-100vh;
+    transition:transform 0.9s cubic-bezier(.7,0,.2,1)}
+  .sec{position:absolute; width:100vw; height:100vh; overflow-y:auto; overflow-x:hidden;
+    background:var(--paper); padding:26px 22px 110px}
+  .sec[data-pos="0,-1"]{left:100vw; top:0}
+  .sec[data-pos="-1,0"]{left:0; top:100vh}
+  .sec[data-pos="0,0"]{left:100vw; top:100vh}
+  .sec[data-pos="1,0"]{left:200vw; top:100vh}
+  .sec[data-pos="0,1"]{left:100vw; top:200vh}
+  .inner{max-width:1060px; margin:0 auto}
+  /* ---------- home ---------- */
+  .brand{text-align:center; padding-top:4vh}
+  .brand .mark{display:inline-block; background:var(--ink); color:var(--paper);
+    padding:16px 30px 12px; border-radius:4px}
+  .brand .mark .kuro{font-size:clamp(40px,7vw,74px); letter-spacing:.14em; line-height:1}
+  .brand .mark .sub{color:#e8b13c; letter-spacing:.42em; font-size:12px; margin-top:6px}
+  .brand h1{font-size:clamp(22px,3.4vw,32px); margin:26px 0 8px; font-weight:normal}
+  .brand p.lede{max-width:640px; margin:0 auto; color:#3c382f; font-size:16.5px; line-height:1.65}
+  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:30px 0 8px; text-align:left}
+  .tile{background:var(--card); border:1px solid var(--line); border-top:3px solid var(--ink); padding:16px 18px}
+  .tile.red{border-top-color:var(--red)} .tile.teal{border-top-color:var(--teal)} .tile.gold{border-top-color:var(--gold)}
+  .tile h3{margin:0 0 6px; font-size:17px}
+  .tile p{margin:0; font-size:13.5px; line-height:1.55; color:#4a463c}
+  .hint{text-align:center; color:var(--mut); font-size:13px; margin-top:22px}
+  /* ---------- directional controls ---------- */
+  .edge{position:fixed; z-index:40; background:var(--ink); color:var(--paper); border:1px solid #000;
+    padding:10px 16px; font-size:13px; letter-spacing:.12em; text-transform:uppercase; border-radius:999px;
+    box-shadow:0 4px 18px rgba(0,0,0,.35)}
+  .edge:hover{background:var(--red)}
+  .edge.up{top:14px; left:50%; transform:translateX(-50%)}
+  .edge.down{bottom:14px; left:50%; transform:translateX(-50%)}
+  .edge.left{left:14px; top:50%; transform:translateY(-50%)}
+  .edge.right{right:14px; top:50%; transform:translateY(-50%)}
+  .edge[hidden]{display:none}
+  .compass{position:fixed; z-index:40; top:14px; right:14px; background:rgba(20,19,17,.88); color:var(--paper);
+    font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; padding:8px 12px; border-radius:4px}
+  .homebtn{background:var(--ink); color:var(--paper); border:0; border-radius:999px; padding:9px 18px;
+    font-size:12.5px; letter-spacing:.12em; text-transform:uppercase}
+  .homebtn:hover{background:var(--red)}
+  .sechead{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:6px}
+  .sechead h2{font-size:clamp(26px,4vw,38px); margin:0}
+  .kicker{font-size:11.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--red); margin:0 0 6px}
+  .secsub{color:#4a463c; font-size:15.5px; line-height:1.6; max-width:720px}
+  /* ---------- menu + cart ---------- */
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 6px}
+  .chip{border:1px solid var(--ink); background:transparent; border-radius:999px; padding:7px 14px; font-size:13px}
+  .chip.on{background:var(--ink); color:var(--paper)}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(225px,1fr)); gap:14px; margin-top:14px}
+  .dish{background:var(--card); border:1px solid var(--line); padding:16px; position:relative}
+  .dish[draggable="true"]{cursor:grab}
+  .dish.dragging{opacity:.45}
+  .dish h4{margin:0 40px 4px 0; font-size:16.5px}
+  .dish .desc{font-size:13px; color:#5a5546; line-height:1.5; min-height:38px; margin:0}
+  .dish .row{display:flex; justify-content:space-between; align-items:center; margin-top:10px}
+  .dish .price{font-size:16px; font-weight:bold}
+  .tag{position:absolute; top:12px; right:12px; font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+    background:var(--red); color:#fff; padding:3px 7px; border-radius:3px}
+  .tag.veg{background:var(--teal)} .tag.pop{background:var(--gold)}
+  .addbtn{background:var(--red); color:#fff; border:0; border-radius:999px; padding:8px 16px; font-size:13px}
+  .addbtn:hover{background:#9c0c24}
+  .addbtn:disabled{background:#a49c8a; cursor:not-allowed}
+  .menunote{font-size:13px; color:#4a463c; margin:10px 0 0; line-height:1.55}
+  .basket{margin-top:22px; border:2px dashed var(--ink); background:#efe9db; padding:16px 18px; text-align:center}
+  .basket.over{border-color:var(--red); background:#f7e3e6}
+  .basket b{font-size:16px}
+  .basket span{color:#4a463c; font-size:13.5px; display:block; margin-top:4px}
+  /* cart table */
+  table.cart{width:100%; border-collapse:collapse; margin-top:16px; background:var(--card)}
+  table.cart th, table.cart td{border:1px solid var(--line); padding:10px 12px; font-size:14.5px; text-align:left}
+  table.cart th{background:var(--ink); color:var(--paper); font-weight:normal; letter-spacing:.06em}
+  .qty{display:inline-flex; align-items:center; gap:8px}
+  .qty button{width:26px; height:26px; border-radius:50%; border:1px solid var(--ink); background:#fff; font-size:15px; line-height:1}
+  .rm{border:0; background:none; color:var(--red); font-size:13px; text-decoration:underline}
+  .totals{max-width:340px; margin:18px 0 0 auto; font-size:15px}
+  .totals .tr{display:flex; justify-content:space-between; padding:6px 2px; border-bottom:1px solid var(--line)}
+  .totals .tr.grand{font-size:18px; font-weight:bold; border-bottom:2px solid var(--ink)}
+  .checkout{background:var(--red); color:#fff; border:0; padding:13px 26px; font-size:15px; border-radius:4px; margin-top:16px}
+  .checkout:disabled{background:#a49c8a; cursor:not-allowed}
+  .confirm{display:none; border:2px solid var(--teal); background:#eef5f2; padding:20px 22px; margin-top:20px}
+  .confirm h3{margin:0 0 8px; color:var(--teal)}
+  .empty{color:var(--mut); font-size:15px; padding:18px 0}
+  /* ---------- kitchen (recipe format only) ---------- */
+  .doc{border:2px solid var(--ink); background:var(--card); margin-top:18px; display:flex}
+  .docband{background:var(--ink); color:var(--paper); writing-mode:vertical-rl; text-orientation:mixed;
+    padding:16px 10px; font-size:20px; letter-spacing:.3em; text-align:center}
+  .docbody{padding:20px 22px; flex:1}
+  .docbody h3{margin:0 0 4px; font-size:20px}
+  .specs{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 4px}
+  .spec{border:1px solid var(--ink); border-radius:999px; padding:5px 12px; font-size:12px; letter-spacing:.05em}
+  .pgroup{margin-top:18px}
+  .pgroup h5{margin:0 0 8px; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--mut)}
+  .ritems{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:10px}
+  .ritem{border:1px solid var(--line); padding:10px 12px}
+  .ritem .rn{font-size:14.5px; margin-bottom:8px}
+  .ritem .rn span{color:var(--mut); font-size:12px}
+  .redact{height:8px; border-radius:4px; background:repeating-linear-gradient(90deg,#c9c2b0 0 26px,#ddd6c6 26px 34px); margin:5px 0; filter:blur(.6px)}
+  .redact.short{width:62%}
+  .locknote{margin-top:16px; font-size:13px; color:#7a2015; border-left:3px solid var(--red); padding:6px 12px; background:#faf0ee}
+  /* ---------- about ---------- */
+  .piece{border-top:1px solid var(--line); padding:18px 0}
+  .piece h3{margin:0 0 6px; font-size:19px}
+  .piece p{margin:0; font-size:15px; line-height:1.65; color:#3c382f; max-width:760px}
+  .piece a{color:var(--red)}
+  .foot{margin-top:30px; color:var(--mut); font-size:12.5px; text-align:center}
+  /* ---------- servo ---------- */
+  #servoBtn{position:fixed; z-index:60; right:18px; bottom:52px; background:var(--teal); color:#fff; border:0;
+    border-radius:999px; padding:13px 20px; font-size:14.5px; box-shadow:0 6px 22px rgba(0,0,0,.35)}
+  #servoBtn:hover{background:#0f463d}
+  #servoPanel{position:fixed; z-index:60; right:18px; bottom:112px; width:min(350px,calc(100vw - 36px));
+    background:var(--card); border:1px solid var(--ink); border-radius:10px; box-shadow:0 14px 40px rgba(0,0,0,.35);
+    display:none; flex-direction:column; overflow:hidden}
+  #servoPanel.open{display:flex}
+  .sv-head{background:var(--teal); color:#fff; padding:12px 16px}
+  .sv-head b{font-size:16px}
+  .sv-head span{display:block; font-size:11.5px; opacity:.9; margin-top:2px; line-height:1.45}
+  .sv-log{padding:12px 14px; height:280px; overflow-y:auto; display:flex; flex-direction:column; gap:8px}
+  .msg{max-width:86%; padding:9px 12px; border-radius:12px; font-size:13.5px; line-height:1.5}
+  .msg.bot{background:#e8efed; align-self:flex-start; border-bottom-left-radius:3px}
+  .msg.me{background:var(--ink); color:var(--paper); align-self:flex-end; border-bottom-right-radius:3px}
+  .sv-chips{display:flex; flex-wrap:wrap; gap:6px; padding:0 14px 10px}
+  .sv-chips button{border:1px solid var(--teal); color:var(--teal); background:#fff; border-radius:999px; padding:5px 11px; font-size:12px}
+  .sv-in{display:flex; border-top:1px solid var(--line)}
+  .sv-in input{flex:1; border:0; padding:12px 14px; font-size:14px; font-family:inherit; outline:none}
+  .sv-in button{border:0; background:var(--teal); color:#fff; padding:0 18px; font-size:14px}
+  .badge{display:inline-block; background:#fdf3d8; border:1px solid var(--gold); color:#6d5312; font-size:11px;
+    padding:2px 8px; border-radius:999px; margin-left:8px; vertical-align:2px}
+
+  /* ---------- merged AIO additions ---------- */
+  .subh{font-size:clamp(21px,3vw,27px); margin:36px 0 8px}
+  .lede{font-size:17.5px; line-height:1.65; max-width:760px}
+  .tale p{font-size:16.5px; line-height:1.72; max-width:760px}
+  .provenance{margin-top:30px; font-size:12.5px; color:var(--mut); border-top:1px solid var(--line); padding-top:14px; max-width:760px}
+  /* houses: listing cards and articles */
+  .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; margin-top:18px}
+  .card{background:var(--card); border:1px solid var(--line); padding:0 0 16px; overflow:hidden}
+  .card img{width:100%; height:200px; object-fit:cover; display:block; border-bottom:1px solid var(--line)}
+  .card .pad{padding:14px 18px 0}
+  .card h3{font-size:22px; margin:0 0 4px}
+  .card .no{font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--red); margin:0}
+  .card p{font-size:14.5px; line-height:1.55; margin:6px 0 0}
+  .card .status{font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); margin-top:10px}
+  .cap{font-size:11px; color:var(--mut); padding:6px 18px 0; margin:0}
+  .listing{background:var(--card); border:1px solid var(--line); margin-top:24px; padding:22px}
+  .listing h3{font-size:28px; margin:0 0 4px}
+  .listing .no{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--red); margin:0}
+  .listing p{font-size:16px; line-height:1.65; max-width:760px}
+  .listing .hero{width:100%; height:auto; display:block; border:1px solid var(--line); margin:12px 0 4px}
+  .listing .trio{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:10px}
+  .listing .trio img{width:100%; height:180px; object-fit:cover; display:block; border:1px solid var(--line)}
+  table.spec{border:0; border-radius:0; padding:0; background:transparent; border-collapse:collapse; margin-top:14px; width:100%; max-width:640px; font-size:14.5px}
+  table.spec th{font-size:11px; letter-spacing:.14em; text-transform:uppercase; text-align:left; color:var(--mut); padding:7px 14px 7px 0; border-bottom:1px solid var(--line); white-space:nowrap; vertical-align:top; font-weight:normal}
+  table.spec td{padding:7px 0; border-bottom:1px solid var(--line)}
+  .visitbtn{display:inline-block; margin-top:14px; background:var(--red); color:#fff; text-decoration:none; padding:11px 20px; border-radius:999px; font-size:12px; letter-spacing:.14em; text-transform:uppercase}
+  .visitbtn:hover{background:#9c0c24}
+  .traits{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 4px}
+  .traits span{border:1px solid var(--ink); border-radius:999px; padding:6px 13px; font-size:12px; letter-spacing:.06em}
+  /* travel */
+  .cities{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:20px}
+  .city{background:var(--card); border:1px solid var(--line); border-top:3px solid var(--teal); padding:18px 20px}
+  .city h3{margin:0 0 6px; font-size:21px}
+  .city p{margin:0; font-size:14.5px; line-height:1.6; color:#4a463c}
+  .city .status{font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); margin-top:10px}
+</style>
+</head>
+<body>
+<div class="viewport">
+  <div class="world" id="world">
+
+    <!-- HOUSES : UP -->
+    <section class="sec" data-pos="0,-1" id="sec-houses">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Up - The Houses</p><h2>The Houses</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Down)</button></div>
+        <p class="secsub">The Espil House Collection, introduced the way a realtor wishes houses could be shown: full listings, spec sheets, and the parts that fit them out. The houses lived scattered on someone else's marketplace once. Their home is here now, introduced in full on my own platform.</p>
+        <h3 class="subh">Full listings</h3>
+        <p class="lede">Every house in the collection, introduced properly: what it is, how it was made, and what comes with it. These pages are the houses' home now - nothing here sends you elsewhere to understand them.</p>
+
+      <article class="listing">
+        <p class="no">Espil House Collection - No. 1</p>
+        <h3>Hexagon Palace</h3>
+        <img class="hero" src="img/house-spiral-top.jpg" alt="White circular Espil House model seen from above">
+        <p class="cap">Collection render - the white circular house form, seen from above.</p>
+        <p>The first house of the collection: a palace built on a six-sided idea, drawn as a full 3D habitat rather than a picture of one. Like every Espil House it is VR-ready, made to be walked through, and planted with a tree that belongs to this house alone. It was designed to be printed: a self-sustainable home that could one day be manufactured, not just modelled.</p>
+        <table class="spec">
+          <tr><th>Collection</th><td>Espil House Collection, No. 1</td></tr>
+          <tr><th>Format</th><td>3D habitat model - editable and printable</td></tr>
+          <tr><th>Made with</th><td>SketchUp, Enscape, Blender</td></tr>
+          <tr><th>Grounds</th><td>A unique tree, planted in the design for this house alone</td></tr>
+          <tr><th>Experience</th><td>VR-ready - built to be entered, not just viewed</td></tr>
+          <tr><th>Status</th><td>Collection piece - introduced in full here</td></tr>
+        </table>
+      </article>
+
+      <article class="listing">
+        <p class="no">Espil House Collection - No. 2</p>
+        <h3>Universe</h3>
+        <div class="trio">
+          <img src="img/universe-tree.jpg" alt="Universe house - courtyard with the red maple, Enscape render">
+          <img src="img/universe-day.jpg" alt="Universe house interior by day, Enscape render">
+          <img src="img/universe-night.jpg" alt="Universe house interior at night, Enscape render">
+        </div>
+        <p class="cap">Enscape renders of this house: the courtyard and its red maple, the interior by day, the same room after dark.</p>
+        <p>The second house, and the one you can already walk into: its courtyard holds a red maple under an open sky, and the rooms wrap around it. Universe is the collection's proof of its own idea - make your website into your house. Its Enscape viewer is live on this site, and it doubles as the sample of where the whole collection is heading: these houses are the future housing layer of Espil.Online.</p>
+        <table class="spec">
+          <tr><th>Collection</th><td>Espil House Collection, No. 2</td></tr>
+          <tr><th>Format</th><td>3D habitat model - editable and printable</td></tr>
+          <tr><th>Made with</th><td>SketchUp, Enscape, Blender</td></tr>
+          <tr><th>Grounds</th><td>A red maple in the central courtyard - this house's unique tree</td></tr>
+          <tr><th>Experience</th><td>VR-ready, with a live Enscape viewer on this site</td></tr>
+          <tr><th>Status</th><td>Collection piece - introduced in full here</td></tr>
+        </table>
+        <a class="visitbtn" href="/universe/">Walk through Universe</a>
+      </article>
+
+      <article class="listing">
+        <p class="no">Espil House Collection - No. 4</p>
+        <h3>Tree of Life</h3>
+        <img class="hero" src="img/house-front-tree.jpg" alt="An Espil House front elevation with a flowering tree">
+        <p class="cap">Collection render - an Espil House front elevation, the tree standing at its centre.</p>
+        <p>Every Espil House is planted with a unique tree; this house takes that rule as its whole subject. The tree is not landscaping added at the end - it is the centre the plan is organised around, the living part of a printed house. Tree of Life carries the collection's founding thought furthest: a house that sustains itself, in nature, without disturbing it.</p>
+        <table class="spec">
+          <tr><th>Collection</th><td>Espil House Collection, No. 4</td></tr>
+          <tr><th>Format</th><td>3D habitat model - editable and printable</td></tr>
+          <tr><th>Made with</th><td>SketchUp, Enscape, Blender</td></tr>
+          <tr><th>Grounds</th><td>The tree of life itself - the centre of the plan</td></tr>
+          <tr><th>Experience</th><td>VR-ready - built to be entered, not just viewed</td></tr>
+          <tr><th>Status</th><td>Collection piece - introduced in full here</td></tr>
+        </table>
+      </article>
+
+      <article class="listing">
+        <p class="no">Espil House Collection - No. 4</p>
+        <h3>Flower</h3>
+        <img class="hero" src="img/house-aerial-dusk.jpg" alt="The white circular Espil House at dusk">
+        <p class="cap">Collection render - the white circular house at dusk.</p>
+        <p>A house that opens like its namesake. Flower takes the collection's circular, petal-like planning and gives it a garden's character: rooms arranged as growth around a centre, a printed habitat that sits in its landscape the way a plant does. It shares the family traits - VR-ready, printable, its own unique tree - in the softest form the collection has.</p>
+        <table class="spec">
+          <tr><th>Collection</th><td>Espil House Collection, No. 4</td></tr>
+          <tr><th>Format</th><td>3D habitat model - editable and printable</td></tr>
+          <tr><th>Made with</th><td>SketchUp, Enscape, Blender</td></tr>
+          <tr><th>Grounds</th><td>A unique tree, planted in the design for this house alone</td></tr>
+          <tr><th>Experience</th><td>VR-ready - built to be entered, not just viewed</td></tr>
+          <tr><th>Status</th><td>Collection piece - introduced in full here</td></tr>
+        </table>
+      </article>
+
+      <p class="hint">The collection holds a fifth house whose original listing was never fully documented. It joins this page when its record is complete - I would rather show four houses properly than five carelessly.</p>
+        <h3 class="subh">Addon parts and finishes</h3>
+        <p class="lede">A house is the shell; these are the rooms and finishes that move in. The Espil Ceil House Addons are capsule rooms and packs that fit the collection's houses - whole rooms, delivered as parts, the way a realtor lists the fittings that come with a home. Credited to Bieclipse Design House.</p>
+      <div class="cards">
+        <div class="card"><img src="img/interior-living.jpg" alt="A capsule room interior with a tree growing through it"><div class="pad"><p class="no">Addon - Capsule Room</p><h3>Living Room Capsule</h3><p>The house's daytime heart as one fitted part: seating, light, and room for the tree to come through.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><img src="img/interior-entrance.jpg" alt="A stone-walled entrance passage in an Espil House"><div class="pad"><p class="no">Addon - Capsule Room</p><h3>Entrance Capsule</h3><p>The arrival: a stone-walled passage that slows the step from outside to inside.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><div class="pad"><p class="no">Addon - Capsule Room</p><h3>Bar Capsule</h3><p>A bar fitted as a single capsule - the social room of the house, delivered whole.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><div class="pad"><p class="no">Addon - Room</p><h3>3D Printer Room</h3><p>The room that explains the house: the printer space, where the next house gets made.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><div class="pad"><p class="no">Addon - Capsule Room</p><h3>Study Room Capsule</h3><p>A quiet capsule for work and reading, fitted to drop into any house in the collection.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><div class="pad"><p class="no">Addon - Pack</p><h3>Universe Pack</h3><p>The companion pack for the Universe house: the matching parts for the collection's second home.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+      </div>
+      <h3 style="margin-top:30px">How the parts are specified</h3>
+      <p style="font-size:15.5px; line-height:1.6; max-width:720px">Every addon carries a trait sheet, the way a listing carries its finishes. The categories the parts are specified in:</p>
+      <div class="traits"><span>Background</span><span>BGM</span><span>House Type</span><span>Floors</span><span>Paints</span><span>Trees</span><span>Portals</span><span>Clothings</span></div>
+      <p class="hint">The addons collection holds a seventh piece whose original listing was never fully documented; it joins this page when its record is complete.</p>
+        <h3 class="subh">Doors that open today</h3>
+        <p class="lede">Two of the collection's doors already open. Both viewers run on this site, in the browser - step in.</p>
+      <article class="listing">
+        <p class="no">Viewing - House No. 2</p>
+        <h3>Universe, in Enscape</h3>
+        <img class="hero" src="img/universe-day.jpg" alt="Universe house interior by day, Enscape render">
+        <p>The full Enscape viewer for the Universe house: the courtyard, the maple, the rooms by day and after dark. This is the collection's standing show home.</p>
+        <a class="visitbtn" href="/universe/">Enter the Universe viewer</a>
+      </article>
+      <article class="listing">
+        <p class="no">Viewing - The Sample House</p>
+        <h3>MROS, the free sample</h3>
+        <img class="hero" src="img/house-aerial-day.jpg" alt="The white circular Espil House in its grounds, seen from the air">
+        <p class="cap">Collection render - the circular house in its grounds.</p>
+        <p>MROS is the collection's free sample house: an Enscape 3D architectural viewer that lets anyone step inside the idea before anything else. If you walk one house today, the sample is the honest place to start.</p>
+        <a class="visitbtn" href="/mros/">Enter the MROS sample house</a>
+      </article>
+        <h3 class="subh">The story</h3>
+        <div class="tale"><p>Espil began with an obsession: a house I could not stop designing. Minimal, 3D-printed, set down in nature without disturbing it, and powered by its own hydroelectric and solar generation rather than the grid. The Espil House Collection is that obsession made into houses - each one a complete 3D habitat, VR-ready, editable and printable, with a tree that belongs to it alone.</p>
+      <p>Inside the idea sits a VR chamber that copies a place completely - its temperature, its humidity, its wind - so that being somewhere can be shared, not just shown. The houses and their models are traded inside Espil.Online, and one day they stop being a collection and become an address: the housing layer of the world I am building, where your website is your house and these designs are its first homes.</p>
+      <p>That is why these pages exist. A collection should be somewhere its maker controls, introduced in full, with its spec sheets and its story attached - not scattered across someone else's marketplace. So the houses live here now.</p>
+      <p class="provenance">Provenance: the Espil House Collection and the Espil Ceil House Addons were first minted on OpenSea in 2022. Their home is this page.</p></div>
+      </div>
+    </section>
+
+    <!-- FOOD AND INGREDIENTS : LEFT -->
+    <section class="sec" data-pos="-1,0" id="sec-food">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Left - Food and Ingredients</p><h2>Food and Ingredients</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Right)</button></div>
+        <p class="secsub">Two sides of one counter: what the guest orders from, and the system that makes it come out the same every time. The menu is Kuro Sushi's, designed by me in Figma; the recipe book behind it is the one I wrote and formatted at Sushi Umi, and it is shown in format only.</p>
+        <h3 class="subh">The Menu - Kuro Sushi</h3>
+        <p class="secsub">The menu I designed for Kuro Sushi in Figma - an original version and a revised "Live" version - rebuilt here as a working order page. It runs on the drag-to-cart I first built for the IMCHOICHOI cosmetics demo in December 2022: drag a dish into the basket, or tap Add. The basket is my cart, rebuilt for sushi. The items and prices below are loaded from the shop's own menu document, 메뉴 1123 (2020).</p>
+        <div class="chips" id="catChips"></div>
+        <p class="menunote" id="menuNote"></p>
+        <div class="grid" id="dishGrid"></div>
+        <div class="basket" id="basket">
+          <b>Drop dishes here - your basket</b>
+          <span id="basketLine">The basket is empty. Drag a dish in, or tap Add on any dish.</span>
+        </div>
+        <p class="foot">Menu source: the shop's own menu document, 메뉴 1123 (2020). Items and prices are loaded from that document. Where the document lists two servings or sizes, both prices are shown and the basket uses the first listed price. The two Kid's Combo entries are printed without prices in the document, so this page does not invent one for them.</p>
+        <p class="menunote">The menu design itself lives in Figma: <a href="https://www.figma.com/design/dgwMOLld1HBSVVE88GnZuc/kuro-sushi-and-japanese-bar?t=H9277MVoxMAhjGvu-0" target="_blank" rel="noopener">the original</a> and <a href="https://www.figma.com/design/A6dYoWOF2okjR2JGBTFUDd/kuro-sushi---bar?t=9j9pWheZy2nEtZsV-0" target="_blank" rel="noopener">the revised "Live" version</a>. The shop's physical signboard is also my work.</p>
+        <h3 class="subh">The Ingredients - the Sushi Umi recipe system</h3>
+        <p class="secsub">Alongside my design work I cooked part-time on hot foods at Sushi Umi for eight years, and I wrote and formatted the kitchen's recipe book: 21 standardized recipes, Korean and English side by side, every one in the same fixed format. The format is the portfolio piece. The quantities stay in the kitchen, so the document below shows its structure with the contents redacted.</p>
+        <div class="doc">
+          <div class="docband">SUSHI UMI RECIPE</div>
+          <div class="docbody">
+            <h3>Standardized Kitchen Recipe Book</h3>
+            <p style="margin:0; color:#4a463c; font-size:14px">One format for every recipe: name, ingredients in Korean and English, quantity, and method notes. Written at bulk kitchen scale so any cook on the line produces the same result.</p>
+            <div class="specs">
+              <span class="spec">21 recipes</span><span class="spec">Bilingual KO / EN</span>
+              <span class="spec">Fixed table format</span><span class="spec">4 pages</span><span class="spec">Format shown - contents redacted</span>
+            </div>
+            <div id="recipeGroups"></div>
+            <p class="locknote">These are a working restaurant's trade recipes. I show the document system I built - the categories, the bilingual layout, the discipline - and nothing of the recipes themselves.</p>
+          </div>
+        </div>
+        <p class="foot">The hot dishes on the menu above run on this system: the teriyaki, the katsu, the calamari, the gyoza, the udon.</p>
+      </div>
+    </section>
+
+    <!-- HOME : CENTER -->
+    <section class="sec" data-pos="0,0" id="sec-home">
+      <div class="inner">
+        <div class="brand">
+          <p class="kicker">AIO - All-in-One Service</p>
+          <div class="mark"><div class="kuro">AIO</div><div class="sub">ALL-IN-ONE SERVICE</div></div>
+          <h1>One service, five rooms: a house, a table, a shop, a guide, and a journey.</h1>
+          <p class="lede" style="margin:0 auto">I call it AIO, my all-in-one service. It began as everything a small restaurant needs - a menu, a recipe system, a cart, an assistant - and it grew: the houses I design, and the game that is travel itself. The rooms sit up, down, left and right of here, the way you move through Boundless Horizon, and Servo, at the bottom right, is your guide to all of them.</p>
+        </div>
+        <div class="tiles">
+          <div class="tile"><h3>The Houses - Up</h3><p>The Espil House Collection introduced like a realtor's listings: four houses with spec sheets, the capsule-room addons that fit them out, and the doors that already open.</p></div>
+          <div class="tile red"><h3>Food and Ingredients - Left</h3><p>Kuro Sushi's real menu, all 272 items from the shop's own 2020 document, and behind it the Sushi Umi recipe system in format only.</p></div>
+          <div class="tile gold"><h3>Shopping - Right</h3><p>My IMCHOICHOI drag-to-cart from 2022, rebuilt for this menu. Drag dishes in, set quantities, check out.</p></div>
+          <div class="tile teal"><h3>Travel, the Game - Down</h3><p>Espil Online: the game is travel. Enter a real city inside the Cauldron and walk it yourself - Vancouver today, Auckland for Zealandia.</p></div>
+          <div class="tile teal"><h3>Servo - Your Guide</h3><p>UseDesign Servo, my Peekobot-based chatbot, is no longer just on the counter. Servo guides the whole of AIO: ask where anything is, ask about any room, or say a dish name and Servo fills your basket.</p></div>
+        </div>
+        <p class="hint">Move with the edge buttons, the arrow keys, or the buttons inside each room. Escape returns here. The demo shop inside AIO is Kuro Sushi; its hours are Tuesday to Sunday, 11:30 am to 10:00 pm.</p>
+      </div>
+    </section>
+
+    <!-- SHOPPING : RIGHT -->
+    <section class="sec" data-pos="1,0" id="sec-cart">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Right - Shopping</p><h2>Shopping - Your Basket</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Left)</button></div>
+        <p class="secsub">The IMCHOICHOI cart, rebuilt: the same drag-and-drop basket, now with quantities, totals and a checkout. You can also drop dishes straight onto the table below.</p>
+        <div class="basket" id="basket2"><b>Drop dishes here</b><span>Drag any dish from the menu (Left) onto this basket.</span></div>
+        <div id="cartArea"></div>
+        <div class="totals" id="totals" style="display:none">
+          <div class="tr"><span>Subtotal</span><span id="tSub">$0.00</span></div>
+          <div class="tr"><span>GST (5%)</span><span id="tGst">$0.00</span></div>
+          <div class="tr grand"><span>Total</span><span id="tAll">$0.00</span></div>
+          <button class="checkout" id="checkoutBtn">Place the order</button>
+        </div>
+        <div class="confirm" id="confirmBox">
+          <h3>Order placed - thank you.</h3>
+          <p id="confirmText" style="margin:0; line-height:1.6"></p>
+          <p style="margin:10px 0 0"><button class="homebtn" data-go="0,0">Back to Home</button></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAVEL, THE GAME : DOWN -->
+    <section class="sec" data-pos="0,1" id="sec-travel">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Down - Travel, the Game</p><h2>The game is a journey</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Up)</button></div>
+        <div class="tale">
+          <p>People ask what the game in AIO is. It is travel. Espil Online is the world I am building inside the Cauldron, and you do not watch it from above: you enter a real city and walk it yourself, at street level, on your own two feet.</p>
+          <p>I studied tourism because I hold a conviction about it. A screen can introduce a culture, and social channels do their best at sharing one, but they only attempt it. Only visiting a place in person and walking its streets yourself truly shares a culture. So the game is built as traveling: real streets, real building footprints and heights, real weather of a place - a journey first, and a game because the journey is one.</p>
+        </div>
+        <div class="cities">
+          <div class="city"><h3>Vancouver</h3><p>The first city, and my home. The living world of Espil Online today: enter it and walk the downtown I rebuilt from the city's own map data, street by street.</p><p class="status">The world as it stands</p></div>
+          <div class="city"><h3>Auckland - Zealandia</h3><p>Zealandia, the hidden sunken land under New Zealand, gets its game - and it starts in Auckland, the capital of 1841 to 1865, where the old maps fit the story. The Queen Street corridor is its first ground.</p><p class="status">The starting city of Zealandia</p></div>
+        </div>
+        <div class="tale" style="margin-top:22px">
+          <p>The houses above are the other end of this journey. They are the future housing layer of the same world: travel far enough through Espil Online, and one of those houses is your home in it. House, table, shop, guide, journey - one service, because in the end they are one world.</p>
+        </div>
+        <a class="visitbtn" href="https://espil.online" target="_blank" rel="noopener">Enter Espil Online</a>
+        <p class="foot">Espil Online is entered at espil.online - the Cauldron is the space, and the world inside it is the journey.</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="compass" id="compass">You are at: AIO Home</div>
+<button class="edge up" id="edgeUp">Up - The Houses</button>
+<button class="edge left" id="edgeLeft">Left - Food and Ingredients</button>
+<button class="edge right" id="edgeRight">Right - Shopping</button>
+<button class="edge down" id="edgeDown">Down - Travel, the Game</button>
+
+<button id="servoBtn" type="button">Ask Servo</button>
+<div id="servoPanel" role="dialog" aria-label="Servo, your guide to AIO">
+  <div class="sv-head"><b>Servo</b><span class="badge" style="margin-left:0">UseDesign Servo - Your Guide</span><span>Your guide to all of AIO: the houses, the food, the shopping and the journey - and the counter assistant for Kuro Sushi's real menu. Ask me where anything is.</span></div>
+  <div class="sv-log" id="svLog"></div>
+  <div class="sv-chips" id="svChips"></div>
+  <form class="sv-in" id="svForm"><input id="svInput" type="text" placeholder="Ask Servo: the houses, travel, the menu, or say: add tuna nigiri" autocomplete="off"><button type="submit">Send</button></form>
+</div>
+
+<script>
+/* ================= MENU DATA (real Kuro menu, loaded from 메뉴 1123, 2020) ================= */
+var MENU = [
+  {"id": "appetizers-edamame", "cat": "Appetizers", "name": "Edamame", "desc": "Boiled beans lightly seasoned with salt.", "price": 4.5},
+  {"id": "appetizers-spinach-gomae", "cat": "Appetizers", "name": "Spinach Gomae", "desc": "Spinach with sesame sauce.", "price": 4.5},
+  {"id": "appetizers-spring-rolls", "cat": "Appetizers", "name": "Spring Rolls", "desc": "4 pieces; with sweet chilli sauce.", "price": 4.0},
+  {"id": "appetizers-veggie-sunomono", "cat": "Appetizers", "name": "Veggie Sunomono", "desc": "Cold vermicelli noodle with veggie.", "price": 5.0},
+  {"id": "appetizers-ebi-sunomono", "cat": "Appetizers", "name": "Ebi Sunomono", "desc": "Shrimp.", "price": 5.5},
+  {"id": "appetizers-tako-sunomono", "cat": "Appetizers", "name": "Tako Sunomono", "desc": "Octopus.", "price": 5.5},
+  {"id": "appetizers-pork-gyoza", "cat": "Appetizers", "name": "Pork Gyoza", "desc": "5 pieces; pan fried pork & veggie dumplings.", "price": 5.5},
+  {"id": "appetizers-flat-gyoza", "cat": "Appetizers", "name": "Flat Gyoza", "desc": "4 pieces; deep fried veggie dumplings.", "price": 5.5},
+  {"id": "appetizers-ebi-gyoza", "cat": "Appetizers", "name": "Ebi Gyoza", "desc": "4 pieces; cooked full-size shrimp with pork & veggie.", "price": 6.0},
+  {"id": "appetizers-takoyaki", "cat": "Appetizers", "name": "Takoyaki", "desc": "5 pieces; Japanese style deep fried octopus balls.", "price": 5.0},
+  {"id": "appetizers-croquette", "cat": "Appetizers", "name": "Croquette", "desc": "2 pieces; deep fried kabocha croquette.", "price": 5.0},
+  {"id": "appetizers-agedashi-tofu", "cat": "Appetizers", "name": "Agedashi Tofu", "desc": "Deep fried tofu.", "price": 5.0},
+  {"id": "appetizers-spicy-agedashi-tofu", "cat": "Appetizers", "name": "Spicy Agedashi Tofu", "desc": "Deep fried tofu with spicy sauce.", "price": 6.0},
+  {"id": "appetizers-chicken-karaage", "cat": "Appetizers", "name": "Chicken Karaage", "desc": "7 pieces; deep fried boneless chicken with fresh salad.", "price": 8.0},
+  {"id": "appetizers-calamari", "cat": "Appetizers", "name": "Calamari", "desc": "Marinated deep fried squid with fresh salad.", "price": 9.0},
+  {"id": "appetizers-soft-shell-crab", "cat": "Appetizers", "name": "Soft Shell Crab", "desc": "Deep fried soft shell crab with fresh salad.", "price": 12.0},
+  {"id": "appetizers-tako-wasabi", "cat": "Appetizers", "name": "Tako Wasabi", "desc": "Chopped raw octopus with wasabi flavoured sauce.", "price": 6.0},
+  {"id": "appetizers-tuna-tataki", "cat": "Appetizers", "name": "Tuna Tataki", "desc": "Seared tuna with ponzu sauce.", "price": 12.0},
+  {"id": "appetizers-beef-tataki", "cat": "Appetizers", "name": "Beef Tataki", "desc": "Seared AAA grade beef with ponzu sauce.", "price": 13.0},
+  {"id": "appetizers-sushi-pizza", "cat": "Appetizers", "name": "Sushi Pizza", "desc": "Deep-fried rice dough, crab meat, avocado, 3 pcs tuna, 3 pcs salmon, masago, green onion with BBQ & spicy mayo sauce.", "price": 12.5},
+  {"id": "side-items-miso-soup", "cat": "Side Items", "name": "Miso Soup", "desc": "Fermented soy bean soup.", "price": 1.5},
+  {"id": "side-items-white-rice", "cat": "Side Items", "name": "White Rice", "desc": "Side item.", "price": 2.0},
+  {"id": "side-items-black-rice", "cat": "Side Items", "name": "Black Rice", "desc": "Side item.", "price": 2.5},
+  {"id": "side-items-sushi-rice", "cat": "Side Items", "name": "Sushi Rice", "desc": "Side item.", "price": 2.5},
+  {"id": "side-items-sushi-black-rice", "cat": "Side Items", "name": "Sushi Black Rice", "desc": "Side item.", "price": 3.0},
+  {"id": "side-items-extra-side-sauce", "cat": "Side Items", "name": "Extra Side Sauce", "desc": "Side item.", "price": 0.5},
+  {"id": "salad-wakame-salad", "cat": "Salad", "name": "Wakame Salad", "desc": "Japanese seaweed salad.", "price": 4.5},
+  {"id": "salad-house-green-salad", "cat": "Salad", "name": "House Green Salad", "desc": "Salad.", "price": 6.0},
+  {"id": "salad-tuna-gomae-salad", "cat": "Salad", "name": "Tuna Gomae Salad", "desc": "Salad.", "price": 9.0},
+  {"id": "salad-sashimi-salad", "cat": "Salad", "name": "Sashimi Salad", "desc": "Assorted sashimi and mixed green salad with special sauce.", "price": 13.0},
+  {"id": "grilled-bbq-salmon-kama", "cat": "Grilled BBQ", "name": "Salmon Kama", "desc": "Grilled salmon neck with sauce (Teriyaki, Salt & Pepper, or Spicy).", "price": 7.0},
+  {"id": "grilled-bbq-wild-salmon-kama", "cat": "Grilled BBQ", "name": "Wild Salmon Kama", "desc": "Grilled wild salmon neck with sauce (Teriyaki, Salt & Pepper, or Spicy).", "price": 7.5},
+  {"id": "grilled-bbq-hamachi-kama", "cat": "Grilled BBQ", "name": "Hamachi Kama", "desc": "Grilled yellowtail neck with sauce (Teriyaki, Salt & Pepper, or Spicy).", "price": 9.0},
+  {"id": "grilled-bbq-saba-shioyaki", "cat": "Grilled BBQ", "name": "Saba Shioyaki", "desc": "Grilled seasoned mackerel.", "price": 9.0},
+  {"id": "grilled-bbq-ika-maruyaki", "cat": "Grilled BBQ", "name": "Ika Maruyaki", "desc": "Grilled squid.", "price": 9.0},
+  {"id": "grilled-bbq-yakitori", "cat": "Grilled BBQ", "name": "Yakitori", "desc": "2 pieces; grilled chicken skewers with sauce (Teriyaki, Salt & Pepper, or Spicy).", "price": 8.0},
+  {"id": "grilled-bbq-black-cod", "cat": "Grilled BBQ", "name": "Black Cod", "desc": "Grilled black cod marinated with miso sauce.", "price": 12.0},
+  {"id": "sashimi-tuna-sashimi", "cat": "Sashimi", "name": "Tuna Sashimi", "desc": "5 pieces / 10 pieces.", "price": 6.75, "priceLabel": "$6.75 / $13.00"},
+  {"id": "sashimi-salmon-sashimi", "cat": "Sashimi", "name": "Salmon Sashimi", "desc": "5 pieces / 10 pieces.", "price": 6.75, "priceLabel": "$6.75 / $13.00"},
+  {"id": "sashimi-wild-salmon-sashimi", "cat": "Sashimi", "name": "Wild Salmon Sashimi", "desc": "4 pieces / 8 pieces.", "price": 8.0, "priceLabel": "$8.00 / $15.50"},
+  {"id": "sashimi-tuna-salmon-sashimi", "cat": "Sashimi", "name": "Tuna & Salmon Sashimi", "desc": "5 pieces / 10 pieces.", "price": 6.75, "priceLabel": "$6.75 / $13.00"},
+  {"id": "sashimi-red-tuna-sashimi", "cat": "Sashimi", "name": "Red Tuna Sashimi", "desc": "4 pieces / 8 pieces.", "price": 9.5, "priceLabel": "$9.50 / $18.00"},
+  {"id": "sashimi-hamachi-sashimi", "cat": "Sashimi", "name": "Hamachi Sashimi", "desc": "6 pieces.", "price": 15.0},
+  {"id": "sashimi-toro-sashimi", "cat": "Sashimi", "name": "Toro Sashimi", "desc": "5 pieces. Tuna belly.", "price": 9.0},
+  {"id": "sashimi-saba-sashimi", "cat": "Sashimi", "name": "Saba Sashimi", "desc": "5 pieces. Marinated mackerel.", "price": 9.0},
+  {"id": "sashimi-tako-sashimi", "cat": "Sashimi", "name": "Tako Sashimi", "desc": "7 pieces. Octopus.", "price": 13.0},
+  {"id": "sashimi-amaebi-sashimi", "cat": "Sashimi", "name": "Amaebi Sashimi", "desc": "5 pieces. Sweet prawn.", "price": 18.0},
+  {"id": "sashimi-hokkigai-sashimi", "cat": "Sashimi", "name": "Hokkigai Sashimi", "desc": "5 pieces / 10 pieces. Surf clam.", "price": 7.0, "priceLabel": "$7.00 / $13.00"},
+  {"id": "sashimi-spicy-salmon-sashimi", "cat": "Sashimi", "name": "Spicy Salmon Sashimi", "desc": "Half / full.", "price": 7.5, "priceLabel": "$7.50 / $14.00"},
+  {"id": "sashimi-spicy-tuna-sashimi", "cat": "Sashimi", "name": "Spicy Tuna Sashimi", "desc": "Half / full.", "price": 7.5, "priceLabel": "$7.50 / $14.00"},
+  {"id": "sashimi-assorted-sashimi", "cat": "Sashimi", "name": "Assorted Sashimi", "desc": "13 pieces. 3 pcs salmon, 3 pcs tuna, 3 pcs sockeye and 4 pcs of chef's choice sashimi.", "price": 21.0},
+  {"id": "sashimi-deluxe-assorted-sashimi", "cat": "Sashimi", "name": "Deluxe Assorted Sashimi", "desc": "20 pieces. 3 pcs salmon, 3 pcs tuna, 3 pcs sockeye, 3 pcs tako, 2 pcs hamachi, 2 pcs amaebi, and 4 pcs of chef's choice sashimi.", "price": 33.0},
+  {"id": "nigiri-inari-nigiri", "cat": "Nigiri", "name": "Inari Nigiri", "desc": "Bean curd.", "price": 1.75},
+  {"id": "nigiri-avocado-nigiri", "cat": "Nigiri", "name": "Avocado Nigiri", "desc": "Per piece.", "price": 1.75},
+  {"id": "nigiri-tamago-nigiri", "cat": "Nigiri", "name": "Tamago Nigiri", "desc": "Egg.", "price": 1.75},
+  {"id": "nigiri-salmon-nigiri", "cat": "Nigiri", "name": "Salmon Nigiri", "desc": "Per piece.", "price": 1.95},
+  {"id": "nigiri-tuna-nigiri", "cat": "Nigiri", "name": "Tuna Nigiri", "desc": "Per piece.", "price": 1.95},
+  {"id": "nigiri-red-tuna-nigiri", "cat": "Nigiri", "name": "Red Tuna Nigiri", "desc": "Per piece.", "price": 3.0},
+  {"id": "nigiri-toro-nigiri", "cat": "Nigiri", "name": "Toro Nigiri", "desc": "Tuna belly.", "price": 2.75},
+  {"id": "nigiri-ebi-nigiri", "cat": "Nigiri", "name": "Ebi Nigiri", "desc": "Prawn.", "price": 1.95},
+  {"id": "nigiri-tai-nigiri", "cat": "Nigiri", "name": "Tai Nigiri", "desc": "Red snapper.", "price": 1.95},
+  {"id": "nigiri-hamachi-nigiri", "cat": "Nigiri", "name": "Hamachi Nigiri", "desc": "Yellow tail.", "price": 3.5},
+  {"id": "nigiri-wild-salmon-nigiri", "cat": "Nigiri", "name": "Wild Salmon Nigiri", "desc": "Sockeye.", "price": 2.75},
+  {"id": "nigiri-tako-nigiri", "cat": "Nigiri", "name": "Tako Nigiri", "desc": "Octopus.", "price": 2.5},
+  {"id": "nigiri-sake-toro-nigiri", "cat": "Nigiri", "name": "Sake Toro Nigiri", "desc": "Salmon belly.", "price": 2.75},
+  {"id": "nigiri-amaebi-nigiri", "cat": "Nigiri", "name": "Amaebi Nigiri", "desc": "Sweet shrimp.", "price": 3.25},
+  {"id": "nigiri-saba-nigiri", "cat": "Nigiri", "name": "Saba Nigiri", "desc": "Marinated mackerel.", "price": 2.5},
+  {"id": "nigiri-ika-nigiri", "cat": "Nigiri", "name": "Ika Nigiri", "desc": "Squid.", "price": 2.5},
+  {"id": "nigiri-hokkigai-nigiri", "cat": "Nigiri", "name": "Hokkigai Nigiri", "desc": "Surf clam.", "price": 1.95},
+  {"id": "nigiri-hotate-nigiri", "cat": "Nigiri", "name": "Hotate Nigiri", "desc": "Jumbo scallop.", "price": 3.0},
+  {"id": "nigiri-chopped-scallop-nigiri", "cat": "Nigiri", "name": "Chopped Scallop Nigiri", "desc": "Per piece.", "price": 2.5},
+  {"id": "nigiri-masago-nigiri", "cat": "Nigiri", "name": "Masago Nigiri", "desc": "Smelt fish roe.", "price": 2.0},
+  {"id": "nigiri-tobiko-nigiri", "cat": "Nigiri", "name": "Tobiko Nigiri", "desc": "Flying fish roe.", "price": 2.5},
+  {"id": "nigiri-ikura-nigiri", "cat": "Nigiri", "name": "Ikura Nigiri", "desc": "Salmon roe.", "price": 3.0},
+  {"id": "nigiri-negitoro-nigiri", "cat": "Nigiri", "name": "Negitoro Nigiri", "desc": "Chopped toro with green onion.", "price": 3.0},
+  {"id": "nigiri-negihamachi-nigiri", "cat": "Nigiri", "name": "Negihamachi Nigiri", "desc": "Chopped hamachi with green onion.", "price": 3.75},
+  {"id": "nigiri-unagi-nigiri", "cat": "Nigiri", "name": "Unagi Nigiri", "desc": "BBQ eel.", "price": 3.0},
+  {"id": "nigiri-uni-nigiri", "cat": "Nigiri", "name": "Uni Nigiri", "desc": "Sea urchins.", "price": 4.0},
+  {"id": "aburi-oshi-sushi-salmon-oshi", "cat": "Aburi Oshi Sushi", "name": "Salmon Oshi", "desc": "6 pieces. Furikake, salmon, oshi sauce, onion sauce, Jalapeno on top.", "price": 11.5},
+  {"id": "aburi-oshi-sushi-ebi-oshi", "cat": "Aburi Oshi Sushi", "name": "Ebi Oshi", "desc": "6 pieces. Furikake, Tiger prawn, oshi sauce, onion sauce, tobiko on top.", "price": 11.5},
+  {"id": "aburi-oshi-sushi-scallop-oshi", "cat": "Aburi Oshi Sushi", "name": "Scallop Oshi", "desc": "6 pieces. Furikake, chopped scallop, tobiko, green onion, oshi sauce, special sauce.", "price": 12.5},
+  {"id": "aburi-oshi-sushi-saba-oshi", "cat": "Aburi Oshi Sushi", "name": "Saba Oshi", "desc": "6 pieces. Paprika, marinated mackerel, oshi sauce, garlic chips, green onion.", "price": 12.5},
+  {"id": "aburi-oshi-sushi-unagi-oshi", "cat": "Aburi Oshi Sushi", "name": "Unagi Oshi", "desc": "6 pieces. Paprika, BBQ eel, garlic chips, green onion, sesame seed, BBQ sauce.", "price": 13.5},
+  {"id": "aburi-oshi-sushi-spicy-tuna-oshi", "cat": "Aburi Oshi Sushi", "name": "Spicy Tuna Oshi", "desc": "6 pieces. Cream cheese, paprika, spicy tuna, Korean spicy sauce, jalapeno, garlic flakes.", "price": 14.0},
+  {"id": "rolls-tuna-roll", "cat": "Rolls", "name": "Tuna Roll", "desc": "6 pieces.", "price": 3.75},
+  {"id": "rolls-salmon-roll", "cat": "Rolls", "name": "Salmon Roll", "desc": "6 pieces.", "price": 3.75},
+  {"id": "rolls-smoked-salmon-roll", "cat": "Rolls", "name": "Smoked Salmon Roll", "desc": "6 pieces.", "price": 3.95},
+  {"id": "rolls-wild-salmon-roll", "cat": "Rolls", "name": "Wild Salmon Roll", "desc": "6 pieces.", "price": 4.25},
+  {"id": "rolls-red-tuna-roll", "cat": "Rolls", "name": "Red Tuna Roll", "desc": "6 pieces.", "price": 5.25},
+  {"id": "rolls-kappa-roll", "cat": "Rolls", "name": "Kappa Roll", "desc": "6 pieces; cucumber.", "price": 3.25},
+  {"id": "rolls-asparagus-roll", "cat": "Rolls", "name": "Asparagus Roll", "desc": "6 pieces.", "price": 3.25},
+  {"id": "rolls-oshinko-roll", "cat": "Rolls", "name": "Oshinko Roll", "desc": "6 pieces; yellow pickled radish.", "price": 3.25},
+  {"id": "rolls-kanpyo-roll", "cat": "Rolls", "name": "Kanpyo Roll", "desc": "6 pieces; dried gourd strip.", "price": 3.25},
+  {"id": "rolls-tamago-roll", "cat": "Rolls", "name": "Tamago Roll", "desc": "6 pieces; egg.", "price": 3.25},
+  {"id": "rolls-negitoro-roll", "cat": "Rolls", "name": "Negitoro Roll", "desc": "6 pieces; chopped tuna belly with green onion.", "price": 4.25},
+  {"id": "rolls-negihamachi-roll", "cat": "Rolls", "name": "Negihamachi Roll", "desc": "6 pieces; chopped hamachi with green onion.", "price": 5.5},
+  {"id": "rolls-california-roll", "cat": "Rolls", "name": "California Roll", "desc": "8 pieces; crab meat, avocado, cucumber.", "price": 4.5},
+  {"id": "rolls-avocado-roll", "cat": "Rolls", "name": "Avocado Roll", "desc": "8 pieces.", "price": 4.5},
+  {"id": "rolls-avokappa-roll", "cat": "Rolls", "name": "Avokappa Roll", "desc": "8 pieces.", "price": 4.5},
+  {"id": "rolls-salmon-avocado-roll", "cat": "Rolls", "name": "Salmon & Avocado Roll", "desc": "8 pieces; avocado, cucumber, salmon.", "price": 5.5},
+  {"id": "rolls-tuna-avocado-roll", "cat": "Rolls", "name": "Tuna & Avocado Roll", "desc": "8 pieces; avocado, cucumber, tuna.", "price": 5.5},
+  {"id": "rolls-inari-roll", "cat": "Rolls", "name": "Inari Roll", "desc": "8 pieces; bean curd.", "price": 3.5},
+  {"id": "rolls-shitake-roll", "cat": "Rolls", "name": "Shitake Roll", "desc": "8 pieces; marinated mushroom.", "price": 4.5},
+  {"id": "rolls-spinach-gomae-roll", "cat": "Rolls", "name": "Spinach Gomae Roll", "desc": "8 pieces.", "price": 4.5},
+  {"id": "rolls-spicy-salmon-roll", "cat": "Rolls", "name": "Spicy Salmon Roll", "desc": "8 pieces; cucumber, spicy salmon.", "price": 5.25},
+  {"id": "rolls-spicy-tuna-roll", "cat": "Rolls", "name": "Spicy Tuna Roll", "desc": "8 pieces; cucumber, spicy tuna.", "price": 5.25},
+  {"id": "rolls-crunchy-spicy-salmon-roll", "cat": "Rolls", "name": "Crunchy Spicy Salmon Roll", "desc": "8 pieces; cucumber, spicy salmon with tempura crumble.", "price": 5.75},
+  {"id": "rolls-crunchy-spicy-tuna-roll", "cat": "Rolls", "name": "Crunchy Spicy Tuna Roll", "desc": "8 pieces; cucumber, spicy tuna with tempura crumble.", "price": 5.75},
+  {"id": "rolls-chopped-scallop-roll", "cat": "Rolls", "name": "Chopped Scallop Roll", "desc": "8 pieces; cucumber, mayo, masago, chopped scallop.", "price": 5.25},
+  {"id": "rolls-spicy-chopped-scallop-roll", "cat": "Rolls", "name": "Spicy Chopped Scallop Roll", "desc": "8 pieces; chopped scallop roll with Korean spicy sauce.", "price": 5.75},
+  {"id": "rolls-yam-tempura-roll", "cat": "Rolls", "name": "Yam Tempura Roll", "desc": "8 pieces.", "price": 4.5},
+  {"id": "rolls-yam-avocado-roll", "cat": "Rolls", "name": "Yam & Avocado Roll", "desc": "8 pieces.", "price": 5.25},
+  {"id": "rolls-yam-mushroom-roll", "cat": "Rolls", "name": "Yam & Mushroom Roll", "desc": "8 pieces.", "price": 5.25},
+  {"id": "rolls-bc-roll", "cat": "Rolls", "name": "BC Roll", "desc": "6 pieces; salmon skin, mayo, cucumber, masago, lettuce.", "price": 4.75},
+  {"id": "rolls-spam-roll", "cat": "Rolls", "name": "Spam Roll", "desc": "8 pieces.", "price": 4.0},
+  {"id": "rolls-deep-fried-california-roll", "cat": "Rolls", "name": "Deep Fried California Roll", "desc": "10 pieces; with spicy mayo & bbq sauce.", "price": 6.5},
+  {"id": "rolls-veggie-roll", "cat": "Rolls", "name": "Veggie Roll", "desc": "6 pieces; cucumber, avocado, oshinko, carrot, red cabbage, radish, beet, lettuce.", "price": 5.0},
+  {"id": "rolls-veggie-tem-roll", "cat": "Rolls", "name": "Veggie-Tem Roll", "desc": "6 pieces; 4 kinds of veggie tem, cucumber.", "price": 5.5},
+  {"id": "rolls-double-s-roll", "cat": "Rolls", "name": "Double S Roll", "desc": "6 pieces; crab meat, avocado, cucumber, masago, smoked salmon on top.", "price": 5.75},
+  {"id": "rolls-beef-teriyaki-roll", "cat": "Rolls", "name": "Beef Teriyaki Roll", "desc": "6 pieces; cucumber, beef, teriyaki sauce.", "price": 5.25},
+  {"id": "rolls-chicken-teriyaki-roll", "cat": "Rolls", "name": "Chicken Teriyaki Roll", "desc": "6 pieces; cucumber, chicken, teriyaki sauce.", "price": 5.25},
+  {"id": "rolls-dynamite-roll", "cat": "Rolls", "name": "Dynamite Roll", "desc": "6 pieces; crab meat, avocado, cucumber, masago, 2 prawns tempura.", "price": 5.5},
+  {"id": "rolls-fillet-o-fish-roll", "cat": "Rolls", "name": "Fillet-O-Fish Roll", "desc": "8 pieces; cucumber, deep fried basa, tartar sauce.", "price": 4.5},
+  {"id": "rolls-spicy-tempura-roll", "cat": "Rolls", "name": "Spicy Tempura Roll", "desc": "6 pieces; cucumber, mayo, deep fried spicy tuna, tonkatsu sauce.", "price": 5.75},
+  {"id": "rolls-unagi-roll", "cat": "Rolls", "name": "Unagi Roll", "desc": "8 pieces; cucumber, BBQ eel, BBQ sauce.", "price": 5.95},
+  {"id": "rolls-house-roll", "cat": "Rolls", "name": "House Roll", "desc": "6 pieces; crab meat, avocado, cucumber, tuna, salmon, tamago, masago.", "price": 5.95},
+  {"id": "rolls-salifornia-roll", "cat": "Rolls", "name": "Salifornia Roll", "desc": "6 pieces; deep fried roll with salmon, avocado, crab meat with special sauce.", "price": 5.95},
+  {"id": "rolls-mango-avocado-roll", "cat": "Rolls", "name": "Mango Avocado Roll", "desc": "8 pieces.", "price": 5.95},
+  {"id": "rolls-crunchy-calamari-roll", "cat": "Rolls", "name": "Crunchy Calamari Roll", "desc": "6 pieces. Deep-fried squid, crab meat, marinated onion with tempura crumble, special sauce.", "price": 6.5},
+  {"id": "temaki-tuna-hand-roll", "cat": "Temaki", "name": "Tuna Hand Roll", "desc": "Hand roll.", "price": 3.95},
+  {"id": "temaki-salmon-hand-roll", "cat": "Temaki", "name": "Salmon Hand Roll", "desc": "Hand roll.", "price": 3.95},
+  {"id": "temaki-wild-salmon-hand-roll", "cat": "Temaki", "name": "Wild Salmon Hand Roll", "desc": "Hand roll.", "price": 4.45},
+  {"id": "temaki-red-tuna-hand-roll", "cat": "Temaki", "name": "Red Tuna Hand Roll", "desc": "Hand roll.", "price": 5.45},
+  {"id": "temaki-tobiko-hand-roll", "cat": "Temaki", "name": "Tobiko Hand Roll", "desc": "Hand roll.", "price": 5.0},
+  {"id": "temaki-masago-hand-roll", "cat": "Temaki", "name": "Masago Hand Roll", "desc": "Hand roll.", "price": 4.0},
+  {"id": "temaki-ikura-hand-roll", "cat": "Temaki", "name": "Ikura Hand Roll", "desc": "Hand roll.", "price": 6.0},
+  {"id": "temaki-negitoro-hand-roll", "cat": "Temaki", "name": "Negitoro Hand Roll", "desc": "Hand roll.", "price": 4.25},
+  {"id": "temaki-negihamachi-hand-roll", "cat": "Temaki", "name": "Negihamachi Hand Roll", "desc": "Hand roll.", "price": 5.5},
+  {"id": "temaki-california-hand-roll", "cat": "Temaki", "name": "California Hand Roll", "desc": "Hand roll.", "price": 4.5},
+  {"id": "temaki-spicy-tuna-or-salmon-hand-roll", "cat": "Temaki", "name": "Spicy Tuna Or Salmon Hand Roll", "desc": "Hand roll.", "price": 5.25},
+  {"id": "temaki-chopped-scallop-hand-roll", "cat": "Temaki", "name": "Chopped Scallop Hand Roll", "desc": "Hand roll.", "price": 5.25},
+  {"id": "temaki-spicy-chopped-scallop-hand-roll", "cat": "Temaki", "name": "Spicy Chopped Scallop Hand Roll", "desc": "Hand roll.", "price": 5.75},
+  {"id": "temaki-avocado-hand-roll", "cat": "Temaki", "name": "Avocado Hand Roll", "desc": "Hand roll.", "price": 4.5},
+  {"id": "temaki-yam-tempura-hand-roll", "cat": "Temaki", "name": "Yam Tempura Hand Roll", "desc": "Hand roll.", "price": 4.5},
+  {"id": "temaki-dynamite-hand-roll", "cat": "Temaki", "name": "Dynamite Hand Roll", "desc": "Hand roll.", "price": 5.5},
+  {"id": "temaki-bc-hand-roll", "cat": "Temaki", "name": "BC Hand Roll", "desc": "Hand roll.", "price": 4.75},
+  {"id": "temaki-unagi-hand-roll", "cat": "Temaki", "name": "Unagi Hand Roll", "desc": "Hand roll.", "price": 5.95},
+  {"id": "temaki-tamago-hand-roll", "cat": "Temaki", "name": "Tamago Hand Roll", "desc": "Hand roll.", "price": 3.25},
+  {"id": "temaki-oshinko-hand-roll", "cat": "Temaki", "name": "Oshinko Hand Roll", "desc": "Hand roll.", "price": 3.25},
+  {"id": "temaki-kappa-hand-roll", "cat": "Temaki", "name": "Kappa Hand Roll", "desc": "Hand roll.", "price": 3.25},
+  {"id": "special-rolls-dragon-roll", "cat": "Special Rolls", "name": "Dragon Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: unagi, avocado, tobiko, green onion, special sauce.", "price": 11.5},
+  {"id": "special-rolls-red-dragon-roll", "cat": "Special Rolls", "name": "Red Dragon Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: unagi, spicy tuna, tobiko, green onion, special sauce.", "price": 12.5},
+  {"id": "special-rolls-gold-dragon-roll", "cat": "Special Rolls", "name": "Gold Dragon Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: mango and avocado on top with special sauce.", "price": 10.5},
+  {"id": "special-rolls-veggie-dragon-roll", "cat": "Special Rolls", "name": "Veggie Dragon Roll", "desc": "8 pieces. Inside: asparagus, avocado. Outside: yam, spinach gomae on top with special veggie sauce.", "price": 9.0},
+  {"id": "special-rolls-drunken-tiger-roll", "cat": "Special Rolls", "name": "Drunken Tiger Roll", "desc": "8 pieces. Inside: cream cheese, deep fried unagi. Outside: ebi, avocado, special sauce.", "price": 10.5},
+  {"id": "special-rolls-red-roll", "cat": "Special Rolls", "name": "Red Roll", "desc": "8 pieces. Inside: cucumber, chopped scallop. Outside: spicy tuna, green onion, tempura crumble.", "price": 11.5},
+  {"id": "special-rolls-tuna-tataki-roll", "cat": "Special Rolls", "name": "Tuna Tataki Roll", "desc": "8 pieces. Inside: cucumber, crab meat, avocado. Outside: aburi tuna, green onion, marinated onion, tobiko, special sauce.", "price": 12.0},
+  {"id": "special-rolls-jalapeno-roll", "cat": "Special Rolls", "name": "Jalapeno Roll", "desc": "8 pieces. Inside: deep fried jalapeno with cream cheese and spicy tuna. Outside: special sauce with yam flakes.", "price": 11.5},
+  {"id": "special-rolls-pop-pop-roll", "cat": "Special Rolls", "name": "Pop Pop Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: deep fried scallop, yam flakes, special sauce.", "price": 12.0},
+  {"id": "special-rolls-crazy-roll", "cat": "Special Rolls", "name": "Crazy Roll", "desc": "10 pieces. Deep fried california roll with cream cheese and special sauce, yam flakes.", "price": 8.75},
+  {"id": "special-rolls-caterpillar-roll", "cat": "Special Rolls", "name": "Caterpillar Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: avocado & special sauce, sesame seed.", "price": 9.95},
+  {"id": "special-rolls-fire-volcano-roll", "cat": "Special Rolls", "name": "Fire Volcano Roll", "desc": "10 pieces. Deep fried spicy tuna with cream cheese, spicy tuna/salmon sashimi on top, green onion, yam flakes, special sauce.", "price": 12.5},
+  {"id": "special-rolls-mozza-white-roll", "cat": "Special Rolls", "name": "Mozza White Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: aburi scallop with mozza, yam flakes, special sauce.", "price": 11.0},
+  {"id": "special-rolls-queen-elizabeth-roll", "cat": "Special Rolls", "name": "Queen Elizabeth Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: aburi spicy salmon, yam flakes, special sauce.", "price": 11.0},
+  {"id": "special-rolls-jame-s-roll", "cat": "Special Rolls", "name": "Jame's Roll", "desc": "10 pieces. Deep fried spicy tuna with cream cheese, tobiko, green onion, yam flakes on top with special sauce.", "price": 9.95},
+  {"id": "special-rolls-spider-roll", "cat": "Special Rolls", "name": "Spider Roll", "desc": "6 pieces. Inside: soft-shell crab, cucumber, crab meat. Outside: tobiko, special sauce.", "price": 9.5},
+  {"id": "special-rolls-cheetos-roll", "cat": "Special Rolls", "name": "Cheetos Roll", "desc": "8 pieces. Inside: spicy tuna, cucumber. Outside: yam flake & special sauce.", "price": 8.5},
+  {"id": "special-rolls-awesome-roll", "cat": "Special Rolls", "name": "Awesome Roll", "desc": "8 pieces. Inside: crab meat, avocado, cucumber. Outside: aburi salmon, masago, green onion, fish flakes, special sauce.", "price": 11.5},
+  {"id": "special-rolls-xo-xo-roll", "cat": "Special Rolls", "name": "XO XO Roll", "desc": "8 pieces. Inside: cream cheese, paprika, avocado. Outside: tobiko, salmon on top with special sauce.", "price": 8.5},
+  {"id": "special-rolls-tropical-roll", "cat": "Special Rolls", "name": "Tropical Roll", "desc": "8 pieces. Inside: avocado, mango. Outside: sliced mango with diced mango, paprika, special sauce.", "price": 11.0},
+  {"id": "special-rolls-rainbow-roll", "cat": "Special Rolls", "name": "Rainbow Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: 4 kinds of sashimi & avocado on top, tobiko.", "price": 11.0},
+  {"id": "special-rolls-yum-yummy-roll", "cat": "Special Rolls", "name": "Yum Yummy Roll", "desc": "8 pieces. Inside: yam tempura roll. Outside: sliced yam tempura, yam flakes, special sauce.", "price": 9.5},
+  {"id": "special-rolls-philadelphia-roll", "cat": "Special Rolls", "name": "Philadelphia Roll", "desc": "8 pieces. Inside: cucumber, paprika, cream cheese, crab meat. Outside: smoked salmon with special sauce.", "price": 8.5},
+  {"id": "special-rolls-alaska-roll", "cat": "Special Rolls", "name": "Alaska Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: salmon on top & tobiko, special sauce.", "price": 9.95},
+  {"id": "special-rolls-49th-fraser-roll", "cat": "Special Rolls", "name": "49th Fraser Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: cream cheese on top with special sauce, yam flakes.", "price": 9.5},
+  {"id": "special-rolls-chef-s-choice-roll", "cat": "Special Rolls", "name": "Chef's Choice Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: aburi 5 kinds of sashimi with special sauce, tobiko, green onion, garlic flakes.", "price": 14.0},
+  {"id": "special-rolls-blue-ocean-roll", "cat": "Special Rolls", "name": "Blue Ocean Roll", "desc": "8 pieces. Inside: 2 pcs prawn tempura, crab meat, avocado. Outside: red tuna on top tobiko, special sauce.", "price": 9.5},
+  {"id": "special-rolls-bts-roll", "cat": "Special Rolls", "name": "BTS Roll", "desc": "8 pieces. Inside: Bacon, Tamago, Spam. Outside: yam tempura on top with special sauce, onion, tobiko, yam flakes.", "price": 12.0},
+  {"id": "special-rolls-futomaki-roll", "cat": "Special Rolls", "name": "Futomaki Roll", "desc": "5 pieces / 10 pieces. Cucumber, crab meat, oshinko, tamago, spinach, inari, kanpyo, tobiko.", "price": 6.5, "priceLabel": "$6.50 / $12.00"},
+  {"id": "special-rolls-s-c-roll", "cat": "Special Rolls", "name": "S&C Roll", "desc": "6 pieces. Sliced cheddar cheese, cucumber, oshinko, spam, crab meat, tempura crumble.", "price": 8.5},
+  {"id": "special-rolls-funky-veggie-roll", "cat": "Special Rolls", "name": "Funky Veggie Roll", "desc": "6 pieces. Inside: 4 kinds of veggie tem, avocado, cucumber. Outside: yam flakes on top with balsamic & onion sauce.", "price": 8.5},
+  {"id": "tempura-appetizer-tempura-2-prawns-2-veggies", "cat": "Tempura", "name": "Appetizer Tempura 2 Prawns & 2 Veggies", "desc": "From the Tempura section of the menu.", "price": 6.0},
+  {"id": "tempura-veggie-tempura", "cat": "Tempura", "name": "Veggie Tempura", "desc": "5 pieces / 10 pieces.", "price": 5.5, "priceLabel": "$5.50 / $10.00"},
+  {"id": "tempura-yam-tempura", "cat": "Tempura", "name": "Yam Tempura", "desc": "5 pieces / 10 pieces.", "price": 5.5, "priceLabel": "$5.50 / $10.00"},
+  {"id": "tempura-prawn-tempura", "cat": "Tempura", "name": "Prawn Tempura", "desc": "5 pieces / 10 pieces.", "price": 7.5, "priceLabel": "$7.50 / $14.00"},
+  {"id": "tempura-assorted-tempura-4-prawns-4-veggies", "cat": "Tempura", "name": "Assorted Tempura 4 Prawns & 4 Veggies", "desc": "From the Tempura section of the menu.", "price": 11.0},
+  {"id": "tempura-deluxe-assorted-tempura-5-prawns-6-veggies-4-red-snapper", "cat": "Tempura", "name": "Deluxe Assorted Tempura 5 Prawns, 6 Veggies, 4 Red Snapper", "desc": "From the Tempura section of the menu.", "price": 17.0},
+  {"id": "teriyaki-plate-tofu-teriyaki", "cat": "Teriyaki Plate", "name": "Tofu Teriyaki", "desc": "Served with rice.", "price": 10.0},
+  {"id": "teriyaki-plate-chicken-teriyaki", "cat": "Teriyaki Plate", "name": "Chicken Teriyaki", "desc": "Served with rice.", "price": 11.0},
+  {"id": "teriyaki-plate-beef-teriyaki", "cat": "Teriyaki Plate", "name": "Beef Teriyaki", "desc": "Served with rice.", "price": 11.0},
+  {"id": "teriyaki-plate-salmon-teriyaki", "cat": "Teriyaki Plate", "name": "Salmon Teriyaki", "desc": "Served with rice.", "price": 13.0},
+  {"id": "katsu-plate-chicken-katsu", "cat": "Katsu Plate", "name": "Chicken Katsu", "desc": "Deep-fried cutlet with rice and salad.", "price": 12.0},
+  {"id": "katsu-plate-pork-katsu", "cat": "Katsu Plate", "name": "Pork Katsu", "desc": "Deep-fried cutlet with rice and salad.", "price": 12.0},
+  {"id": "katsu-plate-fish-katsu", "cat": "Katsu Plate", "name": "Fish Katsu", "desc": "Deep-fried cutlet with rice and salad.", "price": 12.0},
+  {"id": "katsu-plate-cheese-katsu", "cat": "Katsu Plate", "name": "Cheese Katsu", "desc": "Deep-fried cutlet with rice and salad.", "price": 14.0},
+  {"id": "udon-veggie-udon", "cat": "Udon", "name": "Veggie Udon", "desc": "Noodle bowl.", "price": 9.0},
+  {"id": "udon-chicken-udon", "cat": "Udon", "name": "Chicken Udon", "desc": "Noodle bowl.", "price": 10.0},
+  {"id": "udon-beef-udon", "cat": "Udon", "name": "Beef Udon", "desc": "Noodle bowl.", "price": 10.0},
+  {"id": "udon-seafood-udon", "cat": "Udon", "name": "Seafood Udon", "desc": "Noodle bowl.", "price": 12.0},
+  {"id": "udon-spicy-seafood-udon", "cat": "Udon", "name": "Spicy Seafood Udon", "desc": "Noodle bowl.", "price": 15.0},
+  {"id": "udon-spicy-seafood-ramen", "cat": "Udon", "name": "Spicy Seafood Ramen", "desc": "Noodle bowl.", "price": 15.0},
+  {"id": "udon-tempura-udon", "cat": "Udon", "name": "Tempura Udon", "desc": "Noodle bowl.", "price": 12.0},
+  {"id": "udon-nabeyaki-udon", "cat": "Udon", "name": "Nabeyaki Udon", "desc": "Noodle bowl.", "price": 13.0},
+  {"id": "udon-oden-tang", "cat": "Udon", "name": "Oden Tang", "desc": "A bowl of soup with fish cakes.", "price": 11.0},
+  {"id": "yakisoba-udon-veggie-yakisoba-udon", "cat": "Yakisoba / Udon", "name": "Veggie Yakisoba / Udon", "desc": "Choice of yakisoba or udon noodles.", "price": 11.0},
+  {"id": "yakisoba-udon-chicken-yakisoba-udon", "cat": "Yakisoba / Udon", "name": "Chicken Yakisoba / Udon", "desc": "Choice of yakisoba or udon noodles.", "price": 12.0},
+  {"id": "yakisoba-udon-beef-yakisoba-udon", "cat": "Yakisoba / Udon", "name": "Beef Yakisoba / Udon", "desc": "Choice of yakisoba or udon noodles.", "price": 12.0},
+  {"id": "yakisoba-udon-seafood-yakisoba-udon", "cat": "Yakisoba / Udon", "name": "Seafood Yakisoba / Udon", "desc": "Choice of yakisoba or udon noodles.", "price": 14.0},
+  {"id": "yakisoba-udon-spicy-seafood-yakisoba-udon", "cat": "Yakisoba / Udon", "name": "Spicy Seafood Yakisoba / Udon", "desc": "Choice of yakisoba or udon noodles.", "price": 15.0},
+  {"id": "donburi-veggie-don", "cat": "Donburi", "name": "Veggie Don", "desc": "Veggie with deep-fried tofu on rice.", "price": 9.5},
+  {"id": "donburi-chicken-teriyaki-don", "cat": "Donburi", "name": "Chicken Teriyaki Don", "desc": "Rice bowl.", "price": 10.5},
+  {"id": "donburi-beef-teriyaki-don", "cat": "Donburi", "name": "Beef Teriyaki Don", "desc": "Rice bowl.", "price": 10.5},
+  {"id": "donburi-oyako-don", "cat": "Donburi", "name": "Oyako Don", "desc": "Chicken stir cooked with onion & egg.", "price": 11.5},
+  {"id": "donburi-sukiyaki-beef-don", "cat": "Donburi", "name": "Sukiyaki Beef Don", "desc": "Beef stir cooked with mushroom, noodles, tofu & egg.", "price": 12.5},
+  {"id": "donburi-pork-chicken-katsu-don", "cat": "Donburi", "name": "Pork/Chicken Katsu Don", "desc": "Pork/chicken cutlet stir cooked with onion & egg.", "price": 11.5},
+  {"id": "donburi-kimchi-fried-rice", "cat": "Donburi", "name": "Kimchi Fried Rice", "desc": "Rice bowl.", "price": 12.0},
+  {"id": "donburi-tuna-don", "cat": "Donburi", "name": "Tuna Don", "desc": "Rice bowl.", "price": 14.0},
+  {"id": "donburi-salmon-don", "cat": "Donburi", "name": "Salmon Don", "desc": "Rice bowl.", "price": 14.0},
+  {"id": "donburi-tuna-salmon-don", "cat": "Donburi", "name": "Tuna & Salmon Don", "desc": "Rice bowl.", "price": 14.0},
+  {"id": "donburi-red-tuna-don", "cat": "Donburi", "name": "Red Tuna Don", "desc": "Rice bowl.", "price": 16.0},
+  {"id": "donburi-chirashi-don", "cat": "Donburi", "name": "Chirashi Don", "desc": "Assorted sashimi on sushi rice.", "price": 16.5},
+  {"id": "donburi-korean-style-spicy-chirashi-don", "cat": "Donburi", "name": "Korean Style Spicy Chirashi Don", "desc": "Diced assorted sashimi served with veggie on rice.", "price": 18.0},
+  {"id": "donburi-unagi-don", "cat": "Donburi", "name": "Unagi Don", "desc": "Bbq eel on rice.", "price": 16.0},
+  {"id": "donburi-aburi-tuna-don", "cat": "Donburi", "name": "Aburi Tuna Don", "desc": "Seared tuna sashimi with aburi sauce on sushi rice.", "price": 15.0},
+  {"id": "donburi-aburi-salmon-don", "cat": "Donburi", "name": "Aburi Salmon Don", "desc": "Seared salmon sashimi with aburi sauce on sushi rice.", "price": 15.0},
+  {"id": "donburi-aburi-tuna-salmon-don", "cat": "Donburi", "name": "Aburi Tuna & Salmon Don", "desc": "Seared tuna & salmon sashimi with aburi sauce on sushi rice.", "price": 15.0},
+  {"id": "combo-maki-combo", "cat": "Combo", "name": "Maki Combo", "desc": "20 pieces. California roll, tuna roll, salmon roll.", "price": 11.5},
+  {"id": "combo-spicy-roll-combo", "cat": "Combo", "name": "Spicy Roll Combo", "desc": "18 pieces. Spicy tuna roll, spicy salmon roll, spicy chopped scallop roll.", "price": 14.95},
+  {"id": "combo-veggie-combo-a", "cat": "Combo", "name": "Veggie Combo A", "desc": "20 pieces. Yam roll, avocado roll, kappa roll.", "price": 11.75},
+  {"id": "combo-veggie-combo-b", "cat": "Combo", "name": "Veggie Combo B", "desc": "20 pieces. Vegetable roll, spinach gomae roll, asparagus roll.", "price": 12.25},
+  {"id": "combo-california-combo", "cat": "Combo", "name": "California Combo", "desc": "California roll, 4 pcs nigiri (Salmon, tuna, ebi, tai).", "price": 11.75},
+  {"id": "combo-dynamite-combo", "cat": "Combo", "name": "Dynamite Combo", "desc": "Dynamite roll, 4 pcs nigiri (Salmon, tuna, ebi, tai).", "price": 12.75},
+  {"id": "combo-bc-combo", "cat": "Combo", "name": "BC Combo", "desc": "BC roll, 4 pcs nigiri (Salmon, tuna, ebi, tai).", "price": 12.0},
+  {"id": "combo-tuna-salmon-combo", "cat": "Combo", "name": "Tuna & Salmon Combo", "desc": "Tuna roll, salmon roll, 4 pcs nigiri (2 Salmon, 2 tuna).", "price": 14.5},
+  {"id": "combo-spicy-tuna-combo", "cat": "Combo", "name": "Spicy Tuna Combo", "desc": "Spicy tuna roll & spicy tuna sashimi & 2 pcs tuna nigiri.", "price": 14.5},
+  {"id": "combo-spicy-salmon-combo", "cat": "Combo", "name": "Spicy Salmon Combo", "desc": "Spicy salmon roll & spicy salmon sashimi & 2 pcs salmon nigiri.", "price": 14.5},
+  {"id": "combo-aburi-sushi-combo", "cat": "Combo", "name": "Aburi Sushi Combo", "desc": "8 pcs aburi nigiri sushi on chef's creation with aburi sauce.", "price": 17.0},
+  {"id": "combo-sashimi-sushi-combo", "cat": "Combo", "name": "Sashimi & Sushi Combo", "desc": "2 pieces. Each; tuna & salmon sashimi & 5 pcs nigiri sushi on chef's creation.", "price": 16.0},
+  {"id": "combo-assorted-sushi-combo", "cat": "Combo", "name": "Assorted Sushi Combo", "desc": "8 pcs nigiri sushi on chef's creation & tuna or salmon roll.", "price": 18.0},
+  {"id": "combo-deluxe-assorted-sushi-combo", "cat": "Combo", "name": "Deluxe Assorted Sushi Combo", "desc": "12 pcs nigiri sushi on chef's creation & tuna or salmon roll.", "price": 30.0},
+  {"id": "box-teriyaki-box-a", "cat": "Box", "name": "Teriyaki Box A", "desc": "Chicken or Beef Teriyaki, California roll, Spring rolls, 2 prawns & 2 veggies Tempura, House green salad.", "price": 13.5},
+  {"id": "box-teriyaki-box-b", "cat": "Box", "name": "Teriyaki Box B", "desc": "Chicken or Beef Teriyaki, Dynamite roll, Spring rolls, 2 prawns & 2 veggies Tempura, House green salad.", "price": 14.5},
+  {"id": "box-veggie-box", "cat": "Box", "name": "Veggie Box", "desc": "Tofu Teriyaki, avocado roll, Spinach Gomae, 3 pcs of veggie Tempura, House green salad.", "price": 13.0},
+  {"id": "box-katsu-box", "cat": "Box", "name": "Katsu Box", "desc": "Chicken Or Pork Katsu, California roll, Spring rolls, 2 prawns & 2 veggies Tempura, House green salad.", "price": 13.5},
+  {"id": "box-nigiri-box", "cat": "Box", "name": "Nigiri Box", "desc": "5 pcs assorted nigiri, BC roll, Spring rolls, 2 prawns & 2 veggies Tempura, House green salad.", "price": 16.0},
+  {"id": "box-nigiri-sashimi-box", "cat": "Box", "name": "Nigiri & Sashimi Box", "desc": "4 pcs assorted Nigiri, 2 pcs Tuna & 2 pcs Salmon Sashimi, Spring rolls, 2 prawns & 2 veggies Tempura, House green salad.", "price": 18.0},
+  {"id": "kid-s-combo-kid-s-teriyaki-combo-beef-chicken", "cat": "Kid's Combo", "name": "Kid's Teriyaki Combo (Beef/Chicken)", "desc": "Tamago roll, 1 pc kabocha croquette, 1 pc deep-fried potato, 2 pcs yam tempura, 1 pc prawn tempura.", "price": null, "priceLabel": "Price not printed in source"},
+  {"id": "kid-s-combo-kid-s-katsu-combo-chicken-pork", "cat": "Kid's Combo", "name": "Kid's Katsu Combo (Chicken/Pork)", "desc": "Avocado roll, 1 pc kabocha croquette, 1 pc deep-fried potato, 2 pcs yam tempura, 1 pc prawn tempura.", "price": null, "priceLabel": "Price not printed in source"},
+  {"id": "party-tray-tray-a", "cat": "Party Tray", "name": "Tray A", "desc": "46 pieces. California roll, Dynamite roll, Sp tuna roll, BC roll, Tuna roll, Salmon roll, Kappa roll.", "price": 28.0},
+  {"id": "party-tray-tray-b", "cat": "Party Tray", "name": "Tray B", "desc": "57 pieces. California roll, Dynamite roll, yam roll, chopped scallop roll, Tuna roll, Salmon roll, negitoro roll & tuna, salmon, ebi nigiri sushi (3 pcs each).", "price": 46.0},
+  {"id": "party-tray-tray-c", "cat": "Party Tray", "name": "Tray C", "desc": "59 pieces. California roll, Dynamite roll, BC roll, yam roll, chicken roll, Philadelphia roll & tuna, salmon, ebi, hokkigai, chopped scallop nigiri (3 pcs each).", "price": 60.0},
+  {"id": "party-tray-veggie-tray", "cat": "Party Tray", "name": "Veggie Tray", "desc": "62 pieces. Avocado roll, Yam roll, Gomae roll, vegetable roll, mango avocado roll, Asparagus roll, Kappa roll, oshinko roll & inari nigiri (4 pcs).", "price": 38.0},
+  {"id": "drinks-bottled-water", "cat": "Drinks", "name": "Bottled Water", "desc": "Bottled water.", "price": 1.75},
+  {"id": "drinks-juice", "cat": "Drinks", "name": "Juice", "desc": "Apple, Orange.", "price": 2.5},
+  {"id": "drinks-pop", "cat": "Drinks", "name": "Pop", "desc": "Coke, Diet Coke, Zero Coke, 7up, Ginger Ale, iced tea, Fanta(Orange).", "price": 2.0},
+  {"id": "drinks-asahi-pint", "cat": "Drinks", "name": "Asahi Pint", "desc": "Draft beer.", "price": 6.0},
+  {"id": "drinks-asahi-pitcher", "cat": "Drinks", "name": "Asahi Pitcher", "desc": "Draft beer.", "price": 18.0},
+  {"id": "drinks-local-beer-341ml", "cat": "Drinks", "name": "Local Beer (341ml)", "desc": "Bottled beer.", "price": 5.0},
+  {"id": "drinks-asahi-330ml", "cat": "Drinks", "name": "Asahi (330ml)", "desc": "Bottled beer.", "price": 5.75},
+  {"id": "drinks-sapporo-330ml", "cat": "Drinks", "name": "Sapporo (330ml)", "desc": "Bottled beer.", "price": 5.75},
+  {"id": "drinks-sapporo-600ml", "cat": "Drinks", "name": "Sapporo (600ml)", "desc": "Bottled beer.", "price": 10.0},
+  {"id": "drinks-hot-sake-small", "cat": "Drinks", "name": "Hot Sake - Small", "desc": "Hot sake.", "price": 5.0},
+  {"id": "drinks-hot-sake-large", "cat": "Drinks", "name": "Hot Sake - Large", "desc": "Hot sake.", "price": 9.0},
+  {"id": "drinks-cold-sake-small", "cat": "Drinks", "name": "Cold Sake - Small", "desc": "Cold sake.", "price": 5.0},
+  {"id": "drinks-cold-sake-large", "cat": "Drinks", "name": "Cold Sake - Large", "desc": "Cold sake.", "price": 9.0},
+  {"id": "drinks-hakutsuru-junmai-ginjo-sake-300ml", "cat": "Drinks", "name": "Hakutsuru - Junmai Ginjo Sake (300ml)", "desc": "Bottled cold sake.", "price": 16.0},
+  {"id": "drinks-hakutsuru-sayuri-nigori-sake-300ml", "cat": "Drinks", "name": "Hakutsuru - Sayuri Nigori Sake (300ml)", "desc": "Bottled cold sake.", "price": 16.0},
+  {"id": "drinks-chamisul-360ml", "cat": "Drinks", "name": "Chamisul (360ml)", "desc": "Soju.", "price": 15.0},
+  {"id": "drinks-house-wine-6oz", "cat": "Drinks", "name": "House Wine 6oz", "desc": "RED - CABERNET SAUVIGNON (JACKSON TRIGGS); WHITE - CHARDONNAY (JACKSON TRIGGS); SAUVIGNON BLANC (COPPER MOON).", "price": 6.0},
+  {"id": "drinks-red-cabernet-sauvignon-woodbridge-750ml", "cat": "Drinks", "name": "Red - Cabernet Sauvignon (Woodbridge, 750ml)", "desc": "Bottled wine.", "price": 26.0},
+  {"id": "drinks-white-sauvignon-blanc-kim-crawford-marlborough-2019-750ml", "cat": "Drinks", "name": "White - Sauvignon Blanc (Kim Crawford Marlborough 2019, 750ml)", "desc": "Bottled wine.", "price": 32.0},
+  {"id": "drinks-moscato-barefoot-cellars-750ml", "cat": "Drinks", "name": "Moscato (Barefoot Cellars, 750ml)", "desc": "Bottled wine.", "price": 22.0}
+];
+var CATS = ["All", "Appetizers", "Side Items", "Salad", "Grilled BBQ", "Sashimi", "Nigiri", "Aburi Oshi Sushi", "Rolls", "Temaki", "Special Rolls", "Tempura", "Teriyaki Plate", "Katsu Plate", "Udon", "Yakisoba / Udon", "Donburi", "Combo", "Box", "Kid's Combo", "Party Tray", "Drinks"];
+var CAT_NOTES = {"Appetizers": "Source note: modifications + $0.50.", "Nigiri": "Source notes: seared + $0.50; add quail egg + $0.50.", "Aburi Oshi Sushi": "Source note: modifications + $0.50.", "Rolls": "Source note: add cream cheese + $1.00.", "Special Rolls": "Source notes: add cream cheese + $1.00; modifications + $0.50.", "Teriyaki Plate": "Served with rice. Source note: modifications + $0.50.", "Katsu Plate": "Deep-fried cutlet with rice and salad. Source note: modifications + $0.50.", "Udon": "Source note: modifications + $0.50.", "Donburi": "Source note: modifications + $0.50.", "Combo": "Source note: modifications + $0.50.", "Box": "Served with miso soup. Source note: modifications + $0.50.", "Kid's Combo": "The source document prints these two combos without prices, so this page does not invent one."};
+
+/* ================= RECIPE INDEX (names/structure only - contents private) ================= */
+var RECIPE_PAGES = [
+  {page:"Page 1 - Bases and Sauces", items:[["Dendashi","덴다시"],["Cho Jang","초장"],["Gyoza Sauce","교자 소스"],["Sushi Cho","스시초"],["Sushi Soy","스시 간장"],["Udon","우동"]]},
+  {page:"Page 2 - Rice and Hot Portions", items:[["Black Rice","흑미"],["Chicken / Beef Teriyaki","치킨·비프 테리야키"],["Seafood Portion","해물 포션"]]},
+  {page:"Page 3 - The Sauce Row", items:[["Teriyaki Sauce","테리야키 소스"],["Tartar Sauce","타르타르 소스"],["Sunomono Sauce","스노모노 소스"],["Spicy Sauce","매운 소스"],["Gomae Sauce","고마에 소스"],["Yakisoba Sauce","야키소바 소스"],["Salad Sauce","샐러드 소스"]]},
+  {page:"Page 4 - Hot Line Finishes", items:[["Basa","바사"],["Black Cod","블랙 코드"],["Katsu","카츠"],["Calamari","깔라마리"],["Spicy Seafood Sauce","다대기"]]}
+];
+
+/* ================= DIRECTIONAL NAVIGATION (Boundless Horizon pattern) ================= */
+var world = document.getElementById("world");
+var NAMES = {"0,0":"AIO Home","0,-1":"The Houses - Up","-1,0":"Food and Ingredients - Left","1,0":"Shopping - Right","0,1":"Travel, the Game - Down"};
+var cur = [0,0];
+var compass = document.getElementById("compass");
+var edges = {up:document.getElementById("edgeUp"), down:document.getElementById("edgeDown"),
+             left:document.getElementById("edgeLeft"), right:document.getElementById("edgeRight")};
+function goTo(x,y){
+  cur = [x,y];
+  world.style.transform = "translate(" + (-x*100) + "vw," + (-y*100) + "vh)";
+  compass.textContent = "You are at: " + NAMES[x+","+y];
+  var home = (x===0 && y===0);
+  edges.up.hidden = !home; edges.down.hidden = !home;
+  edges.left.hidden = !home; edges.right.hidden = !home;
+}
+document.querySelectorAll("[data-go]").forEach(function(b){
+  b.addEventListener("click", function(){
+    var p = b.getAttribute("data-go").split(","); goTo(parseInt(p[0],10), parseInt(p[1],10));
+  });
+});
+edges.up.addEventListener("click", function(){ goTo(0,-1); });
+edges.down.addEventListener("click", function(){ goTo(0,1); });
+edges.left.addEventListener("click", function(){ goTo(-1,0); });
+edges.right.addEventListener("click", function(){ goTo(1,0); });
+document.addEventListener("keydown", function(e){
+  var tag = (e.target.tagName||"").toLowerCase();
+  if(tag==="input" || tag==="textarea") return;
+  if(e.key==="Escape"){ goTo(0,0); return; }
+  var DIRS = {ArrowUp:[0,-1], ArrowDown:[0,1], ArrowLeft:[-1,0], ArrowRight:[1,0]};
+  if(DIRS[e.key]){
+    var nx = cur[0] + DIRS[e.key][0], ny = cur[1] + DIRS[e.key][1];
+    if(NAMES.hasOwnProperty(nx + "," + ny)) goTo(nx, ny);
+  }
+});
+goTo(0,0);
+
+/* ================= MENU RENDER ================= */
+var grid = document.getElementById("dishGrid");
+var chipsBox = document.getElementById("catChips");
+var activeCat = "All";
+CATS.forEach(function(c){
+  var b = document.createElement("button");
+  b.className = "chip" + (c==="All" ? " on" : ""); b.textContent = c;
+  b.addEventListener("click", function(){
+    activeCat = c;
+    chipsBox.querySelectorAll(".chip").forEach(function(x){ x.classList.remove("on"); });
+    b.classList.add("on"); renderMenu();
+  });
+  chipsBox.appendChild(b);
+});
+function renderMenu(){
+  var note = document.getElementById("menuNote");
+  if(note){
+    if(activeCat === "All"){
+      note.textContent = "Showing all " + MENU.length + " items in " + (CATS.length - 1) + " sections from the shop's own menu document, 메뉴 1123 (2020). Dual-price items show both prices; the basket uses the first listed price.";
+    } else {
+      var count = MENU.filter(function(m){ return m.cat === activeCat; }).length;
+      note.textContent = activeCat + ": " + count + " items from 메뉴 1123 (2020)." + (CAT_NOTES[activeCat] ? " " + CAT_NOTES[activeCat] : "");
+    }
+  }
+  grid.innerHTML = "";
+  function esc(s){ return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  MENU.filter(function(m){ return activeCat==="All" || m.cat===activeCat; }).forEach(function(m){
+    var d = document.createElement("div");
+    d.className = "dish"; d.draggable = (m.price != null); d.setAttribute("data-id", m.id);
+    var tag = m.tag ? '<span class="tag ' + (m.tag==="veg" ? "veg" : (m.tag==="pop" ? "pop" : "")) + '">' + esc(m.tagText) + "</span>" : "";
+    var priceHtml = (m.price == null) ? "Price not printed" : (m.priceLabel ? esc(m.priceLabel) : "$" + m.price.toFixed(2));
+    var btn = (m.price == null)
+      ? "<button class='addbtn' type='button' disabled>Price not listed</button>"
+      : "<button class='addbtn' type='button'>Add to basket</button>";
+    d.innerHTML = tag + "<h4>" + esc(m.name) + "</h4><p class='desc'>" + esc(m.desc) + "</p>" +
+      "<div class='row'><span class='price'>" + priceHtml + "</span>" + btn + "</div>";
+    if(m.price != null){
+      d.querySelector(".addbtn").addEventListener("click", function(){ addToCart(m.id, 1); flashBasket(); });
+      d.addEventListener("dragstart", function(ev){
+        ev.dataTransfer.setData("text/plain", m.id); d.classList.add("dragging");
+      });
+      d.addEventListener("dragend", function(){ d.classList.remove("dragging"); });
+    }
+    grid.appendChild(d);
+  });
+}
+renderMenu();
+
+/* ================= RECIPE RENDER (structure only) ================= */
+var rg = document.getElementById("recipeGroups");
+RECIPE_PAGES.forEach(function(p){
+  var wrap = document.createElement("div"); wrap.className = "pgroup";
+  var h = document.createElement("h5"); h.textContent = p.page; wrap.appendChild(h);
+  var box = document.createElement("div"); box.className = "ritems";
+  p.items.forEach(function(it){
+    var el = document.createElement("div"); el.className = "ritem";
+    el.innerHTML = "<div class='rn'>" + it[0] + " <span>" + it[1] + "</span></div>" +
+      "<div class='redact'></div><div class='redact'></div><div class='redact short'></div>";
+    box.appendChild(el);
+  });
+  wrap.appendChild(box); rg.appendChild(wrap);
+});
+
+/* ================= CART (IMCHOICHOI drag-to-cart, rebuilt) ================= */
+var cart = {}; /* id -> qty */
+function money(n){ return "$" + n.toFixed(2); }
+function cartCount(){ var n=0; for(var k in cart) n += cart[k]; return n; }
+function cartSubtotal(){ var s=0; for(var k in cart){ var m = MENU.find(function(x){ return x.id===k; }); if(m && m.price!=null) s += m.price * cart[k]; } return s; }
+function addToCart(id, qty){
+  var item = MENU.find(function(x){ return x.id===id; });
+  if(!item || item.price==null) return;
+  cart[id] = (cart[id]||0) + qty; if(cart[id] <= 0) delete cart[id];
+  renderCart();
+}
+function flashBasket(){
+  var line = document.getElementById("basketLine");
+  var n = cartCount();
+  line.textContent = n === 0 ? "The basket is empty. Drag a dish in, or tap Add on any dish."
+    : n + (n===1 ? " dish" : " dishes") + " in the basket - subtotal " + money(cartSubtotal()) + ". Press Right to check out.";
+}
+function renderCart(){
+  flashBasket();
+  var area = document.getElementById("cartArea");
+  var totals = document.getElementById("totals");
+  var ids = Object.keys(cart);
+  if(ids.length === 0){
+    area.innerHTML = "<p class='empty'>Your basket is empty. Press Left for the menu and drag something in.</p>";
+    totals.style.display = "none"; return;
+  }
+  var rows = ids.map(function(id){
+    var m = MENU.find(function(x){ return x.id===id; });
+    return "<tr><td>" + m.name + "</td><td>" + money(m.price) + "</td>" +
+      "<td><span class='qty'><button data-dec='" + id + "'>-</button><b>" + cart[id] + "</b><button data-inc='" + id + "'>+</button></span></td>" +
+      "<td>" + money(m.price * cart[id]) + "</td>" +
+      "<td><button class='rm' data-rm='" + id + "'>Remove</button></td></tr>";
+  }).join("");
+  area.innerHTML = "<table class='cart'><tr><th>Dish</th><th>Price</th><th>Quantity</th><th>Line total</th><th></th></tr>" + rows + "</table>";
+  area.querySelectorAll("[data-inc]").forEach(function(b){ b.addEventListener("click", function(){ addToCart(b.getAttribute("data-inc"), 1); }); });
+  area.querySelectorAll("[data-dec]").forEach(function(b){ b.addEventListener("click", function(){ addToCart(b.getAttribute("data-dec"), -1); }); });
+  area.querySelectorAll("[data-rm]").forEach(function(b){ b.addEventListener("click", function(){ delete cart[b.getAttribute("data-rm")]; renderCart(); }); });
+  var sub = cartSubtotal(), gst = sub * 0.05;
+  document.getElementById("tSub").textContent = money(sub);
+  document.getElementById("tGst").textContent = money(gst);
+  document.getElementById("tAll").textContent = money(sub + gst);
+  totals.style.display = "block";
+}
+["basket","basket2"].forEach(function(bid){
+  var el = document.getElementById(bid);
+  el.addEventListener("dragover", function(ev){ ev.preventDefault(); el.classList.add("over"); });
+  el.addEventListener("dragleave", function(){ el.classList.remove("over"); });
+  el.addEventListener("drop", function(ev){
+    ev.preventDefault(); el.classList.remove("over");
+    var id = ev.dataTransfer.getData("text/plain");
+    if(id && MENU.some(function(m){ return m.id===id; })) addToCart(id, 1);
+  });
+});
+var orderNo = 100;
+document.getElementById("checkoutBtn").addEventListener("click", function(){
+  var ids = Object.keys(cart); if(ids.length === 0) return;
+  orderNo += 1;
+  var lines = ids.map(function(id){
+    var m = MENU.find(function(x){ return x.id===id; });
+    return m.name + " x" + cart[id];
+  }).join(", ");
+  var total = money(cartSubtotal() * 1.05);
+  document.getElementById("confirmText").innerHTML =
+    "Order <b>#" + orderNo + "</b> - " + lines + ".<br>Total with GST: <b>" + total + "</b>. " +
+    "In a live shop this is where the kitchen fires the order; in this demo the basket is cleared and the counter thanks you.";
+  document.getElementById("confirmBox").style.display = "block";
+  cart = {}; renderCart();
+});
+renderCart();
+
+/* ================= SERVO (UseDesign Servo - Peekobot-based chatbot framework) ================= */
+var svPanel = document.getElementById("servoPanel");
+var svLog = document.getElementById("svLog");
+var svInput = document.getElementById("svInput");
+document.getElementById("servoBtn").addEventListener("click", function(){
+  svPanel.classList.toggle("open");
+  if(svPanel.classList.contains("open") && svLog.children.length === 0){
+    botSay("Hello, I am Servo, your guide to AIO. I can walk you to any of its rooms - the houses up, food and ingredients to the left, shopping to the right, and the travel game down - and I still work the shop counter. Ask me where anything is, ask about Kuro Sushi's real menu, or say 'add tuna nigiri' and I will put it in your basket.");
+  }
+});
+function botSay(t){ var d = document.createElement("div"); d.className = "msg bot"; d.textContent = t; svLog.appendChild(d); svLog.scrollTop = svLog.scrollHeight; }
+function meSay(t){ var d = document.createElement("div"); d.className = "msg me"; d.textContent = t; svLog.appendChild(d); svLog.scrollTop = svLog.scrollHeight; }
+function normText(s){
+  return s.toLowerCase().replace(/['\u2019]/g, "").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+}
+function findDish(q){
+  var qn = normText(q.replace(/^\s*add\s+/, ""));
+  var qTokens = qn.split(" ").filter(Boolean);
+  var best = null, bestScore = 0;
+  MENU.forEach(function(m){
+    var name = normText(m.name), cat = normText(m.cat);
+    var aliases = [name, name + " " + cat, cat + " " + name];
+    var score = 0;
+    aliases.forEach(function(a){
+      if(qn === a) score = Math.max(score, 1000 + a.length);
+      else if(qn.indexOf(a) >= 0) score = Math.max(score, 800 + a.length);
+      else if(a.indexOf(qn) >= 0 && qn.length > 3) score = Math.max(score, 500 + a.length);
+    });
+    var nameTokens = name.split(" ").filter(function(w){ return w.length > 1; });
+    var hits = nameTokens.filter(function(w){ return qTokens.indexOf(w) >= 0; }).length;
+    if(hits) score += hits * 30 + (hits === nameTokens.length ? 120 : 0);
+    if(cat && qn.indexOf(cat) >= 0) score += 80;
+    if(qn.indexOf("hand roll") >= 0 && m.cat === "Temaki") score += 90;
+    if(qn.indexOf("roll") >= 0 && name.indexOf("roll") >= 0) score += 25;
+    if(m.price == null) score -= 5;
+    if(score > bestScore){ bestScore = score; best = m; }
+  });
+  return bestScore >= 90 ? best : null;
+}
+function dishLine(m){
+  return m.name + " (" + (m.price == null ? "price not printed in the source" : (m.priceLabel || money(m.price))) + ")";
+}
+function byDishName(n){ return MENU.find(function(x){ return x.name === n; }); }
+function servoAnswer(raw){
+  var q = raw.toLowerCase();
+  if(q.indexOf("add") >= 0){
+    var d = findDish(q);
+    if(d && d.price == null) return d.name + " is on the real menu, but 메뉴 1123 prints it without a price, so I will not invent one or add it to the basket.";
+    if(d){ addToCart(d.id, 1); return "Done - one " + d.name + " is in your basket (" + money(d.price) + "). Your basket now holds " + cartCount() + (cartCount()===1 ? " dish" : " dishes") + ", subtotal " + money(cartSubtotal()) + ". Press Right any time to check out."; }
+    return "I could not match that to a dish on the real menu. Try 'add edamame', 'add tuna nigiri', or 'add chef's choice roll'.";
+  }
+  if(q.indexOf("houses") >= 0 || q.indexOf("hexagon") >= 0 || q.indexOf("tree of life") >= 0 || q.indexOf("universe") >= 0 || q.indexOf("addon") >= 0 || q.indexOf("capsule") >= 0 || q.indexOf("mros") >= 0 || q.indexOf("realtor") >= 0 || q.indexOf("house collection") >= 0)
+    return "The houses are up. Press Up for the Espil House Collection, introduced the way a realtor would: full listings and spec sheets for Hexagon Palace, Universe, Tree of Life and Flower, the Espil Ceil addon parts that fit them out, and the two doors that open today - the Universe viewer and the MROS sample house. Universe is the one you can already walk through.";
+  if(q.indexOf("travel") >= 0 || q.indexOf("game") >= 0 || q.indexOf("espil online") >= 0 || q.indexOf("cauldron") >= 0 || q.indexOf("vancouver") >= 0 || q.indexOf("auckland") >= 0 || q.indexOf("zealandia") >= 0 || q.indexOf("journey") >= 0 || q.indexOf("tourism") >= 0)
+    return "The game is travel, and it waits below. Press Down: Espil Online is the world I am building inside the Cauldron, where you enter a real city and walk it yourself - Vancouver today, and Auckland as the starting city of Zealandia. Walking a place yourself is the whole point; the door itself is espil.online.";
+  if(q.indexOf("where is") >= 0 || q.indexOf("where are") >= 0 || q.indexOf("how do i get") >= 0 || q.indexOf("directions") >= 0 || q.indexOf("guide me") >= 0 || q.indexOf("show me around") >= 0 || q.indexOf("what can you do") >= 0 || q === "help"){
+    if(q.indexOf("menu") >= 0 || q.indexOf("food") >= 0 || q.indexOf("ingredient") >= 0 || q.indexOf("recipe") >= 0) return "The food is to your left. Press Left for Food and Ingredients: the full Kuro Sushi menu, and below it the Sushi Umi recipe book, shown in format only.";
+    if(q.indexOf("house") >= 0) return "The houses are up. Press Up for the listings, the addon parts, and the doors that open today.";
+    if(q.indexOf("cart") >= 0 || q.indexOf("basket") >= 0 || q.indexOf("shop") >= 0 || q.indexOf("checkout") >= 0 || q.indexOf("check out") >= 0) return "Shopping is to your right. Press Right for your basket, quantities, totals and checkout.";
+    if(q.indexOf("travel") >= 0 || q.indexOf("game") >= 0) return "Travel is down. Press Down for the game: Espil Online, where you walk real cities yourself.";
+    return "Here is the map of AIO: Up for the Houses, Left for Food and Ingredients, Right for Shopping, and Down for Travel, the Game. I am your guide - ask me about any of them, or about the menu, and say 'add' with a dish name to fill your basket.";
+  }
+  if(q.indexOf("hour") >= 0 || q.indexOf("open") >= 0 || q.indexOf("close") >= 0)
+    return "Demo hours: Tuesday to Sunday, 11:30 am to 10:00 pm. The kitchen's last order is 9:30 pm. (Demo information for this staging build.)";
+  if(q.indexOf("where") >= 0 || q.indexOf("location") >= 0 || q.indexOf("address") >= 0)
+    return "Kuro Sushi is a real design client of mine - the identity, the menu, and the signboard. This staging demo does not publish the shop's address.";
+  if(q.indexOf("recommend") >= 0 || q.indexOf("popular") >= 0 || q.indexOf("best") >= 0 || q.indexOf("famous") >= 0 || q.indexOf("first visit") >= 0){
+    var recs = ["Chef's Choice Roll", "Salmon Oshi", "Deluxe Assorted Sashimi"].map(byDishName).filter(Boolean).map(dishLine).join(", ");
+    return "From the real menu in 메뉴 1123, a strong place to start: " + recs + ". Say 'add chef's choice roll' and I will put one in your basket.";
+  }
+  if(q.indexOf("spicy") >= 0){
+    var sp = MENU.filter(function(m){ return (m.name + " " + m.desc).toLowerCase().indexOf("spicy") >= 0; });
+    return "The real menu lists " + sp.length + " spicy items. Among them: " + sp.slice(0, 10).map(function(m){ return m.name; }).join(", ") + ".";
+  }
+  if(q.indexOf("vegetarian") >= 0 || q.indexOf("vegan") >= 0 || q.indexOf("veggie") >= 0){
+    var vegNames = ["Edamame", "Spinach Gomae", "Veggie Sunomono", "Agedashi Tofu", "Inari Nigiri", "Avocado Nigiri", "Tamago Nigiri", "Kappa Roll", "Asparagus Roll", "Oshinko Roll", "Kanpyo Roll", "Veggie Roll", "Veggie Dragon Roll", "Veggie Tempura", "Tofu Teriyaki", "Veggie Udon", "Veggie Yakisoba / Udon", "Veggie Don", "Veggie Combo A", "Veggie Combo B", "Veggie Box", "Veggie Tray"];
+    var vg = MENU.filter(function(m){ return vegNames.indexOf(m.name) >= 0; });
+    return "Vegetarian picks named on the real menu (" + vg.length + " of them): " + vg.slice(0, 12).map(function(m){ return m.name; }).join(", ") + (vg.length > 12 ? ", and more in the Rolls, Combo and Drinks sections." : ".");
+  }
+  if(q.indexOf("price") >= 0 || q.indexOf("cost") >= 0 || q.indexOf("how much") >= 0){
+    var dd = findDish(q);
+    if(dd && dd.price == null) return dd.name + " is printed without a price in 메뉴 1123, so this page does not invent one.";
+    if(dd) return dd.name + " is " + (dd.priceLabel || money(dd.price)) + ". " + dd.desc;
+    return "Tell me a dish name and I will price it from the real menu - for example, 'how much is the chef's choice roll?'";
+  }
+  if(q.indexOf("cart") >= 0 || q.indexOf("basket") >= 0 || q.indexOf("checkout") >= 0 || q.indexOf("check out") >= 0){
+    var n = cartCount();
+    return n === 0 ? "Your basket is empty. Press Left for the menu, drag a dish into the basket, or ask me to add one."
+      : "Your basket holds " + n + (n===1 ? " dish" : " dishes") + ", subtotal " + money(cartSubtotal()) + ". Press Right to see it and check out.";
+  }
+  if(q.indexOf("recipe") >= 0 || q.indexOf("kitchen") >= 0)
+    return "Press Left for Food and Ingredients and scroll past the menu: the kitchen system is there - 21 standardized bilingual recipes from my Sushi Umi years. The format is on show; the recipes themselves stay in the kitchen, so I cannot recite one.";
+  if(q.indexOf("menu") >= 0)
+    return "Press Left for the full menu: " + MENU.length + " items in " + (CATS.length - 1) + " sections, from Appetizers and Sashimi through Rolls, Donburi, Party Tray and Drinks - all loaded from 메뉴 1123 (2020).";
+  if(q.indexOf("book") >= 0 || q.indexOf("reserv") >= 0 || q.indexOf("table") >= 0 || q.indexOf("appointment") >= 0 || q.indexOf("intake") >= 0)
+    return "Servo's original Apex Derm flow handled client intake and appointment steps, but this AIO store demo does not take reservations.";
+  if(q.indexOf("peekobot") >= 0 || q.indexOf("conversation") >= 0 || q.indexOf("framework") >= 0 || q.indexOf("apex") >= 0)
+    return "Servo is my UseDesign Servo project: a chatbot framework built on Peekobot. Its conversation.js is an option tree, first written for Apex Derm Clinic intake - greeting, new or returning customer, service options, forms form1.html to form4.html, then date and time steps toward a scheduled appointment.";
+  if(q.indexOf("deliver") >= 0)
+    return "No delivery in this demo. The AIO service bundle is dine-in and takeout at the counter.";
+  if(q.indexOf("hello") >= 0 || q.indexOf("hi") === 0 || q.indexOf("hey") >= 0)
+    return "Hello. Hungry? Ask me for a recommendation, or press Left and drag a dish into the basket.";
+  if(q.indexOf("who are you") >= 0 || q.indexOf("servo") >= 0)
+    return "I am Servo, from UseDesign Servo, my Peekobot-based chatbot framework. The original conversation.js used an option tree for Apex Derm Clinic intake; in AIO I am the guide of the whole service - the houses, the food, the shopping and the journey - and I also work the shop counter, grounded in Kuro Sushi's real menu, where I can add dishes to your basket.";
+  if(q.indexOf("thank") >= 0) return "You are welcome. Enjoy the meal.";
+  var any = findDish(q);
+  if(any) return any.name + " - " + any.desc + " " + (any.price == null ? "It is printed without a price in the source." : (any.priceLabel || money(any.price)) + ". Say 'add " + any.name.toLowerCase() + "' and I will put it in your basket.");
+  return "I can guide you around AIO - the houses up, the food to the left, the shopping to the right, the travel game down - and help with the real menu, prices and your basket. Try 'tell me about the houses', 'recommend something' or 'add edamame'.";
+}
+
+document.getElementById("svForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  var v = svInput.value.trim(); if(!v) return;
+  meSay(v); svInput.value = "";
+  setTimeout(function(){ botSay(servoAnswer(v)); }, 220);
+});
+[["The houses","Tell me about the houses"],["Travel","What is the travel game?"],["Recommend","Recommend something"],["Hours","What are the hours?"],["Where is the menu?","Where is the menu?"],["My basket","What is in my basket?"]].forEach(function(pair){
+  var b = document.createElement("button"); b.type = "button"; b.textContent = pair[0];
+  b.addEventListener("click", function(){ meSay(pair[1]); setTimeout(function(){ botSay(servoAnswer(pair[1])); }, 220); });
+  document.getElementById("svChips").appendChild(b);
+});
+</script>
+</body>
+</html>
