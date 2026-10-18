@@ -50,7 +50,13 @@
 
 
 
-<!-- espil-loader v10 (injected 2026-10-16) -->
+
+
+
+
+
+
+<!-- espil-loader v13 (injected 2026-10-16) -->
 <style>
 @property --p{syntax:"<number>"; inherits:true; initial-value:0}
 #espil-loader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0b0b0b url("/universe/render-tree.png") center/cover no-repeat;transition:opacity .45s ease}
@@ -90,12 +96,13 @@
 #espil-loader .b4{left:45%;width:2.5px;height:2.5px;animation-delay:1.9s}
 #espil-loader .b5{left:56%;width:3.5px;height:3.5px;animation-delay:2.4s}
 @keyframes elRise{0%{transform:translate(0,0);opacity:0}12%{opacity:.85}38%{transform:translate(calc(var(--sway,0px) * -.8),-24px)}62%{transform:translate(calc(var(--sway,0px) * .75),-42px)}100%{transform:translate(calc(var(--sway,0px) * -.35),-58px);opacity:0}}
+#espil-loader .el-b{scale:clamp(0,calc((var(--p, 0) - 30) / 6),1)}
 #espil-loader .el-shade{position:absolute;inset:0;border-radius:50%;z-index:3;pointer-events:none;box-shadow:inset -14px -12px 26px rgba(0,0,0,.28),inset 12px 14px 22px rgba(255,255,255,.05),inset 0 -18px 26px rgba(4,32,16,.25),inset 0 0 22px rgba(190,242,100,.05)}
 #espil-loader .el-shine{position:absolute;inset:0;border-radius:50%;z-index:4;pointer-events:none;background:radial-gradient(64px 36px at 30% 15%,rgba(255,255,255,.55),rgba(255,255,255,0) 62%),radial-gradient(26px 13px at 24% 11%,rgba(255,255,255,.5),rgba(255,255,255,0) 70%),radial-gradient(90px 34px at 50% 108%,rgba(216,252,170,.16),rgba(216,252,170,0) 70%),linear-gradient(115deg,transparent 32%,rgba(255,255,255,.13) 47%,rgba(255,255,255,.03) 55%,transparent 68%);background-size:auto,auto,auto,260% 100%;animation:elSheen 7s ease-in-out infinite alternate}
 @keyframes elSheen{from{background-position:0 0,0 0,0 0,115% 0}to{background-position:0 0,0 0,0 0,-35% 0}}
-#espil-loader .el-pct{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.72);font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:15px;letter-spacing:.02em;text-shadow:0 1px 6px rgba(0,0,0,.3);filter:url(#espil-fisheye)}
-#espil-loader .el-pct .pctsym{font-size:8px;font-weight:600;margin-left:2px;transform:translateY(2px)}
-#espil-loader .el-status{margin-top:20px;color:rgba(255,255,255,.85);font-family:'Helvetica Neue',Arial,sans-serif;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase}
+
+
+
 .el-lock{overflow:hidden!important}
 @media (prefers-reduced-motion:reduce){#espil-loader .el-wave,#espil-loader .el-swirl i,#espil-loader .el-b,#espil-loader .el-slosh,#espil-loader .el-surface,#espil-loader .el-water::after,#espil-loader .el-shine{animation:none}}
 </style>
@@ -103,9 +110,9 @@
 </head>
 
 <body id="page-top">
-<!-- espil-loader v10 (injected 2026-10-16) -->
+<!-- espil-loader v13 (injected 2026-10-16) -->
 <div id="espil-loader" role="status" aria-label="Loading">
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="espil-fisheye" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB"><feImage href="data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Cdefs%3E%3ClinearGradient%20id='gx'%20x1='0'%20y1='0'%20x2='1'%20y2='0'%3E%3Cstop%20offset='0'%20stop-color='rgb%280,128,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28255,128,0%29'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='gy'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='rgb%28128,0,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28128,255,0%29'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gx%29'/%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gy%29'%20opacity='0.55'/%3E%3C/svg%3E" x="0" y="0" width="100" height="100" preserveAspectRatio="none" result="map"/><feDisplacementMap in="SourceGraphic" in2="map" scale="10" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+  
   <div class="el-card">
     <div class="el-glass">
       <canvas class="el-canvas" width="196" height="196"></canvas>
@@ -117,11 +124,17 @@
       </div>
       <div class="el-shade"></div>
       <div class="el-shine"></div>
-      <div class="el-pct"><span class="n">0</span><span class="pctsym">%</span></div>
+      
     </div>
-    <div class="el-status">Opening the issue</div>
+    
   </div>
 </div>
+
+
+
+
+
+
 
 
 
@@ -387,13 +400,24 @@
 
 
 
-<!-- espil-loader v10 (injected 2026-10-16) -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- espil-loader v13 (injected 2026-10-16) -->
 <script>
 (function(){
   var L=document.getElementById('espil-loader'); if(!L) return;
-  var G=L.querySelector('.el-glass'), N=L.querySelector('.n'), S=L.querySelector('.el-status');
-  var lines=['Opening the issue','Pouring the water','Setting the type','Polishing the cover'];
-  document.documentElement.classList.add('el-lock');
+  var G=L.querySelector('.el-glass');
+    document.documentElement.classList.add('el-lock');
   var start=Date.now(), shown=0, finished=false;
   setTimeout(function(){ finish(); }, 7000); /* absolute failsafe */
   function real(){
@@ -412,7 +436,7 @@
       setTimeout(function(){ if(L.parentNode) L.parentNode.removeChild(L); }, 500);
     }, 160);
   }
-  function paint(){ G.style.setProperty('--p', Math.round(shown)); N.textContent=Math.round(shown); }
+  function paint(){ G.style.setProperty('--p', Math.round(shown)); }
   var tick=setInterval(function(){
     try{
       var el=Date.now()-start, target=real()*100;
@@ -423,14 +447,13 @@
       if(shown>target) shown=target;
       if(shown>99) shown=99;
       paint();
-      S.textContent=lines[Math.min(lines.length-1, Math.floor(el/1100))];
       if((real()>=1 && el>900) || el>6000){ clearInterval(tick); finish(); }
     }catch(e){ clearInterval(tick); finish(); }
   }, 50);
 })();
 </script>
 
-<!-- espil-loader v10 physics (injected 2026-10-16) -->
+<!-- espil-loader v13 physics (injected 2026-10-16) -->
 <script>
 /* Liquid physics for the loading glass (2026-10-15, Han): the surface is a
    spring chain — each column pulls on its neighbours — rocked by an
@@ -465,7 +488,7 @@
   var h=[], v=[], i;
   for(i=0;i<N;i++){ h.push(0); v.push(0); }
   var drops=[], bubbles=[];
-  var baseY=H+4, phase=0, budget=0, last=performance.now(), prevDrive=0, speedSm=0, agit=0.7, agitTick=0;
+  var baseY=H+4, phase=0, budget=0, last=performance.now(), prevDrive=0, speedSm=0, agit=0.35, agitTick=0, fillP=0;
   function progress(){
     var p=parseFloat(glassEl.style.getPropertyValue('--p'));
     return isNaN(p)?0:Math.max(0,Math.min(100,p));
@@ -474,6 +497,7 @@
   function surfY(x){ return baseY+h[colAt(x)]; }
   function spawnDrop(x,y,vy,vx,r){
     if(drops.length>=60) return;
+    if(y>H-16||fillP<18) return; /* nothing flies before a real body of liquid */
     drops.push({x:x,y:y,vy:vy,vx:vx,r:r});
   }
   function frame(now){
@@ -481,7 +505,7 @@
     var dt=(now-last)/1000; last=now;
     if(dt>0.05) dt=0.05;
     if(dt<=0){ requestAnimationFrame(frame); return; }
-    var p=progress(), energy=0.3+0.7*agit;
+    var p=progress(), energy=0.3+0.7*agit; fillP=p;
     phase+=dt*1.85;
     var amp=(0.5+p*0.02+agit*(1.1+p*0.055))/9.1; /* rock fraction, speed-led */
     var drive=Math.cos(phase)*amp;
@@ -528,7 +552,7 @@
       }
     }
     /* bubbles inside the liquid: rise, wobble, pop at the surface */
-    if(bubbles.length<7 && Math.random()<dt*3.2) bubbles.push({x:26+Math.random()*(W-52), y:H-8, r:1.4+Math.random()*2.2, vy:-(16+Math.random()*22), seed:Math.random()*6.28});
+    if(bubbles.length<7 && p>=35 && Math.random()<dt*3.2){ var bx=26+Math.random()*(W-52); if(surfY(bx)<H-55) bubbles.push({x:bx, y:Math.min(H-8, surfY(bx)+10+Math.random()*14), r:1.4+Math.random()*2.2, vy:-(16+Math.random()*22), seed:Math.random()*6.28}); } /* bubbles only in a substantially filled glass */
     for(var bi=bubbles.length-1;bi>=0;bi--){
       var bb=bubbles[bi]; bb.y+=bb.vy*dt; bb.x+=Math.sin(now/300+bb.seed)*7*dt;
       if(bb.y<=surfY(bb.x)+3){ v[colAt(bb.x)]-=16; bubbles.splice(bi,1); }
