@@ -16,15 +16,19 @@
   button{font-family:inherit; cursor:pointer}
   /* ---------- directional stage (Boundless Horizon pattern) ---------- */
   .viewport{position:fixed; inset:0; overflow:hidden; background:var(--ink)}
-  .world{position:absolute; width:300vw; height:300vh; left:-100vw; top:-100vh;
+  .world{position:absolute; width:500vw; height:500vh; left:-200vw; top:-200vh;
     transition:transform 0.9s cubic-bezier(.7,0,.2,1)}
   .sec{position:absolute; width:100vw; height:100vh; overflow-y:auto; overflow-x:hidden;
     background:var(--paper); padding:26px 22px 110px}
-  .sec[data-pos="0,-1"]{left:100vw; top:0}
-  .sec[data-pos="-1,0"]{left:0; top:100vh}
-  .sec[data-pos="0,0"]{left:100vw; top:100vh}
-  .sec[data-pos="1,0"]{left:200vw; top:100vh}
-  .sec[data-pos="0,1"]{left:100vw; top:200vh}
+  .sec[data-pos="0,-2"]{left:200vw; top:0}
+  .sec[data-pos="0,-1"]{left:200vw; top:100vh}
+  .sec[data-pos="-2,0"]{left:0; top:200vh}
+  .sec[data-pos="-1,0"]{left:100vw; top:200vh}
+  .sec[data-pos="0,0"]{left:200vw; top:200vh}
+  .sec[data-pos="1,0"]{left:300vw; top:200vh}
+  .sec[data-pos="2,0"]{left:400vw; top:200vh}
+  .sec[data-pos="0,1"]{left:200vw; top:300vh}
+  .sec[data-pos="0,2"]{left:200vw; top:400vh}
   .inner{max-width:1060px; margin:0 auto}
   /* ---------- home ---------- */
   .brand{text-align:center; padding-top:4vh}
@@ -234,6 +238,21 @@
   #sec-production .basket{border-color:#17586e}
   #sec-production .checkout{background:#17586e}
   #sec-houses .listing{border-top:3px solid #c8102e}
+  /* branch room themes (the second division) */
+  #sec-zealandia{color:#ece7da; background-color:#15130e; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Cg fill='none' stroke='%23e8b13c' stroke-opacity='0.07' stroke-width='1.6'%3E%3Cpath d='M10 62a12 12 0 1 1 12-12 9 9 0 1 0 9 9'/%3E%3Cpath d='M52 30a12 12 0 1 1 12-12 9 9 0 1 0 9 9'/%3E%3C/g%3E%3C/svg%3E")}
+  #sec-zealandia h2{color:#f2ecdc}
+  #sec-zealandia .kicker{color:#e8b13c}
+  #sec-zealandia .secsub, #sec-zealandia .tale p{color:#d8d2c0}
+  #sec-zealandia .city{background:#1e1b14; border-color:#3a3527; border-top-color:#e8b13c}
+  #sec-zealandia .city p{color:#cfc9b8}
+  #sec-zealandia .city .status{color:#e8b13c}
+  #sec-zealandia .foot{color:#97917f}
+  #sec-zealandia .homebtn{border:1px solid #ece7da}
+  #sec-zealandia .visitbtn{background:#b98a2f; color:#171310}
+  #sec-zealandia .visitbtn:hover{background:#d3a243}
+  #sec-auckland{background:#fbf8f1}
+  #sec-auckland .city{border-top-color:#141311}
+  #sec-recipe .kicker{color:#17586e}
   /* taegeuk gate intro (first entry) */
   #gateIntro{position:fixed; inset:0; z-index:200; cursor:pointer; display:flex; align-items:center; justify-content:center;
     background:radial-gradient(120% 90% at 50% 30%, #f7f1e0 0%, #efe6cf 55%, #e2d3b0 100%); transition:opacity .55s ease}
@@ -301,6 +320,30 @@
       </div>
     </section>
 
+
+    <!-- ZEALANDIA - THE FUTURE LAND : UP, ONCE MORE -->
+    <section class="sec" data-pos="0,-2" id="sec-zealandia">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Up - Imagination, Once More</p><h2>Zealandia - The Future Land</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Down)</button></div>
+        <div class="trim"></div>
+        <p class="secsub">One division further up from Imagination: the room where what is imagined becomes the future land itself. Zealandia is the game dungeon of Espil Online, set on New Zealand's hidden sunken land.</p>
+        <div class="tale">
+          <p>In the wing below, Zealandia is still being imagined. Up here it is drawn as the land it will become: a game dungeon set on Zealandia, the hidden continent beneath the sea, waiting under the water to be walked. Auckland is its starting city, out to the left through Travel - and what is imagined in the wing below becomes ground to walk here.</p>
+        </div>
+        <div class="cities">
+          <div class="city"><h3>The sunken land</h3><p>Zealandia: New Zealand's hidden land under the sea, a continent that sank and kept its shape. The dungeon is set on that land, so the ground itself is the story.</p><p class="status">The future land</p></div>
+          <div class="city"><h3>The starting city</h3><p>Every dungeon needs a door, and this one's is Auckland, out through the Travel wing to the left - the capital of 1841 to 1865, and the first ground of the game.</p><p class="status">Starts at Auckland</p></div>
+          <div class="city"><h3>The dungeon</h3><p>What Espil Online imagines, Zealandia plays: the world's ideas given ground, weather and walking. It is the game extension of the world, drawn while the world itself is still being built.</p><p class="status">The land still being imagined</p></div>
+        </div>
+        <div class="tale" style="margin-top:22px">
+          <p>Nothing here is finished, and that is the point of the room: it is where the imagination keeps its future. From an idea below to a land under the sea - one more division up, and the idea has ground under it.</p>
+        </div>
+        <p style="margin:14px 0 0"><button class="homebtn" data-go="0,-1">Back to Imagination (Down)</button></p>
+        <p class="foot">Zealandia is the future land of Espil Online - imagined below, walked in its own time.</p>
+      </div>
+    </section>
+
     <!-- TRAVEL, FREEDOM : LEFT -->
     <section class="sec" data-pos="-1,0" id="sec-travel">
       <div class="inner">
@@ -321,6 +364,27 @@
         </div>
         <a class="visitbtn" href="https://espil.online" target="_blank" rel="noopener">Enter Espil Online</a>
         <p class="foot">Espil Online is entered at espil.online - the Cauldron is the space, and the world inside it is the journey.</p>
+      </div>
+    </section>
+
+
+    <!-- AUCKLAND - THE STARTING CITY : LEFT, ONCE MORE -->
+    <section class="sec" data-pos="-2,0" id="sec-auckland">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Left - Travel, Once More</p><h2>Auckland - The Starting City</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Right)</button></div>
+        <div class="trim"></div>
+        <p class="secsub">One division further left from Travel: the first ground of Zealandia. The Travel wing holds the journey; this room holds the city the longest journey starts from.</p>
+        <div class="tale">
+          <p>Auckland is where Zealandia begins. It was the capital from 1841 to 1865, and the old maps fit the story: a young port city, the natural door into a hidden continent. The Queen Street corridor is its first ground - the street the game walks first.</p>
+        </div>
+        <div class="cities">
+          <div class="city"><h3>The starting city</h3><p>Zealandia, the hidden sunken land under New Zealand, gets its game - and it starts in Auckland, the capital of 1841 to 1865, where the old maps fit the story.</p><p class="status">The starting city of Zealandia</p></div>
+          <div class="city"><h3>Queen Street</h3><p>The corridor is the first ground: the city's main street, walked at street level the way every city in this world is walked - on your own two feet, not watched from above.</p><p class="status">The first ground</p></div>
+          <div class="city"><h3>Walk it yourself</h3><p>The conviction behind the Travel wing stands at the door of the game: a screen only attempts to share a culture. Only visiting a place in person and walking its streets yourself truly shares it - so Auckland is built to be walked.</p><p class="status">The conviction, applied</p></div>
+        </div>
+        <p style="margin:14px 0 0"><button class="homebtn" data-go="-1,0">Back to Travel (Right)</button></p>
+        <p class="foot">Auckland is the starting city of Zealandia - one division left of the journey, where the walking begins.</p>
       </div>
     </section>
 
@@ -359,7 +423,7 @@
           <p>AIO is divided by a simple design strategy of mine: split the sections so each one reads as a page of its own. The centre is the main page. Around it, each direction carries its own value: the left is the past, and freedom; the right is the future, and the decision; the top is dreams, and the tools for them; the bottom is the current state, where things stand now.</p>
           <p>Each section can divide again into four directions of its own, so you reach different sections without pressing a lot of buttons. It works the way a catalogue does in an RPG: open one, and the branch of choices on that theme unfolds. I find the tactic extremely self-intuitive - you always know where you are, and where a choice leads.</p>
         </div>
-        <p class="hint">Move with the edge buttons, the arrow keys, or the buttons inside each room. Escape returns to the gate. The demo shop inside AIO is Kuro Sushi; its hours are Tuesday to Sunday, 11:30 am to 10:00 pm.</p>
+        <p class="hint">Move with the edge buttons, the arrow keys, or the buttons inside each room. Every direction branches once more beyond its wing, so keep going outward. Escape returns to the gate. The demo shop inside AIO is Kuro Sushi; its hours are Tuesday to Sunday, 11:30 am to 10:00 pm.</p>
       </div>
     </section>
 
@@ -412,6 +476,34 @@
           <p id="confirmText" style="margin:0; line-height:1.6"></p>
           <p style="margin:10px 0 0"><button class="homebtn" data-go="0,0">Back to Home</button></p>
         </div>
+      </div>
+    </section>
+
+
+    <!-- THE RECIPE SYSTEM : RIGHT, ONCE MORE -->
+    <section class="sec" data-pos="2,0" id="sec-recipe">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Right - Production, Once More</p><h2>The Recipe System - Production Branch</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Left)</button></div>
+        <div class="trim"></div>
+        <p class="secsub">One division further right from Production: the system behind the counter. The guest side of Production holds the menu and the cart; this room holds the book the kitchen runs on.</p>
+        <div class="tale">
+          <p>I cooked part-time on hot foods at Sushi Umi for eight years, and I wrote and formatted the kitchen's recipe book: 21 standardized recipes, Korean and English side by side, every one in the same fixed format. The format is the work. A guest never sees this book, but the hot dishes on the menu in Production run on it - the teriyaki, the katsu, the calamari, the gyoza, the udon. The quantities stay in the kitchen, so what is shown here is the structure, with the contents redacted.</p>
+        </div>
+        <div class="doc">
+          <div class="docband">SUSHI UMI RECIPE</div>
+          <div class="docbody">
+            <h3>Standardized Kitchen Recipe Book</h3>
+            <p style="margin:0; color:#4a463c; font-size:14px">One format for every recipe: name, ingredients in Korean and English, quantity, and method notes. Written at bulk kitchen scale so any cook on the line produces the same result.</p>
+            <div class="specs">
+              <span class="spec">21 recipes</span><span class="spec">Bilingual KO / EN</span>
+              <span class="spec">Fixed table format</span><span class="spec">4 pages</span><span class="spec">Format shown - contents redacted</span>
+            </div>
+            <p class="locknote">These are a working restaurant's trade recipes. I show the document system I built - the categories, the bilingual layout, the discipline - and nothing of the recipes themselves.</p>
+          </div>
+        </div>
+        <p style="margin:22px 0 0"><button class="homebtn" data-go="1,0">Back to Production (Left)</button></p>
+        <p class="foot">The recipe system is the back of the counter: Production sells from the menu, and this room is what makes it come out the same every time. The working menu and cart live back in Production.</p>
       </div>
     </section>
 
@@ -531,6 +623,30 @@
       <p>Inside the idea sits a VR chamber that copies a place completely - its temperature, its humidity, its wind - so that being somewhere can be shared, not just shown. The houses and their models are traded inside Espil.Online, and one day they stop being a collection and become an address: the housing layer of the world I am building, where your website is your house and these designs are its first homes.</p>
       <p>That is why these pages exist. A collection should be somewhere its maker controls, introduced in full, with its spec sheets and its story attached - not scattered across someone else's marketplace. So the houses live here now.</p>
       <p class="provenance">Provenance: the Espil House Collection and the Espil Ceil House Addons were first minted on OpenSea in 2022. Their home is this page.</p></div>
+      </div>
+    </section>
+
+    <!-- THE CAPSULE ADDONS : DOWN, ONCE MORE -->
+    <section class="sec" data-pos="0,2" id="sec-addons">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Down - The Land, Once More</p><h2>The Capsule Addons - The Land Branch</h2></div>
+        <button class="homebtn" data-go="0,0">Home (Up)</button></div>
+        <div class="trim"></div>
+        <p class="secsub">One division further down from the Land: the parts that fit the houses out. The Land above holds the houses themselves; this room holds the Espil Ceil House Addons - capsule rooms and packs that fit the collection's houses, whole rooms delivered as parts, the way a realtor lists the fittings that come with a home. Credited to Bieclipse Design House.</p>
+      <div class="cards">
+        <div class="card"><img src="img/interior-living.jpg" alt="A capsule room interior with a tree growing through it"><div class="pad"><p class="no">Addon - Capsule Room</p><h3>Living Room Capsule</h3><p>The house's daytime heart as one fitted part: seating, light, and room for the tree to come through.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><img src="img/interior-entrance.jpg" alt="A stone-walled entrance passage in an Espil House"><div class="pad"><p class="no">Addon - Capsule Room</p><h3>Entrance Capsule</h3><p>The arrival: a stone-walled passage that slows the step from outside to inside.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><div class="pad"><p class="no">Addon - Capsule Room</p><h3>Bar Capsule</h3><p>A bar fitted as a single capsule - the social room of the house, delivered whole.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><div class="pad"><p class="no">Addon - Room</p><h3>3D Printer Room</h3><p>The room that explains the house: the printer space, where the next house gets made.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><div class="pad"><p class="no">Addon - Capsule Room</p><h3>Study Room Capsule</h3><p>A quiet capsule for work and reading, fitted to drop into any house in the collection.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+        <div class="card"><div class="pad"><p class="no">Addon - Pack</p><h3>Universe Pack</h3><p>The companion pack for the Universe house: the matching parts for the collection's second home.</p><p class="status">Collection piece - Espil Ceil House Addons</p></div></div>
+      </div>
+      <h3 style="margin-top:30px">How the parts are specified</h3>
+      <p style="font-size:15.5px; line-height:1.6; max-width:720px">Every addon carries a trait sheet, the way a listing carries its finishes. The categories the parts are specified in:</p>
+      <div class="traits"><span>Background</span><span>BGM</span><span>House Type</span><span>Floors</span><span>Paints</span><span>Trees</span><span>Portals</span><span>Clothings</span></div>
+      <p class="hint">The addons collection holds a seventh piece whose original listing was never fully documented; it joins this page when its record is complete.</p>
+        <p style="margin:14px 0 0"><button class="homebtn" data-go="0,1">Back to The Houses (Up)</button></p>
+        <p class="foot">The capsule addons are the fittings of the collection - the houses stand above, and their rooms are kept here, one division down.</p>
       </div>
     </section>
 
@@ -840,7 +956,10 @@ var RECIPE_PAGES = [
 
 /* ================= DIRECTIONAL NAVIGATION (Boundless Horizon pattern) ================= */
 var world = document.getElementById("world");
-var NAMES = {"0,0":"AIO Home","0,-1":"Imagination - Up","-1,0":"Travel - Left","1,0":"Production - Right","0,1":"The Houses - Down"};
+var NAMES = {"0,0":"AIO Home","0,-1":"Imagination - Up","-1,0":"Travel - Left","1,0":"Production - Right","0,1":"The Houses - Down","0,-2":"Zealandia - The Future Land","-2,0":"Auckland - The Starting City","2,0":"The Recipe System - Production Branch","0,2":"The Capsule Addons - The Land Branch"};
+var SHORT = {"0,0":"AIO Home","0,-1":"Imagination","-1,0":"Travel","1,0":"Production","0,1":"The Houses","0,-2":"Zealandia","-2,0":"Auckland","2,0":"The Recipe System","0,2":"The Capsule Addons"};
+var CCOLORS = {"0,0":"#b98a2f","0,-1":"#454037","-1,0":"#f4f1ea","1,0":"#17586e","0,1":"#c8102e","0,-2":"#454037","-2,0":"#f4f1ea","2,0":"#17586e","0,2":"#c8102e"};
+var edgeTarget = {};
 var cur = [0,0];
 var compass = document.getElementById("compass");
 var edges = {up:document.getElementById("edgeUp"), down:document.getElementById("edgeDown"),
@@ -849,20 +968,28 @@ function goTo(x,y){
   cur = [x,y];
   world.style.transform = "translate(" + (-x*100) + "vw," + (-y*100) + "vh)";
   compass.textContent = "You are at: " + NAMES[x+","+y];
-  document.documentElement.style.setProperty("--cc", {"0,0":"#b98a2f","0,-1":"#454037","-1,0":"#f4f1ea","1,0":"#17586e","0,1":"#c8102e"}[x+","+y] || "#b98a2f");
-  var home = (x===0 && y===0);
-  edges.up.hidden = !home; edges.down.hidden = !home;
-  edges.left.hidden = !home; edges.right.hidden = !home;
+  document.documentElement.style.setProperty("--cc", CCOLORS[x+","+y] || "#b98a2f");
+  var DIRS = [["up",0,-1,"Up"],["down",0,1,"Down"],["left",-1,0,"Left"],["right",1,0,"Right"]];
+  edgeTarget = {};
+  DIRS.forEach(function(d){
+    var nk = (x+d[1]) + "," + (y+d[2]);
+    if(NAMES.hasOwnProperty(nk)){
+      edges[d[0]].hidden = false;
+      edges[d[0]].textContent = d[3] + " - " + SHORT[nk];
+      edgeTarget[d[0]] = [x+d[1], y+d[2]];
+    } else {
+      edges[d[0]].hidden = true;
+    }
+  });
 }
 document.querySelectorAll("[data-go]").forEach(function(b){
   b.addEventListener("click", function(){
     var p = b.getAttribute("data-go").split(","); goTo(parseInt(p[0],10), parseInt(p[1],10));
   });
 });
-edges.up.addEventListener("click", function(){ goTo(0,-1); });
-edges.down.addEventListener("click", function(){ goTo(0,1); });
-edges.left.addEventListener("click", function(){ goTo(-1,0); });
-edges.right.addEventListener("click", function(){ goTo(1,0); });
+["up","down","left","right"].forEach(function(k){
+  edges[k].addEventListener("click", function(){ var t = edgeTarget[k]; if(t) goTo(t[0], t[1]); });
+});
 document.addEventListener("keydown", function(e){
   var tag = (e.target.tagName||"").toLowerCase();
   if(tag==="input" || tag==="textarea") return;
