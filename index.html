@@ -151,6 +151,15 @@
 @media (prefers-reduced-motion:reduce){#espil-loader .el-wave,#espil-loader .el-swirl i,#espil-loader .el-b,#espil-loader .el-slosh,#espil-loader .el-surface,#espil-loader .el-water::after,#espil-loader .el-shine{animation:none}}
 </style>
 <noscript><style>#espil-loader{display:none}</style></noscript>
+<style>
+.case-tag{display:inline-block; font-family:var(--sans); font-size:10.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; background:var(--highlight); color:var(--paper); padding:2px 7px; margin-left:8px; vertical-align:2px; white-space:nowrap}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .case-tag{color:#161616} }
+html[data-theme="dark"] .case-tag{color:#161616}
+.combo-strip{border:2px solid var(--ink); background:var(--card); padding:22px 24px 10px; margin:28px 0}
+.combo-strip h2{margin:0 0 14px}
+.combo-strip ul{margin:0 0 14px; padding-left:22px}
+.combo-strip li{margin:0 0 8px; font-size:17px; line-height:1.5}
+</style>
 </head>
 <body>
 <!-- espil-loader v13 (injected 2026-10-16) -->
@@ -203,8 +212,10 @@
 <!-- ============ THE BRIEFING ============ -->
 <section id="briefing">
   <p class="kicker">The Briefing</p>
-  <h2>A proven builder who converted to vibe coding</h2>
-  <p class="lede">I am a web developer and designer based in Vancouver, BC. I have been building for the web since 2015 — and on computers since the DOS era. My headline skill today is AI-assisted development: I direct the tools, review and edit the code myself, and ship end-to-end. I currently build <strong>Espil.Online</strong>, a live interactive 3D map, on top of a decade of client sites, internal systems and experiments — most of which I scoped, designed, built and ran myself.</p>
+  <h2>I design systems. Then I build them.</h2>
+  <p class="lede">Senior product designer and design engineer in Vancouver, BC. For ten years I have designed and built websites, internal systems, and one living 3D world, always as documented systems rather than one-off pages. I currently design, build, and operate Espil.Online end to end.</p>
+  <p>The proof is in the record below. At Discover Holidays I authored the style guide the company's pricing catalogues are formatted by, and enforced it with InDesign scripts across thousands of pages and hundreds of thousands of prices. At Higgs Creative I was already converting Figma designs into production HTML with AI assistance in 2022. And the design system behind Espil.Online, its laws, tokens, and components, is documented on this site at /system/.</p>
+  <p>Everything on this page was scoped, designed, built, and run by one person. That is not the biography. That is the offer.</p>
 
   <div class="factbox">
     <dl>
@@ -212,11 +223,12 @@
       <dt>Experience</dt><dd>Building for the web since 2015; computers since the DOS era</dd>
       <dt>Focus</dt><dd>Espil.Online — an interactive 3D map of a living world</dd>
       <dt>Strength</dt><dd>Cultural fluency — Korean / Mandarin / English, all fluent</dd>
+      <dt>Status</dt><dd>Open to full-time senior product design roles across Canada.</dd>
     </dl>
   </div>
 
   <h3>Three vantage points</h3>
-  <p>I do not see IT and design from the maker's chair alone. I have worked from the standpoint of a one-person company, where I was the whole operation and every decision landed on me. I have worked inside a company as it grew to ten people, where the work had to hold up in other people's hands. And I have sat on the operations team of an established company, where accuracy matters every single day and the systems have to serve people who never see how they work. Just as important is what accumulated across all three seats: feedback, gathered steadily from clients, teammates and users since 2015, and all of it is still in how I build.</p>
+  <p>I do not see IT and design from the maker's chair alone. I have worked from the standpoint of a one-person company, where every decision landed on me; inside a company as it grew to ten people, where the work had to hold up in other people's hands; and on the operations team of an established company, where accuracy matters every day. Across all three seats, feedback gathered steadily from clients, teammates and users since 2015 is still in how I build.</p>
 
   <h3>Origins</h3>
   <p>I was born in South Korea, but I only lived there until I was seven — my elementary schooling was in China, before Canada. I have been on computers since the DOS era, learning from grade 3 and building my first HTML pages as a child. Photoshop and Illustrator since high school, Dreamweaver in my web toolkit — and my high-school design work was already in use, by the Coquitlam Hall of Fame and my school soccer team.</p>
@@ -260,17 +272,33 @@
   </div>
 </section>
 
+<!-- ============ THE COMBINATION ============ -->
+<section id="combination">
+  <div class="combo-strip">
+    <h2>The combination</h2>
+    <ul>
+      <li>Product design, systems-first: laws and tokens before screens.</li>
+      <li>Front-end engineering: he ships his own designs, in production code.</li>
+      <li>AI-assisted workflow: practised since 2022, before ChatGPT made it a headline.</li>
+      <li>An operator's discipline: pricing-grade accuracy, learned where errors cost money.</li>
+      <li>Three languages, three markets: Korean, Mandarin, and English, all fluent.</li>
+    </ul>
+    <p>These usually arrive as three hires and a translation budget. Here they are one seat.</p>
+  </div>
+</section>
+
 <!-- ============ 02 SELECTED WORKS ============ -->
 <section id="works">
   <p class="kicker">02 — Selected Works</p>
   <h2>Seven doors into the same world</h2>
+  <p>Reviewing my design work? Start with the three case studies: Espil.Online, Discover Holidays, and Apex Dermatology.</p>
   <ol class="works">
     <li>
-      <h3>Espil.Online</h3>
+      <h3>Espil.Online <span class="case-tag">CASE STUDY</span></h3>
       <p>An online web-based MMORPG for real-time shopping and trading, played in real cities - a live interactive 3D world built with Three.js and shipped end-to-end by me: engine, UI, pipeline, sound, channels. It begins as a mall where everything in real stores can be bought, and trade runs person to person on trust - stalls opened in the world, promises instead of fees, and a signup kept a little strict to protect that trust. <span class="connects">&rarr; <a href="/case-espil-online/">The case study: designing the system, not the screens</a> &middot; <a href="/system/">The design system behind it</a></span></p>
     </li>
     <li>
-      <h3>Apex Dermatology — Complete Web System</h3>
+      <h3>Apex Dermatology — Complete Web System <span class="case-tag">CASE STUDY</span></h3>
       <p>For a dermatology clinic I built the whole web presence as one system: the Figma design, the Apex Derm landing site, a chatbot reservation flow, and QDerm online booking with calendar sync and email notifications. <span class="connects">&rarr; <a href="/case-apex-dermatology/">The case study</a></span></p>
     </li>
     <li>
@@ -310,6 +338,7 @@
 <section id="record">
   <p class="kicker">03 — The Record</p>
   <h2>What I have done, in order</h2>
+  <p>Twice, employers moved first: headhunted by the founders of Higgs Creative, and converted from intern to full-time staff at Discover Holidays on the strength of a single project.</p>
 
   <div class="entry">
     <div class="when">Pre-2010 — Origins</div>
@@ -319,8 +348,8 @@
 
   <div class="entry">
     <div class="when">May 2024 – Feb 2026</div>
-    <h3>Operations Coordinator — Discover Holidays</h3>
-    <p>I alone produced the entire Alaska + Canada tariffs under the Founder's direction — hundreds of pages of price sourcing, data entry, image work and posters. To escape the manual workflow I built my own Python tool on the company intranet API (bulk typo-finding and correction, price and property search) and wrote macros that finished a job estimated at several months in one day. The tariff content itself is company-confidential; the scale and the process are the story. Operations taught me that accuracy is paramount — and exactly which steps buy speed. <span class="connects">&rarr; <a href="/case-discover-holidays/">The case study: rebuilding the tariff system</a></span></p>
+    <h3>Operations Coordinator — Discover Holidays <span class="case-tag">CASE STUDY</span></h3>
+    <p>I alone produced the entire Alaska + Canada tariffs under the Founder's direction - hundreds of pages of price sourcing, data entry, image work and posters - and the tooling I built finished a job estimated at several months in one day. I also authored the style guide the catalogues are formatted by, and enforced it with JavaScripts inside InDesign. To escape the manual workflow I built my own Python tool on the company intranet API (bulk typo-finding and correction, price and property search). The tariff content itself is company-confidential; the scale and the process are the story. Operations taught me that accuracy is paramount - and exactly which steps buy speed. <span class="connects">&rarr; <a href="/case-discover-holidays/">The case study: rebuilding the tariff system</a></span></p>
   </div>
 
   <div class="entry">
@@ -338,7 +367,7 @@
   <div class="entry">
     <div class="when">Jun 2019 – Dec 2021</div>
     <h3>Full Stack Developer — HMC (Han Mobility)</h3>
-    <p>I was hired in sales, on the floor of the company's Freedom Mobile franchise. I grew through marketing and design work into the company's full-stack developer - and its backend person. I migrated the entire Excel-based customer list into a real database, fully manageable through CRUD, on top of an intranet CMS, dashboards and OCR-based PDF data entry - including a JavaScript reader that scanned the standard contract PDFs and filed price, name, address and the rest into the database. A Python script turned the old monthly sheets into new CSVs by detecting their patterns.</p>
+    <p>Hired in sales, on the floor of the company's Freedom Mobile franchise, I ended up migrating its entire Excel-based customer list into a managed database. I grew through marketing and design work into the company's full-stack developer - and its backend person. The database was fully manageable through CRUD, on top of an intranet CMS, dashboards and OCR-based PDF data entry - including a JavaScript reader that scanned the standard contract PDFs and filed price, name, address and the rest into the database. A Python script turned the old monthly sheets into new CSVs by detecting their patterns.</p>
   </div>
 
   <div class="entry">
@@ -350,7 +379,7 @@
   <div class="entry">
     <div class="when">Dec 2020 – Dec 2021</div>
     <h3>Marketer — Nohproblem Consulting</h3>
-    <p>I was the company's only employee when I started - my first remote job, handed over by a predecessor who left within days. Hired as a marketer, I ended up running far more: I managed all of the company's websites — including four different language channels — plus its YouTube channel, which I grew to its first 1,000 subscribers, its SNS and blogs, video editing and official documents, plus logo design, ads and SEO. I also handled total landing-service care for immigration clients: house search, cars, furniture, schools, driver's licences. The videos I produced for that channel are still its most-watched, with over 500,000 views between them, and the channel has since grown to 15,000 subscribers. By the time I left, the two-person Slack had grown to about ten people.</p>
+    <p>I began as the company's sole employee - my first remote job, handed over by a predecessor who left within days - and by the time I left, the team had grown to about ten people. Hired as a marketer, I ended up running far more: I managed all of the company's websites — including four different language channels — plus its YouTube channel, which I grew to its first 1,000 subscribers, its SNS and blogs, video editing and official documents, plus logo design, ads and SEO. I also handled total landing-service care for immigration clients: house search, cars, furniture, schools, driver's licences. The videos I produced for that channel are still its most-watched, with over 500,000 views between them, and the channel has since grown to 15,000 subscribers.</p>
   </div>
 
   <div class="entry">
@@ -545,6 +574,8 @@
   <p class="kicker">05 — Correspondence</p>
   <h2>Write to me</h2>
   <p>I am looking for full-time remote web development work. The fastest way to reach me is email; the fastest way to judge me is the live project.</p>
+  <p>I am looking for a full-time senior product design role in Canada, remote or Vancouver hybrid, at a company where the foundations work matters.</p>
+  <p>For most of the last decade I was not on the market: the seat stayed filled, by employers who headhunted or converted me, and by clients who kept coming back. I am on the market now, and I intend to choose deliberately: the company whose foundations I spend the next years building. If that is the hire you are making, I would like to talk.</p>
   <ul class="contact-list">
     <li><span class="label">Email</span><a href="mailto:han@espil.online">han@espil.online</a></li>
     <li><span class="label">GitHub</span><a href="https://github.com/espil">github.com/espil</a></li>

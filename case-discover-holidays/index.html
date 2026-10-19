@@ -131,20 +131,21 @@
   </aside>
 
   <section class="ad-sec">
-    <h2>The problem</h2>
+    <h2>The pages were not the problem.</h2>
     <p>I joined as an intern and found tariff production done by hand, page by page, on top of an old PHP-era database. Making the catalogues took months of manual work, and every manual step was a chance for a pricing error to reach a partner.</p>
   </section>
   <section class="ad-sec">
-    <h2>The decision</h2>
+    <h2>Rebuild the system, not the pages.</h2>
     <p>Instead of producing pages faster, I rebuilt the production itself as a system. I redesigned the tariff system, converted the legacy database into an API as a single source of truth, and built a map of every hotel the company traded with, placed on the main page titles so a partner could reach the right page in one click.</p>
+    <p>Within a few weeks of joining, I had gone further: I built a working online tariff on that API, a sample meant to replace the printed catalogues entirely. The company asked me to prepare a presentation of it. I could have pushed for the launch. A few months in, I understood why I should not. The partners reading these tariffs were older, and the company's direction was trust built on accuracy they could hold in their hands. Replacing their working tool overnight would have served my demo, not them. So the online tariff stayed built but unlaunched, and the real work became raising the accuracy and cleanliness of the tariffs they actually used, shifting online only as fast as the partners could follow. Knowing when not to ship the new thing is also design.</p>
   </section>
   <section class="ad-sec">
-    <h2>The process</h2>
+    <h2>A style guide the tooling enforces.</h2>
     <p>The formatting had the same problem the data did: previous formats were messy and unstandardized because there was no style guide. So I created one, and then enforced it with JavaScripts inside InDesign: table widths and heights, row dimensions, column separators, applied by script across thousands of pages and hundreds of thousands of products and prices. Standards that live in a document get negotiated; standards that live in the tooling just hold.</p>
     <p>Working alone under the Founder's direction, I also built the automation around the data: database search against the API in Python and Java, typo detectors for the database, automation bots for the repetitive tasks, and macros recorded to handle varying circumstances, categorizing, selecting, and inserting the correct amounts each time. A product map was generated and scanned to catch products with wrong destination coordinates, and that map became the map in the B2B InDesign file.</p>
   </section>
   <section class="ad-sec">
-    <h2>The outcome</h2>
+    <h2>Months became a day.</h2>
     <ul>
       <li>Production work estimated at several months by hand was completed in one day with the new tooling, without losing accuracy</li>
       <li>Partner satisfaction with the new tariffs was large and immediate</li>
@@ -152,6 +153,7 @@
       <li>The tariffs I produced carried the company's Alaska and Canada programs</li>
     </ul>
     <p>Operations taught me that accuracy is paramount, and exactly which steps buy speed. This project is where I learned to earn speed by rebuilding the system, never by checking less.</p>
+    <p>This is what I do to a legacy workflow, inside a single internship.</p>
   </section>
 
   <p class="backline"><a href="/#record">&larr; Back to The Record</a></p>
