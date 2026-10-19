@@ -54,6 +54,9 @@
   .edge.left{left:14px; top:50%; transform:translateY(-50%)}
   .edge.right{right:14px; top:50%; transform:translateY(-50%)}
   .edge[hidden]{display:none}
+  /* ---------- mobile swipe navigation ---------- */
+  body.touch-nav .edge{display:none !important}
+  body.touch-nav .sec{touch-action:pan-y}
   .compass{position:fixed; z-index:40; top:14px; right:14px; background:rgba(20,19,17,.88); color:var(--paper);
     font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; padding:8px 12px; border-radius:4px}
   .homebtn{background:var(--ink); color:var(--paper); border:0; border-radius:999px; padding:9px 18px;
@@ -1001,6 +1004,49 @@ document.addEventListener("keydown", function(e){
   }
 });
 goTo(0,0);
+
+/* ================= MOBILE SWIPE NAVIGATION (Han, 2026-10-19) =================
+   On touch devices the edge buttons hide and a four-direction swipe moves
+   between rooms instead. The swipe names its destination: swipe left to go
+   left, right to go right, up to go up, down to go down. A swipe that
+   scrolled the room first does not navigate. */
+(function(){
+  var mq = window.matchMedia("(pointer: coarse), (max-width: 760px)");
+  var navHint = document.querySelector(".sec .hint");
+  var deskHint = navHint ? navHint.textContent : "";
+  function applyMode(){
+    var touch = mq.matches;
+    document.body.classList.toggle("touch-nav", touch);
+    if(navHint) navHint.textContent = touch
+      ? "On mobile, swipe left, right, up or down to move between rooms. Every direction branches once more beyond its wing, so keep going outward. The demo shop inside AIO is Kuro Sushi; its hours are Tuesday to Sunday, 11:30 am to 10:00 pm."
+      : deskHint;
+  }
+  if(mq.addEventListener) mq.addEventListener("change", applyMode);
+  else if(mq.addListener) mq.addListener(applyMode);
+  applyMode();
+  var sx = 0, sy = 0, tracking = false, scroller = null, startScroll = 0;
+  document.addEventListener("touchstart", function(e){
+    tracking = false;
+    if(!document.body.classList.contains("touch-nav")) return;
+    if(e.touches.length !== 1) return;
+    var t = e.target;
+    if(!t.closest || t.closest("#gateIntro, button, a, input, textarea, select, [draggable='true']")) return;
+    scroller = t.closest(".sec");
+    startScroll = scroller ? scroller.scrollTop : 0;
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+    tracking = true;
+  }, {passive: true});
+  document.addEventListener("touchend", function(e){
+    if(!tracking) return;
+    tracking = false;
+    if(scroller && scroller.scrollTop !== startScroll) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if(Math.max(Math.abs(dx), Math.abs(dy)) < 48) return;
+    var dir = Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? "left" : "right") : (dy < 0 ? "up" : "down");
+    var target = edgeTarget[dir];
+    if(target) goTo(target[0], target[1]);
+  }, {passive: true});
+})();
 
 /* ================= MENU RENDER ================= */
 var grid = document.getElementById("dishGrid");
