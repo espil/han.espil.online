@@ -202,7 +202,6 @@ html[data-theme="dark"] .case-tag{color:#161616}
   <a href="#briefing">The Briefing</a>
   <a href="#cover-story">01 Cover Story</a>
   <a href="#works">02 Selected Works</a>
-  <a href="/system/">Design System</a>
   <a href="#record">03 The Record</a>
   <a href="#archive">Full Index</a>
   <a href="#capabilities">04 Capabilities</a>
@@ -414,7 +413,8 @@ html[data-theme="dark"] .case-tag{color:#161616}
   <div class="index-group">
     <h3>Portfolio Lineage &amp; Houses</h3>
     <ul class="index">
-      <li><a href="/hbi/">HBI — HighSchool Artworks</a> <span class="yr">2021</span> — a 3D flip-book of my 2006 charcoal works; from the same school years when my designs were already in real use (Coquitlam Hall of Fame, school soccer team).</li>
+      <li><a href="/system/">The Design System</a> — the laws, tokens, and one component family behind Espil.Online and this site.</li>
+        <li><a href="/hbi/">HBI — HighSchool Artworks</a> <span class="yr">2021</span> — a 3D flip-book of my 2006 charcoal works; from the same school years when my designs were already in real use (Coquitlam Hall of Fame, school soccer team).</li>
       <li><a href="/resume/">Resume — Minihompi / Recruiter Dossier</a> — my single-page interactive resume and dossier site; the full text also lives here, in print form.</li>
       <li><a href="/media/">Media — Bieclipse Design, Immersive Web Development</a> <span class="yr">2021</span> — my early immersive portfolio, with Enscape 3D embedded.</li>
       <li><a href="/roadmap/">Roadmap — Bieclipse Designs</a> <span class="yr">2022</span> — a portfolio built on Pannellum 360° panoramas.</li>
@@ -647,10 +647,20 @@ html[data-theme="dark"] .case-tag{color:#161616}
 (function(){
   var links = {};
   document.querySelectorAll('nav.contents a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var nav = document.querySelector('nav.contents');
+  function followTab(a){
+    if(!nav || !a || nav.scrollWidth <= nav.clientWidth) return;
+    var target = a.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2;
+    target = Math.max(0, Math.min(target, nav.scrollWidth - nav.clientWidth));
+    if(Math.abs(nav.scrollLeft - target) < 2) return;
+    if(nav.scrollTo) nav.scrollTo({left: target, behavior: 'smooth'});
+    else nav.scrollLeft = target;
+  }
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(en){
       if(en.isIntersecting){
         Object.keys(links).forEach(function(k){ links[k].classList.toggle('active', k === en.target.id); });
+        followTab(links[en.target.id]);
       }
     });
   }, {rootMargin: '-38% 0px -55% 0px'});
