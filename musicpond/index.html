@@ -7,8 +7,82 @@
 <meta name="description" content="Music Pond, a 2018 BCIT school project app connecting music students and teachers. Interactive web revival: Firebase bypassed, every screen navigable. UI designed by HanBin Im (Espil).">
 <link rel="icon" href="assets/icon.png">
 <link rel="stylesheet" href="style.css">
+<!-- espil-loader v13 (injected 2026-10-16) -->
+<style>
+@property --p{syntax:"<number>"; inherits:true; initial-value:0}
+#espil-loader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0b0b0b url("/universe/render-tree.png") center/cover no-repeat;transition:opacity .45s ease}
+#espil-loader::before{content:"";position:absolute;inset:0;background:rgba(8,8,8,.55)}
+#espil-loader.done{opacity:0;pointer-events:none}
+#espil-loader .el-card{position:relative;text-align:center}
+#espil-loader .el-glass{position:relative;width:98px;height:98px;margin:0 auto;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 32% 24%,rgba(255,255,255,.34),rgba(255,255,255,.10) 26%,rgba(255,255,255,0) 48%),linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.16) 45%,rgba(255,255,255,.03) 52%,rgba(255,255,255,0) 62%),linear-gradient(165deg,rgba(255,255,255,.08),rgba(255,255,255,0) 42%,rgba(120,200,255,.06) 78%,rgba(190,242,100,.08)),rgba(240,238,233,.02);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),inset 0 10px 18px rgba(255,255,255,.14),inset 0 -16px 24px rgba(0,0,0,.38),inset 0 0 17px rgba(240,238,233,.10),0 0 18px rgba(220,255,190,.10),0 12px 30px rgba(0,0,0,.4);filter:drop-shadow(0 16px 16px rgba(0,0,0,.35));--p:0;--rock:calc(0.5deg + var(--p,0) * .02deg + var(--agit,0.7) * (1.1deg + var(--p,0) * .055deg));--sway:calc(0.4px + var(--p,0) * .016px + var(--agit,0.7) * (0.9px + var(--p,0) * .05px));--bob:calc(.8px + var(--p,0) * .032px)}
+#espil-loader .el-glass::before{content:"";position:absolute;inset:0;border-radius:50%;z-index:4;pointer-events:none;background:conic-gradient(from 215deg,rgba(255,255,255,.62),rgba(255,255,255,.10) 20%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 74%,rgba(190,242,100,.24) 90%,rgba(255,255,255,.5));-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px))}
+#espil-loader .el-glass::after{content:"";position:absolute;left:10%;right:10%;bottom:4px;height:18px;border-radius:50%;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 100%,rgba(216,252,170,.34),rgba(216,252,170,0) 70%)}
+#espil-loader .el-slosh{position:absolute;inset:-6px;z-index:1;transform-origin:50% 88%;animation:elSlosh 3.4s ease-in-out infinite alternate}
+@keyframes elSlosh{from{transform:rotate(calc(var(--rock) * -1)) translateX(calc(var(--sway) * -1))}to{transform:rotate(var(--rock)) translateX(var(--sway))}}
+#espil-loader .el-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;display:none;filter:brightness(1.24) saturate(1.38)}
+#espil-loader.physics-on .el-canvas{display:block}
+#espil-loader.physics-on .el-slosh{display:none}
+#espil-loader .el-water{position:absolute;left:0;right:0;bottom:0;height:calc(var(--p)*1%);background:linear-gradient(100deg,rgba(255,255,255,.12),rgba(255,255,255,0) 36%,rgba(255,255,255,.07) 60%,rgba(255,255,255,0) 82%),linear-gradient(180deg, rgba(255,245,155,.78), rgba(254,246,160,.72) 22%, rgba(224,252,175,.70) 45%, rgba(198,244,120,.68) 66%, rgba(172,232,70,.70) 85%, rgba(148,214,50,.74));filter:brightness(1.24) saturate(1.38);transition:height .12s linear}
+#espil-loader .el-water::before{content:"";position:absolute;left:6%;right:6%;bottom:2px;height:34%;background:radial-gradient(ellipse at 50% 100%,rgba(232,255,200,.68),rgba(210,255,180,0) 70%)}
+#espil-loader .el-water::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 28%,rgba(255,255,255,.22) 45%,rgba(255,255,255,.05) 55%,transparent 68%);background-size:260% 100%;animation:elStreak 5.5s ease-in-out infinite alternate}
+@keyframes elStreak{from{background-position:110% 0}to{background-position:-30% 0}}
+
+
+
+#espil-loader .el-surface{position:absolute;left:-4%;right:-4%;top:-7px;height:14px;border-radius:50%;background:radial-gradient(ellipse at 50% 42%,rgba(236,255,205,.85),rgba(196,244,120,.34) 55%,rgba(196,244,120,0) 74%);animation:elSurface 1.7s ease-in-out infinite alternate}
+@keyframes elSurface{from{transform:translateY(calc(var(--bob) * -1)) rotate(calc(var(--rock) * -.5))}to{transform:translateY(var(--bob)) rotate(calc(var(--rock) * .5))}}
+#espil-loader .el-wave{position:absolute;top:-7px;left:0;width:200%;height:8px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M0 8 Q 15 1 30 8 T 60 8 T 90 8 T 120 8 V14 H0 Z' fill='%23bef264' fill-opacity='0.42'/%3E%3C/svg%3E") repeat-x;background-size:60px 8px;animation:elWave1 2.6s linear infinite}
+#espil-loader .el-wave.back{top:-6px;opacity:.22;animation:elWave2 4.4s linear infinite}
+#espil-loader .el-wave.deep{top:-5px;opacity:.15;background-size:85px 10px;height:10px;animation:elWave3 7s linear infinite}
+@keyframes elWave1{0%{transform:translate(0,0)}50%{transform:translate(-30px,calc(.9px + var(--p,0) * .028px))}100%{transform:translate(-60px,0)}}
+@keyframes elWave2{0%{transform:translate(-60px,calc(.8px + var(--p,0) * .02px))}50%{transform:translate(-30px,-1px)}100%{transform:translate(0,calc(.8px + var(--p,0) * .02px))}}
+@keyframes elWave3{0%{transform:translate(0,0)}50%{transform:translate(-42px,calc(1.2px + var(--p,0) * .03px))}100%{transform:translate(-85px,0)}}
+#espil-loader .el-swirl{position:absolute;left:0;right:0;bottom:0;height:calc(var(--p)*1%);overflow:hidden;transition:height .12s linear;pointer-events:none}
+#espil-loader .el-swirl i{position:absolute;left:50%;top:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg,rgba(255,244,150,.3) 40deg,transparent 95deg,rgba(255,255,255,.16) 165deg,transparent 215deg,rgba(190,242,100,.26) 300deg,transparent 345deg);animation:elSwirl 6s linear infinite}
+@keyframes elSwirl{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+#espil-loader .el-b{position:absolute;bottom:8px;border-radius:50%;z-index:3;background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.95),rgba(255,255,255,.25));opacity:0;animation:elRise 2.8s ease-in infinite}
+#espil-loader .b1{left:38%;width:4px;height:4px;animation-delay:0s}
+#espil-loader .b2{left:52%;width:3px;height:3px;animation-delay:.7s}
+#espil-loader .b3{left:60%;width:5px;height:5px;animation-delay:1.3s}
+#espil-loader .b4{left:45%;width:2.5px;height:2.5px;animation-delay:1.9s}
+#espil-loader .b5{left:56%;width:3.5px;height:3.5px;animation-delay:2.4s}
+@keyframes elRise{0%{transform:translate(0,0);opacity:0}12%{opacity:.85}38%{transform:translate(calc(var(--sway,0px) * -.8),-24px)}62%{transform:translate(calc(var(--sway,0px) * .75),-42px)}100%{transform:translate(calc(var(--sway,0px) * -.35),-58px);opacity:0}}
+#espil-loader .el-b{scale:clamp(0,calc((var(--p, 0) - 30) / 6),1)}
+#espil-loader .el-shade{position:absolute;inset:0;border-radius:50%;z-index:3;pointer-events:none;box-shadow:inset -14px -12px 26px rgba(0,0,0,.28),inset 12px 14px 22px rgba(255,255,255,.05),inset 0 -18px 26px rgba(4,32,16,.25),inset 0 0 22px rgba(190,242,100,.05)}
+#espil-loader .el-shine{position:absolute;inset:0;border-radius:50%;z-index:4;pointer-events:none;background:radial-gradient(64px 36px at 30% 15%,rgba(255,255,255,.55),rgba(255,255,255,0) 62%),radial-gradient(26px 13px at 24% 11%,rgba(255,255,255,.5),rgba(255,255,255,0) 70%),radial-gradient(90px 34px at 50% 108%,rgba(216,252,170,.16),rgba(216,252,170,0) 70%),linear-gradient(115deg,transparent 32%,rgba(255,255,255,.13) 47%,rgba(255,255,255,.03) 55%,transparent 68%);background-size:auto,auto,auto,260% 100%;animation:elSheen 7s ease-in-out infinite alternate}
+@keyframes elSheen{from{background-position:0 0,0 0,0 0,115% 0}to{background-position:0 0,0 0,0 0,-35% 0}}
+
+
+
+.el-lock{overflow:hidden!important}
+@media (prefers-reduced-motion:reduce){#espil-loader .el-wave,#espil-loader .el-swirl i,#espil-loader .el-b,#espil-loader .el-slosh,#espil-loader .el-surface,#espil-loader .el-water::after,#espil-loader .el-shine{animation:none}}
+</style>
+<noscript><style>#espil-loader{display:none}</style></noscript>
+<link rel="stylesheet" href="/chrome/site-chrome.css?v=1">
+<script src="/chrome/site-chrome.js?v=1" defer></script>
 </head>
 <body>
+<!-- espil-loader v13 (injected 2026-10-16) -->
+<div id="espil-loader" role="status" aria-label="Loading">
+  
+  <div class="el-card">
+    <div class="el-glass">
+      <canvas class="el-canvas" width="196" height="196"></canvas>
+      <div class="el-slosh">
+        <div class="el-water"><div class="el-surface"></div><div class="el-wave"></div><div class="el-wave back"></div><div class="el-wave deep"></div></div>
+        
+        <div class="el-swirl"><i></i></div>
+        <span class="el-b b1"></span><span class="el-b b2"></span><span class="el-b b3"></span><span class="el-b b4"></span><span class="el-b b5"></span>
+      </div>
+      <div class="el-shade"></div>
+      <div class="el-shine"></div>
+      
+    </div>
+    
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="espil-fisheye" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB"><feImage href="data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Cdefs%3E%3ClinearGradient%20id='gx'%20x1='0'%20y1='0'%20x2='1'%20y2='0'%3E%3Cstop%20offset='0'%20stop-color='rgb%280,128,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28255,128,0%29'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='gy'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='rgb%28128,0,0%29'/%3E%3Cstop%20offset='1'%20stop-color='rgb%28128,255,0%29'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gx%29'/%3E%3Crect%20width='100'%20height='100'%20fill='url%28%23gy%29'%20opacity='0.55'/%3E%3C/svg%3E" x="0" y="0" width="100" height="100" preserveAspectRatio="none" result="map"/><feDisplacementMap in="SourceGraphic" in2="map" scale="10" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
 <div class="stage">
   <div class="phone" id="phone">
     <div class="notch"></div>
@@ -25,5 +99,199 @@
   <p class="caption">Music Pond (2018) - interactive web revival. The original React Native app ran on Firebase; this archive build bypasses sign-in so every screen can be explored. UI designed by Espil.</p>
 </div>
 <script src="app.js"></script>
+<!-- espil-loader v13 (injected 2026-10-16) -->
+<script>
+(function(){
+  var L=document.getElementById('espil-loader'); if(!L) return;
+  var G=L.querySelector('.el-glass');
+    document.documentElement.classList.add('el-lock');
+  var start=Date.now(), shown=0, finished=false;
+  setTimeout(function(){ finish(); }, 7000); /* absolute failsafe */
+  function real(){
+    var imgs=document.images, t=imgs.length, c=0;
+    for(var i=0;i<t;i++){ if(imgs[i].complete) c++; }
+    var imgP = t ? c/t : 1;
+    if(document.readyState==='complete') return 1;
+    return Math.min(imgP, document.readyState==='interactive' ? 0.96 : 0.6);
+  }
+  function finish(){
+    if(finished) return; finished=true;
+    shown=100; paint();
+    setTimeout(function(){
+      L.classList.add('done');
+      document.documentElement.classList.remove('el-lock');
+      setTimeout(function(){ if(L.parentNode) L.parentNode.removeChild(L); }, 500);
+    }, 160);
+  }
+  function paint(){ G.style.setProperty('--p', Math.round(shown)); }
+  var tick=setInterval(function(){
+    try{
+      var el=Date.now()-start, target=real()*100;
+      var stallCap=document.readyState==='complete'?100:45;
+      var creep=stallCap*(1-Math.exp(-el/1200));
+      if(target<creep) target=creep; if(target>99) target=99;
+      shown += Math.max(0.6, (target-shown)*0.14);
+      if(shown>target) shown=target;
+      if(shown>99) shown=99;
+      paint();
+      if((real()>=1 && el>900) || el>6000){ clearInterval(tick); finish(); }
+    }catch(e){ clearInterval(tick); finish(); }
+  }, 50);
+})();
+</script>
+<!-- espil-loader v13 physics (injected 2026-10-16) -->
+<script>
+/* Liquid physics for the loading glass (2026-10-15, Han): the surface is a
+   spring chain — each column pulls on its neighbours — rocked by an
+   oscillating lateral force that grows with --p. Fast crests throw
+   droplets; droplets arc under gravity and splash back in with a ripple.
+   Pure enhancement: any failure here leaves the CSS liquid untouched. */
+(function(){
+  var loader=document.getElementById('espil-loader'); if(!loader) return;
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* Luminous yellow-to-green gradient (Han 2026-10-16): the stops are drawn
+     fresh on every load along yellow -> green and lifted in luminance so
+     the liquid glows inside the glass. Shared by the CSS liquid (inline
+     style) and the physics canvas, so both always match. */
+  var YC=[255,245,155], GC=[202,248,118], stops=[[0,YC[0],YC[1],YC[2],0.76]], k;
+  for(k=1;k<=4;k++){
+    var t=k/5+(Math.random()-0.5)*0.09;
+    stops.push([t, Math.round(YC[0]+(GC[0]-YC[0])*t), Math.round(YC[1]+(GC[1]-YC[1])*t), Math.round(YC[2]+(GC[2]-YC[2])*t), 0.68+Math.random()*0.08]);
+  }
+  stops.push([1,172,230,64,0.78]);
+  var waterEl=loader.querySelector('.el-water');
+  if(waterEl){
+    var parts=[];
+    for(k=0;k<stops.length;k++){ var s0=stops[k]; parts.push('rgba('+s0[1]+','+s0[2]+','+s0[3]+','+s0[4].toFixed(2)+') '+(s0[0]*100).toFixed(1)+'%'); }
+    waterEl.style.background='linear-gradient(100deg, rgba(255,255,255,.12), rgba(255,255,255,0) 36%, rgba(255,255,255,.07) 60%, rgba(255,255,255,0) 82%), linear-gradient(180deg, '+parts.join(', ')+')';
+  }
+  var canvas=loader.querySelector('.el-canvas'); if(!canvas) return;
+  var ctx=null; try{ ctx=canvas.getContext('2d'); }catch(e){}
+  if(!ctx) return;
+  loader.classList.add('physics-on');
+  var glassEl=loader.querySelector('.el-glass'); if(!glassEl) return;
+  var W=196, H=196, N=30, K=90, C=1.6, COUPLE=150, GRAV=1600;
+  var h=[], v=[], i;
+  for(i=0;i<N;i++){ h.push(0); v.push(0); }
+  var drops=[], bubbles=[];
+  var baseY=H+4, phase=0, budget=0, last=performance.now(), prevDrive=0, speedSm=0, agit=0.35, agitTick=0, fillP=0;
+  function progress(){
+    var p=parseFloat(glassEl.style.getPropertyValue('--p'));
+    return isNaN(p)?0:Math.max(0,Math.min(100,p));
+  }
+  function colAt(x){ var c=Math.floor(x/W*N); return c<0?0:(c>=N?N-1:c); }
+  function surfY(x){ return baseY+h[colAt(x)]; }
+  function spawnDrop(x,y,vy,vx,r){
+    if(drops.length>=60) return;
+    if(y>H-16||fillP<18) return; /* nothing flies before a real body of liquid */
+    drops.push({x:x,y:y,vy:vy,vx:vx,r:r});
+  }
+  function frame(now){
+    if(!document.body.contains(loader) || loader.classList.contains('done')) return;
+    var dt=(now-last)/1000; last=now;
+    if(dt>0.05) dt=0.05;
+    if(dt<=0){ requestAnimationFrame(frame); return; }
+    var p=progress(), energy=0.3+0.7*agit; fillP=p;
+    phase+=dt*1.85;
+    var amp=(0.5+p*0.02+agit*(1.1+p*0.055))/9.1; /* rock fraction, speed-led */
+    var drive=Math.cos(phase)*amp;
+    if(prevDrive!==0 && Math.sign(drive)!==Math.sign(prevDrive) && p>50){
+      /* rock reversal at high fill: a burst off the leading side — inset
+         from the rim, where the round glass does not clip the droplets */
+      var ex=(drive>0?0.22:0.78)*W;
+      for(var b=0;b<3+Math.round(3*agit);b++) spawnDrop(ex+(Math.random()*14-7), surfY(ex), -(230+Math.random()*190)*(0.45+0.75*agit), (Math.random()*90-45), 2.2+Math.random()*2.6);
+    }
+    prevDrive=drive;
+    /* fill level eases toward the driver's --p */
+    var targetY=H-(p/100)*H, prevBase=baseY;
+    baseY+=(targetY-baseY)*Math.min(1,dt*2.6);
+    var rise=(prevBase-baseY)/Math.max(dt,0.001); /* px/s the line climbs */
+    /* Agitation follows the loading SPEED (Han 2026-10-16): fast progress
+       churns the liquid, a stall lets it settle. agit also feeds the CSS
+       fallback rock through the --agit variable. */
+    speedSm+=((rise>0?rise:0)-speedSm)*Math.min(1,dt*2.2);
+    agit=Math.max(0,Math.min(1,speedSm/55));
+    if(++agitTick>=9){ agitTick=0; try{ loader.style.setProperty('--agit', agit.toFixed(2)); }catch(e){} }
+    /* spring chain, two substeps */
+    for(var s=0;s<2;s++){
+      var dts=dt/2, a=[], c;
+      for(c=0;c<N;c++){
+        var left=c>0?h[c-1]:h[c], right=c<N-1?h[c+1]:h[c];
+        a[c]=-K*h[c]-C*v[c]+COUPLE*(left+right-2*h[c]);
+      }
+      for(c=0;c<N;c++){
+        var nx=(c/(N-1))*2-1;
+        v[c]+=(a[c]-drive*820*nx)*dts;
+        h[c]+=v[c]*dts;
+      }
+    }
+    if(rise>50){ /* pouring in fast: the surface gets thrown around */
+      for(var r2=0;r2<4;r2++){ var rc=Math.floor(Math.random()*N); v[rc]-=rise*0.55*Math.random(); }
+      if(Math.random()<0.75) spawnDrop(Math.random()*W, baseY, -(200+Math.random()*200)*energy, (Math.random()*70-35), 1.7+Math.random()*2.2);
+    }
+    /* crest ejection: fast-rising crests throw droplets */
+    budget+=dt*(2+9*agit);
+    for(var c2=2;c2<N-2;c2++){
+      if(budget>=1 && v[c2]<-80*energy && h[c2]<=h[c2-1] && h[c2]<=h[c2+1] && Math.random()<0.6){
+        budget-=1;
+        spawnDrop((c2+0.5)/N*W, baseY+h[c2]-2, v[c2]*1.05-(110+Math.random()*120), ((c2/(N-1))*2-1)*58+(Math.random()*76-38), 2+Math.random()*2.6);
+      }
+    }
+    /* bubbles inside the liquid: rise, wobble, pop at the surface */
+    if(bubbles.length<7 && p>=35 && Math.random()<dt*3.2){ var bx=26+Math.random()*(W-52); if(surfY(bx)<H-55) bubbles.push({x:bx, y:Math.min(H-8, surfY(bx)+10+Math.random()*14), r:1.4+Math.random()*2.2, vy:-(16+Math.random()*22), seed:Math.random()*6.28}); } /* bubbles only in a substantially filled glass */
+    for(var bi=bubbles.length-1;bi>=0;bi--){
+      var bb=bubbles[bi]; bb.y+=bb.vy*dt; bb.x+=Math.sin(now/300+bb.seed)*7*dt;
+      if(bb.y<=surfY(bb.x)+3){ v[colAt(bb.x)]-=16; bubbles.splice(bi,1); }
+    }
+    /* droplets under gravity; landing pushes a ripple into the surface */
+    for(var di=drops.length-1;di>=0;di--){
+      var d=drops[di];
+      d.vy+=GRAV*dt; d.x+=d.vx*dt; d.y+=d.vy*dt;
+      if(d.x<2){ d.x=2; d.vx=Math.abs(d.vx)*0.5; }
+      if(d.x>W-2){ d.x=W-2; d.vx=-Math.abs(d.vx)*0.5; }
+      if(d.vy>0 && d.y>=surfY(d.x)){
+        v[colAt(d.x)]+=d.vy*0.20;
+        if(d.vy>300){ /* hard landing: a small crown splash */
+          spawnDrop(d.x, surfY(d.x)-2, -(70+Math.random()*80), (Math.random()*50-25), 1.2+Math.random()*1.4);
+          spawnDrop(d.x, surfY(d.x)-2, -(55+Math.random()*60), (Math.random()*50-25), 1+Math.random()*1.2);
+        } else if(Math.random()<0.3) spawnDrop(d.x, surfY(d.x)-2, -(50+Math.random()*70), (Math.random()*44-22), 1+Math.random()*1.2);
+        drops.splice(di,1);
+      } else if(d.y>H+10){ drops.splice(di,1); }
+    }
+    /* ---- render ---- */
+    ctx.clearRect(0,0,W,H);
+    var grad=ctx.createLinearGradient(0,Math.max(0,baseY-30),0,H);
+    for(var gs=0;gs<stops.length;gs++){ var st=stops[gs]; grad.addColorStop(st[0],'rgba('+st[1]+','+st[2]+','+st[3]+','+st[4]+')'); }
+    ctx.beginPath();
+    ctx.moveTo(-4,H+4);
+    for(var px=0;px<N;px++) ctx.lineTo((px+0.5)/N*W, baseY+h[px]);
+    ctx.lineTo(W+4,H+4);
+    ctx.closePath();
+    ctx.fillStyle=grad; ctx.fill();
+    /* luminous sheen pooled in the upper liquid, so it glows in the glass */
+    var sheen=ctx.createLinearGradient(0,Math.max(0,baseY-8),0,Math.min(H,baseY+64));
+    sheen.addColorStop(0,'rgba(255,255,232,0.36)');
+    sheen.addColorStop(1,'rgba(255,255,232,0)');
+    ctx.fillStyle=sheen; ctx.fill();
+    /* surface glint along the simulated line */
+    ctx.beginPath();
+    for(var gx=0;gx<N;gx++){ var gy=baseY+h[gx]; if(gx===0) ctx.moveTo((gx+0.5)/N*W,gy); else ctx.lineTo((gx+0.5)/N*W,gy); }
+    ctx.strokeStyle='rgba(245,255,220,0.75)'; ctx.lineWidth=2; ctx.stroke();
+    /* bubbles */
+    ctx.strokeStyle='rgba(255,255,255,0.45)'; ctx.lineWidth=1;
+    for(var bu=0;bu<bubbles.length;bu++){ var q=bubbles[bu]; ctx.beginPath(); ctx.arc(q.x,q.y,q.r,0,6.2832); ctx.stroke(); }
+    /* droplets */
+    for(var dr=0;dr<drops.length;dr++){
+      var o=drops[dr];
+      ctx.beginPath(); ctx.arc(o.x,o.y,o.r,0,6.2832);
+      ctx.fillStyle='rgba(250,255,224,0.95)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(o.x-o.r*0.3,o.y-o.r*0.3,o.r*0.38,0,6.2832);
+      ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>

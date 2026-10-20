@@ -1,0 +1,71 @@
+/* Site chrome (Han, 2026-10-20): the front page's cursor and scroll
+   indicator, shared by every page of han.espil.online. Cursor artwork is
+   the UseDesign hat in three states (rest, link, press) with light and
+   dark variants, mirroring the front page's own rules. */
+/* Static url() cursors are the no-JS fallback everywhere. */
+body{cursor:url("/assets/usedesign-cursor-light.svg") 12 11, auto}
+a, button, input[type="submit"], input[type="button"], select, label, [role="button"]{cursor:url("/assets/usedesign-cursor-light-hover.svg") 12 11, pointer}
+body:active, body:active *{cursor:url("/assets/usedesign-cursor-light-active.svg") 12 11, auto!important}
+@media (prefers-color-scheme: dark){
+  body{cursor:url("/assets/usedesign-cursor-dark.svg") 12 11, auto}
+  a, button, input[type="submit"], input[type="button"], select, label, [role="button"]{cursor:url("/assets/usedesign-cursor-dark-hover.svg") 12 11, pointer}
+  body:active, body:active *{cursor:url("/assets/usedesign-cursor-dark-active.svg") 12 11, auto!important}
+}
+/* Animated logo cursor: mirrors the front page (style.css). */
+#espil-cursor{
+  position:fixed; left:0; top:0; width:24px; height:23px; margin:-11px 0 0 -12px;
+  pointer-events:none; z-index:2147483200; opacity:0; transition:opacity .18s ease;
+  color:#fff; mix-blend-mode:difference; will-change:transform;
+}
+#espil-cursor.on{opacity:1}
+html.uc-on, html.uc-on *{cursor:none!important}
+#espil-cursor .screw-ext{stroke-dasharray:100; stroke-dashoffset:100}
+#espil-cursor.is-hover .screw-ext{animation:uc-screw 1.6s ease-in-out infinite}
+@keyframes uc-screw{
+  0%{stroke-dashoffset:100}
+  50%{stroke-dashoffset:0}
+  100%{stroke-dashoffset:100}
+}
+#espil-cursor .feather-all{transform-box:fill-box; transform-origin:50% 0%; transition:transform .18s ease}
+#espil-cursor.is-active .feather-all{transform:translate(-8px,0) scale(1.3,.95)}
+@media (prefers-reduced-motion: reduce){
+  #espil-cursor.is-hover .screw-ext{animation:none}
+}
+/* Scroll indicator: the native scrollbar is removed; a hairline with a
+   line-drawn diamond marks the position, as on the front page. */
+html{scrollbar-width:none; -ms-overflow-style:none}
+html::-webkit-scrollbar, body::-webkit-scrollbar{width:0; height:0; display:none}
+#scroll-track{
+  position:fixed; right:17px; top:50%; transform:translateY(-50%);
+  width:13px; height:min(46vh,430px); z-index:900; pointer-events:none;
+  opacity:0; transition:opacity .3s ease; color:#161616;
+}
+#scroll-track.on{opacity:1}
+#scroll-track::before{
+  content:""; position:absolute; left:50%; top:0; bottom:0; width:1px;
+  margin-left:-.5px; background:currentColor; opacity:.45;
+}
+#scroll-track .cap{
+  position:absolute; left:50%; width:5px; height:5px; border:1px solid currentColor;
+  transform:translate(-50%,-50%) rotate(45deg);
+}
+#scroll-track .cap.top{top:0}
+#scroll-track .cap.bot{top:100%}
+#scroll-track .tick{
+  position:absolute; left:50%; width:7px; height:1px; background:currentColor;
+  opacity:.45; transform:translate(-50%,-50%);
+}
+#scroll-track .tick.active{width:11px; opacity:1}
+#scroll-shadow{
+  position:absolute; left:50%; top:12px; width:15px; height:6px; border-radius:50%;
+  background:currentColor; filter:blur(2.5px); opacity:.26;
+  transform:translate(-50%,-50%); transition:opacity .5s ease, transform .5s ease;
+}
+#scroll-track.moving #scroll-shadow{opacity:0; transform:translate(-50%,-50%) scale(.35)}
+#scroll-diamond{
+  position:absolute; left:50%; top:12px; width:11px; height:11px;
+  border:1.5px solid currentColor; background:transparent;
+  transform:translate(-50%,-50%) scale(1,1.5) rotate(45deg); transition:background .15s ease;
+}
+#scroll-track.moving #scroll-diamond{background:currentColor}
+@media (max-width:719px){#scroll-track{display:none}}
