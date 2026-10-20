@@ -111,6 +111,31 @@
 @media (prefers-reduced-motion:reduce){#espil-loader .el-wave,#espil-loader .el-swirl i,#espil-loader .el-b,#espil-loader .el-slosh,#espil-loader .el-surface,#espil-loader .el-water::after,#espil-loader .el-shine{animation:none}}
 </style>
 <noscript><style>#espil-loader{display:none}</style></noscript>
+<style id="mobile-fluid-embeds">
+html,body{overflow-x:hidden}
+/* Mobile pass (2026-10-19): the archived page's fixed-width embeds become fluid. */
+iframe{max-width:100%}
+@media (max-width: 760px){
+  #enscapeframe{width:100% !important; height:56vw !important}
+  iframe[width="800"]{width:100% !important; height:56vw !important}
+  .sketchfab-embed-wrapper iframe{width:100% !important; height:56vw !important}
+  img{max-width:100%; height:auto}
+}
+/* Fluid pass 2: small-screen scaffolding that also holds when the page's
+   Bootstrap assets are slow or blocked, plus a loader cover that never
+   exceeds the screen it covers. */
+#espil-loader{max-width:100vw; overflow:hidden}
+@media (max-width: 991px){
+  #sideNav{position:static !important; width:100% !important; height:auto !important}
+  body{padding-left:0 !important}
+  .container-fluid{padding-left:15px !important; padding-right:15px !important}
+}
+@media (max-width: 760px){
+  h1{font-size:15vw !important; line-height:1.02 !important}
+  .resume-date .text-primary, span.text-primary{display:inline-block; max-width:100%; overflow-wrap:anywhere}
+  .resume-date{text-align:left !important}
+}
+</style>
 </head>
 
 <body id="page-top">
