@@ -30,6 +30,8 @@
   .sec[data-pos="0,1"]{left:200vw; top:300vh}
   .sec[data-pos="0,2"]{left:200vw; top:400vh}
   .inner{max-width:1060px; margin:0 auto}
+  #sec-home .homebg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.3; pointer-events:none}
+  #sec-home .inner{position:relative; z-index:1}
   /* ---------- home ---------- */
   .brand{text-align:center; padding-top:4vh}
   .brand .mark{display:inline-block; background:var(--ink); color:var(--paper);
@@ -45,17 +47,7 @@
   .tile p{margin:0; font-size:13.5px; line-height:1.55; color:#4a463c}
   .hint{text-align:center; color:var(--mut); font-size:13px; margin-top:22px}
   /* ---------- directional controls ---------- */
-  .edge{position:fixed; z-index:40; background:var(--ink); color:var(--paper); border:1px solid #000;
-    padding:10px 16px; font-size:13px; letter-spacing:.12em; text-transform:uppercase; border-radius:999px;
-    box-shadow:0 4px 18px rgba(0,0,0,.35)}
-  .edge:hover{background:var(--red)}
-  .edge.up{top:14px; left:50%; transform:translateX(-50%)}
-  .edge.down{bottom:14px; left:50%; transform:translateX(-50%)}
-  .edge.left{left:14px; top:50%; transform:translateY(-50%)}
-  .edge.right{right:14px; top:50%; transform:translateY(-50%)}
-  .edge[hidden]{display:none}
   /* ---------- mobile swipe navigation ---------- */
-  body.touch-nav .edge{display:none !important}
   body.touch-nav .sec{touch-action:pan-y}
   .compass{position:fixed; z-index:40; top:14px; right:14px; background:rgba(20,19,17,.88); color:var(--paper);
     font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; padding:8px 12px; border-radius:4px}
@@ -191,14 +183,10 @@
   .roof{width:100%; height:auto; display:block}
   .compass{border-left:5px solid var(--cc)}
   .trim{height:5px; opacity:.55; margin:2px 0 14px; background:linear-gradient(90deg,#a41226 0 25%, #b98a2f 25% 50%, #17586e 50% 75%, #241f19 75% 100%)}
-  .edge.up{background:#141311; border-color:#000}
-  .edge.down{background:#c8102e; border-color:#7d0a1f}
-  .edge.left{background:#fbf8f1; color:#141311; border-color:#141311}
-  .edge.right{background:#17586e; border-color:#0d3a4a}
-  .edge.up:hover{background:#000}
-  .edge.down:hover{background:#a50d29}
-  .edge.left:hover{background:#ffffff}
-  .edge.right:hover{background:#0f4256}
+  
+  
+  
+  
   .tile.ink{border-top-color:#141311}
   .tile.white{border-top-color:#cfc9b8; background:#fffefb}
   .tile.cheong{border-top-color:#17586e}
@@ -304,7 +292,7 @@
     <section class="sec" data-pos="0,-1" id="sec-imagine">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Up - Imagination</p><h2>Imagination - Espil Online</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Down)</button></div>
+        <button class="homebtn" data-go="0,0">↓ Home</button></div>
         <div class="trim"></div>
         <div class="tale">
           <p>Up is where ideas live, so up is Espil Online. Everything in AIO began as imagination before it became a thing I made: a house, a menu, a journey. The largest of those ideas is a world - Espil Online, the world I am building inside the Cauldron.</p>
@@ -328,7 +316,7 @@
     <section class="sec" data-pos="0,-2" id="sec-zealandia">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Up - Imagination, Once More</p><h2>Zealandia - The Future Land</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Down)</button></div>
+        <button class="homebtn" data-go="0,0">↑ Home</button></div>
         <div class="trim"></div>
         <p class="secsub">One division further up from Imagination: the room where what is imagined becomes the future land itself. Zealandia is the game dungeon of Espil Online, set on New Zealand's hidden sunken land.</p>
         <div class="tale">
@@ -342,7 +330,7 @@
         <div class="tale" style="margin-top:22px">
           <p>Nothing here is finished, and that is the point of the room: it is where the imagination keeps its future. From an idea below to a land under the sea - one more division up, and the idea has ground under it.</p>
         </div>
-        <p style="margin:14px 0 0"><button class="homebtn" data-go="0,-1">Back to Imagination (Down)</button></p>
+        <p style="margin:14px 0 0"><button class="homebtn" data-go="0,-1">↓ Back</button></p>
         <p class="foot">Zealandia is the future land of Espil Online - imagined below, walked in its own time.</p>
       </div>
     </section>
@@ -351,7 +339,7 @@
     <section class="sec" data-pos="-1,0" id="sec-travel">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Left - Travel, Freedom</p><h2>The game is a journey</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Right)</button></div>
+        <button class="homebtn" data-go="0,0">→ Home</button></div>
         <div class="trim"></div>
         <p class="secsub">Left is freedom: of the four directions, this is the one that leaves the house. It holds the journey - the game that is travel, played on your own two feet.</p>
         <div class="tale">
@@ -375,7 +363,7 @@
     <section class="sec" data-pos="-2,0" id="sec-auckland">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Left - Travel, Once More</p><h2>Auckland - The Starting City</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Right)</button></div>
+        <button class="homebtn" data-go="0,0">↑ Home</button></div>
         <div class="trim"></div>
         <p class="secsub">One division further left from Travel: the first ground of Zealandia. The Travel wing holds the journey; this room holds the city the longest journey starts from.</p>
         <div class="tale">
@@ -386,29 +374,15 @@
           <div class="city"><h3>Queen Street</h3><p>The corridor is the first ground: the city's main street, walked at street level the way every city in this world is walked - on your own two feet, not watched from above.</p><p class="status">The first ground</p></div>
           <div class="city"><h3>Walk it yourself</h3><p>The conviction behind the Travel wing stands at the door of the game: a screen only attempts to share a culture. Only visiting a place in person and walking its streets yourself truly shares it - so Auckland is built to be walked.</p><p class="status">The conviction, applied</p></div>
         </div>
-        <p style="margin:14px 0 0"><button class="homebtn" data-go="-1,0">Back to Travel (Right)</button></p>
+        <p style="margin:14px 0 0"><button class="homebtn" data-go="-1,0">→ Back</button></p>
         <p class="foot">Auckland is the starting city of Zealandia - one division left of the journey, where the walking begins.</p>
       </div>
     </section>
 
     <!-- HOME - THE GATE : CENTER -->
     <section class="sec" data-pos="0,0" id="sec-home">
+    <img class="homebg" src="img/universe-tree.jpg" alt="" aria-hidden="true">
       <div class="inner">
-        <div class="gate" aria-hidden="true">
-          <svg class="roof" viewBox="0 0 1200 190" role="img" aria-label="Tiled roof of the gate">
-  <path d="M28 176 C240 100 430 60 600 52 C770 60 960 100 1172 176 L1106 176 C938 116 788 86 600 82 C412 86 262 116 94 176 Z" fill="#1b1813"/>
-  <path d="M70 158 C268 96 446 64 600 60 C754 64 932 96 1130 158" fill="none" stroke="#f4f1ea" stroke-opacity=".10" stroke-width="5"/>
-  <path d="M120 140 C300 88 462 66 600 64" fill="none" stroke="#f4f1ea" stroke-opacity=".07" stroke-width="5"/>
-  <path d="M1080 140 C900 88 738 66 600 64" fill="none" stroke="#f4f1ea" stroke-opacity=".07" stroke-width="5"/>
-  <rect x="438" y="30" width="324" height="17" rx="7" fill="#1b1813"/>
-  <circle cx="600" cy="24" r="9" fill="#1b1813"/>
-  <circle cx="30" cy="172" r="10" fill="#1b1813"/>
-  <circle cx="1170" cy="172" r="10" fill="#1b1813"/>
-</svg>
-          <div class="gatebeam"></div>
-          <div class="plaque"><div class="plq-name">AIO</div><div class="plq-sub">ALL-IN-ONE SERVICE</div></div>
-          <div class="doors"><div class="door"></div><div class="door"></div><span class="knob l"></span><span class="knob r"></span></div>
-        </div>
         <div class="brand">
           <p class="kicker">AIO - All-in-One Service</p>
           <h1>One service, four directions and a guide.</h1>
@@ -426,7 +400,7 @@
           <p>AIO is divided by a simple design strategy of mine: split the sections so each one reads as a page of its own. The centre is the main page. Around it, each direction carries its own value: the left is the past, and freedom; the right is the future, and the decision; the top is dreams, and the tools for them; the bottom is the current state, where things stand now.</p>
           <p>Each section can divide again into four directions of its own, so you reach different sections without pressing a lot of buttons. It works the way a catalogue does in an RPG: open one, and the branch of choices on that theme unfolds. I find the tactic extremely self-intuitive - you always know where you are, and where a choice leads.</p>
         </div>
-        <p class="hint">Move with the edge buttons, the arrow keys, or the buttons inside each room. Every direction branches once more beyond its wing, so keep going outward. Escape returns to the gate. The demo shop inside AIO is Kuro Sushi; its hours are Tuesday to Sunday, 11:30 am to 10:00 pm.</p>
+        <p class="hint">Move with the arrow keys, the buttons inside each room, or a swipe on touch screens. Every direction branches once more beyond its wing, so keep going outward. Escape returns to the gate. The demo shop inside AIO is Kuro Sushi; its hours are Tuesday to Sunday, 11:30 am to 10:00 pm.</p>
       </div>
     </section>
 
@@ -434,7 +408,7 @@
     <section class="sec" data-pos="1,0" id="sec-production">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Right - Production</p><h2>Production</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Left)</button></div>
+        <button class="homebtn" data-go="0,0">← Home</button></div>
         <div class="trim"></div>
         <p class="secsub">Production is the direction of moving forward: the things I make. Gathered here is a restaurant's whole working set, made by my hands - the menu I designed for Kuro Sushi, the recipe system I wrote and formatted at Sushi Umi, and the cart I built to sell from it. Two sides of one counter: what the guest orders from, and the system that makes it come out the same every time. The recipe book is shown in format only.</p>
         <h3 class="subh">The Menu - Kuro Sushi</h3>
@@ -477,7 +451,7 @@
         <div class="confirm" id="confirmBox">
           <h3>Order placed - thank you.</h3>
           <p id="confirmText" style="margin:0; line-height:1.6"></p>
-          <p style="margin:10px 0 0"><button class="homebtn" data-go="0,0">Back to Home</button></p>
+          <p style="margin:10px 0 0"><button class="homebtn" data-go="0,0">← Home</button></p>
         </div>
       </div>
     </section>
@@ -487,7 +461,7 @@
     <section class="sec" data-pos="2,0" id="sec-recipe">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Right - Production, Once More</p><h2>The Recipe System - Production Branch</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Left)</button></div>
+        <button class="homebtn" data-go="0,0">↑ Home</button></div>
         <div class="trim"></div>
         <p class="secsub">One division further right from Production: the system behind the counter. The guest side of Production holds the menu and the cart; this room holds the book the kitchen runs on.</p>
         <div class="tale">
@@ -505,7 +479,7 @@
             <p class="locknote">These are a working restaurant's trade recipes. I show the document system I built - the categories, the bilingual layout, the discipline - and nothing of the recipes themselves.</p>
           </div>
         </div>
-        <p style="margin:22px 0 0"><button class="homebtn" data-go="1,0">Back to Production (Left)</button></p>
+        <p style="margin:22px 0 0"><button class="homebtn" data-go="1,0">← Back</button></p>
         <p class="foot">The recipe system is the back of the counter: Production sells from the menu, and this room is what makes it come out the same every time. The working menu and cart live back in Production.</p>
       </div>
     </section>
@@ -514,7 +488,7 @@
     <section class="sec" data-pos="0,1" id="sec-houses">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Down - The Land</p><h2>The Land - the House Collection</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Up)</button></div>
+        <button class="homebtn" data-go="0,0">↑ Home</button></div>
         <div class="trim"></div>
         <p class="secsub">Down is the land, and the land holds the houses. The Espil House Collection, introduced the way a realtor wishes houses could be shown: full listings, spec sheets, and the parts that fit them out. The houses lived scattered on someone else's marketplace once. Their home is here now, introduced in full on my own platform.</p>
         <h3 class="subh">Full listings</h3>
@@ -633,7 +607,7 @@
     <section class="sec" data-pos="0,2" id="sec-addons">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Down - The Land, Once More</p><h2>The Capsule Addons - The Land Branch</h2></div>
-        <button class="homebtn" data-go="0,0">Home (Up)</button></div>
+        <button class="homebtn" data-go="0,0">↑ Home</button></div>
         <div class="trim"></div>
         <p class="secsub">One division further down from the Land: the parts that fit the houses out. The Land above holds the houses themselves; this room holds the Espil Ceil House Addons - capsule rooms and packs that fit the collection's houses, whole rooms delivered as parts, the way a realtor lists the fittings that come with a home. Credited to Bieclipse Design House.</p>
       <div class="cards">
@@ -648,7 +622,7 @@
       <p style="font-size:15.5px; line-height:1.6; max-width:720px">Every addon carries a trait sheet, the way a listing carries its finishes. The categories the parts are specified in:</p>
       <div class="traits"><span>Background</span><span>BGM</span><span>House Type</span><span>Floors</span><span>Paints</span><span>Trees</span><span>Portals</span><span>Clothings</span></div>
       <p class="hint">The addons collection holds a seventh piece whose original listing was never fully documented; it joins this page when its record is complete.</p>
-        <p style="margin:14px 0 0"><button class="homebtn" data-go="0,1">Back to The Houses (Up)</button></p>
+        <p style="margin:14px 0 0"><button class="homebtn" data-go="0,1">↑ Back</button></p>
         <p class="foot">The capsule addons are the fittings of the collection - the houses stand above, and their rooms are kept here, one division down.</p>
       </div>
     </section>
@@ -657,10 +631,6 @@
 </div>
 
 <div class="compass" id="compass">You are at: AIO Home</div>
-<button class="edge up" id="edgeUp">Up - Imagination</button>
-<button class="edge left" id="edgeLeft">Left - Travel</button>
-<button class="edge right" id="edgeRight">Right - Production</button>
-<button class="edge down" id="edgeDown">Down - The Houses</button>
 
 <button id="servoBtn" type="button">Ask Servo</button>
 <div id="servoPanel" role="dialog" aria-label="Servo, your guide to AIO">
@@ -965,8 +935,6 @@ var CCOLORS = {"0,0":"#b98a2f","0,-1":"#454037","-1,0":"#f4f1ea","1,0":"#17586e"
 var edgeTarget = {};
 var cur = [0,0];
 var compass = document.getElementById("compass");
-var edges = {up:document.getElementById("edgeUp"), down:document.getElementById("edgeDown"),
-             left:document.getElementById("edgeLeft"), right:document.getElementById("edgeRight")};
 function goTo(x,y){
   cur = [x,y];
   world.style.transform = "translate(" + (-x*100) + "vw," + (-y*100) + "vh)";
@@ -977,11 +945,7 @@ function goTo(x,y){
   DIRS.forEach(function(d){
     var nk = (x+d[1]) + "," + (y+d[2]);
     if(NAMES.hasOwnProperty(nk)){
-      edges[d[0]].hidden = false;
-      edges[d[0]].textContent = d[3] + " - " + SHORT[nk];
       edgeTarget[d[0]] = [x+d[1], y+d[2]];
-    } else {
-      edges[d[0]].hidden = true;
     }
   });
 }
@@ -989,9 +953,6 @@ document.querySelectorAll("[data-go]").forEach(function(b){
   b.addEventListener("click", function(){
     var p = b.getAttribute("data-go").split(","); goTo(parseInt(p[0],10), parseInt(p[1],10));
   });
-});
-["up","down","left","right"].forEach(function(k){
-  edges[k].addEventListener("click", function(){ var t = edgeTarget[k]; if(t) goTo(t[0], t[1]); });
 });
 document.addEventListener("keydown", function(e){
   var tag = (e.target.tagName||"").toLowerCase();
@@ -1006,7 +967,7 @@ document.addEventListener("keydown", function(e){
 goTo(0,0);
 
 /* ================= MOBILE SWIPE NAVIGATION (Han, 2026-10-19) =================
-   On touch devices the edge buttons hide and a four-direction swipe moves
+   On touch devices a four-direction swipe moves
    between rooms instead. The swipe names its destination: swipe left to go
    left, right to go right, up to go up, down to go down. A swipe that
    scrolled the room first does not navigate. */
