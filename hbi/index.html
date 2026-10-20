@@ -2,6 +2,28 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
+<style id="phone-gate-style">
+#phoneGate{display:none}
+html.phone-blocked #phoneGate{display:flex; position:fixed; inset:0; z-index:9999; background:#f0eee9; color:#161616;
+  align-items:center; justify-content:center; text-align:center; padding:28px; box-sizing:border-box}
+html.phone-blocked{overflow:hidden}
+#phoneGate .pg-in{max-width:420px}
+#phoneGate h1{font-family:Georgia,'Times New Roman',serif; font-size:26px; font-weight:400; margin:0 0 14px}
+#phoneGate p{font-family:Georgia,'Times New Roman',serif; font-size:16px; line-height:1.65; margin:0 0 22px}
+#phoneGate a{font-family:Arial,sans-serif; font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+  color:#161616; text-decoration:none; border:1px solid #161616; padding:11px 18px; display:inline-block}
+</style>
+<script>
+(function(){
+  var coarse = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+  if((coarse && Math.min(screen.width, screen.height) < 820) || innerWidth <= 760){
+    document.documentElement.classList.add('phone-blocked');
+    var m = document.createElement('meta');
+    m.name = 'viewport'; m.content = 'width=device-width, initial-scale=1';
+    document.head.appendChild(m);
+  }
+})();
+</script>
   <title>HighSchool Artworks - Han Bin Im</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/assets/usedesign-icon.svg">
@@ -87,6 +109,11 @@
 <noscript><style>#espil-loader{display:none}</style></noscript>
 </head>
 <body>
+<div id="phoneGate" role="note"><div class="pg-in">
+  <h1>A book needs a big page.</h1>
+  <p>HBI is my high-school art book, bound as a flip-book sized for a desktop screen. It does not open on a phone - please visit on a computer, where the charcoal pages turn properly.</p>
+  <a href="/">Back to the portfolio</a>
+</div></div>
 <!-- espil-loader v13 (injected 2026-10-16) -->
 <div id="espil-loader" role="status" aria-label="Loading">
   

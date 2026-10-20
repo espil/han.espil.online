@@ -30,12 +30,7 @@
   .sec[data-pos="0,1"]{left:200vw; top:300vh}
   .sec[data-pos="0,2"]{left:200vw; top:400vh}
   .inner{max-width:1060px; margin:0 auto}
-  /* ---------- page peel (Han, 2026-10-19): hovering an edge lifts the page toward the next room ---------- */
-  .peel{position:fixed; inset:0; z-index:35; pointer-events:none; cursor:pointer; background:var(--paper);
-    box-shadow:0 0 44px rgba(20,16,8,.40); opacity:0; overflow:hidden}
-  .peel img{width:100%; height:100%; object-fit:cover; opacity:.3; display:none}
-  .peel.homebg img{display:block}
-  .peel .peelSec{position:absolute; width:100vw; height:100vh; overflow:hidden; background:var(--paper); padding:26px 22px 110px}
+  .viewport{transition:transform .38s ease}
   #sec-home .homebg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.3; pointer-events:none}
   #sec-home .inner{position:relative; z-index:1}
   /* ---------- home ---------- */
@@ -1273,81 +1268,33 @@ document.getElementById("svForm").addEventListener("submit", function(e){
   document.getElementById("svChips").appendChild(b);
 });
 </script>
-<div class="peel" id="peel" aria-hidden="true"></div>
 <script>
+/* Page nudge (Han, 2026-10-20): when the cursor reaches the outer 5% band of
+   any side, the current page shifts 5% the opposite way, hinting the room
+   beyond. Only where a room actually lies that way. */
 (function(){
-  var peel = document.getElementById("peel");
-  if(!peel) return;
   if(!window.matchMedia || !matchMedia("(pointer:fine)").matches) return;
   if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  var EDGE = 90, MAXLIFT = 0.34, curT = null;
-  var ORIGIN = { right: "100% 50%", left: "0% 50%", down: "50% 100%", up: "50% 0%" };
-  var UNDER = { right: "perspective(1600px)", left: "perspective(1600px)", down: "perspective(1600px)", up: "perspective(1600px)" };
-  function build(dir, target){
-    peel.innerHTML = "";
-    var sx = 0, sy = 0;
-    document.querySelectorAll(".sec").forEach(function(sec){
-      var p = (sec.getAttribute("data-pos") || "0,0").split(",");
-      if(+p[0] === target[0] && +p[1] === target[1]){ peel.className = "peel" + (sec.id === "sec-home" ? " homebg" : ""); }
-    });
-    var clone = null;
-    document.querySelectorAll(".sec").forEach(function(sec){
-      var p = (sec.getAttribute("data-pos") || "0,0").split(",");
-      if(+p[0] === target[0] && +p[1] === target[1]) clone = sec.cloneNode(true);
-    });
-    if(!clone) return false;
-    clone.removeAttribute("id");
-    clone.querySelectorAll("[id]").forEach(function(n){ n.removeAttribute("id"); });
-    var wrap = document.createElement("div");
-    wrap.className = "peelSec";
-    var img = document.createElement("img");
-    img.alt = "";
-    var homeImg = clone.querySelector(".homebg");
-    if(homeImg){ img.src = homeImg.getAttribute("src"); homeImg.parentNode.removeChild(homeImg); }
-    peel.appendChild(img);
-    wrap.appendChild(clone.firstChild ? clone : clone);
-    // move the section's .inner (and any stray children) into the wrap
-    while(clone.firstChild) wrap.appendChild(clone.firstChild);
-    peel.appendChild(wrap);
-    peel.style.transformOrigin = ORIGIN[dir];
-    return true;
-  }
-  function setT(dir, t){
-    var r = t * MAXLIFT;
-    var tf = "";
-    if(dir === "right") tf = "perspective(1600px) rotateY(" + (-34 * r / MAXLIFT * MAXLIFT * 2.2) + "deg)";
-    if(dir === "left")  tf = "perspective(1600px) rotateY(" + (34 * r / MAXLIFT * MAXLIFT * 2.2) + "deg)";
-    if(dir === "down")  tf = "perspective(1600px) rotateX(" + (30 * r / MAXLIFT * MAXLIFT * 2.2) + "deg)";
-    if(dir === "up")    tf = "perspective(1600px) rotateX(" + (-30 * r / MAXLIFT * MAXLIFT * 2.2) + "deg)";
-    peel.style.transform = tf;
-    peel.style.opacity = Math.min(1, t * 1.6).toFixed(3);
-  }
+  var vp = document.querySelector(".viewport");
+  if(!vp) return;
+  var cur = "";
+  function setT(t){ if(t !== cur){ cur = t; vp.style.transform = t; } }
   document.addEventListener("mousemove", function(e){
-    if(!window.__gateDone) { curT = null; peel.style.opacity = 0; return; }
-    if(document.body.classList.contains("touch-nav")) return;
-    var w = innerWidth, h = innerHeight;
-    var dir = null, d = EDGE;
-    if(e.clientX > w - EDGE) { dir = "right"; d = w - e.clientX; }
-    else if(e.clientX < EDGE) { dir = "left"; d = e.clientX; }
-    else if(e.clientY > h - EDGE) { dir = "down"; d = h - e.clientY; }
-    else if(e.clientY < EDGE) { dir = "up"; d = e.clientY; }
-    if(!dir || typeof edgeTarget === "undefined" || !edgeTarget[dir]){ curT = null; peel.style.opacity = 0; return; }
-    var key = dir + ":" + edgeTarget[dir].join(",");
-    if(curT !== key){ if(!build(dir, edgeTarget[dir])) { curT = null; return; } curT = key; }
-    setT(dir, 1 - d / EDGE);
-    // clicking while the page is lifted completes the turn
-    if(!peel.__clickBound){
-      peel.__clickBound = true;
-      document.addEventListener("click", function(ev){
-        if(peel.style.opacity > 0.05 && curT){
-          var parts = curT.split(":")[1].split(",");
-          goTo(+parts[0], +parts[1]);
-          curT = null; peel.style.opacity = 0;
-        }
-      }, true);
-    }
+    if(!window.__gateDone || document.body.classList.contains("touch-nav")){ setT(""); return; }
+    var fx = e.clientX / innerWidth, fy = e.clientY / innerHeight;
+    var cand = [];
+    if(fx > 0.95) cand.push(["right", 1 - fx]);
+    if(fx < 0.05) cand.push(["left", fx]);
+    if(fy > 0.95) cand.push(["down", 1 - fy]);
+    if(fy < 0.05) cand.push(["up", fy]);
+    if(!cand.length){ setT(""); return; }
+    cand.sort(function(a, b){ return a[1] - b[1]; });
+    var dir = cand[0][0];
+    if(typeof edgeTarget === "undefined" || !edgeTarget[dir]){ setT(""); return; }
+    setT(dir === "right" ? "translateX(-5vw)" : dir === "left" ? "translateX(5vw)" : dir === "down" ? "translateY(-5vh)" : "translateY(5vh)");
   });
-  document.addEventListener("mouseleave", function(){ curT = null; peel.style.opacity = 0; });
+  document.addEventListener("mouseleave", function(){ setT(""); });
+  document.addEventListener("keydown", function(){ setT(""); });
 })();
 </script>
 <script>
