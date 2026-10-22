@@ -15,7 +15,7 @@ body:active, body:active *{cursor:url("/assets/usedesign-cursor-light-active.svg
 #espil-cursor{
   position:fixed; left:0; top:0; width:24px; height:23px; margin:-11px 0 0 -12px;
   pointer-events:none; z-index:2147483200; opacity:0; transition:opacity .18s ease;
-  color:#fff; mix-blend-mode:difference; will-change:transform;
+  color:#c8102e; will-change:transform;
 }
 #espil-cursor.on{opacity:1}
 html.uc-on, html.uc-on *{cursor:none!important}
