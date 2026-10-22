@@ -40,3 +40,26 @@ html::-webkit-scrollbar, body::-webkit-scrollbar{width:0; height:0; display:none
 }
 #scroll-track.moving #scroll-diamond{background:currentColor}
 @media (max-width:719px){#scroll-track{display:none}}
+
+/* Animated logo cursor (from-scratch rebuild, 2026-10-21): the UseDesign
+   hat follows the pointer. Its colour is decided by one rule - the
+   background under the pointer: black hat on light, white hat on dark. */
+#espil-cursor{
+  position:fixed; left:0; top:0; width:24px; height:23px; margin:-11px 0 0 -12px;
+  pointer-events:none; z-index:2147483200; opacity:0; transition:opacity .18s ease;
+  will-change:transform;
+}
+#espil-cursor.on{opacity:1}
+html.uc-on, html.uc-on *{cursor:none!important}
+#espil-cursor .screw-ext{stroke-dasharray:100; stroke-dashoffset:100}
+#espil-cursor.is-hover .screw-ext{animation:uc-screw 1.6s ease-in-out infinite}
+@keyframes uc-screw{
+  0%{stroke-dashoffset:100}
+  50%{stroke-dashoffset:0}
+  100%{stroke-dashoffset:100}
+}
+#espil-cursor .feather-all{transform-box:fill-box; transform-origin:50% 0%; transition:transform .18s ease}
+#espil-cursor.is-active .feather-all{transform:translate(-8px,0) scale(1.3,.95)}
+@media (prefers-reduced-motion: reduce){
+  #espil-cursor.is-hover .screw-ext{animation:none}
+}
