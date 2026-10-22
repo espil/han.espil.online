@@ -46,7 +46,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar{width:0; height:0; display:none
    background under the pointer: black hat on light, white hat on dark. */
 #espil-cursor{
   position:fixed; left:0; top:0; width:24px; height:23px; margin:-11px 0 0 -12px;
-  pointer-events:none; z-index:2147483200; opacity:0; transition:opacity .18s ease;
+  pointer-events:none; z-index:2147483647; opacity:0; transition:opacity .18s ease;
   will-change:transform;
 }
 #espil-cursor.on{opacity:1}
