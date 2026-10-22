@@ -498,19 +498,9 @@ body.loading{overflow:hidden}
 #espil-cursor{
   position:fixed; left:0; top:0; width:24px; height:23px; margin:-11px 0 0 -12px;
   pointer-events:none; z-index:2147483200; opacity:0; transition:opacity .18s ease;
-  color:#f0eee9; will-change:transform;
+  color:#fff; mix-blend-mode:difference; will-change:transform;
 }
 #espil-cursor.on{opacity:1}
-/* Solid hat silhouette (Han, 2026-10-21): a plain ink-filled hat under
-   the paper-coloured linework. No blend modes anywhere - Han's PC showed
-   the difference-blend cursor as transparent, so the cursor is now solid
-   colour like the static fallback cursors. */
-#espil-cursor-sil{
-  position:fixed; left:0; top:0; width:24px; height:23px; margin:-11px 0 0 -12px;
-  pointer-events:none; z-index:2147483199; opacity:0; transition:opacity .18s ease;
-  will-change:transform;
-}
-#espil-cursor-sil.on{opacity:1}
 html.uc-on, html.uc-on *{cursor:none!important}
 /* Hover: the spiral screws IN — an extension curve draws itself toward
    the centre — then screws back out. The original curves never change. */
