@@ -8,10 +8,22 @@
   if(!window.matchMedia || !matchMedia('(pointer:fine)').matches) return;
   if(document.getElementById('espil-cursor')) return;
   Promise.all([
-      fetch('/chrome/cursor.svg.txt').then(function(r){ return r.text(); }),
-      fetch('/chrome/cursor-light.svg.txt').then(function(r){ return r.text(); })
+      fetch('/chrome/cursor.svg.txt?v=5').then(function(r){ return r.text(); }),
+      fetch('/chrome/cursor-light.svg.txt?v=5').then(function(r){ return r.text(); })
     ]).then(function(pair){
     var SVG_DARK = ""+pair[0]+"", SVG_LIGHT = ""+pair[1]+"";
+    /* Environment calibration: if this browser reports a known paper
+       colour as dark (colour-inverting extensions / forced-dark modes),
+       every background judgement flips to match the rendered page. */
+    var CAL = 1;
+    (function(){
+      var p = document.createElement('div');
+      p.style.cssText = 'position:fixed; left:-9999px; top:-9999px; width:2px; height:2px; background:#f0eee9; visibility:hidden;';
+      document.body.appendChild(p);
+      var v = getComputedStyle(p).backgroundColor.match(/[\d.]+/g);
+      p.remove();
+      if(v && (0.2126 * +v[0] + 0.7152 * +v[1] + 0.0722 * +v[2]) / 255 < 0.4) CAL = -1;
+    })();
     var el = document.createElement('div');
     el.id = 'espil-cursor'; el.setAttribute('aria-hidden','true'); el.innerHTML = SVG_DARK;
     document.body.appendChild(el);
@@ -32,7 +44,7 @@
       return (0.2126 * +m[0] + 0.7152 * +m[1] + 0.0722 * +m[2]) / 255 > 0.6;
     }
     function adapt(){
-      var want = bgLight(x, y);
+      var want = bgLight(x, y); if(CAL < 0) want = !want;
       if(want !== curDark){ curDark = want; el.innerHTML = want ? SVG_DARK : SVG_LIGHT; }
     }
     function draw(){ el.style.transform = 'translate(' + x + 'px,' + y + 'px)'; adapt(); raf = null; }
