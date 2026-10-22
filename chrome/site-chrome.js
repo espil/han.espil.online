@@ -28,7 +28,14 @@
       return true;
     }
     function adapt(){
+      /* Hide the cursor while sampling, so the browser can never return
+         the cursor itself as the element under the pointer (some builds
+         hit-test the hat's SVG shapes despite pointer-events:none, and
+         the walk then lands on the page body instead of the block that
+         is actually under the pointer). */
+      el.style.display = 'none';
       var wantDark = backgroundIsLight(x, y);
+      el.style.display = '';
       if(wantDark !== dark){ dark = wantDark; el.innerHTML = dark ? DARK : LIGHT; }
     }
     function draw(){ el.style.transform = 'translate(' + x + 'px,' + y + 'px)'; adapt(); raf = null; }
