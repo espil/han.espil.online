@@ -114,6 +114,26 @@
   .door h3{margin:0 0 6px; font-size:17px; font-weight:normal}
   .door p{margin:0; font-size:13.5px; line-height:1.55; color:#4a463c}
   .door .dir{display:block; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--red); margin-bottom:7px}
+
+  /* Playable city frame (Han, 2026-10-23): the live Vancouver build from
+     espil.online, entered directly via its /vancouver route - no landing. */
+  .player{position:relative; border:1.5px solid var(--ink); background:#0b0b0b; aspect-ratio:16/9; margin:18px 0 0; overflow:hidden}
+  .player img.poster{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+  .player .veil{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+    background:rgba(10,10,10,.38); text-align:center; padding:16px}
+  .player .pbtn{background:var(--red); color:#fff; border:0; border-radius:999px; padding:14px 30px;
+    font-size:15px; letter-spacing:.1em; text-transform:uppercase; box-shadow:0 8px 26px rgba(0,0,0,.45)}
+  .player .pbtn:hover{background:#9c0c24}
+  .player .pnote{color:#f4f1ea; font-size:13.5px; line-height:1.55; max-width:520px; text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .player iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block; background:#0b0b0b}
+  .player .pload{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    color:#f4f1ea; background:#0b0b0b; font-size:14px; letter-spacing:.08em}
+  .pbar{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; align-items:baseline; margin-top:7px}
+  .pbar .cap{font-size:12.5px; color:var(--mut); line-height:1.5; max-width:640px}
+  .pbar .acts{font-size:12px; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap}
+  .pbar .acts a{color:inherit}
+  .pbar .acts button{background:none; border:0; font:inherit; letter-spacing:inherit; text-transform:inherit;
+    text-decoration:underline; cursor:pointer; padding:0; display:none}
   .blogcard{border:2px solid var(--ink); background:var(--card); padding:18px 20px; margin:18px 0}
   .blogcard h3{margin:0 0 6px; font-size:19px}
   .blogcard p{margin:0 0 10px; font-size:14.5px; line-height:1.6; color:#3c382f}
@@ -242,10 +262,16 @@
           <p>The app and PC program are the game build of the same world, on the same account. Character selection starts there, the game character is a server record created there, and Zealandia - the sunken land under New Zealand, entered only through the Auckland portal - is its first game expansion. The web stays light and social on purpose; the game weight lives in the app.</p>
         </div>
 
-        <div class="figrow">
-          <figure class="fig"><img src="/system/img/capture-city.jpg" alt="The Espil app build over a real city"><figcaption>The app build over a real city: the world layer that the game is built on.</figcaption></figure>
-          <figure class="fig"><img src="/system/img/hud.jpg" alt="The live web build HUD on espil.online"><figcaption>The live web build: city HUD, chat and the guide, on the production site.</figcaption></figure>
-          <figure class="fig"><img src="/system/img/capture-walk.jpg" alt="Walking the world at street level"><figcaption>Street level, on foot: the world is walked, not browsed.</figcaption></figure>
+<div class="player" id="vanPlayer">
+          <img class="poster" src="/system/img/capture-city.jpg" alt="Vancouver in Espil Online">
+          <div class="veil" id="vanVeil">
+            <button class="pbtn" id="vanPlay" type="button">&#9654; Play Vancouver</button>
+            <p class="pnote">The real city, live from espil.online - entered directly, no globe, no landing. The world loads inside this page.</p>
+          </div>
+        </div>
+        <div class="pbar">
+          <span class="cap">Vancouver, playable in this page: the same production build visitors enter at espil.online, on its direct-entry route.</span>
+          <span class="acts"><button id="vanStop" type="button">Stop</button> <a href="https://espil.online/vancouver" target="_blank" rel="noopener">Open at espil.online &#8599;</a></span>
         </div>
 
         <div class="rsec">
@@ -593,6 +619,40 @@ function playFb(){
     if(loaderGone && gateGone){ clearInterval(iv); roomIn(cur[0], cur[1]); }
   }, 300);
   setTimeout(function(){ clearInterval(iv); }, 9000);
+})();
+</script>
+
+
+<script>
+/* Playable Vancouver (Han, 2026-10-23): click-to-load the live build in an
+   iframe on its direct-entry route. The poster keeps the room light and
+   scrollable until the visitor chooses to play. */
+(function(){
+  var box = document.getElementById('vanPlayer');
+  var veil = document.getElementById('vanVeil');
+  var play = document.getElementById('vanPlay');
+  var stop = document.getElementById('vanStop');
+  if(!box || !play) return;
+  play.addEventListener('click', function(){
+    veil.style.display = 'none';
+    var load = document.createElement('div');
+    load.className = 'pload'; load.textContent = 'Entering Vancouver...';
+    box.appendChild(load);
+    var f = document.createElement('iframe');
+    f.src = 'https://espil.online/vancouver';
+    f.title = 'Espil Online - Vancouver, playable';
+    f.setAttribute('allow', 'fullscreen; autoplay; gamepad');
+    f.setAttribute('allowfullscreen', '');
+    f.addEventListener('load', function(){ if(load.parentNode) load.parentNode.removeChild(load); });
+    box.appendChild(f);
+    if(stop) stop.style.display = 'inline';
+  });
+  if(stop) stop.addEventListener('click', function(){
+    var f = box.querySelector('iframe');
+    if(f) f.parentNode.removeChild(f);
+    veil.style.display = 'flex';
+    stop.style.display = 'none';
+  });
 })();
 </script>
 
