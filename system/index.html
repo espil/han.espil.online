@@ -74,10 +74,21 @@
   .syshead{padding:26px 0 4px}
   .syshead h1{font-size:clamp(36px,5.6vw,56px); line-height:1.02; margin:6px 0 12px}
   .lede{font-size:17.5px; line-height:1.62; max-width:780px; color:#2c2a24}
-  .factbox{border:1.5px solid var(--ink); background:var(--card); padding:16px 20px; margin:22px 0 6px}
-  .factbox dl{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px 22px; margin:0}
-  .factbox dt{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--red); margin-bottom:3px}
-  .factbox dd{margin:0; font-size:14px; line-height:1.5}
+  .factbox{position:relative; border:1.5px solid var(--ink); background:var(--card); padding:20px 22px 10px; margin:22px 0 6px; overflow:hidden}
+  .factbox::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--line)}
+  .factbox::after{content:""; position:absolute; top:0; left:0; height:3px; width:34%; background:var(--red);
+    animation:fbSweep 5.5s ease-in-out infinite alternate}
+  @keyframes fbSweep{from{transform:translateX(-30%)} to{transform:translateX(264%)}}
+  .factbox dl{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:2px 28px; margin:0}
+  .fb-item{border-top:2px solid var(--ink); padding:11px 4px 13px; transition:border-color .35s ease, background .35s ease}
+  .fb-item:hover{border-top-color:var(--red); background:rgba(200,16,46,.045)}
+  .factbox.play .fb-item{animation:fbIn .7s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(var(--i)*100ms)}
+  @keyframes fbIn{from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:translateY(0)}}
+  .fb-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px}
+  .fb-num{font-size:13px; color:var(--mut)}
+  .factbox dt{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--red)}
+  .factbox dd{margin:0; font-size:14.5px; line-height:1.55}
+  @media (prefers-reduced-motion: reduce){ .factbox::after{animation:none} .factbox.play .fb-item{animation:none} }
   .rsec{margin-top:32px}
   .rsec h3{font-size:23px; margin:0 0 9px}
   .rsec p{font-size:15.5px; line-height:1.66; color:#2c2a24; max-width:780px; margin:0 0 12px}
@@ -110,6 +121,21 @@
     font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; text-decoration:none}
   .visitbtn:hover{background:var(--red)}
   .backline{margin-top:34px; font-size:12px; letter-spacing:.14em; text-transform:uppercase}
+
+  /* Room entrance (Han, 2026-10-23): on every room change the incoming
+     room's blocks rise and settle in a stagger. */
+  .sec.room-in .inner > *{animation:roomIn .8s cubic-bezier(.2,.7,.2,1) both; animation-delay:.16s}
+  .sec.room-in .inner > *:nth-child(2){animation-delay:.22s}
+  .sec.room-in .inner > *:nth-child(3){animation-delay:.28s}
+  .sec.room-in .inner > *:nth-child(4){animation-delay:.34s}
+  .sec.room-in .inner > *:nth-child(5){animation-delay:.40s}
+  .sec.room-in .inner > *:nth-child(6){animation-delay:.46s}
+  .sec.room-in .inner > *:nth-child(7){animation-delay:.52s}
+  .sec.room-in .inner > *:nth-child(8){animation-delay:.58s}
+  .sec.room-in .inner > *:nth-child(9){animation-delay:.64s}
+  .sec.room-in .inner > *:nth-child(10){animation-delay:.70s}
+  @keyframes roomIn{from{opacity:0; transform:translateY(22px)} to{opacity:1; transform:translateY(0)}}
+  @media (prefers-reduced-motion: reduce){ .sec.room-in .inner > *{animation:none} }
   .backline a{color:inherit}
 </style>
 <!-- espil-loader v13 (injected 2026-10-16) -->
@@ -201,12 +227,12 @@
         </header>
         <aside class="factbox">
           <dl>
-            <dt>Product</dt><dd>A community and free knowledge-sharing solution in a 3D social world on real cities</dd>
-            <dt>Web build</dt><dd>espil.online - Three.js and Mapbox, social first, light UI, a simple male or female avatar</dd>
-            <dt>App &amp; PC</dt><dd>The game build on 3D assets: quests, the exchange, and Zealandia, the future game land</dd>
-            <dt>Backend</dt><dd>Oracle Cloud Always Free, Fastify, Google sign-in, backend-issued sessions</dd>
-            <dt>Budget law</dt><dd>$0 recurring. Free tiers first, and a written asset-size standard caps first entry at about 64 MB</dd>
-            <dt>Governance</dt><dd>Written design laws and tokens in the production code; one loader standard on two production sites</dd>
+            <div class="fb-item" style="--i:0"><div class="fb-top"><dt>Product</dt><span class="fb-num">01</span></div><dd>A community and free knowledge-sharing solution in a 3D social world on real cities</dd></div>
+            <div class="fb-item" style="--i:1"><div class="fb-top"><dt>Web build</dt><span class="fb-num">02</span></div><dd>espil.online - Three.js and Mapbox, social first, light UI, a simple male or female avatar</dd></div>
+            <div class="fb-item" style="--i:2"><div class="fb-top"><dt>App &amp; PC</dt><span class="fb-num">03</span></div><dd>The game build on 3D assets: quests, the exchange, and Zealandia, the future game land</dd></div>
+            <div class="fb-item" style="--i:3"><div class="fb-top"><dt>Backend</dt><span class="fb-num">04</span></div><dd>Oracle Cloud Always Free, Fastify, Google sign-in, backend-issued sessions</dd></div>
+            <div class="fb-item" style="--i:4"><div class="fb-top"><dt>Budget law</dt><span class="fb-num">05</span></div><dd>$0 recurring. Free tiers first, and a written asset-size standard caps first entry at about 64 MB</dd></div>
+            <div class="fb-item" style="--i:5"><div class="fb-top"><dt>Governance</dt><span class="fb-num">06</span></div><dd>Written design laws and tokens in the production code; one loader standard on two production sites</dd></div>
           </dl>
         </aside>
 
@@ -404,6 +430,7 @@ function goTo(x,y){
   document.getElementById("mmName").textContent = SHORT[x+","+y];
   document.querySelectorAll("#mmGrid .mm-cell").forEach(function(c){ c.classList.toggle("cur", c.getAttribute("data-k") === (x+","+y)); });
   document.documentElement.style.setProperty("--cc", CCOLORS[x+","+y] || "#b98a2f");
+  if(x === 0 && y === 0 && typeof playFb === "function"){ setTimeout(playFb, 420); }
   var DIRS = [["up",0,-1],["down",0,1],["left",-1,0],["right",1,0]];
   edgeTarget = {};
   DIRS.forEach(function(d){
@@ -459,6 +486,20 @@ document.querySelectorAll(".keycap[data-dir]").forEach(function(b){
   }
 })();
 goTo(0,0);
+
+/* Factbox entrance: staggered rise, replayed whenever the centre room is entered. */
+function playFb(){
+  var fb = document.querySelector('.factbox');
+  if(!fb) return;
+  fb.classList.remove('play'); void fb.offsetWidth; fb.classList.add('play');
+}
+(function(){
+  var iv = setInterval(function(){
+    var L = document.getElementById('espil-loader');
+    if(!L || L.classList.contains('done')){ clearInterval(iv); playFb(); }
+  }, 300);
+  setTimeout(function(){ clearInterval(iv); }, 8000);
+})();
 
 /* ================= MOBILE SWIPE NAVIGATION ================= */
 (function(){
@@ -523,6 +564,35 @@ goTo(0,0);
   });
   document.addEventListener("mouseleave", function(){ setT(""); });
   document.addEventListener("keydown", function(){ setT(""); });
+})();
+</script>
+
+
+<script>
+/* Room entrance (Han, 2026-10-23): wraps goTo so every room change plays
+   the incoming room's blocks in. First play waits for the intro to clear. */
+(function(){
+  var strip = null;
+  function roomIn(x, y){
+    var sec = document.querySelector('.sec[data-pos="' + x + ',' + y + '"]');
+    document.querySelectorAll('.sec.room-in').forEach(function(el){ el.classList.remove('room-in'); });
+    if(!sec) return;
+    void sec.offsetWidth;
+    sec.classList.add('room-in');
+    clearTimeout(strip);
+    strip = setTimeout(function(){ sec.classList.remove('room-in'); }, 1900);
+  }
+  if(typeof window.goTo === "function"){
+    var orig = window.goTo;
+    window.goTo = function(x, y){ orig(x, y); roomIn(x, y); };
+  }
+  var iv = setInterval(function(){
+    var L = document.getElementById('espil-loader');
+    var loaderGone = !L || L.classList.contains('done');
+    var gateGone = !document.getElementById('gateIntro');
+    if(loaderGone && gateGone){ clearInterval(iv); roomIn(cur[0], cur[1]); }
+  }, 300);
+  setTimeout(function(){ clearInterval(iv); }, 9000);
 })();
 </script>
 

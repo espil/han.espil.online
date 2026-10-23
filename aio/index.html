@@ -67,6 +67,21 @@
   .keycap:active{transform:translateY(2px); border-bottom-width:1px; box-shadow:0 1px 2px rgba(30,25,15,.18)}
   .keycap:disabled{opacity:.28; cursor:default; transform:none}
   .keycap:focus-visible{outline:2px solid #17586e; outline-offset:2px}
+
+  /* Room entrance (Han, 2026-10-23): on every room change the incoming
+     room's blocks rise and settle in a stagger. */
+  .sec.room-in .inner > *{animation:roomIn .8s cubic-bezier(.2,.7,.2,1) both; animation-delay:.16s}
+  .sec.room-in .inner > *:nth-child(2){animation-delay:.22s}
+  .sec.room-in .inner > *:nth-child(3){animation-delay:.28s}
+  .sec.room-in .inner > *:nth-child(4){animation-delay:.34s}
+  .sec.room-in .inner > *:nth-child(5){animation-delay:.40s}
+  .sec.room-in .inner > *:nth-child(6){animation-delay:.46s}
+  .sec.room-in .inner > *:nth-child(7){animation-delay:.52s}
+  .sec.room-in .inner > *:nth-child(8){animation-delay:.58s}
+  .sec.room-in .inner > *:nth-child(9){animation-delay:.64s}
+  .sec.room-in .inner > *:nth-child(10){animation-delay:.70s}
+  @keyframes roomIn{from{opacity:0; transform:translateY(22px)} to{opacity:1; transform:translateY(0)}}
+  @media (prefers-reduced-motion: reduce){ .sec.room-in .inner > *{animation:none} }
   #sec-home .homebg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.3; pointer-events:none}
   #sec-home .inner{position:relative; z-index:1}
   /* ---------- home ---------- */
@@ -1478,6 +1493,35 @@ document.getElementById("svForm").addEventListener("submit", function(e){
   t1 = setTimeout(open, 850);
 })();
 </script>
+
+<script>
+/* Room entrance (Han, 2026-10-23): wraps goTo so every room change plays
+   the incoming room's blocks in. First play waits for the intro to clear. */
+(function(){
+  var strip = null;
+  function roomIn(x, y){
+    var sec = document.querySelector('.sec[data-pos="' + x + ',' + y + '"]');
+    document.querySelectorAll('.sec.room-in').forEach(function(el){ el.classList.remove('room-in'); });
+    if(!sec) return;
+    void sec.offsetWidth;
+    sec.classList.add('room-in');
+    clearTimeout(strip);
+    strip = setTimeout(function(){ sec.classList.remove('room-in'); }, 1900);
+  }
+  if(typeof window.goTo === "function"){
+    var orig = window.goTo;
+    window.goTo = function(x, y){ orig(x, y); roomIn(x, y); };
+  }
+  var iv = setInterval(function(){
+    var L = document.getElementById('espil-loader');
+    var loaderGone = !L || L.classList.contains('done');
+    var gateGone = !document.getElementById('gateIntro');
+    if(loaderGone && gateGone){ clearInterval(iv); roomIn(cur[0], cur[1]); }
+  }, 300);
+  setTimeout(function(){ clearInterval(iv); }, 9000);
+})();
+</script>
+
 <!-- espil-loader v13 (injected 2026-10-16) -->
 <script>
 (function(){
