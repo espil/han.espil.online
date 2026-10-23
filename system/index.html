@@ -3,36 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Design System | han.espil.online</title>
+<title>The System Behind Espil.Online - Documentation &amp; Case Study | han.espil.online</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/assets/usedesign-icon.svg">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-<meta name="description" content="The design system behind Espil.Online: documented laws, design tokens as CSS custom properties, one component family, and a glass-loader standard that runs on two production sites.">
-<link rel="stylesheet" href="../style.css?v=11">
-<script>try{var _t=localStorage.getItem('espil-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
+<meta name="description" content="The documentation and implementation case study of Espil Online: the system at the centre, the story and the Naver blog to the left, character production with Plushy AI and the Meshy API to the right, AI-assisted production above, and the Espil House Collection below.">
 <style>
-  .ad-wrap{max-width:880px; margin:0 auto; padding:0 28px 70px}
-  .ad-head{padding:34px 0 8px}
-  .ad-head h1{font-family:var(--serif); font-size:clamp(38px,6vw,58px); line-height:1.02; margin:8px 0 12px}
-  .ad-sec{margin-top:38px}
-  .ad-sec h2{font-family:var(--serif); font-size:27px; margin:0 0 12px}
-  .ad-sec p{font-size:16.5px; line-height:1.66}
-  .ad-cta{display:inline-block; font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; border:1px solid var(--ink); border-radius:999px; padding:8px 16px; margin-top:6px}
-  .qd-flow{display:flex; flex-wrap:wrap; align-items:stretch; gap:8px; margin:18px 0 6px}
-  .qd-box{border:1.5px solid var(--ink); background:var(--card); padding:12px 14px; min-width:128px; flex:1 1 128px}
-  .qd-box b{display:block; font-family:var(--sans); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--highlight-ink); margin-bottom:5px}
-  .qd-box span{font-size:14px; line-height:1.45}
-  .qd-arrow{align-self:center; font-size:19px; font-weight:700}
-  @media (max-width:720px){.qd-arrow{transform:rotate(90deg)}}
-  .backline{margin-top:38px; font-family:var(--sans); font-size:12px; letter-spacing:.14em; text-transform:uppercase}
-  .ad-fig{margin:22px 0 8px}
-  .ad-fig img{display:block; width:100%; height:auto; border:1.5px solid var(--ink)}
-  .ad-sec ul{margin:4px 0 0 22px; padding:0}
-  .ad-sec li{font-size:16.5px; line-height:1.6; margin-bottom:9px}
+  :root{
+    --ink:#141311; --paper:#f4f1ea; --card:#fffdf8; --red:#c8102e; --gold:#b98a2f;
+    --mut:#6f6a5e; --line:#d8d2c4; --teal:#175e54; --cheong:#17586e;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; height:100%; overflow:hidden; background:var(--ink);
+    font-family:Georgia,'Times New Roman',serif; color:var(--ink)}
+  button{font-family:inherit; cursor:pointer}
+  .viewport{position:fixed; inset:0; overflow:hidden; background:var(--ink); transition:transform .38s ease}
+  .world{position:absolute; width:500vw; height:500vh; left:-200vw; top:-200vh;
+    transition:transform 0.9s cubic-bezier(.7,0,.2,1)}
+  .sec{position:absolute; width:100vw; height:100vh; overflow-y:auto; overflow-x:hidden;
+    background:var(--paper); padding:26px 22px 110px; scrollbar-width:none}
+  .sec::-webkit-scrollbar{width:0;height:0}
+  .sec[data-pos="0,-1"]{left:200vw; top:100vh}
+  .sec[data-pos="-1,0"]{left:100vw; top:200vh}
+  .sec[data-pos="0,0"]{left:200vw; top:200vh}
+  .sec[data-pos="1,0"]{left:300vw; top:200vh}
+  .sec[data-pos="0,1"]{left:200vw; top:300vh}
+  .inner{max-width:1060px; margin:0 auto}
+  #aio-track{position:fixed; right:17px; top:50%; transform:translateY(-50%); width:13px; height:min(46vh,430px);
+    z-index:55; pointer-events:none; opacity:0; transition:opacity .3s ease}
+  #aio-track.on{opacity:1}
+  #aio-track::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:1px; margin-left:-.5px; background:#161616; opacity:.45}
+  #aio-track .cap{position:absolute; left:50%; width:5px; height:5px; border:1px solid #161616; transform:translate(-50%,-50%) rotate(45deg)}
+  #aio-track .cap.top{top:0}
+  #aio-track .cap.bot{top:100%}
+  #aio-diamond{position:absolute; left:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px;
+    background:#161616; transform:rotate(45deg)}
+  #aio-shadow{position:absolute; left:50%; top:0; width:1px; margin-left:-.5px; background:#161616; opacity:.85; height:0}
+  #minimap{position:fixed; right:16px; bottom:16px; z-index:56; background:rgba(20,19,17,.42);
+    border:1px solid rgba(240,238,233,.35); border-radius:8px; padding:7px; backdrop-filter:blur(2px)}
+  #minimap .mm-grid{display:grid; grid-template-columns:repeat(5,15px); grid-template-rows:repeat(5,15px); gap:2px}
+  #minimap .mm-cell{border-radius:2px; background:transparent}
+  #minimap .mm-cell.room{background:rgba(240,238,233,.34)}
+  #minimap .mm-cell.cur{background:#c8102e; box-shadow:0 0 0 1px rgba(240,238,233,.85)}
+  #minimap .mm-name{margin-top:5px; font-size:9.5px; letter-spacing:.4px; color:rgba(240,238,233,.92);
+    text-align:center; max-width:89px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  @media (max-width:700px){ #minimap .mm-grid{grid-template-columns:repeat(5,11px); grid-template-rows:repeat(5,11px)} }
+  .keypad{display:flex; flex-direction:column; align-items:center; gap:6px; margin:26px auto 4px; width:max-content}
+  .keypad .krow{display:flex; gap:6px; justify-content:center}
+  .keycap{width:52px; height:52px; padding:0; display:flex; align-items:center; justify-content:center;
+    font-family:Arial,sans-serif; font-size:21px; line-height:1; color:#2c2a24;
+    background:linear-gradient(180deg,#fffdf7,#efe9da); border:1px solid #b7ad97; border-bottom-width:3px; border-radius:9px;
+    box-shadow:0 2px 5px rgba(30,25,15,.18); cursor:pointer; -webkit-tap-highlight-color:transparent}
+  .keycap:hover{border-color:#8a7f66}
+  .keycap:active{transform:translateY(2px); border-bottom-width:1px; box-shadow:0 1px 2px rgba(30,25,15,.18)}
+  .keycap:focus-visible{outline:2px solid #17586e; outline-offset:2px}
+  body.touch-nav .sec{touch-action:pan-y}
+  .homebtn{background:var(--ink); color:var(--paper); border:0; border-radius:999px; padding:9px 18px;
+    font-size:12.5px; letter-spacing:.12em; text-transform:uppercase}
+  .homebtn:hover{background:var(--red)}
+  .sechead{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:6px}
+  .sechead h2{font-size:clamp(26px,4vw,38px); margin:0; line-height:1.08}
+  .kicker{font-size:11.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--red); margin:0 0 6px}
+  .secsub{color:#4a463c; font-size:15.5px; line-height:1.6; max-width:760px}
+  .trim{border-top:3px solid var(--ink); margin:12px 0 20px}
+  .hint{text-align:center; color:var(--mut); font-size:13px; margin-top:22px}
+  /* ---------- this page's content ---------- */
+  .folio{display:flex; justify-content:space-between; gap:14px; font-size:12px; letter-spacing:.14em;
+    text-transform:uppercase; color:#4a463c; border-bottom:1px solid var(--line); padding-bottom:10px}
+  .folio a{color:inherit}
+  .syshead{padding:26px 0 4px}
+  .syshead h1{font-size:clamp(36px,5.6vw,56px); line-height:1.02; margin:6px 0 12px}
+  .lede{font-size:17.5px; line-height:1.62; max-width:780px; color:#2c2a24}
+  .factbox{border:1.5px solid var(--ink); background:var(--card); padding:16px 20px; margin:22px 0 6px}
+  .factbox dl{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px 22px; margin:0}
+  .factbox dt{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--red); margin-bottom:3px}
+  .factbox dd{margin:0; font-size:14px; line-height:1.5}
+  .rsec{margin-top:32px}
+  .rsec h3{font-size:23px; margin:0 0 9px}
+  .rsec p{font-size:15.5px; line-height:1.66; color:#2c2a24; max-width:780px; margin:0 0 12px}
+  .rsec ul{margin:2px 0 12px 20px; padding:0}
+  .rsec li{font-size:15.5px; line-height:1.6; margin-bottom:7px}
+  .fig{margin:18px 0}
+  .fig img{display:block; width:100%; height:auto; border:1px solid var(--line); background:var(--card)}
+  .fig figcaption{font-size:12.5px; color:var(--mut); margin-top:6px; line-height:1.5}
+  .figrow{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin:18px 0}
+  .figrow .fig{margin:0}
+  .portraits{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin:18px 0}
+  .portraits .fig{margin:0}
+  .portraits .fig img{height:360px; object-fit:cover; object-position:top center}
+  .pipe{display:flex; flex-wrap:wrap; align-items:stretch; gap:8px; margin:18px 0 6px}
+  .pbox{border:1.5px solid var(--ink); background:var(--card); padding:12px 14px; min-width:128px; flex:1 1 128px}
+  .pbox b{display:block; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--red); margin-bottom:5px}
+  .pbox span{font-size:14px; line-height:1.45}
+  .parr{align-self:center; font-size:19px; font-weight:700}
+  @media (max-width:720px){.parr{transform:rotate(90deg)}}
+  .doors{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:28px 0 4px; text-align:left}
+  .door{background:var(--card); border:1px solid var(--line); border-top:3px solid var(--ink); padding:16px 18px; text-align:left; width:100%}
+  .door.red{border-top-color:var(--red)} .door.teal{border-top-color:var(--teal)} .door.gold{border-top-color:var(--gold)}
+  .door h3{margin:0 0 6px; font-size:17px; font-weight:normal}
+  .door p{margin:0; font-size:13.5px; line-height:1.55; color:#4a463c}
+  .door .dir{display:block; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--red); margin-bottom:7px}
+  .blogcard{border:2px solid var(--ink); background:var(--card); padding:18px 20px; margin:18px 0}
+  .blogcard h3{margin:0 0 6px; font-size:19px}
+  .blogcard p{margin:0 0 10px; font-size:14.5px; line-height:1.6; color:#3c382f}
+  .visitbtn{display:inline-block; background:var(--ink); color:var(--paper); border-radius:999px; padding:10px 20px;
+    font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; text-decoration:none}
+  .visitbtn:hover{background:var(--red)}
+  .backline{margin-top:34px; font-size:12px; letter-spacing:.14em; text-transform:uppercase}
+  .backline a{color:inherit}
 </style>
-
-
 <!-- espil-loader v13 (injected 2026-10-16) -->
 <style>
 @property --p{syntax:"<number>"; inherits:true; initial-value:0}
@@ -86,6 +165,7 @@
 <noscript><style>#espil-loader{display:none}</style></noscript>
 <link rel="stylesheet" href="/chrome/site-chrome.css?v=9">
 <script src="/chrome/site-chrome.js?v=9" defer></script>
+
 </head>
 <body>
 <!-- espil-loader v13 (injected 2026-10-16) -->
@@ -107,83 +187,386 @@
     
   </div>
 </div>
+<div class="viewport">
+  <div class="world" id="world">
 
+    <!-- CENTRE : THE SYSTEM -->
+    <section class="sec" data-pos="0,0" id="sec-system">
+      <div class="inner">
+        <div class="folio"><span><a href="/">han.espil.online</a></span><span>The System - Espil.Online Documentation</span><span><a href="/#works">&larr; Selected Works</a></span></div>
+        <header class="syshead">
+          <p class="kicker">Centre - The System</p>
+          <h1>The System Behind Espil.Online</h1>
+          <p class="lede">Espil Online is a free knowledge-sharing community in a living world on real cities: a 3D player, Google Maps, and real businesses in one place. This page is its documentation and its implementation case study, arranged the way the world itself is arranged. The system sits at the centre. The story is to the left, the characters to the right, AI production above, and the houses below.</p>
+        </header>
+        <aside class="factbox">
+          <dl>
+            <dt>Product</dt><dd>A community and free knowledge-sharing solution in a 3D social world on real cities</dd>
+            <dt>Web build</dt><dd>espil.online - Three.js and Mapbox, social first, light UI, a simple male or female avatar</dd>
+            <dt>App &amp; PC</dt><dd>The game build on 3D assets: quests, the exchange, and Zealandia, the future game land</dd>
+            <dt>Backend</dt><dd>Oracle Cloud Always Free, Fastify, Google sign-in, backend-issued sessions</dd>
+            <dt>Budget law</dt><dd>$0 recurring. Free tiers first, and a written asset-size standard caps first entry at about 64 MB</dd>
+            <dt>Governance</dt><dd>Written design laws and tokens in the production code; one loader standard on two production sites</dd>
+          </dl>
+        </aside>
 
+        <div class="rsec">
+          <h3>What is implemented</h3>
+          <p>The web build is live at espil.online. You arrive above a real city and dive the last stretch into it, then walk streets rebuilt from the city's own map data. Vancouver and Auckland stand today. Inside, the world begins as a mall: everything in every real store on the map can be traded, person to person, on trust, with no fee - promises, in an era of credit. The stall system (sellers and seekers, in real time, face to face) is the form that trade takes, and a guide walks new arrivals through the full journey to Auckland.</p>
+          <p>The app and PC program are the game build of the same world, on the same account. Character selection starts there, the game character is a server record created there, and Zealandia - the sunken land under New Zealand, entered only through the Auckland portal - is its first game expansion. The web stays light and social on purpose; the game weight lives in the app.</p>
+        </div>
 
-<div class="ad-wrap">
-  <div class="folio">
-    <span><a href="/">han.espil.online</a></span>
-    <span class="folio-mid">The Design System</span>
-    <span class="folio-end">Espil.Online - Design System <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch between day and night mode">&#9790; Night</button></span>
+        <div class="figrow">
+          <figure class="fig"><img src="img/capture-city.jpg" alt="The Espil app build over a real city"><figcaption>The app build over a real city: the world layer that the game is built on.</figcaption></figure>
+          <figure class="fig"><img src="img/hud.jpg" alt="The live web build HUD on espil.online"><figcaption>The live web build: city HUD, chat and the guide, on the production site.</figcaption></figure>
+          <figure class="fig"><img src="img/capture-walk.jpg" alt="Walking the world at street level"><figcaption>Street level, on foot: the world is walked, not browsed.</figcaption></figure>
+        </div>
+
+        <div class="rsec">
+          <h3>The backend, documented</h3>
+          <p>Accounts are Google-only at this step, on a multi-provider identity structure so more providers can join without a rebuild. Sessions are issued by the backend, not the provider: an opaque token, hashed in the database, carried in an httpOnly cookie on espil.online, sliding for 30 days with a 90-day cap. Visitors who never sign in keep browsing as ghosts; the strict signup is deliberate, because trust is the foundation the trade runs on. Places data is served from the API on Oracle with a cache-aside store, so the map stays fast without paying for calls. The whole backend runs on Oracle Cloud Always Free: $0 recurring is a design constraint, not an accident.</p>
+        </div>
+
+        <div class="rsec">
+          <h3>Laws, tokens, one component family</h3>
+          <p>The design system is a set of documented laws - palette, typography, interaction rules - written before implementation. Tokens are CSS custom properties in the production code itself, so a token change is the design decision and its implementation in the same act. Surfaces are composed from one reusable family (HUD, cards, buttons, loaders) before anything new is invented. The governance test already ran: one glass-loader implementation, built once against the laws, became the single standard on both production sites with no per-site redesign. The asset-size standard works the same way - sprite and 3D budgets, compression requirements, and per-place download targets, written before assets are produced.</p>
+        </div>
+
+        <div class="doors">
+          <button class="door" data-go="-1,0"><span class="dir">Left</span><h3>The Story &amp; the Blog</h3><p>Where Espil comes from: the name, the house, the Cauldron, the novel that is the canon, and the Naver blog where the story is published.</p></button>
+          <button class="door red" data-go="1,0"><span class="dir">Right</span><h3>Character Production</h3><p>How the cast is made: Plushy AI locally, the Meshy API for rigging, animation and retexture, and the eight looks of the player characters.</p></button>
+          <button class="door gold" data-go="0,-1"><span class="dir">Up</span><h3>AI-Assisted Production</h3><p>Production with AI end to end: agents against the written laws, generated cities, skill frames, monsters, music and the animation series.</p></button>
+          <button class="door teal" data-go="0,1"><span class="dir">Down</span><h3>House Design &amp; Concept Art</h3><p>The Espil House Collection: the house everything began with, its design brief, and the renders that carry it.</p></button>
+        </div>
+
+        <div class="keypad" aria-label="Move between rooms">
+          <div class="krow"><button class="keycap" data-dir="up" aria-label="Up - AI Production">&#8593;</button></div>
+          <div class="krow"><button class="keycap" data-dir="left" aria-label="Left - Story and Blog">&#8592;</button><button class="keycap" data-dir="down" aria-label="Down - Houses">&#8595;</button><button class="keycap" data-dir="right" aria-label="Right - Characters">&#8594;</button></div>
+        </div>
+        <p class="hint">Move with the arrow keys, the keycaps, the doors above, or by holding the mouse at a screen edge. Up and Down scroll the room first and turn at the end. Escape returns here.</p>
+        <p class="backline"><a href="/#works">&larr; Back to Selected Works</a></p>
+      </div>
+    </section>
+
+    <!-- LEFT : STORY & NAVER BLOG -->
+    <section class="sec" data-pos="-1,0" id="sec-story">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Left - The Story</p><h2>The story, and where it is written</h2></div>
+        <button class="homebtn" data-go="0,0">The System &rarr;</button></div>
+        <div class="trim"></div>
+        <p class="secsub">Left is the past, and the past of this world is a story before it is a product. It is written as a novel, published on the Naver blog, and the game is built on top of it - not the other way around.</p>
+
+        <div class="rsec">
+          <h3>Espil, spelled backward</h3>
+          <p>The name comes from my design house, Bieclipse. Spell it backward and you get "espil ceib"; I removed the "o" because o is earth. Espil Ceil is the maker at the centre of the story: a cauldron maker. The Cauldron is the space itself, entered through espil.online, and the World in the Cauldron is everything inside it - real cities, the people who walk them, and the knowledge they share. Inside the world, models and knowledge trade for Leo Coin, and the coin's supply grows through knowledge sharing, so the currency of the world is learning itself.</p>
+        </div>
+        <div class="rsec">
+          <h3>It began with a house</h3>
+          <p>Before the world, there was a house I could not stop designing: 3D-printed, minimalist, set in nature without disturbing it, powered by its own hydroelectric and solar, with a VR chamber inside that copies a place completely. I never built that house in the real world. It became the seed of everything else - the houses stand below this room, and the world grew around them.</p>
+        </div>
+        <div class="rsec">
+          <h3>The canon, briefly</h3>
+          <p>The novel is the canonical storyline, and the game follows it. Espil makes the cauldron the world lives in. Lunaris, its keeper, is a goddess who can stop time. Leo makes the coin. Hermes, a giant who is never aggroed, wanders the world carrying the key to the Time Stone. Two masters - Ahi of fire and Huka of ice - combine bound to the Time Stone and shatter with it, and Firzen is the name of that unborn fused power, not a person: mid-story, a fragment of the stone clings to Espil's hand, cold and heat at once like dry ice, and the power is absorbed into him. The Auckland Time Machine quest - the stone's fall, the touch, the crack revealed - opens the only portal to Zealandia and its first town, Waitemat&#257;.</p>
+        </div>
+        <div class="rsec">
+          <h3>The voice</h3>
+          <p>On the blog, Espil Ceil writes the way the world thinks: poetic and philosophical, in short aphoristic lines, addressing the reader directly. Beauty, resonance, and trust run through it - trust most of all, because a world built on promises needs it. That voice is the world's constitution before any of its code: the trade with no fee, the strict signup, the knowledge shared freely, are all the story's values implemented.</p>
+        </div>
+
+        <div class="blogcard">
+          <h3>The Naver Blog - where the story is published</h3>
+          <p>The story, the Espil Ceil writings, and the world's notes in Korean live on my Naver blog. The documentary film of the world, "The World is Listening", is on YouTube.</p>
+          <a class="visitbtn" href="https://blog.naver.com/bieclipse" target="_blank" rel="noopener">blog.naver.com/bieclipse</a>
+          <a class="visitbtn" href="https://youtu.be/txy4eRKnvHY" target="_blank" rel="noopener" style="margin-left:8px">The documentary</a>
+        </div>
+        <p class="backline"><button class="homebtn" data-go="0,0">The System &rarr;</button></p>
+      </div>
+    </section>
+
+    <!-- RIGHT : CHARACTER PRODUCTION, PLUSHY AI, MESHY API -->
+    <section class="sec" data-pos="1,0" id="sec-characters">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Right - Character Production</p><h2>Characters, Plushy AI, and the Meshy API</h2></div>
+        <button class="homebtn" data-go="0,0">&larr; The System</button></div>
+        <div class="trim"></div>
+        <p class="secsub">Right is production and decision. Every character in the world comes through one pipeline: drawn first, built locally by Plushy AI, finished with the Meshy API, and shipped as an engine-ready model.</p>
+
+        <div class="pipe">
+          <div class="pbox"><b>1 - Source</b><span>A character is designed as an image first: face, hair, outfit, proportions.</span></div>
+          <div class="parr">&rarr;</div>
+          <div class="pbox"><b>2 - Plushy AI</b><span>My local image-to-3D pipeline turns the image into a model on my own machine.</span></div>
+          <div class="parr">&rarr;</div>
+          <div class="pbox"><b>3 - Meshy API</b><span>Rigging, animation clips, and retexture when only the look changes.</span></div>
+          <div class="parr">&rarr;</div>
+          <div class="pbox"><b>4 - Engine-ready</b><span>Optimized GLB under the asset-size standard: decimated, compressed, verified.</span></div>
+        </div>
+
+        <div class="rsec">
+          <h3>Plushy AI: the local pipeline</h3>
+          <p>Plushy AI is my own local, private alternative to the cloud 3D services - the image-to-3D pipeline I built so the world's assets are made on my machine, under my control. Its services run in Docker containers. It also produces the world's buildings: curated city sprite sets and 3D building remakes, including the Vancouver pack that dresses the live city.</p>
+        </div>
+        <div class="rsec">
+          <h3>The Meshy API: rig, animate, retexture</h3>
+          <p>Where the API is strongest, I use it: a 24-joint rig on the Plushy model, animation clips applied and merged (idle, walk, run, and each character's specials), and - the rule for every existing character - appearance changes are made by retexture, not regeneration. New eyes or new hair never rebuild the body; the same model is retextured, so a look can change while the character, the rig, and the animations stay exactly who they were.</p>
+        </div>
+
+        <figure class="fig"><img src="img/variants-sheet.jpg" alt="Eight looks for the two player characters"><figcaption>Eight looks, two characters: the player cast in four versions each. Same body, same rig - only the eyes and the hair change.</figcaption></figure>
+
+        <div class="portraits">
+          <figure class="fig"><img src="img/hermes.jpg" alt="Hermes, the giant boss"><figcaption>Hermes: the giant boss, 7.2 metres tall, never aggroed. The glowing key on his chest is the Time Stone key.</figcaption></figure>
+          <figure class="fig"><img src="img/lunaris.jpg" alt="Lunaris, keeper of the Cauldron"><figcaption>Lunaris: keeper of the Cauldron, the goddess who can stop time - and the one who can help you reach Hermes.</figcaption></figure>
+        </div>
+
+        <div class="rsec">
+          <h3>Monsters, as sprites</h3>
+          <p>Not everything needs to be 3D. Under the asset-size standard, ordinary creatures are sprite sheets - generated, framed, and state-driven as billboards in the town - while full 3D is reserved for the characters who carry the story.</p>
+          <figure class="fig"><img src="img/brute.png" alt="A monster sprite sheet"><figcaption>A monster sprite sheet from the town set: one sheet carries the whole performance.</figcaption></figure>
+        </div>
+        <p class="backline"><button class="homebtn" data-go="0,0">&larr; The System</button></p>
+      </div>
+    </section>
+
+    <!-- UP : AI-ASSISTED PRODUCTION -->
+    <section class="sec" data-pos="0,-1" id="sec-aiprod">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Up - AI-Assisted Production</p><h2>Made with AI, against written laws</h2></div>
+        <button class="homebtn" data-go="0,0">&darr; The System</button></div>
+        <div class="trim"></div>
+        <p class="secsub">Up is dreams and tools. This world is built with AI at every stage - but the AI works inside the system: the laws, the tokens, and the standards are written first, and the tools generate against them.</p>
+
+        <div class="rsec">
+          <h3>The build workflow</h3>
+          <p>Figma exploration first, then AI agents - primarily Claude Code - for prototyping, implementation, and refactoring. I edit the code myself and choose which language and tool each job gets; the agents are how one person builds at the speed of a team, and the written laws are how the output stays one product instead of wandering. Every department of this build - map, interface, assets, skills, music, quality - works the same way: a written spec, generated production, and my verdict on the result.</p>
+        </div>
+        <div class="rsec">
+          <h3>Generation at scale</h3>
+          <p>Plushy AI generates the world's matter: the city sprite pack alone is 115 curated sprites, 82 of them buildings in the Vancouver set. Skill effects are generated as frame sets - six abilities in fire and six in ice, drawn as matched pairs so the two attunements read as one system. Monsters come as sprite sheets, the Time Stone and the Auckland street buildings as 3D, and every output passes the asset-size standard before it is allowed into the build.</p>
+        </div>
+        <div class="figrow">
+          <figure class="fig"><img src="img/fx-fire.jpg" alt="The fire skill frame set"><figcaption>The fire set: six abilities, one visual language.</figcaption></figure>
+          <figure class="fig"><img src="img/fx-ice.jpg" alt="The ice skill frame set"><figcaption>The ice set: the same six, in the other attunement.</figcaption></figure>
+          <figure class="fig"><img src="img/building-sprite.png" alt="A Plushy AI building sprite"><figcaption>A building sprite from the Vancouver pack, generated by Plushy AI.</figcaption></figure>
+        </div>
+        <div class="rsec">
+          <h3>Music, film, and the assistants</h3>
+          <p>Each city carries its own theme, composed with AI and finished by ear. The animation series follows one pacing law: every cut shows a start, a change, and a result. And two local assistants live on my own machine beside the pipeline: Plushy AI for making, and Ollama - whose Espil makes his first appearance in the app, the world's own guide, running locally like everything else that matters here.</p>
+        </div>
+        <p class="backline"><button class="homebtn" data-go="0,0">&darr; The System</button></p>
+      </div>
+    </section>
+
+    <!-- DOWN : HOUSE DESIGN & CONCEPT ART -->
+    <section class="sec" data-pos="0,1" id="sec-houses">
+      <div class="inner">
+        <div class="sechead"><div><p class="kicker">Down - House Design &amp; Concept Art</p><h2>The Espil House Collection</h2></div>
+        <button class="homebtn" data-go="0,0">&uarr; The System</button></div>
+        <div class="trim"></div>
+        <p class="secsub">Down is the current state, and the ground everything stands on: the house. The collection below is the oldest work on this page - the design everything else grew from.</p>
+
+        <div class="rsec">
+          <h3>The design brief</h3>
+          <p>One house, designed for years before it had a world: 3D-printed, minimalist, set in nature without disturbing it. It powers itself - hydroelectric and solar - so it owes the land nothing. Inside, a VR chamber copies a place completely, so the house can be anywhere it has visited. I have not built this house in the real world; it is a design ambition, and inside Espil Online it is a place - the models of the collection trade there for Leo Coin, and one day the houses are the world's housing layer, where your website is your house.</p>
+        </div>
+        <div class="rsec">
+          <h3>The collection</h3>
+          <p>Five houses, modelled in full - walkable builds exist for the collection, and the renders below are its concept art: the Universe house and its grounds, drawn at the hours the world keeps. The spiral you see in the roof is the same spiral as my mark; the house was the logo before the logo was.</p>
+        </div>
+        <div class="figrow">
+          <figure class="fig"><img src="/aio/img/house-aerial-day.jpg" alt="The Universe house from above, by day"><figcaption>Aerial, day: the spiral roof over the grounds.</figcaption></figure>
+          <figure class="fig"><img src="/aio/img/house-aerial-dusk.jpg" alt="The Universe house from above, at dusk"><figcaption>Aerial, dusk: the same house at the world's other hour.</figcaption></figure>
+          <figure class="fig"><img src="/aio/img/house-front-tree.jpg" alt="The house front and its tree"><figcaption>The front, and the tree the house is built around.</figcaption></figure>
+          <figure class="fig"><img src="/aio/img/interior-living.jpg" alt="Inside the house"><figcaption>Inside: the living space the VR chamber adjoins.</figcaption></figure>
+          <figure class="fig"><img src="/aio/img/house-spiral-top.jpg" alt="The spiral from directly above"><figcaption>The spiral from directly above - the mark, as a roof.</figcaption></figure>
+          <figure class="fig"><img src="/assets/display/render-day.jpg" alt="The Universe render, day"><figcaption>The Universe render: the house in its landscape, day.</figcaption></figure>
+        </div>
+        <p class="backline"><button class="homebtn" data-go="0,0">&uarr; The System</button></p>
+      </div>
+    </section>
+
   </div>
-
-  <header class="ad-head">
-    <p class="kicker">Espil.Online - Design System</p>
-    <h1>The System Behind Espil.Online</h1>
-    <p class="lede">Most products I have built, I built alone. That is exactly why I work from a system. When there is no team to catch an inconsistency, the rules have to do it, so I wrote mine down.</p>
-  </header>
-
-  <aside class="factbox">
-    <dl>
-      <dt>Laws</dt><dd>Palette, typography, interaction rules, written before implementation</dd>
-      <dt>Tokens</dt><dd>CSS custom properties in the production code</dd>
-      <dt>Components</dt><dd>One reusable family: HUD, cards, buttons, loaders</dd>
-      <dt>Governance test</dt><dd>The glass loader standard, one implementation on two production sites</dd>
-      <dt>Workflow</dt><dd>Figma exploration, AI agents - Claude Code - against the written laws</dd>
-    </dl>
-  </aside>
-
-  <section class="ad-sec">
-    <h2>Laws, not a style guide</h2>
-    <p>The Espil.Online design system is a set of documented laws: palette, typography, and interaction rules, written before they are implemented. A style guide describes what things look like. Laws decide what gets built. Every surface of the product, the globe entry, the city interface, the loaders, this portfolio, is judged against the same written rules, and anything that cannot cite a law does not ship.</p>
-  </section>
-  <section class="ad-sec">
-    <h2>Tokens live in the code</h2>
-    <p>Design tokens are implemented as CSS custom properties in the production code itself. A token change is a design decision and its implementation in the same act: there is no translation step where intent gets lost, and no second source of truth to drift. The palette and type scale a visitor sees on espil.online are the tokens, rendered.</p>
-  </section>
-  <section class="ad-sec">
-    <h2>One component family</h2>
-    <p>The interface is built from a reusable component family rather than page-by-page invention: the heads-up display elements, cards, buttons, and the loading components all descend from shared patterns, styled by the same tokens. New surfaces are composed from the family first; a genuinely new pattern is added to the family, documented, and only then used.</p>
-  </section>
-  <section class="ad-sec">
-    <h2>Governance, in practice: the loader standard</h2>
-    <p>The clearest test of the system came when the loading experience was standardized. One glass-loader implementation, built once against the laws, became the single standard for every loading screen, and the same implementation was transplanted across two production sites, espil.online and this portfolio, with no per-site redesign. That is what governance means in a one-person practice: a decision made once, in the system, holding everywhere the system reaches.</p>
-    <figure class="ad-fig"><img src="/assets/display/render-tree.jpg" alt="The standard glass loader runs over the Espil Universe render"></figure>
-  </section>
-  <section class="ad-sec">
-    <h2>AI works inside the system</h2>
-    <p>My build workflow is AI-assisted end to end: Figma exploration first, then AI agents, primarily Claude Code, for prototyping, implementation, and refactoring. The agents work against the written laws and the token set, which is what keeps generated output converging on one product instead of wandering. QA passes check new work against the same laws. The system is not only how the product stays consistent; it is how one person and a set of AI tools build like a team that shares a memory.</p>
-  </section>
-  <section class="ad-sec">
-    <h2>What it governs today</h2>
-    <ul>
-      <li>espil.online: entry, globe, city interfaces, HUD, loaders</li>
-      <li>han.espil.online: the portfolio issue, its editorial system, and its archive of 50+ project pages under one set of rules, with zero one-off page designs</li>
-      <li>Every loading screen on both sites: one implementation, one standard</li>
-    </ul>
-  </section>
-
-  <section class="ad-sec">
-    <h2>The third system, not the first</h2>
-    <p>The Espil.Online laws are the third time I have built the system before the work. The first was a decade of client sites at Bieclipse Design, where templates and shared patterns carried work I could not personally re-check. The second was at Discover Holidays, where the style guide I authored was enforced by InDesign scripts across thousands of catalogue pages, because in pricing data a standard that can be ignored will be. This one is the first where the tokens live in the production code itself. Ten years of working directly on systems is not a claim on this page. It is the page's table of contents.</p>
-  </section>
-
-  <p class="backline"><a href="/#works">&larr; Back to Selected Works</a></p>
 </div>
+<div id="aio-track" aria-hidden="true"><span class="cap top"></span><span id="aio-shadow"></span><span id="aio-diamond"></span><span class="cap bot"></span></div>
+<div id="minimap" aria-hidden="true"><div class="mm-grid" id="mmGrid"></div><div class="mm-name" id="mmName">System</div></div>
 
 <script>
+window.__gateDone = true;
+/* ================= DIRECTIONAL NAVIGATION (AIO pattern) ================= */
+var world = document.getElementById("world");
+var NAMES = {"0,0":"The System","0,-1":"AI Production - Up","-1,0":"Story & Blog - Left","1,0":"Character Production - Right","0,1":"Houses & Concept - Down"};
+var SHORT = {"0,0":"System","0,-1":"AI Production","-1,0":"Story & Blog","1,0":"Characters","0,1":"Houses"};
+var CCOLORS = {"0,0":"#b98a2f","0,-1":"#454037","-1,0":"#f4f1ea","1,0":"#17586e","0,1":"#c8102e"};
+var edgeTarget = {};
+var cur = [0,0];
+
+function goTo(x,y){
+  cur = [x,y];
+  world.style.transform = "translate(" + (-x*100) + "vw," + (-y*100) + "vh)";
+  document.getElementById("mmName").textContent = SHORT[x+","+y];
+  document.querySelectorAll("#mmGrid .mm-cell").forEach(function(c){ c.classList.toggle("cur", c.getAttribute("data-k") === (x+","+y)); });
+  document.documentElement.style.setProperty("--cc", CCOLORS[x+","+y] || "#b98a2f");
+  var DIRS = [["up",0,-1],["down",0,1],["left",-1,0],["right",1,0]];
+  edgeTarget = {};
+  DIRS.forEach(function(d){
+    var nk = (x+d[1]) + "," + (y+d[2]);
+    if(NAMES.hasOwnProperty(nk)){ edgeTarget[d[0]] = [x+d[1], y+d[2]]; }
+  });
+}
+document.querySelectorAll("[data-go]").forEach(function(b){
+  b.addEventListener("click", function(){
+    var p = b.getAttribute("data-go").split(","); goTo(parseInt(p[0],10), parseInt(p[1],10));
+  });
+});
+document.addEventListener("keydown", function(e){
+  var tag = (e.target.tagName||"").toLowerCase();
+  if(tag==="input" || tag==="textarea") return;
+  if(e.key==="Escape"){ goTo(0,0); return; }
+  var DIRS = {ArrowUp:[0,-1], ArrowDown:[0,1], ArrowLeft:[-1,0], ArrowRight:[1,0]};
+  if(!DIRS[e.key]) return;
+  var d = DIRS[e.key];
+  if(d[1] !== 0){
+    var sec = document.querySelector('.sec[data-pos="' + cur[0] + ',' + cur[1] + '"]');
+    if(sec && sec.scrollHeight > sec.clientHeight + 4){
+      var step = Math.round(sec.clientHeight * 0.85);
+      if(d[1] > 0 && sec.scrollTop + sec.clientHeight < sec.scrollHeight - 4){
+        e.preventDefault(); sec.scrollBy({top: step, behavior: "smooth"}); return;
+      }
+      if(d[1] < 0 && sec.scrollTop > 4){
+        e.preventDefault(); sec.scrollBy({top: -step, behavior: "smooth"}); return;
+      }
+    }
+  }
+  var nx = cur[0] + d[0], ny = cur[1] + d[1];
+  if(NAMES.hasOwnProperty(nx + "," + ny)){ e.preventDefault(); goTo(nx, ny); }
+});
+document.querySelectorAll(".keycap[data-dir]").forEach(function(b){
+  b.addEventListener("click", function(){
+    var dv = {up:[0,-1], down:[0,1], left:[-1,0], right:[1,0]}[b.getAttribute("data-dir")];
+    if(!dv) return;
+    var nx = cur[0] + dv[0], ny = cur[1] + dv[1];
+    if(NAMES.hasOwnProperty(nx + "," + ny)) goTo(nx, ny);
+  });
+});
 (function(){
-  var btn=document.getElementById('themeToggle');
-  function effective(){ var t=document.documentElement.getAttribute('data-theme'); if(t) return t; return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark':'light'; }
-  function paint(){ if(btn) btn.textContent = effective()==='dark' ? '\u2600 Day' : '\u263E Night'; }
-  if(btn) btn.addEventListener('click', function(){ var n=effective()==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',n); try{localStorage.setItem('espil-theme',n);}catch(e){} paint(); });
-  paint();
+  var g = document.getElementById("mmGrid");
+  for(var yy = -2; yy <= 2; yy++){
+    for(var xx = -2; xx <= 2; xx++){
+      var k = xx + "," + yy;
+      var d = document.createElement("div");
+      d.className = "mm-cell" + (NAMES.hasOwnProperty(k) ? " room" : "");
+      d.setAttribute("data-k", k);
+      g.appendChild(d);
+    }
+  }
+})();
+goTo(0,0);
+
+/* ================= MOBILE SWIPE NAVIGATION ================= */
+(function(){
+  var mq = window.matchMedia("(pointer: coarse), (max-width: 760px)");
+  var navHint = document.querySelector(".sec .hint");
+  var deskHint = navHint ? navHint.textContent : "";
+  function applyMode(){
+    var touch = mq.matches;
+    document.body.classList.toggle("touch-nav", touch);
+    if(navHint) navHint.textContent = touch
+      ? "On mobile, swipe left, right, up or down to move between rooms."
+      : deskHint;
+  }
+  if(mq.addEventListener) mq.addEventListener("change", applyMode);
+  else if(mq.addListener) mq.addListener(applyMode);
+  applyMode();
+  var sx = 0, sy = 0, tracking = false, scroller = null, startScroll = 0;
+  document.addEventListener("touchstart", function(e){
+    tracking = false;
+    if(!document.body.classList.contains("touch-nav")) return;
+    if(e.touches.length !== 1) return;
+    var t = e.target;
+    if(!t.closest || t.closest("button, a, input, textarea, select")) return;
+    scroller = t.closest(".sec");
+    startScroll = scroller ? scroller.scrollTop : 0;
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+    tracking = true;
+  }, {passive: true});
+  document.addEventListener("touchend", function(e){
+    if(!tracking) return;
+    tracking = false;
+    if(scroller && scroller.scrollTop !== startScroll) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if(Math.max(Math.abs(dx), Math.abs(dy)) < 48) return;
+    var dir = Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? "left" : "right") : (dy < 0 ? "up" : "down");
+    var target = edgeTarget[dir];
+    if(target) goTo(target[0], target[1]);
+  }, {passive: true});
+})();
+
+/* ================= EDGE NUDGE ================= */
+(function(){
+  if(!window.matchMedia || !matchMedia("(pointer:fine)").matches) return;
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var vp = document.querySelector(".viewport");
+  if(!vp) return;
+  var curT = "";
+  function setT(t){ if(t !== curT){ curT = t; vp.style.transform = t; } }
+  document.addEventListener("mousemove", function(e){
+    if(!window.__gateDone || document.body.classList.contains("touch-nav")){ setT(""); return; }
+    var fx = e.clientX / innerWidth, fy = e.clientY / innerHeight;
+    var cand = [];
+    if(fx > 0.95) cand.push(["right", 1 - fx]);
+    if(fx < 0.05) cand.push(["left", fx]);
+    if(fy > 0.95) cand.push(["down", 1 - fy]);
+    if(fy < 0.05) cand.push(["up", fy]);
+    if(!cand.length){ setT(""); return; }
+    cand.sort(function(a, b){ return a[1] - b[1]; });
+    var dir = cand[0][0];
+    if(typeof edgeTarget === "undefined" || !edgeTarget[dir]){ setT(""); return; }
+    setT(dir === "right" ? "translateX(-5vw)" : dir === "left" ? "translateX(5vw)" : dir === "down" ? "translateY(-5vh)" : "translateY(5vh)");
+  });
+  document.addEventListener("mouseleave", function(){ setT(""); });
+  document.addEventListener("keydown", function(){ setT(""); });
 })();
 </script>
 
-
-
-
+<script>
+/* Room scroll track (Han, 2026-10-21): the front page's diamond indicator,
+   bound to whichever room is current. Rebinds on navigation. */
+(function(){
+  var track = document.getElementById("aio-track");
+  var dia = document.getElementById("aio-diamond");
+  var sh = document.getElementById("aio-shadow");
+  if(!track || !dia) return;
+  var sec = null, idle = null;
+  function currentSec(){
+    return document.querySelector('.sec[data-pos="' + cur[0] + "," + cur[1] + '"]');
+  }
+  function maxS(){ return sec ? (sec.scrollHeight - sec.clientHeight) : 0; }
+  function paint(){
+    if(!sec) return;
+    var m = maxS();
+    var f = m > 0 ? Math.min(1, Math.max(0, sec.scrollTop / m)) : 0;
+    var y = 12 + f * (track.clientHeight - 24);
+    dia.style.top = y + "px";
+    sh.style.height = y + "px";
+  }
+  function show(){
+    if(!sec || maxS() <= 2){ track.classList.remove("on"); return; }
+    track.classList.add("on"); paint();
+    clearTimeout(idle);
+    idle = setTimeout(function(){ track.classList.remove("on"); }, 1400);
+  }
+  function bind(){
+    var ns = currentSec();
+    if(ns === sec) return;
+    if(sec) sec.removeEventListener("scroll", show);
+    sec = ns;
+    if(sec) sec.addEventListener("scroll", show, {passive:true});
+    paint();
+  }
+  setInterval(bind, 400);
+  document.addEventListener("keydown", function(){ setTimeout(show, 60); });
+  window.addEventListener("resize", paint);
+  bind();
+})();
+</script>
 <!-- espil-loader v13 (injected 2026-10-16) -->
 <script>
 (function(){
