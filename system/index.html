@@ -277,7 +277,7 @@
           <button class="door teal" data-go="4,0"><span class="dir">Step 4</span><h3>Espil Online: The Case Study</h3><p>The birth of Espil Online and how AI builds it: Plushy AI, the map editor toolkit, and a production separated into AI departments.</p></button>
         </div>
 
-        <p class="hint">The rooms run in one line to the right. Move with the arrow keys, the doors above, or a right-click anywhere. Rest the mouse at the left or right edge of the screen, and the way to the next chapter is written there. Escape returns here.</p>
+        <p class="hint">The rooms run in one line to the right. Move with the arrow keys, the doors above, a right-click anywhere, or a sideways scroll. Rest the mouse at the left or right edge of the screen, and the way to the next chapter is written there. Escape returns here.</p>
         <p class="backline"><a href="/#works">&larr; Back to Selected Works</a></p>
       </div>
     </section>
@@ -583,6 +583,29 @@ function playFb(){
   document.addEventListener("mousedown", function(e){ if(!menu.contains(e.target)) hide(); });
   document.addEventListener("keydown", function(){ hide(); });
   window.addEventListener("blur", hide);
+})();
+
+/* ================= SIDEWAYS SCROLL NAVIGATION =================
+   A horizontal scroll (trackpad sideways swipe, tilt wheel, or
+   Shift+wheel) turns one room in that direction. Vertical scrolling
+   inside a room is untouched, and the GLB viewer keeps its wheel. */
+(function(){
+  var acc = 0, lockUntil = 0, idleTimer = null;
+  document.addEventListener("wheel", function(e){
+    if(e.target.closest && e.target.closest("model-viewer, .glbview")) return;
+    if(Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    var dx = e.deltaX * (e.deltaMode === 1 ? 16 : 1);
+    acc += dx;
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function(){ acc = 0; }, 350);
+    if(Math.abs(acc) < 55){ if(Math.abs(acc) > 8) e.preventDefault(); return; }
+    var now = Date.now();
+    if(now < lockUntil){ e.preventDefault(); acc = 0; return; }
+    var dir = acc > 0 ? "right" : "left";
+    acc = 0;
+    var t = (typeof edgeTarget !== "undefined") ? edgeTarget[dir] : null;
+    if(t){ lockUntil = now + 1150; e.preventDefault(); goTo(t[0], t[1]); }
+  }, {passive: false});
 })();
 
 /* ================= EDGE CHAPTER STRIPS =================
