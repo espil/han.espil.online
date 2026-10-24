@@ -705,15 +705,22 @@ const initT0 = performance.now();
 async function init(){
   setProgress(6, 'Entering Vancouver');
   try{
-    await loadScript('/system/vendor/mapbox-gl.js');
-    const link = document.createElement('link'); link.rel = 'stylesheet';
-    link.href = '/system/vendor/mapbox-gl.css'; document.head.appendChild(link);
-    const THREE = await import('three'); THREEref = THREE;
-    const { GLTFLoader } = await import('three/addons/loaders/GLTFLoader.js');
+    /* Everything loads in parallel from the first moment: the city key, the
+       map engine, the 3D engine, and the character file. */
+    const hint = document.createElement('link');
+    hint.rel = 'preconnect'; hint.href = 'https://api.mapbox.com'; document.head.appendChild(hint);
     setProgress(10, 'Reading the city key');
     const tokUrl = LOCAL ? '/system/dev-token.json' : '/api/mapbox-token';
-    const tokData = await (await fetch(tokUrl)).json();
+    const pTok = fetch(tokUrl).then((r)=> r.json());
+    const pMb = loadScript('/system/vendor/mapbox-gl.js');
+    const pThree = import('three');
+    const pLoader = import('three/addons/loaders/GLTFLoader.js');
+    const pGlb = fetch('/system/models/player.glb').then((r)=> r.arrayBuffer());
+    const css = document.createElement('link'); css.rel = 'stylesheet';
+    css.href = '/system/vendor/mapbox-gl.css'; document.head.appendChild(css);
+    const tokData = await pTok;
     if(!tokData || !tokData.token) throw new Error('no token');
+    await pMb;
     mapboxgl.accessToken = tokData.token;
     setProgress(24, 'Raising the map');
     map = new mapboxgl.Map({ container: 'demoMap', style: STYLE, center: [START.lng, START.lat],
@@ -728,6 +735,8 @@ async function init(){
     let fellBack = false;
     map.on('error', (e)=>{ if(!LOCAL && !fellBack){ fellBack = true;
       try{ map.setStyle('mapbox://styles/mapbox/streets-v12'); }catch(_){} } });
+    const THREE = await pThree; THREEref = THREE;
+    const { GLTFLoader } = await pLoader;
     const layer = {
       id: 'demo-char', type: 'custom', renderingMode: '3d',
       onAdd(m, gl){
@@ -738,17 +747,19 @@ async function init(){
         this.map = m;
         this.renderer = new THREE.WebGLRenderer({ canvas: m.getCanvas(), context: gl, antialias: true });
         this.renderer.autoClear = false;
-        new GLTFLoader().load('/system/models/player.glb', (gltf)=>{
-          model = gltf.scene;
-          const bb = new THREE.Box3().setFromObject(model);
-          const h = (bb.max.y - bb.min.y) || 1, k = 1.7 / h;
-          model.scale.setScalar(k); model.position.y = -bb.min.y * k;
-          this.scene.add(model);
-          mixer = new THREE.AnimationMixer(model);
-          gltf.animations.forEach((c)=>{ actions[c.name] = mixer.clipAction(c); });
-          setAction('Idle');
-          state.ready = true; state.stage = 'ready'; glassDone();
-        }, undefined, ()=> fail('The character could not load - please retry.'));
+        pGlb.then((buf)=>{
+          new GLTFLoader().parse(buf, '', (gltf)=>{
+            model = gltf.scene;
+            const bb = new THREE.Box3().setFromObject(model);
+            const h = (bb.max.y - bb.min.y) || 1, k = 1.7 / h;
+            model.scale.setScalar(k); model.position.y = -bb.min.y * k;
+            this.scene.add(model);
+            mixer = new THREE.AnimationMixer(model);
+            gltf.animations.forEach((c)=>{ actions[c.name] = mixer.clipAction(c); });
+            setAction('Idle');
+            state.ready = true; state.stage = 'ready'; glassDone();
+          }, ()=>{ if(state.idleSeen){ state.charFailed = true; } else fail('The character could not load - please retry.'); });
+        }).catch(()=>{ if(state.idleSeen){ state.charFailed = true; } else fail('The character could not load - please retry.'); });
       },
       render(gl, matrix){
         if(!model || !this.renderer) return;
@@ -769,24 +780,23 @@ async function init(){
       try{ const pr = map.getProjection(); if(!pr || pr.name !== 'mercator') map.setProjection('mercator'); }catch(_){}
       if(!map.getLayer('demo-char')) map.addLayer(layer);
     });
-    map.on('idle', ()=>{ if(!state.idleSeen){ state.idleSeen = true; state.stage = 'idle'; setProgress(75, 'Buildings rise'); } });
+    /* The map reveals first: the glass clears when the city itself is
+       settled, and the walker joins when his file lands. */
+    map.on('idle', ()=>{ if(!state.idleSeen){ state.idleSeen = true; state.stage = 'idle';
+      setProgress(88, 'The city is ready'); glassDone(); } });
     /* Watchdog: if the designated style does not settle, fall back to the
-       base map - and say so on the glass, never sit on a black frame. */
+       base map - and say so on the glass, never sit on a blank frame. */
     let fellBack2 = false;
     const watchdog = setInterval(()=>{
-      if(state.ready){ clearInterval(watchdog); return; }
-      const stuck = !state.idleSeen;
-      if(stuck && !fellBack2 && performance.now() - initT0 > 14000){
+      if(state.idleSeen){ clearInterval(watchdog); return; }
+      if(!fellBack2 && performance.now() - initT0 > 14000){
         fellBack2 = true;
         setProgress(45, 'The designated style is slow - switching to the base map');
         try{ map.setStyle('mapbox://styles/mapbox/streets-v12'); }catch(_){}
       }
-      if(!state.ready && performance.now() - initT0 > 20000 && state.stage === 'idle' && !glassFailed){
-        setProgress(85, 'The character is still loading');
-      }
-      if(performance.now() - initT0 > 35000 && !state.ready){
+      if(performance.now() - initT0 > 30000 && !state.idleSeen){
         clearInterval(watchdog);
-        fail('The sample did not finish loading here - please retry.');
+        fail('The map did not settle here - please retry.');
       }
     }, 1000);
     let last = performance.now(), lastCur = '0,0';
