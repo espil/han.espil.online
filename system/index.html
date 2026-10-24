@@ -65,27 +65,34 @@
   #minimap .mm-name{margin-top:5px; font-size:9.5px; letter-spacing:.4px; color:rgba(240,238,233,.92);
     text-align:center; max-width:89px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   @media (max-width:700px){ #minimap .mm-grid{grid-template-columns:repeat(5,11px); grid-template-rows:repeat(1,11px)} }
-  /* Nav hint popup (2026-10-24, Han): teaches the room navigation once, on entry.
-     Any click anywhere dismisses it. */
+  /* Nav hint popup (2026-10-24, Han): picture-only navigation hint.
+     Sideways scroll, or right-click and choose Move right. Any click dismisses. */
   #navHint{position:fixed; left:50%; bottom:26px; transform:translate(-50%,14px); z-index:70;
-    display:flex; align-items:center; gap:14px; max-width:92vw;
+    display:flex; align-items:stretch; gap:12px; max-width:94vw;
     background:var(--ink); color:var(--paper); border:1px solid rgba(240,238,233,.28);
-    border-radius:999px; padding:11px 20px; box-shadow:0 14px 34px rgba(0,0,0,.38);
+    border-radius:16px; padding:12px 14px; box-shadow:0 14px 34px rgba(0,0,0,.38);
     opacity:0; animation:nhIn .55s ease 2.6s forwards; cursor:pointer}
   @keyframes nhIn{to{opacity:1; transform:translate(-50%,0)}}
-  #navHint .nh-body{display:flex; flex-direction:column; gap:1px; text-align:center}
-  #navHint .nh-main{font-size:14.5px; font-weight:600; letter-spacing:.01em; white-space:nowrap}
-  #navHint .nh-main b{color:#ff8fa0; font-weight:700}
-  #navHint .nh-sub{font-size:11px; opacity:.72; letter-spacing:.02em; white-space:nowrap}
-  #navHint .nh-arr{color:var(--red); font-size:17px; font-weight:700; line-height:1}
+  #navHint .nh-cell{display:flex; align-items:center; gap:8px;
+    border:1px solid rgba(240,238,233,.18); border-radius:12px; padding:8px 12px}
+  #navHint .nh-div{width:1px; background:rgba(240,238,233,.22)}
+  #navHint .nh-arr{color:var(--red); font-size:19px; font-weight:700; line-height:1; font-style:normal}
   #navHint .nh-l{animation:nhNudgeL 1.6s ease-in-out infinite}
   #navHint .nh-r{animation:nhNudgeR 1.6s ease-in-out infinite}
   @keyframes nhNudgeL{0%,100%{transform:translateX(0)}50%{transform:translateX(-4px)}}
   @keyframes nhNudgeR{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+  #navHint .nh-menu{display:flex; flex-direction:column; gap:2px; background:var(--paper);
+    color:var(--ink); border-radius:7px; padding:3px; box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  #navHint .nh-mrow{display:flex; align-items:center; gap:6px; font-size:10.5px; line-height:1;
+    padding:4px 8px; border-radius:4px; white-space:nowrap}
+  #navHint .nh-mrow i{font-style:normal; font-weight:700; color:var(--red)}
+  #navHint .nh-mrow.dim{opacity:.38}
+  #navHint .nh-mrow.on{background:var(--ink); color:var(--paper)}
+  #navHint .nh-mrow.on i{color:#ff8fa0}
   #navHint.bye{animation:none; opacity:0; transform:translate(-50%,10px);
     transition:opacity .38s ease, transform .38s ease; pointer-events:none}
-  @media (max-width:700px){ #navHint{bottom:84px; padding:10px 16px; gap:10px}
-    #navHint .nh-main{font-size:13px; white-space:normal} #navHint .nh-sub{white-space:normal} }
+  @media (max-width:700px){ #navHint{bottom:84px; gap:8px; padding:10px}
+    #navHint .nh-cell{gap:5px; padding:6px 8px} #navHint .nh-mrow{font-size:9.5px; padding:3px 6px} }
   @media (prefers-reduced-motion: reduce){ #navHint{animation:none; opacity:1; transform:translate(-50%,0)}
     #navHint .nh-l, #navHint .nh-r{animation:none} }
   body.touch-nav .sec{touch-action:pan-y}
@@ -944,10 +951,10 @@ function playFb(){
 })();
 </script>
 
-<div id="navHint" role="note" aria-label="Navigation hint">
-  <span class="nh-arr nh-l">&larr;</span>
-  <span class="nh-body"><span class="nh-main">좌우 스크롤, 혹은 우클릭 후 <b>Move right</b> 클릭</span><span class="nh-sub">Scroll sideways, or right-click and choose Move right</span></span>
-  <span class="nh-arr nh-r">&rarr;</span>
+<div id="navHint" role="note" aria-label="Scroll sideways, or right-click and choose Move right">
+  <span class="nh-cell"><i class="nh-arr nh-l">&larr;</i><svg width="29" height="42" viewBox="0 0 40 48" fill="none" aria-hidden="true"><rect x="10" y="5" width="20" height="34" rx="10" stroke="#F0EEE9" stroke-width="2.4"/><line x1="20" y1="11" x2="20" y2="18" stroke="#F0EEE9" stroke-width="2.4" stroke-linecap="round"/></svg><i class="nh-arr nh-r">&rarr;</i></span>
+  <span class="nh-div"></span>
+  <span class="nh-cell"><svg width="29" height="42" viewBox="0 0 40 48" fill="none" aria-hidden="true"><path d="M20 5h1.5A8.5 8.5 0 0 1 30 13.5V18H20Z" fill="#C8102E"/><rect x="10" y="5" width="20" height="34" rx="10" stroke="#F0EEE9" stroke-width="2.4"/><line x1="20" y1="5" x2="20" y2="18" stroke="#F0EEE9" stroke-width="2"/><line x1="10" y1="18" x2="30" y2="18" stroke="#F0EEE9" stroke-width="2"/></svg><i class="nh-arr nh-r">&rarr;</i><span class="nh-menu"><span class="nh-mrow dim"><i>&larr;</i>Move left</span><span class="nh-mrow on">Move right<i>&rarr;</i></span></span></span>
 </div>
 <script>
 /* Nav hint dismissal (2026-10-24): any pointer-down anywhere fades it out. */
