@@ -39,6 +39,14 @@
   #aio-diamond{position:absolute; left:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px;
     background:#161616; transform:rotate(45deg)}
   #aio-shadow{position:absolute; left:50%; top:0; width:1px; margin-left:-.5px; background:#161616; opacity:.85; height:0}
+  .edgestrip{position:fixed; top:0; bottom:0; width:5vw; min-width:38px; z-index:58;
+    display:flex; align-items:center; justify-content:center; background:var(--ink); color:var(--paper);
+    cursor:pointer; opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s}
+  .edgestrip.on{opacity:1; visibility:visible}
+  .edgestrip span{writing-mode:vertical-rl; font-size:13.5px; letter-spacing:.3em; white-space:nowrap}
+  #edgeNext{right:0; border-left:2px solid var(--red)}
+  #edgePrev{left:0; border-right:2px solid var(--red)}
+  #edgePrev span{transform:rotate(180deg)}
   #ctxmenu{position:fixed; z-index:80; min-width:172px; padding:6px; display:none;
     background:rgba(240,238,233,.96); border:1px solid var(--ink); border-radius:10px;
     box-shadow:0 14px 34px rgba(22,22,22,.28); backdrop-filter:blur(6px)}
@@ -57,15 +65,6 @@
   #minimap .mm-name{margin-top:5px; font-size:9.5px; letter-spacing:.4px; color:rgba(240,238,233,.92);
     text-align:center; max-width:89px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   @media (max-width:700px){ #minimap .mm-grid{grid-template-columns:repeat(5,11px); grid-template-rows:repeat(1,11px)} }
-  .keypad{display:flex; flex-direction:column; align-items:center; gap:6px; margin:26px auto 4px; width:max-content}
-  .keypad .krow{display:flex; gap:6px; justify-content:center}
-  .keycap{width:52px; height:52px; padding:0; display:flex; align-items:center; justify-content:center;
-    font-family:Arial,sans-serif; font-size:21px; line-height:1; color:#2c2a24;
-    background:linear-gradient(180deg,#fffdf7,#efe9da); border:1px solid #b7ad97; border-bottom-width:3px; border-radius:9px;
-    box-shadow:0 2px 5px rgba(30,25,15,.18); cursor:pointer; -webkit-tap-highlight-color:transparent}
-  .keycap:hover{border-color:#8a7f66}
-  .keycap:active{transform:translateY(2px); border-bottom-width:1px; box-shadow:0 1px 2px rgba(30,25,15,.18)}
-  .keycap:focus-visible{outline:2px solid #17586e; outline-offset:2px}
   body.touch-nav .sec{touch-action:pan-y}
   .sechead{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:6px}
   .sechead h2{font-size:clamp(26px,4vw,38px); margin:0; line-height:1.08}
@@ -103,6 +102,12 @@
   .fig{margin:18px 0}
   .fig img{display:block; width:100%; height:auto; border:1px solid var(--line); background:var(--card)}
   .fig figcaption{font-size:12.5px; color:var(--mut); margin-top:6px; line-height:1.5}
+  .glbview{border:1px solid var(--line); background:var(--card); margin:16px 0 6px}
+  .glbview model-viewer{width:100%; height:430px; display:block; background:transparent}
+  .glbbar{display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:10px 12px; border-top:1px solid var(--line)}
+  .glbchip{background:var(--paper); border:1px solid var(--ink); color:var(--ink); border-radius:999px; padding:6px 13px; font-size:13px}
+  .glbchip.on{background:var(--ink); color:var(--paper)}
+  .glbbar a{margin-left:auto; font-size:13px}
   .figrow{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin:18px 0}
   .figrow .fig{margin:0}
   .portraits{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin:18px 0}
@@ -250,6 +255,11 @@
           <p>The app and PC program are the game build of the same world, on the same account. Character selection starts there, the game character is a server record created there, and Zealandia - the sunken land under New Zealand, entered only through the Auckland portal - is its first game expansion. The web stays light and social on purpose; the game weight lives in the app.</p>
         </div>
 
+        <div class="figrow">
+          <figure class="fig"><img src="/aio/img/house-aerial-day.jpg" alt="The Universe house from above, by day"><figcaption>The house everything began with - Step 2 holds the collection.</figcaption></figure>
+          <figure class="fig"><img src="/system/img/building-sprite.png" alt="A Plushy AI building sprite"><figcaption>Plushy AI output: one sprite from the city pack - Step 4 holds the pipeline.</figcaption></figure>
+          <figure class="fig"><img src="/system/img/variants-sheet.jpg" alt="The player character variants"><figcaption>The cast, in variants - made by Plushy AI and the Meshy API.</figcaption></figure>
+        </div>
         <div class="rsec">
           <h3>The backend, documented</h3>
           <p>Accounts are Google-only at this step, on a multi-provider identity structure so more providers can join without a rebuild. Sessions are issued by the backend, not the provider: an opaque token, hashed in the database, carried in an httpOnly cookie on espil.online, sliding for 30 days with a 90-day cap. Visitors who never sign in keep browsing as ghosts; the strict signup is deliberate, because trust is the foundation the trade runs on. Places data is served from the API on Oracle with a cache-aside store, so the map stays fast without paying for calls. The whole backend runs on Oracle Cloud Always Free: $0 recurring is a design constraint, not an accident.</p>
@@ -267,10 +277,7 @@
           <button class="door teal" data-go="4,0"><span class="dir">Step 4</span><h3>Espil Online: The Case Study</h3><p>The birth of Espil Online and how AI builds it: Plushy AI, the map editor toolkit, and a production separated into AI departments.</p></button>
         </div>
 
-        <div class="keypad" aria-label="Move between rooms">
-          <div class="krow"><button class="keycap" data-dir="left" aria-label="Previous room">&#8592;</button><button class="keycap" data-dir="right" aria-label="Next room">&#8594;</button></div>
-        </div>
-        <p class="hint">The rooms run in one line to the right. Move with the arrow keys, the keycaps, the doors above, or a right-click anywhere. Rest the mouse at the left or right screen edge and the neighbouring room peeks in. Escape returns here.</p>
+        <p class="hint">The rooms run in one line to the right. Move with the arrow keys, the doors above, or a right-click anywhere. Rest the mouse at the left or right edge of the screen, and the way to the next chapter is written there. Escape returns here.</p>
         <p class="backline"><a href="/#works">&larr; Back to Selected Works</a></p>
       </div>
     </section>
@@ -294,6 +301,10 @@
         <div class="rsec">
           <h3>Printed with RealPrinty</h3>
           <p>The modelled house was then printed as a physical object using RealPrinty - the dream of 2015 as something you can hold in your hand. A design that survives printing has nowhere to hide: every proportion in the file has to be true.</p>
+        </div>
+        <div class="figrow">
+          <figure class="fig"><img src="/assets/display/render-tree.jpg" alt="The house in its landscape"><figcaption>The house in its landscape: the design as it was modelled.</figcaption></figure>
+          <figure class="fig"><img src="/assets/display/render-night.jpg" alt="The house at night"><figcaption>The same design at night - the model before the collection.</figcaption></figure>
         </div>
         <div class="rsec">
           <h3>The record</h3>
@@ -359,6 +370,12 @@
           <h3>Where the ideas pointed</h3>
           <p>Every one of those products was the same idea in different clothes: real places, on a real map, with real information, shared properly. That is where this page has been heading. Espil Online is a community and a free knowledge, information and technology sharing solution: a 3D player walking the real map of a real city, where everything in every real store can be traded person to person, on trust, with no fee. The mall is its beginning; the sharing is its base. The next room is its birth certificate - how it was actually built.</p>
         </div>
+        <div class="blogcard">
+          <p class="bk">The evidence</p>
+          <h3>The Discover Holidays case study</h3>
+          <p>The tariffs, the style guide, the API conversion and the stewardship call are documented in full on the case study page - the working record of the tourism years.</p>
+          <p class="brow"><a href="/case-discover-holidays/">Read the case study</a></p>
+        </div>
       </div>
     </section>
 
@@ -379,6 +396,26 @@
           <p>Plushy AI is my local, private alternative to Meshy: services in Docker containers on my own machine that turn drawings into the world's matter - sprite packs for whole cities (115 curated sprites in the city pack, 82 of them Vancouver buildings), monsters as sprite sheets, and character work finished through the Meshy API for rigging and animation. One rule the pipeline never breaks: an existing character's appearance changes by retexture, never by regeneration.</p>
         </div>
         <div class="rsec">
+          <h3>The assets themselves - Plushy AI in, GLB out</h3>
+          <p>No stills for this step: the models below are the actual production files. Ahi, the fire master, and Huka, the ice master, were produced by Plushy AI and finished through Meshy AI; Hermes is the giant who carries the Time Stone key. Each ships in the game as the GLB you can turn here - drag to orbit, scroll to zoom.</p>
+          <div class="glbview">
+            <model-viewer id="glbViewer" src="/system/models/ahi.glb" camera-controls auto-rotate auto-rotate-delay="1200" shadow-intensity="0.4" alt="A GLB production model from the Plushy AI and Meshy AI pipeline">
+              <a href="/system/models/ahi.glb">Download the GLB</a>
+            </model-viewer>
+            <div class="glbbar">
+              <button type="button" class="glbchip on" data-glb="/system/models/ahi.glb">Ahi - fire master</button>
+              <button type="button" class="glbchip" data-glb="/system/models/huka.glb">Huka - ice master</button>
+              <button type="button" class="glbchip" data-glb="/system/models/hermes.glb">Hermes - the giant</button>
+              <a href="/system/models/ahi.glb">The GLB file itself &#8599;</a>
+            </div>
+          </div>
+        </div>
+        <div class="figrow">
+          <figure class="fig"><img src="/system/img/fx-fire.jpg" alt="Fire skill effect frames"><figcaption>Skill frames, fire: generated as matched frame sets.</figcaption></figure>
+          <figure class="fig"><img src="/system/img/fx-ice.jpg" alt="Ice skill effect frames"><figcaption>Skill frames, ice: the other attunement, drawn as a pair.</figcaption></figure>
+          <figure class="fig"><img src="/system/img/brute.png" alt="A monster sprite sheet"><figcaption>A monster sprite sheet, produced by Plushy AI.</figcaption></figure>
+        </div>
+        <div class="rsec">
           <h3>The map editor toolkit</h3>
           <p>So that I can author the world myself, a placement editor was built for the game: paint the ground as tiles - village road, grass road, water, paved road - place building and prop sprites on the satellite terrain, mark where the player, the villagers and the monsters spawn, and export village-map.json, which the game reads directly. The first village built this way is Waitemat&#257;. The editor turns world-building from code into composition: I place, the game loads.</p>
         </div>
@@ -392,6 +429,8 @@
   </div>
 </div>
 <div id="aio-track" aria-hidden="true"><span class="cap top"></span><span id="aio-shadow"></span><span id="aio-diamond"></span><span class="cap bot"></span></div>
+<div class="edgestrip" id="edgePrev" role="button" aria-label="To previous chapter"><span>to previous chapter</span></div>
+<div class="edgestrip" id="edgeNext" role="button" aria-label="To next chapter"><span>to next chapter</span></div>
 <div id="ctxmenu" role="menu" aria-label="Move between rooms">
   <button type="button" data-ctx="left" role="menuitem"><span class="arr">&#8592;</span> Move left</button>
   <button type="button" data-ctx="right" role="menuitem">Move right <span class="arr">&#8594;</span></button>
@@ -448,14 +487,6 @@ document.addEventListener("keydown", function(e){
   }
   var nx = cur[0] + d[0], ny = cur[1] + d[1];
   if(NAMES.hasOwnProperty(nx + "," + ny)){ e.preventDefault(); goTo(nx, ny); }
-});
-document.querySelectorAll(".keycap[data-dir]").forEach(function(b){
-  b.addEventListener("click", function(){
-    var dv = {up:[0,-1], down:[0,1], left:[-1,0], right:[1,0]}[b.getAttribute("data-dir")];
-    if(!dv) return;
-    var nx = cur[0] + dv[0], ny = cur[1] + dv[1];
-    if(NAMES.hasOwnProperty(nx + "," + ny)) goTo(nx, ny);
-  });
 });
 (function(){
   var g = document.getElementById("mmGrid");
@@ -554,30 +585,30 @@ function playFb(){
   window.addEventListener("blur", hide);
 })();
 
-/* ================= EDGE NUDGE ================= */
+/* ================= EDGE CHAPTER STRIPS =================
+   Resting the mouse in the outer 5% band shows a vertical strip
+   naming the way on: "to next chapter" at the right edge, "to
+   previous chapter" at the left. Clicking the strip turns the room. */
 (function(){
   if(!window.matchMedia || !matchMedia("(pointer:fine)").matches) return;
   if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  var vp = document.querySelector(".viewport");
-  if(!vp) return;
-  var curT = "";
-  function setT(t){ if(t !== curT){ curT = t; vp.style.transform = t; } }
+  var next = document.getElementById("edgeNext"), prev = document.getElementById("edgePrev");
+  if(!next || !prev) return;
+  function show(which){
+    next.classList.toggle("on", which === "right");
+    prev.classList.toggle("on", which === "left");
+  }
+  next.addEventListener("click", function(){ var t = edgeTarget.right; if(t) goTo(t[0], t[1]); show(""); });
+  prev.addEventListener("click", function(){ var t = edgeTarget.left; if(t) goTo(t[0], t[1]); show(""); });
   document.addEventListener("mousemove", function(e){
-    if(!window.__gateDone || document.body.classList.contains("touch-nav")){ setT(""); return; }
-    var fx = e.clientX / innerWidth, fy = e.clientY / innerHeight;
-    var cand = [];
-    if(fx > 0.95) cand.push(["right", 1 - fx]);
-    if(fx < 0.05) cand.push(["left", fx]);
-    if(fy > 0.95) cand.push(["down", 1 - fy]);
-    if(fy < 0.05) cand.push(["up", fy]);
-    if(!cand.length){ setT(""); return; }
-    cand.sort(function(a, b){ return a[1] - b[1]; });
-    var dir = cand[0][0];
-    if(typeof edgeTarget === "undefined" || !edgeTarget[dir]){ setT(""); return; }
-    setT(dir === "right" ? "translateX(-5vw)" : dir === "left" ? "translateX(5vw)" : dir === "down" ? "translateY(-5vh)" : "translateY(5vh)");
+    if(!window.__gateDone || document.body.classList.contains("touch-nav")){ show(""); return; }
+    var fx = e.clientX / innerWidth;
+    if(fx > 0.95 && typeof edgeTarget !== "undefined" && edgeTarget.right){ show("right"); return; }
+    if(fx < 0.05 && typeof edgeTarget !== "undefined" && edgeTarget.left){ show("left"); return; }
+    show("");
   });
-  document.addEventListener("mouseleave", function(){ setT(""); });
-  document.addEventListener("keydown", function(){ setT(""); });
+  document.addEventListener("mouseleave", function(){ show(""); });
+  document.addEventListener("keydown", function(){ show(""); });
 })();
 </script>
 
@@ -848,6 +879,22 @@ function playFb(){
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+})();
+</script>
+<script type="module" src="/system/vendor/model-viewer.min.js"></script>
+<script>
+(function(){
+  var v = document.getElementById("glbViewer");
+  if(!v) return;
+  var link = v.parentElement.querySelector(".glbbar a");
+  document.querySelectorAll(".glbchip").forEach(function(ch){
+    ch.addEventListener("click", function(){
+      document.querySelectorAll(".glbchip").forEach(function(c){ c.classList.remove("on"); });
+      ch.classList.add("on");
+      v.src = ch.getAttribute("data-glb");
+      if(link) link.href = ch.getAttribute("data-glb");
+    });
+  });
 })();
 </script>
 </body>
