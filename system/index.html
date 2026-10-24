@@ -39,6 +39,15 @@
   #aio-diamond{position:absolute; left:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px;
     background:#161616; transform:rotate(45deg)}
   #aio-shadow{position:absolute; left:50%; top:0; width:1px; margin-left:-.5px; background:#161616; opacity:.85; height:0}
+  #ctxmenu{position:fixed; z-index:80; min-width:172px; padding:6px; display:none;
+    background:rgba(240,238,233,.96); border:1px solid var(--ink); border-radius:10px;
+    box-shadow:0 14px 34px rgba(22,22,22,.28); backdrop-filter:blur(6px)}
+  #ctxmenu.open{display:block}
+  #ctxmenu button{display:flex; width:100%; align-items:center; gap:9px; background:none; border:0;
+    padding:9px 11px; font-size:14px; color:var(--ink); border-radius:6px; text-align:left}
+  #ctxmenu button:hover:not(:disabled){background:var(--ink); color:var(--paper)}
+  #ctxmenu button:disabled{opacity:.32; cursor:default}
+  #ctxmenu .arr{color:var(--red); font-weight:700}
   #minimap{position:fixed; right:16px; bottom:16px; z-index:56; background:rgba(20,19,17,.42);
     border:1px solid rgba(240,238,233,.35); border-radius:8px; padding:7px; backdrop-filter:blur(2px)}
   #minimap .mm-grid{display:grid; grid-template-columns:repeat(5,15px); grid-template-rows:repeat(1,15px); gap:2px}
@@ -58,9 +67,6 @@
   .keycap:active{transform:translateY(2px); border-bottom-width:1px; box-shadow:0 1px 2px rgba(30,25,15,.18)}
   .keycap:focus-visible{outline:2px solid #17586e; outline-offset:2px}
   body.touch-nav .sec{touch-action:pan-y}
-  .homebtn{background:var(--ink); color:var(--paper); border:0; border-radius:999px; padding:9px 18px;
-    font-size:12.5px; letter-spacing:.12em; text-transform:uppercase}
-  .homebtn:hover{background:var(--red)}
   .sechead{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:6px}
   .sechead h2{font-size:clamp(26px,4vw,38px); margin:0; line-height:1.08}
   .kicker{font-size:11.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--red); margin:0 0 6px}
@@ -225,7 +231,7 @@
         <header class="syshead">
           <p class="kicker">Centre - The System</p>
           <h1>The System Behind Espil.Online</h1>
-          <p class="lede">Espil Online is a free knowledge-sharing community in a living world on real cities: a 3D player, Google Maps, and real businesses in one place. This page is its documentation and its implementation case study, arranged the way the world itself is arranged. The system sits at the centre. The story is to the left, the characters to the right, AI production above, and the houses below.</p>
+          <p class="lede">Espil Online is a free knowledge-sharing community in a living world on real cities: a 3D player, Google Maps, and real businesses in one place. This page is its documentation and its implementation case study, arranged the way the world itself is arranged. It is told in the order it happened, in rooms that run in one line to the right: a house dreamed in 2015, the house and the novel, the tourism years, and at the end the case study of Espil Online itself.</p>
         </header>
         <aside class="factbox">
           <dl>
@@ -264,7 +270,7 @@
         <div class="keypad" aria-label="Move between rooms">
           <div class="krow"><button class="keycap" data-dir="left" aria-label="Previous room">&#8592;</button><button class="keycap" data-dir="right" aria-label="Next room">&#8594;</button></div>
         </div>
-        <p class="hint">The rooms run in one line to the right. Move with the arrow keys, the keycaps, the doors above, or by holding the mouse at the left or right screen edge. Escape returns here.</p>
+        <p class="hint">The rooms run in one line to the right. Move with the arrow keys, the keycaps, the doors above, or a right-click anywhere. Rest the mouse at the left or right screen edge and the neighbouring room peeks in. Escape returns here.</p>
         <p class="backline"><a href="/#works">&larr; Back to Selected Works</a></p>
       </div>
     </section>
@@ -273,7 +279,7 @@
     <section class="sec" data-pos="1,0" id="sec-begin">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Step 1 - The Beginning</p><h2>A dream of a house, 2015</h2></div>
-        <button class="homebtn" data-go="0,0">&larr; The System</button></div>
+        </div>
         <div class="trim"></div>
         <p class="secsub">It starts in 2015, with a dream of building a house - before there was a world, a product, or a plan. Everything in the rooms after this one grows out of that dream.</p>
 
@@ -293,7 +299,6 @@
           <h3>The record</h3>
           <p>The full record of these years - the design house, the clients, the sites, and the house work - is in the PDF on my <a href="/resume/">resume page</a>. This room is the short version: a house dream, a design house, a model, a print.</p>
         </div>
-        <p class="backline"><button class="homebtn" data-go="0,0">&larr; The System</button></p>
       </div>
     </section>
 
@@ -301,7 +306,7 @@
     <section class="sec" data-pos="2,0" id="sec-house">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Step 2 - The House &amp; The Novel</p><h2>The Espil House Collection, and a story begins</h2></div>
-        <button class="homebtn" data-go="0,0">&larr; The System</button></div>
+        </div>
         <div class="trim"></div>
         <p class="secsub">The house became a collection, and the collection needed a world around it - so I started writing one, as a novel, on the blog. This room holds both: the houses, and the beginning of the Espil story.</p>
 
@@ -331,7 +336,6 @@
           <p>The novel and the essays around it are published on my Naver blog, in Korean, as they are written. The world of Espil Online is this story, made walkable.</p>
           <p class="brow"><a href="https://blog.naver.com/bieclipse" target="_blank" rel="noopener">Read the blog &#8599;</a> <a href="https://youtu.be/txy4eRKnvHY" target="_blank" rel="noopener">The World is Listening - the documentary &#8599;</a></p>
         </div>
-        <p class="backline"><button class="homebtn" data-go="0,0">&larr; The System</button></p>
       </div>
     </section>
 
@@ -339,7 +343,7 @@
     <section class="sec" data-pos="3,0" id="sec-tourism">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Step 3 - Tourism</p><h2>Tourism, and the products it taught me to build</h2></div>
-        <button class="homebtn" data-go="0,0">&larr; The System</button></div>
+        </div>
         <div class="trim"></div>
         <p class="secsub">Tourism took me through the travel industry - and every job in it turned into a web product I designed and built. The ideas in this room are the ones that later converged into Espil Online.</p>
 
@@ -355,7 +359,6 @@
           <h3>Where the ideas pointed</h3>
           <p>Every one of those products was the same idea in different clothes: real places, on a real map, with real information, shared properly. That is where this page has been heading. Espil Online is a community and a free knowledge, information and technology sharing solution: a 3D player walking the real map of a real city, where everything in every real store can be traded person to person, on trust, with no fee. The mall is its beginning; the sharing is its base. The next room is its birth certificate - how it was actually built.</p>
         </div>
-        <p class="backline"><button class="homebtn" data-go="0,0">&larr; The System</button></p>
       </div>
     </section>
 
@@ -363,7 +366,7 @@
     <section class="sec" data-pos="4,0" id="sec-case">
       <div class="inner">
         <div class="sechead"><div><p class="kicker">Step 4 - The Case Study</p><h2>Espil Online, born with AI</h2></div>
-        <button class="homebtn" data-go="0,0">&larr; The System</button></div>
+        </div>
         <div class="trim"></div>
         <p class="secsub">The last room is the case study: the birth of Espil Online, and how AI is used to build it - not as a feature of the product, but as the workforce, the tools, and the way the work itself is organised.</p>
 
@@ -383,13 +386,16 @@
           <h3>AI, separated into departments</h3>
           <p>The production itself is organised like a studio. The work is separated into departments - a map department, an asset department, a skills department, a music department, quality, and a coordinating office - each staffed by AI agents working from written specs and written laws, each reporting its state to the coordinator, and nothing ships without my verdict. I write the laws, direct the departments, edit the code, and decide. That separation is how one person runs a production of this size without it dissolving into one long prompt: every department holds one craft, knows its standards, and answers for its own work.</p>
         </div>
-        <p class="backline"><button class="homebtn" data-go="0,0">&larr; The System</button></p>
       </div>
     </section>
 
   </div>
 </div>
 <div id="aio-track" aria-hidden="true"><span class="cap top"></span><span id="aio-shadow"></span><span id="aio-diamond"></span><span class="cap bot"></span></div>
+<div id="ctxmenu" role="menu" aria-label="Move between rooms">
+  <button type="button" data-ctx="left" role="menuitem"><span class="arr">&#8592;</span> Move left</button>
+  <button type="button" data-ctx="right" role="menuitem">Move right <span class="arr">&#8594;</span></button>
+</div>
 <div id="minimap" aria-hidden="true"><div class="mm-grid" id="mmGrid"></div><div class="mm-name" id="mmName">System</div></div>
 
 <script>
@@ -516,6 +522,36 @@ function playFb(){
     var target = edgeTarget[dir];
     if(target) goTo(target[0], target[1]);
   }, {passive: true});
+})();
+
+/* ================= RIGHT-CLICK NAVIGATION =================
+   The browser menu is replaced on this page: a right-click offers
+   only Move left / Move right. Ends of the line disable their side. */
+(function(){
+  var menu = document.getElementById("ctxmenu");
+  if(!menu) return;
+  var btnL = menu.querySelector('[data-ctx="left"]');
+  var btnR = menu.querySelector('[data-ctx="right"]');
+  function hide(){ menu.classList.remove("open"); }
+  function step(dir){
+    var nx = cur[0] + dir, ny = cur[1];
+    if(NAMES.hasOwnProperty(nx + "," + ny)) goTo(nx, ny);
+    hide();
+  }
+  btnL.addEventListener("click", function(){ step(-1); });
+  btnR.addEventListener("click", function(){ step(1); });
+  document.addEventListener("contextmenu", function(e){
+    e.preventDefault();
+    btnL.disabled = !NAMES.hasOwnProperty((cur[0]-1) + "," + cur[1]);
+    btnR.disabled = !NAMES.hasOwnProperty((cur[0]+1) + "," + cur[1]);
+    menu.classList.add("open");
+    var mw = menu.offsetWidth, mh = menu.offsetHeight;
+    menu.style.left = Math.max(8, Math.min(e.clientX, innerWidth - mw - 8)) + "px";
+    menu.style.top = Math.max(8, Math.min(e.clientY, innerHeight - mh - 8)) + "px";
+  });
+  document.addEventListener("mousedown", function(e){ if(!menu.contains(e.target)) hide(); });
+  document.addEventListener("keydown", function(){ hide(); });
+  window.addEventListener("blur", hide);
 })();
 
 /* ================= EDGE NUDGE ================= */
