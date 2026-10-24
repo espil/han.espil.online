@@ -668,9 +668,10 @@ let map = null, mixer = null, model = null, current = null;
 const actions = {};
 let THREEref = null;
 
-let glassPct = 0;
+let glassPct = 0, glassFailed = false;
 function setProgress(pct, status){
   glassPct = Math.max(glassPct, pct);
+  if(glassFailed) status = null;
   const liq = document.getElementById('glassLiquid'), col = document.getElementById('glassCol');
   const st = document.getElementById('demoStatus');
   if(liq) liq.style.height = glassPct + '%';
@@ -683,6 +684,7 @@ function glassDone(){
   if(g) setTimeout(()=> g.classList.add('done'), 350);
 }
 function fail(msg){
+  glassFailed = true;
   const g = document.getElementById('demoGlass'), st = document.getElementById('demoStatus'), rb = document.getElementById('demoRetry');
   if(g) g.classList.remove('done');
   if(st) st.textContent = msg;
@@ -779,9 +781,12 @@ async function init(){
         setProgress(45, 'The designated style is slow - switching to the base map');
         try{ map.setStyle('mapbox://styles/mapbox/streets-v12'); }catch(_){}
       }
-      if(performance.now() - initT0 > 30000 && !state.ready){
+      if(!state.ready && performance.now() - initT0 > 20000 && state.stage === 'idle' && !glassFailed){
+        setProgress(85, 'The character is still loading');
+      }
+      if(performance.now() - initT0 > 35000 && !state.ready){
         clearInterval(watchdog);
-        fail('The map did not settle here - please retry.');
+        fail('The sample did not finish loading here - please retry.');
       }
     }, 1000);
     let last = performance.now(), lastCur = '0,0';
