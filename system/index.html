@@ -679,7 +679,11 @@ async function init(){
     if(!tokData || !tokData.token) throw new Error('no token');
     mapboxgl.accessToken = tokData.token;
     map = new mapboxgl.Map({ container: 'demoMap', style: STYLE, center: [START.lng, START.lat],
-      zoom: 17.6, pitch: 58, bearing: -18, antialias: true, attributionControl: { compact: true } });
+      zoom: 17.6, pitch: 58, bearing: -18, antialias: true, attributionControl: { compact: true },
+      projection: 'mercator' });
+    /* The designated style declares lambertConformalConic, under which
+       Mapbox skips all 3D (custom layers never render) - espil.online
+       forces mercator for the same reason. Re-asserted on style.load. */
     state.map = map;
     map.dragPan.disable(); map.doubleClickZoom.disable();
     map.dragRotate.enable(); map.touchZoomRotate.enableRotation();
@@ -721,7 +725,10 @@ async function init(){
         this.renderer.render(this.scene, this.camera);
       }
     };
-    map.on('load', ()=> map.addLayer(layer));
+    map.on('style.load', ()=>{
+      try{ const pr = map.getProjection(); if(!pr || pr.name !== 'mercator') map.setProjection('mercator'); }catch(_){}
+      if(!map.getLayer('demo-char')) map.addLayer(layer);
+    });
     let last = performance.now(), lastCur = '0,0';
     function tick(now){
       requestAnimationFrame(tick);
