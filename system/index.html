@@ -65,6 +65,29 @@
   #minimap .mm-name{margin-top:5px; font-size:9.5px; letter-spacing:.4px; color:rgba(240,238,233,.92);
     text-align:center; max-width:89px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   @media (max-width:700px){ #minimap .mm-grid{grid-template-columns:repeat(5,11px); grid-template-rows:repeat(1,11px)} }
+  /* Nav hint popup (2026-10-24, Han): teaches the room navigation once, on entry.
+     Any click anywhere dismisses it. */
+  #navHint{position:fixed; left:50%; bottom:26px; transform:translate(-50%,14px); z-index:70;
+    display:flex; align-items:center; gap:14px; max-width:92vw;
+    background:var(--ink); color:var(--paper); border:1px solid rgba(240,238,233,.28);
+    border-radius:999px; padding:11px 20px; box-shadow:0 14px 34px rgba(0,0,0,.38);
+    opacity:0; animation:nhIn .55s ease 2.6s forwards; cursor:pointer}
+  @keyframes nhIn{to{opacity:1; transform:translate(-50%,0)}}
+  #navHint .nh-body{display:flex; flex-direction:column; gap:1px; text-align:center}
+  #navHint .nh-main{font-size:14.5px; font-weight:600; letter-spacing:.01em; white-space:nowrap}
+  #navHint .nh-main b{color:#ff8fa0; font-weight:700}
+  #navHint .nh-sub{font-size:11px; opacity:.72; letter-spacing:.02em; white-space:nowrap}
+  #navHint .nh-arr{color:var(--red); font-size:17px; font-weight:700; line-height:1}
+  #navHint .nh-l{animation:nhNudgeL 1.6s ease-in-out infinite}
+  #navHint .nh-r{animation:nhNudgeR 1.6s ease-in-out infinite}
+  @keyframes nhNudgeL{0%,100%{transform:translateX(0)}50%{transform:translateX(-4px)}}
+  @keyframes nhNudgeR{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+  #navHint.bye{animation:none; opacity:0; transform:translate(-50%,10px);
+    transition:opacity .38s ease, transform .38s ease; pointer-events:none}
+  @media (max-width:700px){ #navHint{bottom:84px; padding:10px 16px; gap:10px}
+    #navHint .nh-main{font-size:13px; white-space:normal} #navHint .nh-sub{white-space:normal} }
+  @media (prefers-reduced-motion: reduce){ #navHint{animation:none; opacity:1; transform:translate(-50%,0)}
+    #navHint .nh-l, #navHint .nh-r{animation:none} }
   body.touch-nav .sec{touch-action:pan-y}
   .sechead{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:6px}
   .sechead h2{font-size:clamp(26px,4vw,38px); margin:0; line-height:1.08}
@@ -918,6 +941,25 @@ function playFb(){
       if(link) link.href = ch.getAttribute("data-glb");
     });
   });
+})();
+</script>
+
+<div id="navHint" role="note" aria-label="Navigation hint">
+  <span class="nh-arr nh-l">&larr;</span>
+  <span class="nh-body"><span class="nh-main">좌우 스크롤, 혹은 우클릭 후 <b>Move right</b> 클릭</span><span class="nh-sub">Scroll sideways, or right-click and choose Move right</span></span>
+  <span class="nh-arr nh-r">&rarr;</span>
+</div>
+<script>
+/* Nav hint dismissal (2026-10-24): any pointer-down anywhere fades it out. */
+(function(){
+  var h = document.getElementById('navHint');
+  if(!h) return;
+  function dismiss(){
+    document.removeEventListener('pointerdown', dismiss, true);
+    h.classList.add('bye');
+    setTimeout(function(){ if(h.parentNode) h.parentNode.removeChild(h); }, 420);
+  }
+  document.addEventListener('pointerdown', dismiss, true);
 })();
 </script>
 </body>
