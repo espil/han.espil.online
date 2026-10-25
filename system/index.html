@@ -273,7 +273,7 @@
             <div class="fb-item" style="--i:0"><div class="fb-top"><dt>Product</dt><span class="fb-num">01</span></div><dd>A community and free knowledge-sharing solution in a 3D social world on real cities</dd></div>
             <div class="fb-item" style="--i:1"><div class="fb-top"><dt>Web build</dt><span class="fb-num">02</span></div><dd>espil.online - Three.js and Mapbox, social first, light UI, a simple male or female avatar</dd></div>
             <div class="fb-item" style="--i:2"><div class="fb-top"><dt>App &amp; PC</dt><span class="fb-num">03</span></div><dd>The game build on 3D assets: quests, the exchange, and Zealandia, the future game land</dd></div>
-            <div class="fb-item" style="--i:3"><div class="fb-top"><dt>Backend</dt><span class="fb-num">04</span></div><dd>Oracle Cloud Always Free, Fastify, Google sign-in, backend-issued sessions</dd></div>
+            <div class="fb-item" style="--i:3"><div class="fb-top"><dt>Backend</dt><span class="fb-num">04</span></div><dd>Cloudflare serverless (Workers, D1, Durable Objects, R2), Google sign-in, backend-issued sessions</dd></div>
             <div class="fb-item" style="--i:4"><div class="fb-top"><dt>Budget law</dt><span class="fb-num">05</span></div><dd>$0 recurring. Free tiers first, and a written asset-size standard caps first entry at about 64 MB</dd></div>
             <div class="fb-item" style="--i:5"><div class="fb-top"><dt>Governance</dt><span class="fb-num">06</span></div><dd>Written design laws and tokens in the production code; one loader standard on two production sites</dd></div>
           </dl>
@@ -292,7 +292,7 @@
         </div>
         <div class="rsec">
           <h3>The backend, documented</h3>
-          <p>Accounts are Google-only at this step, on a multi-provider identity structure so more providers can join without a rebuild. Sessions are issued by the backend, not the provider: an opaque token, hashed in the database, carried in an httpOnly cookie on espil.online, sliding for 30 days with a 90-day cap. Visitors who never sign in keep browsing as ghosts; the strict signup is deliberate, because trust is the foundation the trade runs on. Places data is served from the API on Oracle with a cache-aside store, so the map stays fast without paying for calls. The whole backend runs on Oracle Cloud Always Free: $0 recurring is a design constraint, not an accident.</p>
+          <p>Accounts are Google-only at this step, on a multi-provider identity structure so more providers can join without a rebuild. Sessions are issued by the backend, not the provider: an opaque token, hashed in the database, carried in an httpOnly cookie on espil.online, sliding for 30 days with a 90-day cap. Visitors who never sign in keep browsing as ghosts; the strict signup is deliberate, because trust is the foundation the trade runs on. Places data is served from the API with a cache-aside store, so the map stays fast without paying for calls. The whole backend runs serverless on Cloudflare - Workers for the API, D1 for accounts and data, Durable Objects for realtime presence, R2 for the heavy bytes: $0 recurring is a design constraint, not an accident.</p>
         </div>
 
         <div class="rsec">
@@ -419,7 +419,7 @@
 
         <div class="rsec">
           <h3>The birth</h3>
-          <p>Espil Online is live at espil.online. You arrive above a real city and dive the last stretch into it, then walk streets rebuilt from the city's own map data; Vancouver and Auckland stand today, trade begins as a mall on trust, and a guide walks new arrivals through the full journey. The app and PC program are the game build of the same world on the same account, and Zealandia - entered only through the Auckland portal - is its first game expansion, in production now. The backend runs on Oracle Cloud Always Free with Google sign-in and backend-issued sessions: $0 recurring is a design constraint, not an accident.</p>
+          <p>Espil Online is live at espil.online. You arrive above a real city and dive the last stretch into it, then walk streets rebuilt from the city's own map data; Vancouver and Auckland stand today, trade begins as a mall on trust, and a guide walks new arrivals through the full journey. The app and PC program are the game build of the same world on the same account, and Zealandia - entered only through the Auckland portal - is its first game expansion, in production now. The backend runs serverless on Cloudflare with Google sign-in and backend-issued sessions: $0 recurring is a design constraint, not an accident.</p>
         </div>
         <div class="rsec">
           <h3>Plushy AI - my own image-to-3D pipeline</h3>
