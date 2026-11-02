@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>임한빈님의 미니홈피 - The Resume | han.espil.online</title>
+<title>HanBin Im's Minihompy - The Resume | han.espil.online</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/assets/usedesign-icon.svg">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -16,7 +16,7 @@
   --cy-ink:#33383d; --cy-soft:#6b7683; --skin:#9dbfdd;
 }
 body{
-  font-family:"Malgun Gothic","Apple SD Gothic Neo",Dotum,"돋움",sans-serif;
+  font-family:"Malgun Gothic","Apple SD Gothic Neo",Dotum,sans-serif;
   font-size:12px; color:var(--cy-ink); line-height:1.55;
   background:
     radial-gradient(circle at 18px 18px, rgba(255,255,255,.5) 2px, transparent 2.6px) 0 0/36px 36px,
@@ -30,11 +30,11 @@ a:hover{text-decoration:underline}
 .topbar a{color:#fff;font-weight:bold}
 /* ===== minihompy frame: fixed at 80% x 80% of the visible screen, inner scroll ===== */
 .hompy{position:relative;width:80vw;height:80vh;background:#fff;border:2px solid #5f87a8;border-radius:12px;box-shadow:0 14px 40px rgba(23,48,74,.4);padding:18px 22px 14px;display:flex;flex-direction:column}
-.scrollwrap{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;padding-right:6px;scrollbar-width:thin;scrollbar-color:#8fb0cc #e8eff5}
-.scrollwrap::-webkit-scrollbar{width:14px}
-.scrollwrap::-webkit-scrollbar-track{background:#e8eff5;border:1px solid var(--cy-line);border-radius:7px}
-.scrollwrap::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#a9c6de,#7fa3c4);border:2px solid #e8eff5;border-radius:7px}
-.scrollwrap::-webkit-scrollbar-thumb:hover{background:var(--cy-orange)}
+.scrollwrap{flex:1;overflow:hidden;min-height:0;padding-right:6px;display:flex;flex-direction:column}
+.main::-webkit-scrollbar{width:14px}
+.main::-webkit-scrollbar-track{background:#e8eff5;border:1px solid var(--cy-line);border-radius:7px}
+.main::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#a9c6de,#7fa3c4);border:2px solid #e8eff5;border-radius:7px}
+.main::-webkit-scrollbar-thumb:hover{background:var(--cy-orange)}
 /* home avatar window - the miniroom frame, now an Espil.Online preview */
 .avatarwin{border:1px solid var(--cy-line);border-radius:6px;padding:6px;background:#fdfdf8;margin-bottom:14px}
 .avatarwin .stage{position:relative;height:190px;border:1px solid #d8e2ec;overflow:hidden;background:#dfeaf3}
@@ -44,6 +44,11 @@ a:hover{text-decoration:underline}
 .avatarwin .openbar{display:flex;justify-content:space-between;align-items:center;padding-top:6px}
 .avatarwin .openbar .lbl{color:var(--cy-orange-dk);font-weight:bold;font-size:11px}
 .avatarwin .openbar a{font-weight:bold}
+.main:has(#view-home.on){overflow-y:hidden}
+#view-home.on{display:flex;flex-direction:column;height:100%}
+#view-home .sec{flex:1;display:flex;flex-direction:column;min-height:0;margin-bottom:0}
+#view-home .avatarwin{flex:1;display:flex;flex-direction:column;min-height:0}
+#view-home .avatarwin .stage{flex:1;height:auto;min-height:0}
 .hompy-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px double var(--cy-line);padding-bottom:8px}
 .hompy-title{font-size:19px;font-weight:bold;color:var(--cy-ink)}
 .hompy-title .house{color:var(--cy-orange)}
@@ -59,7 +64,7 @@ a:hover{text-decoration:underline}
 /* tab views: one section at a time, like the real minihompy */
 .view{display:none}
 .view.on{display:block}
-/* portfolio album (사진첩 = portfolio page) */
+/* portfolio album */
 .pf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .pf-card{border:1px solid var(--cy-line);background:#fdfdf8;padding:6px}
 .pf-card img{width:100%;height:150px;object-fit:cover;display:block;border:1px solid #e2eaf1}
@@ -68,9 +73,9 @@ a:hover{text-decoration:underline}
 .pf-card p{font-size:11.5px;color:var(--cy-soft);margin:0 2px 4px}
 .pf-card .go{font-size:11px;font-weight:bold;margin:0 2px 2px}
 /* ===== columns ===== */
-.cols{display:flex;gap:0;margin-top:14px}
-.rail{width:208px;flex:none;padding-right:14px;border-right:1px dotted var(--cy-line)}
-.main{flex:1;padding-left:16px;min-width:0}
+.cols{display:flex;gap:0;margin-top:14px;flex:1;min-height:0}
+.rail{width:208px;flex:none;padding-right:14px;border-right:1px dotted var(--cy-line);height:100%;overflow:hidden}
+.main{flex:1;padding-left:16px;min-width:0;height:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#8fb0cc #e8eff5}
 .box{border:1px solid var(--cy-line);border-radius:6px;padding:9px 10px;margin-bottom:12px;background:#fff}
 .box h4{font-size:11px;color:var(--cy-orange-dk);border-bottom:1px dotted var(--cy-line);padding-bottom:4px;margin-bottom:7px;letter-spacing:.4px}
 .profile-photo{border:1px solid var(--cy-line);padding:5px;background:#fdfdf8;text-align:center}
@@ -135,9 +140,12 @@ table.board td a:hover{color:var(--cy-orange-dk)}
 .btn:hover{background:var(--cy-orange-dk);text-decoration:none}
 .hompy-foot{border-top:3px double var(--cy-line);margin-top:6px;padding-top:8px;display:flex;justify-content:space-between;color:var(--cy-soft);font-size:11px}
 @media (max-width:820px){
-  .cols{flex-direction:column}
-  .rail{width:100%;border-right:none;padding-right:0}
-  .main{padding-left:0}
+  .scrollwrap{overflow-y:auto;display:block}
+  .cols{flex-direction:column;flex:none;min-height:0}
+  .rail{width:100%;border-right:none;padding-right:0;height:auto;overflow:visible}
+  .main{padding-left:0;height:auto;overflow:visible}
+  #view-home.on{display:block;height:auto}
+  #view-home .avatarwin .stage{height:190px;flex:none}
   .tabs{right:-14px}
   .album{flex-direction:column}
   .hompy{width:94vw;height:86vh}
@@ -228,19 +236,19 @@ table.board td a:hover{color:var(--cy-orange-dk)}
 
 
 
-<div class="topbar"><span>han.espil.online/resume</span><span><a href="https://han.espil.online/">포트폴리오 홈</a> · <a href="https://espil.online">Espil.Online</a></span></div>
+<div class="topbar"><span>han.espil.online/resume</span><span><a href="https://han.espil.online/">Portfolio Home</a> · <a href="https://espil.online">Espil.Online</a></span></div>
 
 <div class="hompy">
   <nav class="tabs">
-    <a class="t1 active" href="#home" data-view="home">홈</a>
-    <a class="t2" href="#profile" data-view="profile">프로필</a>
-    <a class="t3" href="#board" data-view="board">게시판</a>
-    <a class="t4" href="#album" data-view="album">사진첩</a>
-    <a class="t5" href="#guestbook" data-view="guestbook">방명록</a>
+    <a class="t1 active" href="#home" data-view="home">Home</a>
+    <a class="t2" href="#profile" data-view="profile">Profile</a>
+    <a class="t3" href="#board" data-view="board">Board</a>
+    <a class="t4" href="#album" data-view="album">Album</a>
+    <a class="t5" href="#guestbook" data-view="guestbook">Guestbook</a>
   </nav>
 
   <div class="hompy-head">
-    <div class="hompy-title"><span class="house">⌂</span> 임한빈님의 미니홈피
+    <div class="hompy-title"><span class="house">⌂</span> HanBin Im's Minihompy
       <small>HanBin Im - Web Developer · Designer · Vancouver, BC</small>
     </div>
     <div class="counter">TODAY <b id="cnt-today">-</b> · TOTAL <b id="cnt-total">-</b></div>
@@ -251,37 +259,37 @@ table.board td a:hover{color:var(--cy-orange-dk)}
     <!-- ===== left rail ===== -->
     <aside class="rail">
       <div class="box profile-photo">
-        <img src="usedesign-logo.svg" alt="HanBin Im - UseDesign logo">
-        <div class="cap">HanBin Im (임한빈)</div>
+        <img src="pf-espil.png" alt="Espil - the pink-haired character">
+        <div class="cap">HanBin Im</div>
       </div>
 
       <div class="box mood">
-        <h4>오늘의 한마디</h4>
-        <p>가마솥에 세상을 담는 중입니다.</p>
+        <h4>Today's One-Liner</h4>
+        <p>Putting the world into the cauldron.</p>
         <p class="en">Building the World in the Cauldron.</p>
       </div>
 
       <div class="box">
-        <h4>프로필</h4>
+        <h4>Profile</h4>
         <ul class="info">
-          <li><span class="k">직업</span> Web Developer · Designer</li>
-          <li><span class="k">지역</span> Vancouver, BC, Canada</li>
-          <li><span class="k">이메일</span> <a href="mailto:han@espil.online">han@espil.online</a></li>
-          <li><span class="k">홈피</span> <a href="https://han.espil.online/">han.espil.online</a></li>
-          <li><span class="k">경력</span> Building for the web since 2015</li>
+          <li><span class="k">Job</span> Web Developer · Designer</li>
+          <li><span class="k">Location</span> Vancouver, BC, Canada</li>
+          <li><span class="k">Email</span> <a href="mailto:han@espil.online">han@espil.online</a></li>
+          <li><span class="k">Homepage</span> <a href="https://han.espil.online/">han.espil.online</a></li>
+          <li><span class="k">Career</span> Building for the web since 2015</li>
         </ul>
       </div>
 
       <div class="box bgm">
         <h4>BGM</h4>
         <p><span class="note">♬</span> Espil Ceil - my own tracks<br>
-        <a href="https://soundcloud.com/quad-clipse" target="_blank" rel="noopener">SoundCloud에서 듣기</a></p>
+        <a href="https://soundcloud.com/quad-clipse" target="_blank" rel="noopener">Listen on SoundCloud</a></p>
       </div>
 
       <div class="box">
-        <h4>파도타기</h4>
+        <h4>Surf to</h4>
         <ul class="surf">
-          <li><a href="https://espil.online">Espil.Online - 라이브 프로젝트</a></li>
+          <li><a href="https://espil.online">Espil.Online - Live project</a></li>
           <li><a href="https://github.com/espil">GitHub - github.com/espil</a></li>
           <li><a href="https://instagram.com/espil_online">Instagram - @espil_online</a></li>
           <li><a href="https://blog.naver.com/espil_online">Naver Blog - espil_online</a></li>
@@ -290,7 +298,7 @@ table.board td a:hover{color:var(--cy-orange-dk)}
       </div>
 
       <div class="box miniroom">
-        <h4>미니룸</h4>
+        <h4>Miniroom</h4>
         <div class="room">Espil House - a 3D-printed house in nature, powered by its own water and sun. The room is being built at espil.online.</div>
       </div>
     </aside>
@@ -300,16 +308,16 @@ table.board td a:hover{color:var(--cy-orange-dk)}
       <!-- HOME -->
       <div class="view on" id="view-home">
       <section class="sec">
-        <div class="sec-head"><h3>홈 - 미니룸</h3><span class="more">아바타 창 · Espil.Online 미리보기</span></div>
+        <div class="sec-head"><h3>Home - Miniroom</h3><span class="more">Avatar window · Espil.Online preview</span></div>
         <div class="avatarwin">
           <div class="stage">
             <img class="room" src="room-composite.jpg" alt="Espil.Online preview - the Espil Universe house, with Han's character standing beside the bench">
           </div>
-          <div class="openbar"><span class="lbl">Espil.Online 미리보기</span><a href="https://espil.online">espil.online에서 열기 →</a></div>
+          <div class="openbar"><span class="lbl">Espil.Online preview</span><a href="https://espil.online">Open on espil.online →</a></div>
         </div>
-        <div class="sec-head"><h3>최근 게시물 - Selected Work</h3><span class="more">대표작 먼저 보기</span></div>
+        <div class="sec-head"><h3>Recent Posts - Selected Work</h3><span class="more">Start with the leads</span></div>
         <table class="board">
-          <tr><th style="width:38px;text-align:center">번호</th><th>제목</th><th style="width:128px">기간</th></tr>
+          <tr><th style="width:38px;text-align:center">No.</th><th>Title</th><th style="width:128px">Period</th></tr>
           <tr><td class="no">4</td><td><a href="https://espil.online">Espil.Online</a><span class="new-badge">NEW</span><div style="color:var(--cy-soft);font-size:11px">A live interactive 3D map of a living world - the World in the Cauldron, built and run end to end.</div></td><td class="when">2015 - present</td></tr>
 <tr><td class="no">3</td><td><a href="https://han.espil.online">han.espil.online</a><div style="color:var(--cy-soft);font-size:11px">This portfolio and minihompy - the full archive of a decade of work, designed and built by hand.</div></td><td class="when">2026</td></tr>
 <tr><td class="no">2</td><td><a href="#board">Plushy AI</a><div style="color:var(--cy-soft);font-size:11px">A local, private image-to-3D pipeline that turns original designs into game-ready models.</div></td><td class="when">2026</td></tr>
@@ -321,7 +329,7 @@ table.board td a:hover{color:var(--cy-orange-dk)}
       <!-- PROFILE -->
       <div class="view" id="view-profile">
       <section class="sec profile-body">
-        <div class="sec-head"><h3>프로필 - The Briefing</h3><span class="more">자기소개</span></div>
+        <div class="sec-head"><h3>Profile - The Briefing</h3><span class="more">Introduction</span></div>
         <p>A steward of the web: I spent a decade preparing, craft by craft, to do everything alone, and with AI, one person is enough. I am a web developer and designer based in Vancouver, BC. I have been building for the web since 2015, and on computers since the DOS era. My headline skill today is AI-assisted development: I direct the tools, review and edit the code myself, and ship end-to-end. I currently build Espil.Online, a live interactive 3D map, on top of a decade of client sites, internal systems and experiments - most of which I scoped, designed, built and ran myself.</p>
         <ul>
           <li>AI-assisted development - directing the tools, editing the code myself, shipping end-to-end.</li>
@@ -329,12 +337,12 @@ table.board td a:hover{color:var(--cy-orange-dk)}
           <li>Design and code in one hand - from a high-school design portfolio to a decade of client work.</li>
           <li>Full-stack evidence - CRUD databases, a MERN intranet, React and JSON API systems, Firebase and Vercel APIs.</li>
         </ul>
-        <div class="sec-head" style="margin-top:16px"><h3>한눈에 보기 - At a Glance</h3><span class="more">기본 정보</span></div>
+        <div class="sec-head" style="margin-top:16px"><h3>At a Glance</h3><span class="more">Basics</span></div>
         <table class="board">
-          <tr><td class="no">위치</td><td>Vancouver, BC, Canada</td></tr>
-          <tr><td class="no">경력</td><td>Building for the web since 2015 · Computers since the DOS era</td></tr>
-          <tr><td class="no">현재</td><td>Building Espil.Online - an interactive 3D map of a living world</td></tr>
-          <tr><td class="no">연락</td><td><a href="mailto:han@espil.online">han@espil.online</a> · <a href="https://github.com/espil">github.com/espil</a></td></tr>
+          <tr><td class="no">Location</td><td>Vancouver, BC, Canada</td></tr>
+          <tr><td class="no">Career</td><td>Building for the web since 2015 · Computers since the DOS era</td></tr>
+          <tr><td class="no">Now</td><td>Building Espil.Online - an interactive 3D map of a living world</td></tr>
+          <tr><td class="no">Contact</td><td><a href="mailto:han@espil.online">han@espil.online</a> · <a href="https://github.com/espil">github.com/espil</a></td></tr>
         </table>
       </section>
       </div>
@@ -342,9 +350,9 @@ table.board td a:hover{color:var(--cy-orange-dk)}
       <!-- BOARD -->
       <div class="view" id="view-board">
       <section class="sec">
-        <div class="sec-head"><h3>경력 게시판 - Full Record</h3><span class="more">전 경력 15건 · 제목을 누르면 글로 이동합니다</span></div>
+        <div class="sec-head"><h3>Career Board - Full Record</h3><span class="more">All 16 entries · Click a title to jump to its post</span></div>
         <table class="board">
-          <tr><th style="width:38px;text-align:center">번호</th><th>제목</th><th style="width:128px">기간</th></tr>
+          <tr><th style="width:38px;text-align:center">No.</th><th>Title</th><th style="width:128px">Period</th></tr>
           <tr><td class="no">01</td><td><a href="#post-01">Founder / Lead Developer / Espil (Espil.Online)</a><div style="color:var(--cy-soft);font-size:11px">Live Platform · Serverless Backend · AI-Agent Workflow</div></td><td class="when">2015 - Present</td></tr>
 <tr><td class="no">02</td><td><a href="#post-02">Operations Coordinator / Discover Holidays</a><div style="color:var(--cy-soft);font-size:11px">Tariffs · Supplier Data · Quality Control</div></td><td class="when">May 2024 - February 2026</td></tr>
 <tr><td class="no">03</td><td><a href="#post-03">Cook / Sushi Umi</a><div style="color:var(--cy-soft);font-size:11px">Service Quality · Quality Control · Teamwork · Service Pace</div></td><td class="when">January 2018 - January 2026</td></tr>
@@ -364,7 +372,7 @@ table.board td a:hover{color:var(--cy-orange-dk)}
         </table>
       </section>
       <section class="sec">
-        <div class="sec-head"><h3>게시글 - Every Entry, in Full</h3><span class="more">최신순</span></div>
+        <div class="sec-head"><h3>Posts - Every Entry, in Full</h3><span class="more">Newest first</span></div>
         
 <article class="post" id="post-01">
   <div class="post-head"><span class="t"><span class="no">No.01</span>Founder / Lead Developer / Espil (Espil.Online)</span><span class="when">2015 – Present</span></div>
@@ -436,14 +444,14 @@ table.board td a:hover{color:var(--cy-orange-dk)}
       <!-- ALBUM = PORTFOLIO -->
       <div class="view" id="view-album">
       <section class="sec">
-        <div class="sec-head"><h3>사진첩 - Portfolio</h3><span class="more">작업 앨범 · 카드를 누르면 열립니다</span></div>
+        <div class="sec-head"><h3>Album - Portfolio</h3><span class="more">Work album · Click a card to open it</span></div>
         <div class="pf-grid">
-          <div class="pf-card"><a href="https://espil.online"><img src="render-day.jpg" alt="Espil.Online"></a><h4>Espil.Online</h4><p>A live interactive 3D map of a living world - the World in the Cauldron.</p><p class="go"><a href="https://espil.online">열어보기 →</a></p></div>
-          <div class="pf-card"><a href="https://han.espil.online/"><img src="render-night.jpg" alt="han.espil.online"></a><h4>han.espil.online</h4><p>This portfolio - the full archive of a decade of work, after dark.</p><p class="go"><a href="https://han.espil.online/">열어보기 →</a></p></div>
-          <div class="pf-card"><a href="https://han.espil.online/ryde/"><img src="pf-ryde.png" alt="Ryde"></a><h4>Ryde</h4><p>A ride-share app project - my move from database work to API-based work.</p><p class="go"><a href="https://han.espil.online/ryde/">열어보기 →</a></p></div>
-          <div class="pf-card"><a href="https://han.espil.online/ongijongi/"><img src="pf-ongijongi.jpg" alt="Ongijongi"></a><h4>Ongijongi</h4><p>The Vancouver Korean musical club - performing, posters and marketing.</p><p class="go"><a href="https://han.espil.online/ongijongi/">열어보기 →</a></p></div>
-          <div class="pf-card"><div class="typo">ZEALANDIA</div><h4>Zealandia</h4><p>A dungeon to be made on New Zealand's hidden, sunken land - in development.</p><p class="go"><a href="https://han.espil.online/">포트폴리오에서 보기 →</a></p></div>
-          <div class="pf-card"><div class="typo">PLUSHY AI</div><h4>Plushy AI</h4><p>A local, private image-to-3D pipeline for original game assets.</p><p class="go"><a href="https://han.espil.online/">포트폴리오에서 보기 →</a></p></div>
+          <div class="pf-card"><a href="https://espil.online"><img src="render-day.jpg" alt="Espil.Online"></a><h4>Espil.Online</h4><p>A live interactive 3D map of a living world - the World in the Cauldron.</p><p class="go"><a href="https://espil.online">Open →</a></p></div>
+          <div class="pf-card"><a href="https://han.espil.online/"><img src="render-night.jpg" alt="han.espil.online"></a><h4>han.espil.online</h4><p>This portfolio - the full archive of a decade of work, after dark.</p><p class="go"><a href="https://han.espil.online/">Open →</a></p></div>
+          <div class="pf-card"><a href="https://han.espil.online/ryde/"><img src="pf-ryde.png" alt="Ryde"></a><h4>Ryde</h4><p>A ride-share app project - my move from database work to API-based work.</p><p class="go"><a href="https://han.espil.online/ryde/">Open →</a></p></div>
+          <div class="pf-card"><a href="https://han.espil.online/ongijongi/"><img src="pf-ongijongi.jpg" alt="Ongijongi"></a><h4>Ongijongi</h4><p>The Vancouver Korean musical club - performing, posters and marketing.</p><p class="go"><a href="https://han.espil.online/ongijongi/">Open →</a></p></div>
+          <div class="pf-card"><div class="typo">ZEALANDIA</div><h4>Zealandia</h4><p>A dungeon to be made on New Zealand's hidden, sunken land - in development.</p><p class="go"><a href="https://han.espil.online/">View in the portfolio →</a></p></div>
+          <div class="pf-card"><div class="typo">PLUSHY AI</div><h4>Plushy AI</h4><p>A local, private image-to-3D pipeline for original game assets.</p><p class="go"><a href="https://han.espil.online/">View in the portfolio →</a></p></div>
         </div>
       </section>
       </div>
@@ -451,13 +459,13 @@ table.board td a:hover{color:var(--cy-orange-dk)}
       <!-- GUESTBOOK -->
       <div class="view" id="view-guestbook">
       <section class="sec">
-        <div class="sec-head"><h3>방명록 - Guestbook</h3><span class="more">채용 문의는 방명록 대신 메일로</span></div>
+        <div class="sec-head"><h3>Guestbook</h3><span class="more">Send hiring inquiries by email, not in the guestbook</span></div>
         <div class="guest">
-          <div class="entry"><span class="who">주인장</span> · 반갑습니다. 채용이나 프로젝트 문의는 아래 메일로 남겨 주세요. 포트폴리오 본편은 han.espil.online 에 있습니다.</div>
-          <div class="entry"><span class="who">연락처</span> · Email <a href="mailto:han@espil.online">han@espil.online</a> · GitHub <a href="https://github.com/espil">github.com/espil</a> · Live project <a href="https://espil.online">espil.online</a></div>
+          <div class="entry"><span class="who">Host</span> · Welcome. For hiring or project inquiries, please email me below. The full portfolio is at han.espil.online.</div>
+          <div class="entry"><span class="who">Contact</span> · Email <a href="mailto:han@espil.online">han@espil.online</a> · GitHub <a href="https://github.com/espil">github.com/espil</a> · Live project <a href="https://espil.online">espil.online</a></div>
           <div class="write">
-            <span class="fakeinput">방명록 글은 메일로 받습니다 - han@espil.online</span>
-            <a class="btn" href="mailto:han@espil.online">글 남기기</a>
+            <span class="fakeinput">Guestbook notes arrive by email - han@espil.online</span>
+            <a class="btn" href="mailto:han@espil.online">Leave a note</a>
           </div>
         </div>
       </section>
@@ -467,7 +475,7 @@ table.board td a:hover{color:var(--cy-orange-dk)}
 
   <div class="hompy-foot">
     <span>Copyright © HanBin Im · han.espil.online</span>
-    <span>이 페이지는 2000년대 싸이월드 미니홈피 스타일의 오마주입니다.</span>
+    <span>This page is an homage to the 2000s Cyworld minihompy style.</span>
   </div>
   </div><!-- /scrollwrap -->
 </div>
@@ -484,6 +492,8 @@ table.board td a:hover{color:var(--cy-orange-dk)}
     });
     var sw = document.querySelector(".scrollwrap");
     if (sw) sw.scrollTop = 0;
+    var mn = document.querySelector(".main");
+    if (mn) mn.scrollTop = 0;
   }
   document.querySelectorAll(".tabs a").forEach(function(a){
     a.addEventListener("click", function(ev){
