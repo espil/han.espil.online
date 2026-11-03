@@ -697,18 +697,25 @@ setTimeout(function(){
   <header class="ad-head">
     <p class="kicker">Zealandia - In Development</p>
     <h1>The Character Customizer</h1>
-    <p class="lede">Before Zealandia can be a world, it needs people. This is the tool I am building to make them: the character customizer for the game app, where a player builds an SD character - hair, eyes, skin, outfit - in four directions, watches them idle on the creation stage, and sends them into the game as data. The customizer itself is still in development, so this page shows it the honest way: in screenshots, exactly as it runs today.</p>
+    <p class="lede">Before Zealandia can be a world, it needs people. This is the tool I am building to make them: the character customizer for the game app, where a player builds an SD character - hair, eyes, skin, outfit - in four directions, watches them idle on the creation stage, and sends them into the game as data. The customizer itself is still in development, and it runs live below: build a character right here, exactly as it runs today.</p>
   </header>
 
   <aside class="factbox">
     <dl>
       <dt>What</dt><dd>The character-creation tool for Zealandia, the game app of Espil.Online</dd>
       <dt>Characters</dt><dd>SD sprites in four directions - front, side, back, and the side mirrored</dd>
-      <dt>Method</dt><dd>Paper-doll layers registered to one ground line and one centre</dd>
+      <dt>Method</dt><dd>Pre-rendered frame sets per option, registered to one ground line and one centre - a true layered paper-doll rebuild is in progress</dd>
       <dt>Exports</dt><dd>A PNG of the current direction, a four-direction sheet, and a JSON manifest</dd>
-      <dt>Status</dt><dd>In active development - shown here in screenshots; the tool itself is not public yet</dd>
+      <dt>Status</dt><dd>In active development - the current build runs live in the demo on this page</dd>
     </dl>
   </aside>
+
+  <section class="ad-sec">
+    <h2>Live demo</h2>
+    <p>The customizer itself, running in your browser. Choose a hairstyle and eyes, turn the character, watch the idle - the same build the game account creation uses.</p>
+    <iframe src="https://pub-1aac73bf5f7c46ff90c194df0de87b9b.r2.dev/customizer/index.html" title="Character Customizer - live demo" loading="lazy" style="width:100%;height:760px;border:1px solid #d8d8d8;border-radius:12px;background:#111"></iframe>
+    <p><a href="https://pub-1aac73bf5f7c46ff90c194df0de87b9b.r2.dev/customizer/index.html" target="_blank" rel="noopener">Open the customizer full-screen</a></p>
+  </section>
 
   <section class="ad-sec">
     <h2>A character before a world</h2>
