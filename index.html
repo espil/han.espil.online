@@ -160,6 +160,12 @@ html[data-theme="dark"] .case-tag{color:#161616}
 .combo-strip h2{margin:0 0 14px}
 .combo-strip ul{margin:0 0 14px; padding-left:22px}
 .combo-strip li{margin:0 0 8px; font-size:17px; line-height:1.5}
+.cs-cta{margin:20px 0 4px}
+.cs-pulse{display:inline-block; font-family:var(--sans); font-size:15px; font-weight:700; letter-spacing:.04em; color:var(--highlight); text-decoration:none; border:2px solid var(--highlight); padding:12px 20px; background:var(--card); animation:csPulse 1.5s ease-in-out infinite, csFlash 3s linear infinite}
+.cs-pulse:hover{text-decoration:underline}
+@keyframes csPulse{0%,100%{transform:scale(1); box-shadow:0 0 0 0 rgba(200,16,46,.45)} 50%{transform:scale(1.035); box-shadow:0 0 0 13px rgba(200,16,46,0)}}
+@keyframes csFlash{0%,86%{background:var(--card)} 91%{background:#f6d9de} 95%{background:var(--card)} 100%{background:#f6d9de}}
+@media (prefers-reduced-motion: reduce){.cs-pulse{animation:none}}
 </style>
 </head>
 <body>
@@ -214,6 +220,7 @@ html[data-theme="dark"] .case-tag{color:#161616}
   <p class="kicker">The Briefing</p>
   <h2>The steward building before the need has a name.</h2>
   <p class="lede">He spent a decade preparing, craft by craft, to do everything alone. With AI, one person is enough: a steward of the web, bringing the part of hospitality AI cannot replace - a person who has answers, in place of the automated service on the phone that nobody likes. Full-stack web developer and design engineer in Vancouver, BC. Operations at scale, too: hundreds of thousands of prices kept accurate by one pair of hands. A decade in every craft behind it: a one-of-a-kind hybrid who knows how to stir all six senses - before hybrid was cool. For ten years I have designed and built websites, internal systems, and one living 3D world, always as documented systems rather than one-off pages. I currently design, build, and operate Espil.Online end to end.</p>
+  <p class="cs-cta"><a class="cs-pulse" href="/case-espil-online/">Espil.Online - the case study: the concept, the technology, the system &rarr;</a></p>
   <p>The proof is in the record below. At Discover Holidays I authored the style guide the company's pricing catalogues are formatted by, and enforced it with InDesign scripts across thousands of pages and hundreds of thousands of prices. At Higgs Creative I was already converting Figma designs into production HTML with AI assistance in 2022. And the design system behind Espil.Online, its laws, tokens, and components, is documented on this site at /system/.</p>
   <p>Everything on this page was scoped, designed, built, and run by one person. That is not the biography. That is the offer.</p>
 

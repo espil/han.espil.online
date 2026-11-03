@@ -594,6 +594,8 @@ section[id]{scroll-snap-align:start; scroll-margin-top:64px}
   .backline{margin-top:38px; font-family:var(--sans); font-size:12px; letter-spacing:.14em; text-transform:uppercase}
   .ad-fig{margin:22px 0 8px}
   .ad-fig img{display:block; width:100%; height:auto; border:1.5px solid var(--ink)}
+  .ad-fig-duo{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  .ad-fig figcaption{font-size:13.5px; opacity:.75; margin-top:8px; text-align:center}
   .ad-sec ul{margin:4px 0 0 22px; padding:0}
   .ad-sec li{font-size:16.5px; line-height:1.6; margin-bottom:9px}
 </style>
@@ -711,6 +713,20 @@ setTimeout(function(){
     </dl>
   </aside>
 
+  <figure class="ad-fig ad-fig-duo">
+    <img src="/assets/display/render-day.jpg" alt="Espil Universe - a minimal interior render, by day">
+    <img src="/assets/display/render-night.jpg" alt="Espil Universe - the same interior render, by night">
+    <figcaption style="grid-column:1/-1">The same place, by day and by night. The replica keeps real time.</figcaption>
+  </figure>
+
+  <section class="ad-sec">
+    <h2>The concept: a replica of this world.</h2>
+    <p>Espil.Online is a digital replica of this world. Today, Vancouver is the city you can walk - the first city, not the scope. The destination is a map of its own spanning the whole world: the city is auto-selected by where the user is, and from there they roam. Because the world is a replica, it is real-time based: the sky, the rain and snow of real weather, and the alignment of the stars are taken into account, and the world moves with the real one.</p>
+  </section>
+  <section class="ad-sec">
+    <h2>The technology under the concept.</h2>
+    <p>A replica has to be fed by the world it copies. The build draws on live data end to end: Mapbox carries the map, TomTom the real-time traffic, Open-Meteo the weather, TransLink the real-time buses and transit, and Google APIs with free store-data APIs the places and stores - all of it rendered as a Three.js world in the browser. The feeds are not decoration; they are how the copy keeps step with the original. The backend that holds it together is described in the architecture section below.</p>
+  </section>
   <section class="ad-sec">
     <h2>Screens drift. Systems hold.</h2>
     <p>The product kept growing new kinds of surface: a globe entry, city interfaces, a heads-up display, loading states, and a portfolio site beside it. Built screen by screen, each new surface would drift a little further from the others, and a solo builder has no team to catch the drift. I needed the consistency a team provides, without the team.</p>
