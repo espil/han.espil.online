@@ -1,6 +1,7 @@
 {
   "redirects": [
     { "source": "/resume", "destination": "/minihome/", "permanent": true },
-    { "source": "/resume/", "destination": "/minihome/", "permanent": true }
+    { "source": "/resume/", "destination": "/minihome/", "permanent": true },
+    { "source": "/apex", "destination": "/apex/", "permanent": true }
   ]
 }
