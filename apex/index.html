@@ -880,8 +880,7 @@ html, body { overflow-x: hidden !important; }
   .apex-dots button { width: 28px; height: 28px; border: 0; padding: 0; background: transparent; position: relative; }
   .apex-dots button::after { content: ""; position: absolute; left: 50%; top: 50%; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: rgba(15,30,71,.25); }
   .apex-dots button.on::after { background: #0f1e47; }
-  #movers-2 { width: min(1500px, 94%); margin-left: auto; margin-right: auto; scroll-snap-type: x proximity; touch-action: pan-y; }
-  #movers-2 .businesses { scroll-snap-align: start; }
+  #movers-2 { width: min(1500px, 94%); margin-left: auto; margin-right: auto; touch-action: pan-y; }
   .group-22665 .apex-on div { color: #e6c88a !important; font-weight: 600; }
   .group-22665 .apex-on img { transform: scale(1.15); }
   #business .over-group { pointer-events: none; }
@@ -916,9 +915,17 @@ html, body { overflow-x: hidden !important; }
   document.body.appendChild(mini);
   function openNav() { document.documentElement.classList.add('apex-nav-open'); }
   function shutNav() { document.documentElement.classList.remove('apex-nav-open'); }
+  var lastY = 9999;
+  document.addEventListener('mousemove', function (e) { lastY = e.clientY; }, { passive: true });
+  document.addEventListener('mouseleave', function () { lastY = 9999; });
   function maybeShut() { setTimeout(function () {
-    if (!strip.matches(':hover') && !mini.matches(':hover') && !(navbar && navbar.matches(':hover'))) shutNav();
-  }, 300); }
+    if (!strip.matches(':hover') && !mini.matches(':hover') && !(navbar && navbar.matches(':hover')) && lastY > 150) shutNav();
+    else if (document.documentElement.classList.contains('apex-nav-open')) setTimeout(maybeShutStep, 400);
+  }, 600); }
+  function maybeShutStep() {
+    if (!strip.matches(':hover') && !mini.matches(':hover') && !(navbar && navbar.matches(':hover')) && lastY > 150) shutNav();
+    else if (document.documentElement.classList.contains('apex-nav-open')) setTimeout(maybeShutStep, 400);
+  }
   [strip, mini].forEach(function (el) { el.addEventListener('mouseenter', openNav); el.addEventListener('mouseleave', maybeShut); });
   if (navbar) {
     navbar.addEventListener('mouseenter', openNav);
@@ -937,14 +944,14 @@ html, body { overflow-x: hidden !important; }
   var slider = document.querySelector('#movers-2');
   var slides = slider ? Array.prototype.slice.call(slider.querySelectorAll(':scope > .businesses')) : [];
   var dotsBox = null;
-  function slideLeft(k) { return slides[k].getBoundingClientRect().left - slider.getBoundingClientRect().left + slider.scrollLeft; }
+  function dotLeft(k) { var max = slider.scrollWidth - slider.clientWidth; return slides.length > 1 ? Math.round(max * k / (slides.length - 1)) : 0; }
   function markDot() { if (!dotsBox) return; var cur = 0, best = 1e18;
-    slides.forEach(function (sl, k) { var d = Math.abs(slideLeft(k) - slider.scrollLeft); if (d < best) { best = d; cur = k; } });
+    slides.forEach(function (sl, k) { var d = Math.abs(dotLeft(k) - slider.scrollLeft); if (d < best) { best = d; cur = k; } });
     Array.prototype.forEach.call(dotsBox.children, function (b, k) { b.classList.toggle('on', k === cur); }); }
   if (slider && slides.length) {
     dotsBox = document.createElement('div'); dotsBox.className = 'apex-dots';
     slides.forEach(function (sl, k) { var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Business card ' + (k + 1));
-      b.addEventListener('click', function () { slider.scrollTo({ left: slideLeft(k), behavior: 'smooth' }); });
+      b.addEventListener('click', function () { slider.scrollTo({ left: dotLeft(k), behavior: 'smooth' }); });
       dotsBox.appendChild(b); });
     slider.parentNode.insertBefore(dotsBox, slider.nextSibling);
     slider.addEventListener('scroll', markDot, { passive: true }); markDot();
