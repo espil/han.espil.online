@@ -854,6 +854,8 @@ html, body { overflow-x: hidden !important; }
 #contact .screen { overflow: visible !important; }
 @media (min-width: 700px) {
   .logo { display: flex !important; align-items: center; justify-content: center; }
+  #logo { cursor: pointer; }
+  .logo::after { content: "Scroll \2193"; position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); color: rgba(255,255,255,.65); font-size: 13px; letter-spacing: .28em; text-transform: uppercase; }
   .logo svg { position: relative !important; left: auto !important; top: auto !important; transform: none !important; display: block; margin: 0 auto; max-width: min(606px, 84vw); height: auto; }
   #navbar { top: 0 !important; opacity: 1 !important; background: rgba(15,30,71,.94); padding: 10px 0; }
 }
@@ -890,6 +892,21 @@ html, body { overflow-x: hidden !important; }
       }
     }, { passive: false });
   });
+  var mainEl = document.querySelector('main');
+  var heroEl = document.querySelector('#home');
+  if (mainEl && heroEl) {
+    var logoReleased = false;
+    function goHero() { logoReleased = true; mainEl.scrollTo({ top: heroEl.offsetTop, behavior: 'smooth' }); }
+    var autoTimer = setTimeout(function () { if (!logoReleased && mainEl.scrollTop < 10) goHero(); }, 2400);
+    ['wheel', 'keydown', 'touchstart', 'pointerdown'].forEach(function (ev) {
+      window.addEventListener(ev, function () { clearTimeout(autoTimer); }, { once: true, passive: true });
+    });
+    var logoEl = document.querySelector('#logo');
+    if (logoEl) logoEl.addEventListener('click', function () { clearTimeout(autoTimer); goHero(); });
+    window.addEventListener('wheel', function (e) {
+      if (e.deltaY && !mainEl.contains(e.target)) mainEl.scrollTop += e.deltaY;
+    }, { passive: true, capture: true });
+  }
   var send = document.querySelector('#contact .place');
   if (send) {
     var note = document.createElement('div'); note.id = 'contact-note';
