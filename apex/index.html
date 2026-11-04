@@ -827,13 +827,16 @@
   </main>
   
 <style id="apex-upgrade">
-/* Apex upgrade v3 (2026-11-03, han.espil.online): the export's own design is a
-   100vh <main> scroller with 100vh sections, but its logo SVG is position:fixed
-   over the whole viewport and the script that lifts it listens to the document
-   scroll, which never happens - so the page froze on the logo. This layer
-   un-fixes the logo, pins the nav bar, repairs the contact form, sliders and
-   cursor, and keeps the page private on mobile by Han's order. The page's own
-   structure (main scroller, sections, artboards) is left as designed. */
+/* Apex upgrade layer (han.espil.online): the rf.gd export is a 100vh <main>
+   scroller with 100vh sections, but as delivered it froze on its fixed logo,
+   scrolled nowhere useful, and its sliders, menus and checkboxes were dead.
+   This layer implements Han's interaction spec without touching the page's
+   own structure: section paging (inner scroll first, then the page turns),
+   no visible scrollbars, a top bar that hides above with only the diamond
+   logo showing and slides down on hover, the Business cards as one
+   left-right slider, working Contact checkboxes, and the logo screen
+   playing its letter animation alone before gliding on. The page stays
+   private on mobile by Han's order. */
 .section__content > * { opacity: 1 !important; transform: none !important; }
 .section__img { opacity: 0.75 !important; }
 body, body * { cursor: url('/apex/logo/cursor-clean.svg') 13 13, auto !important; }
@@ -856,9 +859,31 @@ html, body { overflow-x: hidden !important; }
 @media (min-width: 700px) {
   .logo { display: flex !important; align-items: center; justify-content: center; }
   #logo { cursor: pointer; }
-  .logo::after { content: "Scroll \2193"; position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); color: rgba(255,255,255,.65); font-size: 13px; letter-spacing: .28em; text-transform: uppercase; }
   .logo svg { position: relative !important; left: auto !important; top: auto !important; transform: none !important; display: block; margin: 0 auto; max-width: min(606px, 84vw); height: auto; }
-  #navbar { top: 0 !important; opacity: 1 !important; background: rgba(15,30,71,.94); padding: 10px 0; }
+  #navbar { top: 0 !important; opacity: 1 !important; background: rgba(15,30,71,.94); padding: 10px 0; transform: translateY(-102%); transition: transform .38s ease; }
+  html.apex-nav-open #navbar { transform: translateY(0); }
+  #apex-nav-strip { position: fixed; top: 0; left: 0; right: 0; height: 30px; z-index: 2000; }
+  html.apex-nav-open #apex-nav-strip { pointer-events: none; }
+  #apex-mini-logo { position: fixed; top: 6px; left: 50%; transform: translateX(-50%); z-index: 2001; display: block; transition: opacity .25s ease; }
+  #apex-mini-logo img { width: 30px; height: auto; display: block; }
+  html.apex-nav-open #apex-mini-logo { opacity: 0; pointer-events: none; }
+  main { scroll-snap-type: y proximity; }
+  main > section { scroll-snap-align: start; }
+  main, main * { scrollbar-width: none; }
+  main::-webkit-scrollbar, main *::-webkit-scrollbar { display: none; }
+  #team, #contact { overflow-y: auto; }
+  #movers-2 { display: flex; flex-direction: row; align-items: flex-start; overflow-x: auto !important; overflow-y: hidden; }
+  #movers-2 .businesses { flex: 0 0 auto; width: auto !important; margin-right: 30px; }
+  #movers-2 .businesses:last-child { margin-right: 0; }
+  #movers-2 img { -webkit-user-drag: none; user-select: none; }
+  .apex-dots { display: flex; gap: 10px; justify-content: center; padding: 20px 0 8px; }
+  .apex-dots button { width: 9px; height: 9px; border-radius: 50%; border: 0; padding: 0; background: rgba(15,30,71,.25); }
+  .apex-dots button.on { background: #0f1e47; }
+  #business .over-group { pointer-events: none; }
+  #movers-2 { margin-top: 850px; }
+  #business .busi-1 { top: 1490px !important; }
+  #business .what-we-do { top: 1533px !important; }
+  #business .at-apexderm-ventures { top: 1737px !important; }
 }
 @media (max-width: 699px) {
   .screen { display: none !important; }
@@ -869,56 +894,128 @@ html, body { overflow-x: hidden !important; }
 
 <script id="apex-upgrade-js">
 (function () {
-  function dragScroll(el) {
-    var down = false, startX = 0, startL = 0;
-    el.addEventListener('pointerdown', function (e) { down = true; startX = e.clientX; startL = el.scrollLeft; el.classList.add('dragging'); });
-    window.addEventListener('pointermove', function (e) { if (down) el.scrollLeft = startL - (e.clientX - startX); });
-    window.addEventListener('pointerup', function () { down = false; el.classList.remove('dragging'); });
-  }
-  document.querySelectorAll('[id^="movers"]').forEach(function (el) {
-    dragScroll(el);
-    if (el.id === 'movers-2') {
-      el.addEventListener('wheel', function (e) {
-        if (el.scrollWidth > el.clientWidth) { e.preventDefault(); el.scrollLeft += (e.deltaY + e.deltaX); }
-      }, { passive: false });
-    }
-  });
-  document.querySelectorAll('#movers-2').forEach(function (el) {
-    el.addEventListener('wheel', function (e) {
-      var max = el.scrollWidth - el.clientWidth;
-      var d = e.deltaY !== 0 ? e.deltaY : e.deltaX;
-      if (max > 0 && ((d > 0 && el.scrollLeft < max) || (d < 0 && el.scrollLeft > 0))) {
-        el.scrollLeft += d;
-        e.preventDefault();
-      }
-    }, { passive: false });
-  });
-  var mainEl = document.querySelector('main');
-  var heroEl = document.querySelector('#home');
-  if (mainEl && heroEl) {
-    var logoReleased = false;
-    function goHero() { logoReleased = true; mainEl.scrollTo({ top: heroEl.offsetTop, behavior: 'smooth' }); }
-    var autoTimer = setTimeout(function () { if (!logoReleased && mainEl.scrollTop < 10) goHero(); }, 2400);
-    ['wheel', 'keydown', 'touchstart', 'pointerdown'].forEach(function (ev) {
-      window.addEventListener(ev, function () { clearTimeout(autoTimer); }, { once: true, passive: true });
+  var main = document.querySelector('main');
+  if (!main) return;
+  var sections = Array.prototype.slice.call(main.querySelectorAll(':scope > section'));
+  var navbar = document.getElementById('navbar');
+  function idx() { var y = main.scrollTop + 6, i = 0; sections.forEach(function (s, k) { if (s.offsetTop <= y) i = k; }); return i; }
+  function pageTo(i) { i = Math.max(0, Math.min(sections.length - 1, i)); main.scrollTo({ top: sections[i].offsetTop, behavior: 'smooth' }); }
+
+  /* Top menu: the bar hides above; the diamond stays at the very top;
+     hovering either slides the bar down. */
+  var strip = document.createElement('div'); strip.id = 'apex-nav-strip'; document.body.appendChild(strip);
+  var mini = document.createElement('a'); mini.id = 'apex-mini-logo'; mini.href = '#home';
+  mini.innerHTML = '<img src="/apex/logo/av.svg" alt="APEXDERM">';
+  document.body.appendChild(mini);
+  function openNav() { document.documentElement.classList.add('apex-nav-open'); }
+  function shutNav() { document.documentElement.classList.remove('apex-nav-open'); }
+  function maybeShut() { setTimeout(function () {
+    if (!strip.matches(':hover') && !mini.matches(':hover') && !(navbar && navbar.matches(':hover'))) shutNav();
+  }, 80); }
+  [strip, mini].forEach(function (el) { el.addEventListener('mouseenter', openNav); el.addEventListener('mouseleave', maybeShut); });
+  if (navbar) {
+    navbar.addEventListener('mouseenter', openNav);
+    navbar.addEventListener('mouseleave', maybeShut);
+    navbar.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var t = document.querySelector(a.getAttribute('href'));
+        var k = sections.indexOf(t);
+        if (k > -1) { e.preventDefault(); shutNav(); pageTo(k); }
+      });
     });
-    var logoEl = document.querySelector('#logo');
-    if (logoEl) logoEl.addEventListener('click', function () { clearTimeout(autoTimer); goHero(); });
-    window.addEventListener('wheel', function (e) {
-      if (e.deltaY && !mainEl.contains(e.target)) mainEl.scrollTop += e.deltaY;
-    }, { passive: true, capture: true });
   }
+  mini.addEventListener('click', function (e) { e.preventDefault(); shutNav(); pageTo(1); });
+
+  /* Business: the four cards form one left-right slider with dots. */
+  var slider = document.querySelector('#movers-2');
+  var slides = slider ? Array.prototype.slice.call(slider.querySelectorAll(':scope > .businesses')) : [];
+  var dotsBox = null;
+  function slideLeft(k) { return slides[k].getBoundingClientRect().left - slider.getBoundingClientRect().left + slider.scrollLeft; }
+  function markDot() { if (!dotsBox) return; var cur = 0, best = 1e18;
+    slides.forEach(function (sl, k) { var d = Math.abs(slideLeft(k) - slider.scrollLeft); if (d < best) { best = d; cur = k; } });
+    Array.prototype.forEach.call(dotsBox.children, function (b, k) { b.classList.toggle('on', k === cur); }); }
+  if (slider && slides.length) {
+    dotsBox = document.createElement('div'); dotsBox.className = 'apex-dots';
+    slides.forEach(function (sl, k) { var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Business card ' + (k + 1));
+      b.addEventListener('click', function () { slider.scrollTo({ left: slideLeft(k), behavior: 'smooth' }); });
+      dotsBox.appendChild(b); });
+    slider.parentNode.insertBefore(dotsBox, slider.nextSibling);
+    slider.addEventListener('scroll', markDot, { passive: true }); markDot();
+    slider.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    var drag = null;
+    slider.addEventListener('pointerdown', function (e) { drag = { x: e.clientX, l: slider.scrollLeft }; slider.classList.add('dragging'); });
+    window.addEventListener('pointermove', function (e) { if (drag) slider.scrollLeft = drag.l - (e.clientX - drag.x); });
+    window.addEventListener('pointerup', function () { if (drag) { drag = null; slider.classList.remove('dragging'); } });
+  }
+
+  /* Section paging: inner content scrolls to its end first, then the
+     next gesture turns to the next section. No visible scrollbars. */
+  var lockUntil = 0;
+  function tryPage(dir) { var now = Date.now(); if (now < lockUntil) return; lockUntil = now + 850; pageTo(idx() + dir); }
+  window.addEventListener('wheel', function (e) {
+    if (e.ctrlKey || !e.deltaY) return;
+    var t = e.target;
+    if (slider && t.closest && t.closest('#movers-2')) {
+      var canL = slider.scrollLeft > 0, canR = slider.scrollLeft < slider.scrollWidth - slider.clientWidth - 1;
+      if ((e.deltaY > 0 && canR) || (e.deltaY < 0 && canL)) { slider.scrollLeft += e.deltaY; e.preventDefault(); return; }
+    }
+    var sec = t.closest ? t.closest('main > section') : null;
+    if (sec && sec.scrollHeight > sec.clientHeight + 2) {
+      var atTop = sec.scrollTop <= 0, atBot = sec.scrollTop >= sec.scrollHeight - sec.clientHeight - 1;
+      if ((e.deltaY > 0 && !atBot) || (e.deltaY < 0 && !atTop)) return;
+    }
+    e.preventDefault();
+    tryPage(e.deltaY > 0 ? 1 : -1);
+  }, { passive: false, capture: true });
+  window.addEventListener('keydown', function (e) {
+    var ae = document.activeElement;
+    if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA')) return;
+    var down = e.key === 'PageDown' || e.key === 'ArrowDown' || e.key === ' ';
+    var up = e.key === 'PageUp' || e.key === 'ArrowUp';
+    if (!down && !up) return;
+    var sec = sections[idx()];
+    if (sec && sec.scrollHeight > sec.clientHeight + 2) {
+      var atTop = sec.scrollTop <= 0, atBot = sec.scrollTop >= sec.scrollHeight - sec.clientHeight - 1;
+      if ((down && !atBot) || (up && !atTop)) return;
+    }
+    e.preventDefault();
+    tryPage(down ? 1 : -1);
+  });
+
+  /* Logo screen: only the logo animation plays (it completes at about
+     3.4s); then the page glides to the next section by itself. */
+  var released = false;
+  function release() { if (!released && main.scrollTop < 10) { released = true; pageTo(1); } }
+  var timer = setTimeout(release, 3800);
+  ['wheel', 'keydown', 'touchstart', 'pointerdown'].forEach(function (ev) {
+    window.addEventListener(ev, function () { clearTimeout(timer); }, { once: true, passive: true }); });
+  var logoSec = document.querySelector('#logo');
+  if (logoSec) logoSec.addEventListener('click', function () { clearTimeout(timer); released = true; pageTo(1); });
+
+  /* Contact: the service option rows work as checkboxes and fill the
+     service field with the chosen services. */
+  var CHECK = '/apex/img/check-circle@2x.svg';
+  var svcInput = document.querySelector('#contact input[name="service"]');
+  var rowData = Array.prototype.slice.call(document.querySelectorAll('.group-22665 .circle')).map(function (img) {
+    var row = img.parentElement;
+    return { row: row, img: img, empty: img.getAttribute('src'),
+      label: row.querySelector('div').textContent.trim(),
+      on: img.getAttribute('src').indexOf('check-circle') > -1 };
+  });
+  function syncSvc() { if (svcInput) svcInput.value = rowData.filter(function (d) { return d.on; }).map(function (d) { return d.label; }).join(', '); }
+  rowData.forEach(function (d) {
+    d.row.style.cursor = 'pointer';
+    d.row.addEventListener('click', function () { d.on = !d.on; d.img.src = d.on ? CHECK : d.empty; syncSvc(); });
+  });
+
+  /* Send: required-field check with an inline note. */
   var send = document.querySelector('#contact .place');
   if (send) {
-    var note = document.createElement('div'); note.id = 'contact-note';
-    send.parentNode.appendChild(note);
+    var note = document.createElement('div'); note.id = 'contact-note'; send.parentNode.appendChild(note);
     send.addEventListener('click', function () {
-      var missing = null;
-      document.querySelectorAll('#contact input, #contact textarea').forEach(function (f) {
-        if (!missing && f.placeholder && f.placeholder.indexOf('*') > -1 && !f.value.trim()) missing = f;
-      });
-      if (missing) { note.textContent = 'Please fill in the required fields.'; missing.focus(); return; }
-      note.textContent = 'This copy is a design showcase - the form has no sending endpoint yet.';
+      var missing = [];
+      document.querySelectorAll('#contact input[required]').forEach(function (inp) { if (!inp.value.trim()) missing.push(inp.getAttribute('placeholder') || inp.name); });
+      note.textContent = missing.length ? 'Please fill in the required fields.' : 'Thank you. This showcase form does not send yet - nothing was submitted.';
     });
   }
 })();
