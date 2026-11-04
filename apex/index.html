@@ -862,9 +862,9 @@ html, body { overflow-x: hidden !important; }
   .logo svg { position: relative !important; left: auto !important; top: auto !important; transform: none !important; display: block; margin: 0 auto; max-width: min(606px, 84vw); height: auto; }
   #navbar { top: 0 !important; opacity: 1 !important; background: rgba(15,30,71,.94); padding: 10px 0; transform: translateY(-102%); transition: transform .38s ease; }
   html.apex-nav-open #navbar { transform: translateY(0); }
-  #apex-nav-strip { position: fixed; top: 0; left: 0; right: 0; height: 30px; z-index: 2000; }
+  #apex-nav-strip { position: fixed; top: 0; left: 0; right: 0; height: 30px; z-index: 9998; }
   html.apex-nav-open #apex-nav-strip { pointer-events: none; }
-  #apex-mini-logo { position: fixed; top: 6px; left: 50%; transform: translateX(-50%); z-index: 2001; display: block; transition: opacity .25s ease; }
+  #apex-mini-logo { position: fixed; top: 6px; left: 50%; transform: translateX(-50%); z-index: 9999; display: block; transition: opacity .25s ease; }
   #apex-mini-logo img { width: 30px; height: auto; display: block; }
   html.apex-nav-open #apex-mini-logo { opacity: 0; pointer-events: none; }
   main { scroll-snap-type: y proximity; }
@@ -899,7 +899,9 @@ html, body { overflow-x: hidden !important; }
   var sections = Array.prototype.slice.call(main.querySelectorAll(':scope > section'));
   var navbar = document.getElementById('navbar');
   function idx() { var y = main.scrollTop + 6, i = 0; sections.forEach(function (s, k) { if (s.offsetTop <= y) i = k; }); return i; }
-  function pageTo(i) { i = Math.max(0, Math.min(sections.length - 1, i)); main.scrollTo({ top: sections[i].offsetTop, behavior: 'smooth' }); }
+  var cur = 0, resyncT = null;
+  main.addEventListener('scroll', function () { clearTimeout(resyncT); resyncT = setTimeout(function () { cur = idx(); }, 180); }, { passive: true });
+  function pageTo(i) { i = Math.max(0, Math.min(sections.length - 1, i)); cur = i; main.scrollTo({ top: sections[i].offsetTop, behavior: 'smooth' }); }
 
   /* Top menu: the bar hides above; the diamond stays at the very top;
      hovering either slides the bar down. */
@@ -951,10 +953,14 @@ html, body { overflow-x: hidden !important; }
   /* Section paging: inner content scrolls to its end first, then the
      next gesture turns to the next section. No visible scrollbars. */
   var lockUntil = 0;
-  function tryPage(dir) { var now = Date.now(); if (now < lockUntil) return; lockUntil = now + 850; pageTo(idx() + dir); }
+  function tryPage(dir) { var now = Date.now(); if (now < lockUntil) return; lockUntil = now + 850; pageTo(cur + dir); }
   window.addEventListener('wheel', function (e) {
     if (e.ctrlKey || !e.deltaY) return;
     var t = e.target;
+    if (!t || t === document.body || t === document.documentElement || !t.closest) {
+      var hit = (e.clientX != null) ? document.elementFromPoint(e.clientX, e.clientY) : null;
+      if (hit) t = hit;
+    }
     if (slider && t.closest && t.closest('#movers-2')) {
       var canL = slider.scrollLeft > 0, canR = slider.scrollLeft < slider.scrollWidth - slider.clientWidth - 1;
       if ((e.deltaY > 0 && canR) || (e.deltaY < 0 && canL)) { slider.scrollLeft += e.deltaY; e.preventDefault(); return; }
@@ -973,13 +979,15 @@ html, body { overflow-x: hidden !important; }
     var down = e.key === 'PageDown' || e.key === 'ArrowDown' || e.key === ' ';
     var up = e.key === 'PageUp' || e.key === 'ArrowUp';
     if (!down && !up) return;
-    var sec = sections[idx()];
+    var dir = down ? 1 : -1;
+    var sec = sections[cur];
     if (sec && sec.scrollHeight > sec.clientHeight + 2) {
-      var atTop = sec.scrollTop <= 0, atBot = sec.scrollTop >= sec.scrollHeight - sec.clientHeight - 1;
-      if ((down && !atBot) || (up && !atTop)) return;
+      var max = sec.scrollHeight - sec.clientHeight;
+      if (dir > 0 && sec.scrollTop < max - 1) { e.preventDefault(); sec.scrollTo({ top: Math.min(max, sec.scrollTop + sec.clientHeight), behavior: 'smooth' }); return; }
+      if (dir < 0 && sec.scrollTop > 0) { e.preventDefault(); sec.scrollTo({ top: Math.max(0, sec.scrollTop - sec.clientHeight), behavior: 'smooth' }); return; }
     }
     e.preventDefault();
-    tryPage(down ? 1 : -1);
+    tryPage(dir);
   });
 
   /* Logo screen: only the logo animation plays (it completes at about
