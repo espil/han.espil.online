@@ -21,15 +21,15 @@
 
   /* ---------- directional stage ---------- */
   .viewport{position:fixed; inset:0; overflow:hidden; background:var(--paper)}
-  .world{position:absolute; width:500vw; height:600vh; left:0; top:0;
-    transform:translate(-200vw,-500vh); transition:transform .9s cubic-bezier(.7,0,.2,1)}
+  .world{position:absolute; width:500vw; height:500vh; left:0; top:0;
+    transform:translate(-200vw,-400vh); transition:transform .9s cubic-bezier(.7,0,.2,1)}
   .sec{position:absolute; width:100vw; height:100vh; height:100dvh; overflow-y:auto; overflow-x:hidden;
     background:var(--paper); padding:74px 20px 86px; scrollbar-width:none}
   .sec::-webkit-scrollbar{width:0; height:0}
   .sec[data-x="-2"]{left:0} .sec[data-x="-1"]{left:100vw} .sec[data-x="0"]{left:200vw}
   .sec[data-x="1"]{left:300vw} .sec[data-x="2"]{left:400vw}
-  .sec[data-y="5"]{top:0} .sec[data-y="4"]{top:100vh} .sec[data-y="3"]{top:200vh}
-  .sec[data-y="2"]{top:300vh} .sec[data-y="1"]{top:400vh} .sec[data-y="0"]{top:500vh}
+  .sec[data-y="4"]{top:0} .sec[data-y="3"]{top:100vh} .sec[data-y="2"]{top:200vh}
+  .sec[data-y="1"]{top:300vh} .sec[data-y="0"]{top:400vh}
   .inner{max-width:1060px; margin:0 auto; height:100%; display:flex; flex-direction:column}
   .kicker{font-size:11.5px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); margin:0 0 8px}
   h1.room{font-size:clamp(25px,3.6vw,38px); line-height:1.1; margin:0 0 10px; font-weight:700}
@@ -142,15 +142,15 @@
   @media (max-width:640px){ .edge{padding:8px 12px; font-size:12.5px} }
   #cartChip{position:fixed; top:14px; right:14px; z-index:61; border:1.5px solid var(--red); background:var(--red);
     color:#fff; border-radius:999px; padding:9px 16px; font-size:14px; letter-spacing:.4px; box-shadow:0 4px 18px rgba(200,16,46,.3)}
-  #minimap{position:fixed; right:16px; bottom:16px; z-index:56; background:rgba(22,22,22,.45);
+  #minimap{position:fixed; left:16px; right:auto; bottom:16px; z-index:56; background:rgba(22,22,22,.45);
     border:1px solid rgba(240,238,233,.35); border-radius:8px; padding:7px; backdrop-filter:blur(2px)}
-  #minimap .mm-grid{display:grid; grid-template-columns:repeat(5,15px); grid-template-rows:repeat(6,15px); gap:2px}
+  #minimap .mm-grid{display:grid; grid-template-columns:repeat(5,15px); grid-template-rows:repeat(5,15px); gap:2px}
   #minimap .mm-cell{border-radius:2px; background:transparent; border:0; padding:0}
   #minimap .mm-cell.room{background:rgba(240,238,233,.34); cursor:pointer}
   #minimap .mm-cell.cur{background:var(--red); box-shadow:0 0 0 1px rgba(240,238,233,.85)}
   #minimap .mm-name{margin-top:5px; font-size:9.5px; letter-spacing:.4px; color:rgba(240,238,233,.92);
     text-align:center; max-width:89px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  @media (max-width:700px){ #minimap .mm-grid{grid-template-columns:repeat(5,11px); grid-template-rows:repeat(6,11px)} }
+  @media (max-width:700px){ #minimap .mm-grid{grid-template-columns:repeat(5,11px); grid-template-rows:repeat(5,11px)} }
 
   /* ---------- cart screen ---------- */
   .cartwrap{display:grid; grid-template-columns:1fr 348px; gap:16px; flex:1; min-height:0; align-items:start}
@@ -199,11 +199,10 @@
   @media (max-width:900px){
     .cartwrap{grid-template-columns:1fr; gap:12px}
     .cards{grid-template-columns:1fr}
-    .sec[data-name="Cart"] .kicker{display:none}
     .bubble.bM{font-size:12.5px; line-height:1.38}
     #sendBtn{padding:10px}
     h1.room{font-size:24px}
-    #minimap .mm-grid{grid-template-columns:repeat(5,9px); grid-template-rows:repeat(6,9px)}
+    #minimap .mm-grid{grid-template-columns:repeat(5,9px); grid-template-rows:repeat(5,9px)}
     .svc,.cartbox,.fld{min-width:0}
     .cform input,.cform textarea{min-width:0}
     .servo{margin-bottom:12px}
@@ -225,7 +224,6 @@
     .mface{width:16px; height:16px}
     .mbub p{padding:3px 8px; font-size:11.5px}
     .menu-item .ds{-webkit-line-clamp:1}
-    .menu-item .btn{display:none}
     .menu-item h3{margin-bottom:3px}
     .menu-item h3{font-size:15.5px}
     .menu-item p{font-size:12.8px; line-height:1.4}
@@ -298,7 +296,58 @@
     .menu-item .ds{-webkit-line-clamp:1}
     .menu-item{padding:5px 10px}
     .menugrid{gap:4px}
+    .menu-layout .mbub{display:none}
+    .menu-layout #sendNote{display:none}
+    .menu-layout .mthumb{width:40px; height:36px; min-height:36px}
   }
+  /* ---------- merged menu board + cart ---------- */
+  .menu-layout{display:grid; grid-template-columns:1fr 330px; gap:22px; align-items:start; width:100%}
+  .menu-layout .menugrid{grid-template-columns:1fr; gap:7px}
+  .menu-layout .menu-item{grid-template-columns:88px 1fr auto; align-items:center; padding:10px 14px}
+  .menu-layout .mthumb{width:88px; height:64px; min-height:64px}
+  .menu-layout .menu-item .ds{-webkit-line-clamp:1}
+  .menu-layout .mbub p{max-height:31px; overflow:hidden}
+  .menu-layout .menu-item .ex{display:none}
+  .menu-layout .menu-item .btn{align-self:center}
+  @media (max-width:900px){
+    .menu-layout{grid-template-columns:1fr; gap:12px}
+    .menu-layout .menu-item{grid-template-columns:44px 1fr auto; padding:5px 9px}
+    .menu-layout .mthumb{width:44px; height:40px; min-height:40px}
+    .menu-layout .menu-item h3{font-size:14.5px}
+    .menu-layout .mbub p{padding:2px 7px; font-size:11px}
+    .menu-layout .cartbox .note{display:none}
+    .menu-layout .cartbox{padding:13px 16px}
+    .menu-layout #sendNote{display:none}
+    .menu-layout .mbub{display:none}
+    .menu-layout .cform{display:grid; grid-template-columns:1fr 1fr; column-gap:10px}
+    .menu-layout .cform .full{grid-column:1 / -1}
+    .menu-layout .cform textarea{height:42px}
+  }
+
+  /* ---------- Servo widget (bottom right) + chat ---------- */
+  #servoWidget{position:fixed; right:16px; bottom:16px; z-index:60; display:none; align-items:flex-end; gap:10px}
+  #servoWidget.on{display:flex}
+  .sw-bubble{background:#fff; border:1px solid var(--line); border-radius:14px 14px 4px 14px; padding:9px 12px;
+    font-size:13px; line-height:1.45; max-width:218px; box-shadow:0 10px 26px rgba(20,18,12,.16); margin-bottom:6px}
+  .sw-btn{width:54px; height:54px; border-radius:50%; border:2px solid var(--ink); background:var(--paper);
+    overflow:hidden; padding:0; cursor:pointer; flex:0 0 auto; box-shadow:0 10px 26px rgba(20,18,12,.2)}
+  .sw-btn img{width:100%; height:100%; display:block}
+  .sw-btn:active{transform:scale(.94)}
+  #chatPanel{position:fixed; right:16px; bottom:82px; width:min(332px, calc(100vw - 32px)); height:408px; max-height:62vh;
+    background:#fff; border:1.5px solid var(--ink); border-radius:16px; display:none; flex-direction:column; z-index:61;
+    box-shadow:0 22px 50px rgba(20,18,12,.25); overflow:hidden}
+  #chatPanel.open{display:flex}
+  .cp-head{display:flex; justify-content:space-between; align-items:center; padding:11px 14px; border-bottom:1px solid var(--line); font-size:14px}
+  .cp-head button{border:0; background:none; font-size:20px; line-height:1; cursor:pointer; color:var(--ink)}
+  #chatMsgs{flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:8px}
+  .msg{max-width:86%; padding:8px 11px; border-radius:12px; font-size:13.5px; line-height:1.45; overflow-wrap:break-word}
+  .msg.servo{align-self:flex-start; background:var(--card); border:1px solid var(--line); border-bottom-left-radius:3px}
+  .msg.me{align-self:flex-end; background:var(--ink); color:#fff; border-bottom-right-radius:3px}
+  .cp-chips{display:flex; flex-wrap:wrap; gap:6px; padding:0 12px 9px}
+  .cp-chips button{border:1px solid var(--line); background:var(--paper); border-radius:999px; padding:5px 10px; font-size:12px; cursor:pointer; color:var(--ink)}
+  #cpForm{display:flex; gap:7px; padding:10px 12px; border-top:1px solid var(--line)}
+  #cpInput{flex:1; min-width:0; border:1px solid var(--line); border-radius:9px; padding:9px 11px; font-size:13.5px; font-family:inherit}
+  #cpForm .btn{padding:9px 14px}
 </style>
 </head>
 <body>
@@ -321,20 +370,18 @@
         <div class="face"><img src="/assets/usedesign-icon.svg" alt="Servo"></div>
         <div class="bubbles">
           <div class="bubble b1"><span class="nm">Servo</span> · 안녕하세요! Hello - I am <b>Servo</b>, your guide. <b>AIO</b> means <b>All In One</b>: chatbot, messenger, CRM, dashboard, cart, login and menu in one web app. This demo runs on <b>UseDesign</b>.</div>
-          <div class="bubble b2">Guiding you is my job. Every room here is a single screen - nothing scrolls, nothing hides. <span class="only-pc">Move with the <b>arrow keys</b>: up first, to the shopping cart.</span><span class="only-touch"><b>Drag the world</b> to move: drag down, and the shopping cart above slides in.</span></div>
-          <div class="bubble bM"><span class="nm">Servo</span> · 안녕하세요! I am <b>Servo</b>, your guide. <b>AIO</b> is <b>All In One</b> - chatbot, messenger, CRM, dashboard, cart, login, menu in one web app (example: <b>UseDesign</b>). <span class="only-pc">Press <b>↑</b> and the shopping cart is next.</span><span class="only-touch">Drag down, and the shopping cart above slides in.</span></div>
+          <div class="bubble b2">Guiding you is my job. Every room here is a single screen - nothing scrolls, nothing hides. <span class="only-pc">Move with the <b>arrow keys</b>: up first, to the menu board - the services and the cart live in that one room.</span><span class="only-touch"><b>Drag the world</b> to move: drag down, and the menu board above slides in.</span></div>
+          <div class="bubble bM"><span class="nm">Servo</span> · 안녕하세요! I am <b>Servo</b>, your guide. <b>AIO</b> is <b>All In One</b> - chatbot, messenger, CRM, dashboard, cart, login, menu in one web app (example: <b>UseDesign</b>). <span class="only-pc">Press <b>↑</b> and the menu board is next.</span><span class="only-touch">Drag down, and the menu board above slides in.</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CART (0,2) -->
-  <section class="sec" data-x="0" data-y="2" data-name="Cart">
+  <!-- MENU BOARD (0,2) -->
+  <section class="sec" data-x="0" data-y="2" data-name="Menu Board">
     <div class="inner">
-      <p class="kicker">UseDesign · Shopping Cart</p>
-      <h1 class="room">Digital services, in one cart.</h1>
-      <div class="cartwrap">
-        <div class="cards" id="svcCards"></div>
+      <div class="menu-layout">
+        <div class="menugrid" id="menuList"></div>
         <div class="cartbox">
           <h2>Your cart</h2>
           <p class="note">No fixed prices - every project is scoped first. Send the cart and I reply with an estimate and a timeline.</p>
@@ -348,25 +395,13 @@
           <p id="sendNote"><span class="only-pc">Opens your mail app with the cart filled in - nothing sends until you press send there.</span><span class="only-touch">Your mail app opens with the cart filled in.</span></p>
         </div>
       </div>
-      <p class="dirhint">↑ Menu board · ↓ Servo</p>
-    </div>
-  </section>
-
-  <!-- MENU BOARD (0,2) -->
-  <section class="sec" data-x="0" data-y="3" data-name="Menu Board">
-    <div class="inner">
-      <p class="kicker">UseDesign · Menu Board</p>
-      <h1 class="room">What each service is.</h1>
-      <div class="menugrid" id="menuList"></div>
-      <p class="dirhint">← Game · Music · → Operations &amp; AI · CRM · OCR · POS · ↑ Branding &amp; Marketing · ↓ Cart</p>
+      <p class="dirhint">← Game · Music · → Operations &amp; AI · CRM · OCR · POS · ↑ Branding &amp; Marketing · ↓ Servo</p>
     </div>
   </section>
 
   <!-- GAME PRODUCTION (-1,2) -->
-  <section class="sec" data-x="-1" data-y="3" data-name="Game Production">
+  <section class="sec" data-x="-1" data-y="2" data-name="Game Production">
     <div class="inner">
-      <p class="kicker">Production Room · Games</p>
-      <h1 class="room">Game production.</h1>
       <p class="lede">Complete games and living worlds, designed and built end to end by one pair of hands - engine, interface, sound and live data shipped as a single product. Browser-first, so anyone with a link is already inside.</p>
       <h2 class="block">What is included</h2>
       <ul class="inc">
@@ -386,10 +421,8 @@
   </section>
 
   <!-- MUSIC PRODUCTION (-2,2) -->
-  <section class="sec" data-x="-2" data-y="3" data-name="Music Production">
+  <section class="sec" data-x="-2" data-y="2" data-name="Music Production">
     <div class="inner">
-      <p class="kicker">Production Room · Music</p>
-      <h1 class="room">Music production.</h1>
       <p class="lede">Original music and sound, composed and produced in-house - from a two-second interface sting to a full soundtrack set that can play for hours without repeating itself.</p>
       <h2 class="block">What is included</h2>
       <ul class="inc">
@@ -409,10 +442,8 @@
   </section>
 
   <!-- BRANDING & MARKETING (0,3) -->
-  <section class="sec" data-x="0" data-y="4" data-name="Branding &amp; Marketing">
+  <section class="sec" data-x="0" data-y="3" data-name="Branding &amp; Marketing">
     <div class="inner">
-      <p class="kicker">Production Room · Brand</p>
-      <h1 class="room">Branding &amp; marketing.</h1>
       <p class="lede">A brand is a standard kept everywhere at once: identity, website, search and social pulling in one direction, so a small business reads as a name people already know.</p>
       <h2 class="block">What is included</h2>
       <ul class="inc">
@@ -431,10 +462,8 @@
   </section>
 
   <!-- LOGO / VIDEO / SNS / BLOG (0,4) -->
-  <section class="sec" data-x="0" data-y="5" data-name="Logo · Video · SNS · Blog">
+  <section class="sec" data-x="0" data-y="4" data-name="Logo · Video · SNS · Blog">
     <div class="inner">
-      <p class="kicker">Production Room · Channels</p>
-      <h1 class="room">Logo design, video production, SNS &amp; blog maintenance.</h1>
       <p class="lede">The ongoing face of the brand: the mark, the moving image, and the channels that have to be fed every week - handled as one desk, not four vendors.</p>
       <div class="grid2">
         <div class="mini"><h3>Logo design</h3><p>Identity marks and wordmarks with the guidelines to keep them consistent - the same discipline behind the UseDesign mark animating on the main floor.</p></div>
@@ -454,10 +483,8 @@
   </section>
 
   <!-- OPERATIONS AUTOMATION / AI (1,2) -->
-  <section class="sec" data-x="1" data-y="3" data-name="Operations &amp; AI">
+  <section class="sec" data-x="1" data-y="2" data-name="Operations &amp; AI">
     <div class="inner">
-      <p class="kicker">Production Room · Operations</p>
-      <h1 class="room">Automate operations, AI integration.</h1>
       <p class="lede">The work a team repeats every day - sorting, copying, checking, generating - rebuilt as a system that does it the same way every time. And AI put to work inside that system, under written standards, with a person checking what ships.</p>
       <h2 class="block">What is included</h2>
       <ul class="inc">
@@ -480,10 +507,8 @@
   </section>
 
   <!-- CRM / OCR / POS (2,2) -->
-  <section class="sec" data-x="2" data-y="3" data-name="CRM · OCR · POS">
+  <section class="sec" data-x="2" data-y="2" data-name="CRM · OCR · POS">
     <div class="inner">
-      <p class="kicker">Production Room · Systems</p>
-      <h1 class="room">CRM, OCR, POS.</h1>
       <p class="lede">The three systems a storefront business lives on: who your customers are, what your paper says, and how the till thinks. Built and tested from both sides of the counter.</p>
       <div class="grid2">
         <div class="mini"><h3>CRM</h3><p>Customer records, pipelines and booking systems a small team will actually use. I built a clinic's requested booking system solo - React, a JSON API and a local database - and tested CRM tools professionally at Higgs Creative.</p></div>
@@ -508,6 +533,17 @@
 <button class="edge" id="edgeRight" type="button"></button>
 <button id="cartChip" type="button">Cart · <b id="cartCount">0</b></button>
 <div id="minimap" aria-hidden="true"><div class="mm-grid" id="mmGrid"></div><div class="mm-name" id="mmName">Main</div></div>
+
+<div id="servoWidget" aria-live="polite">
+  <div class="sw-bubble" id="swBubble"></div>
+  <button class="sw-btn" id="swBtn" type="button" aria-label="Chat with Servo"><img src="/assets/usedesign-icon.svg" alt=""></button>
+</div>
+<div id="chatPanel" role="dialog" aria-label="Servo chat">
+  <div class="cp-head"><span><b>Servo</b> · UseDesign guide</span><button id="cpClose" type="button" aria-label="Close chat">×</button></div>
+  <div id="chatMsgs"></div>
+  <div class="cp-chips" id="cpChips"></div>
+  <form id="cpForm"><input id="cpInput" type="text" placeholder="Ask about the services..." autocomplete="off"><button class="btn" type="submit">Send</button></form>
+</div>
 <script src="/chrome/site-chrome.js?v=9" defer></script>
 <script>
 (function () {
@@ -554,20 +590,19 @@
   var secs = Array.prototype.slice.call(document.querySelectorAll('.sec'));
   var byPos = {};
   secs.forEach(function (s) { byPos[s.dataset.x + ',' + s.dataset.y] = s; });
-  var NAMES = { '0,0': 'Main', '0,1': 'Servo', '0,2': 'Cart', '0,3': 'Menu Board', '-1,3': 'Game Production', '-2,3': 'Music Production', '0,4': 'Branding & Marketing', '0,5': 'Logo · Video · SNS · Blog', '1,3': 'Operations & AI', '2,3': 'CRM · OCR · POS' };
+  var NAMES = { '0,0': 'Main', '0,1': 'Servo', '0,2': 'Menu Board', '-1,2': 'Game Production', '-2,2': 'Music Production', '0,3': 'Branding & Marketing', '0,4': 'Logo · Video · SNS · Blog', '1,2': 'Operations & AI', '2,2': 'CRM · OCR · POS' };
   var LINKS = { '0,0': { up: '0,1' }, '0,1': { up: '0,2', down: '0,0' },
-    '0,2': { up: '0,3', down: '0,1' },
-    '0,3': { down: '0,2', left: '-1,3', right: '1,3', up: '0,4' },
-    '-1,3': { right: '0,3', left: '-2,3' }, '-2,3': { right: '-1,3' },
-    '0,4': { down: '0,3', up: '0,5' }, '0,5': { down: '0,4' },
-    '1,3': { left: '0,3', right: '2,3' }, '2,3': { left: '1,3' } };
+    '0,2': { down: '0,1', left: '-1,2', right: '1,2', up: '0,3' },
+    '-1,2': { right: '0,2', left: '-2,2' }, '-2,2': { right: '-1,2' },
+    '0,3': { down: '0,2', up: '0,4' }, '0,4': { down: '0,3' },
+    '1,2': { left: '0,2', right: '2,2' }, '2,2': { left: '1,2' } };
   var cur = '0,0';
   var edges = { up: document.getElementById('edgeUp'), down: document.getElementById('edgeDown'),
                 left: document.getElementById('edgeLeft'), right: document.getElementById('edgeRight') };
   var ARROW = { up: '↑', down: '↓', left: '←', right: '→' };
 
   var mmGrid = document.getElementById('mmGrid'), mmName = document.getElementById('mmName'), mmCells = {};
-  for (var gy = 5; gy >= 0; gy--) for (var gx = -2; gx <= 2; gx++) {
+  for (var gy = 4; gy >= 0; gy--) for (var gx = -2; gx <= 2; gx++) {
     var c = document.createElement('button'); c.type = 'button'; c.className = 'mm-cell';
     var key = gx + ',' + gy;
     if (byPos[key]) { c.classList.add('room'); c.setAttribute('aria-label', NAMES[key]); (function (k) { c.addEventListener('click', function () { go(k); }); })(key); }
@@ -583,6 +618,7 @@
     });
     Object.keys(mmCells).forEach(function (k) { mmCells[k].classList.toggle('cur', k === cur); });
     mmName.textContent = NAMES[cur];
+    if (window.__roomHook) window.__roomHook(cur);
   }
   function go(key) {
     if (!byPos[key] || key === cur) return;
@@ -590,7 +626,7 @@
     if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA')) ae.blur();
     cur = key;
     var p = key.split(','), x = +p[0], y = +p[1];
-    world.style.transform = 'translate(' + (-(x + 2) * 100) + 'vw,' + (-(5 - y) * 100) + 'vh)';
+    world.style.transform = 'translate(' + (-(x + 2) * 100) + 'vw,' + (-(4 - y) * 100) + 'vh)';
     if (key === '0,1' && !servoServed) { servoServed = true; setTimeout(function () { servoEl.classList.add('served'); }, 450); }
     refreshChrome();
   }
@@ -642,15 +678,6 @@
   cart = cart.filter(function (id) { return svc(id); });
   var cartList = document.getElementById('cartList'), cartCount = document.getElementById('cartCount');
 
-  var cardsBox = document.getElementById('svcCards');
-  SERVICES.forEach(function (s) {
-    var d = document.createElement('div'); d.className = 'svc';
-    d.innerHTML = '<span class="sic">' + iconSvg(s.id) + '</span><h3></h3><p></p>';
-    d.querySelector('h3').textContent = s.name;
-    d.querySelector('p').textContent = s.short;
-    var b = document.createElement('button'); b.type = 'button'; b.className = 'btn addbtn'; b.dataset.add = s.id;
-    d.appendChild(b); cardsBox.appendChild(d);
-  });
   var menuBox = document.getElementById('menuList');
   SERVICES.forEach(function (s, i) {
     var d = document.createElement('div'); d.className = 'menu-item';
@@ -662,7 +689,7 @@
     d.querySelector('.ds').textContent = s.menu;
     d.querySelector('.xt').textContent = s.ex;
     var b = document.createElement('button'); b.type = 'button'; b.className = 'btn addbtn'; b.dataset.add = s.id;
-    d.querySelector('.mbody').appendChild(b); menuBox.appendChild(d);
+    d.appendChild(b); menuBox.appendChild(d);
   });
 
   function saveCart() { try { localStorage.setItem(LS, JSON.stringify(cart)); } catch (e) {} }
@@ -697,11 +724,6 @@
   }
   document.querySelectorAll('.addbtn').forEach(function (b) {
     b.addEventListener('click', function () { toggle(b.dataset.add); });
-  });
-  cardsBox.addEventListener('click', function (e) {
-    if (e.target.closest('.addbtn')) return;
-    var card = e.target.closest('.svc');
-    if (card) toggle(card.querySelector('.addbtn').dataset.add);
   });
   document.getElementById('cartChip').addEventListener('click', function () { introDone(); go('0,2'); });
 
@@ -1113,6 +1135,74 @@ setTimeout(function(){
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+})();
+</script>
+<script>
+/* Servo widget + chatbot (bottom right) */
+(function () {
+  var NOTES = {
+    '0,2': 'The menu board - every service, and the cart, in one room. Add what you need and send it as one email.',
+    '-1,2': 'Game production - complete worlds, engine to sound, shipped as one product.',
+    '-2,2': 'Music production - original tracks and sound, made in-house.',
+    '0,3': 'Branding & marketing - identity, search and social held to one standard.',
+    '0,4': 'Logo, video, SNS and blog - the brand\u2019s ongoing face, run as one desk.',
+    '1,2': 'Operations & AI - the daily repeat work, rebuilt as systems.',
+    '2,2': 'CRM, OCR, POS - the three systems a storefront business lives on.'
+  };
+  var widget = document.getElementById('servoWidget'), bubble = document.getElementById('swBubble');
+  var panel = document.getElementById('chatPanel'), msgs = document.getElementById('chatMsgs');
+  var chipsBox = document.getElementById('cpChips'), form = document.getElementById('cpForm'), input = document.getElementById('cpInput');
+  var greeted = false;
+  window.__roomHook = function (key) {
+    var on = key !== '0,0' && key !== '0,1';
+    widget.classList.toggle('on', on);
+    if (on) bubble.textContent = NOTES[key] || '';
+    if (!on) panel.classList.remove('open');
+  };
+  function addMsg(text, who) {
+    var d = document.createElement('div'); d.className = 'msg ' + who; d.textContent = text;
+    msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+  }
+  function answer(q) {
+    var t = ' ' + q.toLowerCase() + ' ';
+    if (/(price|prices|cost|quote|much|가격|얼마)/.test(t)) return 'No fixed prices - every project is scoped first. Put the services in the cart on the menu board and send it; Han replies with an estimate and a timeline.';
+    if (/(order|buy|cart|send|email|mail|주문|카트)/.test(t)) return 'On the menu board (the room above Servo), press + Add on the services you want, fill in your name and email in the cart box, and press send. Your mail app opens with everything filled in - han@espil.online gets it when you send.';
+    if (/(aio|all in one)/.test(t)) return 'AIO means All In One: chatbot, messenger, CRM, dashboard, cart, login and menu in one web app. This page is the demo, run on UseDesign.';
+    if (/(service|services|menu|list|offer|메뉴|서비스)/.test(t)) return 'Seven services: Music Production, Game Production, Branding & Marketing, Automate Operations, Business Dashboards, 3D Web Production, Video Production. The menu board explains each one with a picture.';
+    if (/(game|게임)/.test(t)) return 'Game Production: complete web games and living worlds - design, engine, UI, sound and live data shipped as one product. Espil.Online is the standing example; its room is left of the menu board.';
+    if (/(music|sound|bgm|음악)/.test(t)) return 'Music Production: original composition and sound, from a two-second UI sting to soundtrack sets that play for hours. Its room is two steps left of the menu board.';
+    if (/(brand|seo|marketing|브랜드)/.test(t)) return 'Branding & Marketing: identity, site, search and social held to one standard. At Nohproblem it filled the first pages of Naver and Google. Its room is above the menu board.';
+    if (/(video|film|영상|비디오)/.test(t)) return 'Video Production: planning, shooting and editing under one roof - dev-logs, brand films and shorts sized for the feed.';
+    if (/(3d|web|website|사이트)/.test(t)) return '3D Web Production: real 3D in a normal browser - cities, products and spaces with live light, weather and data, built with Three.js.';
+    if (/(dashboard|dashboards|대시보드)/.test(t)) return 'Business Dashboards: sales, prices, bookings and stock on one screen, fed by the systems you already use.';
+    if (/(crm|ocr|pos)/.test(t)) return 'CRM, OCR, POS: customer records and booking, paper turned into clean data, and tills designed from the operator\u2019s side. Their room is right of the menu board, past Operations.';
+    if (/(automat|operation|ai|자동)/.test(t)) return 'Automate Operations: the work a team repeats every day - sorting, copying, checking, generating - rebuilt as a system, with AI inside where it helps. Its room is right of the menu board.';
+    if (/(contact|human|han|person|연락)/.test(t)) return 'Han reads everything himself: han@espil.online. The fastest route is the cart on the menu board - it arrives as one tidy email.';
+    if (/(hello|hi|hey|안녕)/.test(t)) return '안녕하세요! Ask me about a service, prices, or how to order - or tap one of the topics below.';
+    if (/(who|servo|you)/.test(t)) return 'I am Servo, the guide of this AIO demo. I explain each room from the corner, and I answer questions here.';
+    if (/(thank|thanks|고마)/.test(t)) return 'You are welcome. If you are ready, the menu board above is where the cart lives.';
+    return 'I mostly know the services, the cart and how ordering works. Try asking about a service by name - or tap a topic below.';
+  }
+  var CHIPS = ['What is AIO?', 'The services', 'Prices?', 'How do I order?', 'Game production', 'Contact Han'];
+  CHIPS.forEach(function (c) {
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = c;
+    b.addEventListener('click', function () { addMsg(c, 'me'); addMsg(answer(c), 'servo'); });
+    chipsBox.appendChild(b);
+  });
+  function openPanel() {
+    panel.classList.add('open');
+    if (!greeted) { greeted = true; addMsg('안녕하세요! I am Servo. Ask me about the services, prices, or how to order.', 'servo'); }
+    setTimeout(function () { input.focus(); }, 60);
+  }
+  document.getElementById('swBtn').addEventListener('click', function () {
+    if (panel.classList.contains('open')) panel.classList.remove('open'); else openPanel();
+  });
+  document.getElementById('cpClose').addEventListener('click', function () { panel.classList.remove('open'); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = input.value.trim(); if (!v) return;
+    input.value = ''; addMsg(v, 'me'); addMsg(answer(v), 'servo');
+  });
 })();
 </script>
 </body>
