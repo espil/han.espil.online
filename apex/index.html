@@ -841,6 +841,9 @@ a, button, .place { cursor: url('/apex/logo/cursor-clean.svg') 13 13, pointer !i
 [id^="movers"] { overflow-x: auto !important; scrollbar-width: none; cursor: grab !important; }
 [id^="movers"]::-webkit-scrollbar { display: none; }
 [id^="movers"].dragging { cursor: grabbing !important; }
+#business .over-group { overflow-x: auto !important; scrollbar-width: none; cursor: grab !important; }
+#business .over-group::-webkit-scrollbar { display: none; }
+#business .over-group.dragging { cursor: grabbing !important; }
 #contact input, #contact textarea { background: rgba(255,255,255,.07) !important; border: 1px solid rgba(255,255,255,.38) !important; border-radius: 6px; color: #fff !important; padding: 12px 14px; width: 100%; box-sizing: border-box; font: inherit; }
 #contact input::placeholder, #contact textarea::placeholder { color: rgba(255,255,255,.55); }
 #contact .place { display: inline-block; background: #fff; color: #0f1e47 !important; padding: 12px 38px; border-radius: 999px; font-weight: 600; letter-spacing: .06em; height: auto !important; line-height: 1.2 !important; }
@@ -853,6 +856,7 @@ html, body { overflow-x: hidden !important; }
 #contact [class*="overlap-group"] { overflow: visible !important; }
 #contact .screen { overflow: visible !important; }
 @media (min-width: 700px) {
+  .logo { display: flex !important; align-items: center; justify-content: center; }
   .logo svg { position: relative !important; left: auto !important; top: auto !important; transform: none !important; display: block; margin: 0 auto; max-width: min(606px, 84vw); height: auto; }
   #navbar { top: 0 !important; opacity: 1 !important; background: rgba(15,30,71,.94); padding: 10px 0; }
 }
@@ -871,13 +875,23 @@ html, body { overflow-x: hidden !important; }
     window.addEventListener('pointermove', function (e) { if (down) el.scrollLeft = startL - (e.clientX - startX); });
     window.addEventListener('pointerup', function () { down = false; el.classList.remove('dragging'); });
   }
-  document.querySelectorAll('[id^="movers"]').forEach(function (el) {
+  document.querySelectorAll('[id^="movers"], #business .over-group').forEach(function (el) {
     dragScroll(el);
     if (el.id === 'movers-2') {
       el.addEventListener('wheel', function (e) {
         if (el.scrollWidth > el.clientWidth) { e.preventDefault(); el.scrollLeft += (e.deltaY + e.deltaX); }
       }, { passive: false });
     }
+  });
+  document.querySelectorAll('#business .over-group').forEach(function (el) {
+    el.addEventListener('wheel', function (e) {
+      var max = el.scrollWidth - el.clientWidth;
+      var d = e.deltaY !== 0 ? e.deltaY : e.deltaX;
+      if (max > 0 && ((d > 0 && el.scrollLeft < max) || (d < 0 && el.scrollLeft > 0))) {
+        el.scrollLeft += d;
+        e.preventDefault();
+      }
+    }, { passive: false });
   });
   var send = document.querySelector('#contact .place');
   if (send) {
