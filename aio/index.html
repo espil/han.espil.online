@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AIO - All In One | UseDesign</title>
-<meta name="description" content="AIO means All In One: chatbot, messenger, CRM, dashboard, cart, login and menu inside a single web app. This working demo uses UseDesign as the example - a service cart above, a menu board above that, and production rooms to the left, right and further up. Five-direction design: less click, more engaging.">
+<meta name="description" content="AIO means All In One: chatbot, messenger, CRM, dashboard, cart, login and menu inside a single web app. This working demo uses UseDesign as the example - Servo the chatbot and a service cart on the first screen, a menu board above, and production rooms to the left, right and further up. Every screen fits one page, no scrolling.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <style>
@@ -24,72 +24,72 @@
   .world{position:absolute; width:500vw; height:500vh; left:0; top:0;
     transform:translate(-200vw,-400vh); transition:transform .9s cubic-bezier(.7,0,.2,1)}
   .sec{position:absolute; width:100vw; height:100vh; height:100dvh; overflow-y:auto; overflow-x:hidden;
-    background:var(--paper); padding:34px 22px 130px; scrollbar-width:none}
+    background:var(--paper); padding:74px 20px 86px; scrollbar-width:none}
   .sec::-webkit-scrollbar{width:0; height:0}
   .sec[data-x="-2"]{left:0} .sec[data-x="-1"]{left:100vw} .sec[data-x="0"]{left:200vw}
   .sec[data-x="1"]{left:300vw} .sec[data-x="2"]{left:400vw}
   .sec[data-y="4"]{top:0} .sec[data-y="3"]{top:100vh} .sec[data-y="2"]{top:200vh}
   .sec[data-y="1"]{top:300vh} .sec[data-y="0"]{top:400vh}
-  .inner{max-width:1020px; margin:0 auto}
-  .kicker{font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); margin:0 0 10px}
-  h1.room{font-size:clamp(30px,4.6vw,46px); line-height:1.08; margin:0 0 14px; font-weight:700}
-  .lede{font-size:clamp(16px,2vw,19px); line-height:1.55; color:#2c2a26; max-width:720px; margin:0 0 26px}
-  h2.block{font-size:21px; margin:34px 0 12px}
-  .inc{list-style:none; margin:0 0 8px; padding:0}
-  .inc li{padding:7px 0 7px 22px; position:relative; font-size:16.5px; line-height:1.45; border-bottom:1px solid var(--line)}
-  .inc li::before{content:"•"; position:absolute; left:2px; color:var(--red)}
-  .work{font-size:16px; line-height:1.6; color:#2c2a26}
+  .inner{max-width:1060px; margin:0 auto; height:100%; display:flex; flex-direction:column}
+  .kicker{font-size:11.5px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); margin:0 0 8px}
+  h1.room{font-size:clamp(25px,3.6vw,38px); line-height:1.1; margin:0 0 10px; font-weight:700}
+  .lede{font-size:clamp(14px,1.7vw,16.5px); line-height:1.5; color:#2c2a26; max-width:760px; margin:0 0 18px}
+  h2.block{font-size:18.5px; margin:20px 0 9px}
+  .inc{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:7px}
+  .inc li{padding:6px 13px; font-size:14.5px; line-height:1.35; border:1px solid var(--line);
+    border-radius:999px; background:var(--card)}
+  .inc li::before{content:"• "; color:var(--red)}
+  .work{font-size:14.5px; line-height:1.55; color:#2c2a26; margin:0}
   .work b{color:var(--ink)}
-  .addrow{margin-top:26px; display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  .addrow{margin-top:auto; padding-top:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center}
   .btn{display:inline-block; border:1.5px solid var(--ink); background:var(--ink); color:var(--paper);
-    padding:11px 20px; border-radius:999px; font-size:15px; letter-spacing:.4px; text-decoration:none}
+    padding:10px 18px; border-radius:999px; font-size:14.5px; letter-spacing:.3px; text-decoration:none}
   .btn.ghost{background:transparent; color:var(--ink)}
   .btn.added{background:var(--red); border-color:var(--red); color:#fff}
   .btn:active{transform:scale(.97)}
-  .dirhint{margin-top:30px; font-size:13.5px; color:var(--mut); letter-spacing:.6px}
+  .dirhint{margin-top:12px; font-size:12.5px; color:var(--mut); letter-spacing:.5px}
 
-  /* ---------- main room: logo animation ---------- */
-  .sec.main{display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-bottom:34px}
-  .mark{width:min(120px,26vw); height:auto; opacity:0; transform:translateY(10px) scale(.96)}
+  /* ---------- main room: logo animation only, dead center ---------- */
+  .sec.main{display:flex; align-items:center; justify-content:center; padding:20px}
+  .stage{text-align:center}
+  .mark{display:block; margin:0 auto; width:min(118px,26vw); height:auto; opacity:0; transform:translateY(10px) scale(.96)}
   .play .mark{animation:markIn .9s ease .1s forwards}
   @keyframes markIn{to{opacity:1; transform:none}}
-  .word{width:min(620px,86vw); height:auto; margin-top:18px}
+  .word{display:block; margin:16px auto 0; width:min(600px,84vw); height:auto}
   .word text{font-family:Georgia,'Times New Roman',serif; font-weight:700; letter-spacing:6px}
   .word tspan{fill:#ddd6c6}
   .play .word tspan{animation:inkIn .55s ease forwards}
   @keyframes inkIn{to{fill:var(--ink)}}
-  .tagline{margin-top:20px; font-size:13px; letter-spacing:3.5px; text-transform:uppercase; color:var(--mut); opacity:0}
+  .tagline{margin-top:18px; font-size:12.5px; letter-spacing:3.5px; text-transform:uppercase; color:var(--mut); opacity:0}
   .play .tagline{animation:fadeUp .7s ease 1.9s forwards}
-  .def{margin-top:16px; max-width:620px; font-size:16.5px; line-height:1.55; color:#2c2a26; opacity:0}
-  .play .def{animation:fadeUp .7s ease 2.15s forwards}
-  .def b{color:var(--ink)}
   @keyframes fadeUp{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   .intro-done .word tspan{fill:var(--ink); animation:none}
-  .intro-done .mark,.intro-done .tagline,.intro-done .def{opacity:1; animation:none; transform:none}
+  .intro-done .mark,.intro-done .tagline{opacity:1; animation:none; transform:none}
 
-  /* guide: PC keypad / mobile swipe */
-  .guide{margin-top:34px; opacity:0; pointer-events:none; transition:opacity .6s ease}
-  .play .guide{animation:fadeUp .7s ease 2.5s forwards; pointer-events:auto}
-  .intro-done .guide{opacity:1; animation:none; pointer-events:auto}
-  .keypad{display:none; flex-direction:column; align-items:center; gap:6px}
-  html:not(.touch) .keypad{display:flex}
-  .keypad .row{display:flex; gap:6px}
-  .key{width:52px; height:52px; border:1.5px solid var(--line); border-bottom-width:3px; border-radius:10px;
-    background:var(--card); color:var(--mut); font-size:21px; display:flex; align-items:center; justify-content:center}
-  .key.live{color:var(--ink); border-color:var(--ink); cursor:pointer}
-  .key.live:hover{background:var(--ink); color:var(--paper)}
-  .guide-cap{margin-top:12px; font-size:13.5px; color:var(--mut); letter-spacing:.6px}
-  .swipe{display:none; flex-direction:column; align-items:center}
-  html.touch .swipe{display:flex}
-  .swipe .chev{font-size:30px; color:var(--red); line-height:.8; animation:chevDown 1.6s ease-in-out infinite}
-  .swipe .chev.c2{animation-delay:.18s} .swipe .chev.c3{animation-delay:.36s}
-  @keyframes chevDown{0%,100%{opacity:.15; transform:translateY(-5px)} 50%{opacity:1; transform:translateY(3px)}}
+  /* ---------- Servo ---------- */
+  .servo{display:flex; gap:12px; align-items:flex-start; margin-bottom:16px}
+  .servo .face{flex:0 0 auto; width:48px; height:48px; border-radius:50%; overflow:hidden;
+    border:1.5px solid var(--ink); background:var(--paper)}
+  .servo .face img{width:100%; height:100%; object-fit:cover; display:block}
+  .servo .bubbles{display:flex; flex-direction:column; gap:7px; max-width:640px}
+  .bubble{background:var(--card); border:1px solid var(--line); border-radius:4px 16px 16px 16px;
+    padding:10px 15px; font-size:15px; line-height:1.45; color:#2c2a26;
+    opacity:0; transform:translateY(8px)}
+  .bubble b{color:var(--ink)} .bubble .nm{color:var(--red); font-weight:700}
+  .bubble.bM{display:none}
+  .served .bubble{animation:fadeUp .55s ease forwards}
+  .served .bubble.b2{animation-delay:.55s}
+  .bubble .only-touch{display:none}
+  html.touch .bubble .only-touch{display:inline}
+  html.touch .bubble .only-pc{display:none}
+  .only-touch{display:none}
+  html.touch .only-touch{display:inline}
+  html.touch .only-pc{display:none}
 
-  /* ---------- edge arrows ---------- */
+  /* ---------- edge arrows / cart chip / minimap ---------- */
   .edge{position:fixed; z-index:60; display:none; align-items:center; gap:7px; border:1.5px solid var(--ink);
     background:var(--ink); color:var(--paper); border-radius:999px; padding:9px 16px; font-size:13.5px; letter-spacing:.5px;
     box-shadow:0 4px 18px rgba(22,22,22,.25)}
-  .edge small{opacity:.75; font-size:11.5px; letter-spacing:1px; text-transform:uppercase}
   .edge.on{display:flex}
   .edge:active{transform:scale(.96)}
   #edgeUp{top:14px; left:50%; transform:translateX(-50%)}
@@ -100,12 +100,9 @@
   #edgeLeft:active{transform:translateY(-50%) scale(.96)}
   #edgeRight{right:14px; top:50%; transform:translateY(-50%)}
   #edgeRight:active{transform:translateY(-50%) scale(.96)}
-  @media (max-width:640px){ .edge{padding:8px 12px; font-size:12.5px} .edge small{display:none} }
-
-  /* ---------- cart chip + minimap + scroll diamond ---------- */
+  @media (max-width:640px){ .edge{padding:8px 12px; font-size:12.5px} }
   #cartChip{position:fixed; top:14px; right:14px; z-index:61; border:1.5px solid var(--red); background:var(--red);
     color:#fff; border-radius:999px; padding:9px 16px; font-size:14px; letter-spacing:.4px; box-shadow:0 4px 18px rgba(200,16,46,.3)}
-  #cartChip b{font-size:15px}
   #minimap{position:fixed; right:16px; bottom:16px; z-index:56; background:rgba(22,22,22,.45);
     border:1px solid rgba(240,238,233,.35); border-radius:8px; padding:7px; backdrop-filter:blur(2px)}
   #minimap .mm-grid{display:grid; grid-template-columns:repeat(5,15px); grid-template-rows:repeat(5,15px); gap:2px}
@@ -115,98 +112,183 @@
   #minimap .mm-name{margin-top:5px; font-size:9.5px; letter-spacing:.4px; color:rgba(240,238,233,.92);
     text-align:center; max-width:89px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   @media (max-width:700px){ #minimap .mm-grid{grid-template-columns:repeat(5,11px); grid-template-rows:repeat(5,11px)} }
-  #aio-track{position:fixed; right:17px; top:50%; transform:translateY(-50%); width:13px; height:min(46vh,430px);
-    z-index:55; pointer-events:none; opacity:0; transition:opacity .3s ease}
-  #aio-track.on{opacity:1}
-  #aio-track::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:1px; margin-left:-.5px; background:#161616; opacity:.45}
-  #aio-track .cap{position:absolute; left:50%; width:5px; height:5px; border:1px solid #161616; transform:translate(-50%,-50%) rotate(45deg)}
-  #aio-track .cap.top{top:0} #aio-track .cap.bot{top:100%}
-  #aio-diamond{position:absolute; left:50%; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; background:#161616; transform:rotate(45deg)}
-  #aio-shadow{position:absolute; left:50%; top:0; width:1px; margin-left:-.5px; background:#161616; opacity:.85; height:0}
 
-  /* ---------- service cards / menu board ---------- */
-  .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(272px,1fr)); gap:14px; margin-top:6px}
-  .svc{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 20px 18px; display:flex; flex-direction:column}
-  .svc h3{margin:0 0 8px; font-size:19px}
-  .svc p{margin:0 0 16px; font-size:15px; line-height:1.5; color:#3a372f; flex:1}
-  .svc .btn{align-self:flex-start; padding:9px 18px; font-size:14px}
-  .menu-item{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px 24px; margin-bottom:14px}
-  .menu-item h3{margin:0 0 8px; font-size:20px}
-  .menu-item h3 .no{color:var(--red); margin-right:8px}
-  .menu-item p{margin:0 0 10px; font-size:16px; line-height:1.55; color:#2c2a26}
-  .menu-item .ex{font-size:15px; line-height:1.55; color:var(--mut)}
-  .menu-item .ex b{color:var(--gold); font-weight:700; letter-spacing:.4px}
-  .menu-item .btn{margin-top:12px; padding:8px 16px; font-size:13.5px}
-
-  /* ---------- cart room ---------- */
-  .cartbox{background:var(--card); border:1.5px solid var(--ink); border-radius:16px; padding:24px; margin-top:28px}
-  .cartbox h2{margin:0 0 6px; font-size:23px}
-  .cartbox .note{font-size:14.5px; color:var(--mut); line-height:1.5; margin:0 0 16px}
-  #cartList{list-style:none; margin:0 0 18px; padding:0}
-  #cartList li{display:flex; align-items:center; justify-content:space-between; gap:10px;
-    padding:10px 4px; border-bottom:1px solid var(--line); font-size:16.5px}
-  #cartList .rm{border:1px solid var(--line); background:transparent; border-radius:999px; padding:4px 12px; font-size:13px; color:var(--mut)}
-  #cartList .empty{color:var(--mut); font-size:15.5px; border-bottom:0}
-  .cform{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  /* ---------- cart screen ---------- */
+  .cartwrap{display:grid; grid-template-columns:1fr 348px; gap:16px; flex:1; min-height:0; align-items:start}
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .svc{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:14px 16px; display:flex; flex-direction:column}
+  .svc h3{margin:0 0 5px; font-size:16.5px}
+  .svc p{margin:0 0 11px; font-size:13.5px; line-height:1.45; color:#3a372f; flex:1}
+  .svc .btn{align-self:flex-start; padding:7px 14px; font-size:13px}
+  .cartbox{background:var(--card); border:1.5px solid var(--ink); border-radius:15px; padding:18px 20px}
+  .cartbox h2{margin:0 0 4px; font-size:20px}
+  .cartbox .note{font-size:13px; color:var(--mut); line-height:1.45; margin:0 0 10px}
+  #cartList{list-style:none; margin:0 0 10px; padding:0 0 3px; display:flex; flex-wrap:nowrap; gap:6px;
+    overflow-x:auto; scrollbar-width:none}
+  #cartList::-webkit-scrollbar{width:0; height:0}
+  #cartList li{display:inline-flex; flex:0 0 auto; align-items:center; gap:8px; padding:5px 6px 5px 12px;
+    border:1px solid var(--line); border-radius:999px; font-size:13.5px; background:#fff}
+  #cartList .rm{border:0; background:transparent; padding:2px 8px; font-size:12px; color:var(--red); border-radius:999px}
+  #cartList .empty{border:0; background:transparent; padding:2px 0; color:var(--mut); font-size:13.5px; border-radius:0}
+  .cform{display:grid; grid-template-columns:1fr 1fr; column-gap:10px}
   .cform .full{grid-column:1/-1}
-  .cform label{display:block; font-size:12.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--mut); margin-bottom:6px}
-  .cform input,.cform textarea{width:100%; border:1px solid var(--line); border-radius:10px; background:#fff;
-    padding:12px 14px; font-size:16px; color:var(--ink)}
+  .cform label{display:block; font-size:11px; letter-spacing:1.1px; text-transform:uppercase; color:var(--mut); margin:9px 0 5px}
+  .cform input,.cform textarea{width:100%; border:1px solid var(--line); border-radius:9px; background:#fff;
+    padding:9px 12px; font-size:15px; color:var(--ink)}
   .cform input:focus,.cform textarea:focus{outline:2px solid var(--red); outline-offset:1px}
   .cform input.bad{border-color:var(--red); background:#fdf1f2}
-  @media (max-width:640px){ .cform{grid-template-columns:1fr} }
-  #sendBtn{margin-top:16px; width:100%; padding:15px; font-size:16.5px}
-  #sendNote{font-size:14px; color:var(--mut); margin-top:10px; min-height:20px}
-  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
-  @media (max-width:760px){ .grid2{grid-template-columns:1fr} }
-  .mini{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px}
-  .mini h3{margin:0 0 8px; font-size:18.5px}
-  .mini p{margin:0; font-size:15px; line-height:1.55; color:#3a372f}
+  #sendBtn{margin-top:13px; width:100%; padding:12px; font-size:15.5px}
+  #sendNote{font-size:12.5px; color:var(--mut); margin-top:8px; min-height:17px; line-height:1.4}
+
+  /* ---------- menu board ---------- */
+  .menugrid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .menu-item{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:14px 17px}
+  .menu-item h3{margin:0 0 5px; font-size:17px}
+  .menu-item h3 .no{color:var(--red); margin-right:7px}
+  .menu-item p{margin:0 0 6px; font-size:13.8px; line-height:1.45; color:#2c2a26}
+  .menu-item .ex{font-size:12.8px; line-height:1.45; color:var(--mut); margin:0}
+  .menu-item .ex b{color:var(--gold); font-weight:700; letter-spacing:.3px}
+  .menu-item .btn{margin-top:9px; padding:6px 13px; font-size:12.5px}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .mini{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:15px 18px}
+  .mini h3{margin:0 0 6px; font-size:16.5px}
+  .mini p{margin:0; font-size:13.8px; line-height:1.5; color:#3a372f}
+
+  /* ---------- short / small screens: tighten until it fits ---------- */
+  @media (max-width:900px){
+    .cartwrap{grid-template-columns:1fr; gap:12px}
+    .cards{grid-template-columns:1fr}
+    .sec[data-name="Cart"] .kicker{display:none}
+    .bubble.bM{font-size:12.5px; line-height:1.38}
+    #sendBtn{padding:10px}
+    h1.room{font-size:24px}
+    #minimap .mm-grid{grid-template-columns:repeat(5,9px); grid-template-rows:repeat(5,9px)}
+    .svc,.cartbox,.fld{min-width:0}
+    .cform input,.cform textarea{min-width:0}
+    .servo{margin-bottom:12px}
+    .servo .bubbles{gap:5px}
+    #cartList{margin-bottom:8px}
+    #cartList li{padding-top:4px; padding-bottom:4px}
+    .cartbox h2{margin-bottom:2px}
+    #sendNote{margin-top:6px}
+    #sendBtn{margin-top:11px}
+    .sec{padding:62px 16px 76px}
+    .cards{gap:5px}
+    .svc{flex-direction:row; align-items:center; justify-content:space-between; gap:8px; padding:4px 10px; min-height:32px; cursor:pointer}
+    .svc h3{margin:0; font-size:14.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:1}
+    .svc p{display:none}
+    .svc .btn{padding:3px 10px; font-size:12px; flex:0 0 auto}
+    .menugrid{gap:8px}
+    .menu-item{padding:11px 13px}
+    .menu-item h3{font-size:15.5px}
+    .menu-item p{font-size:12.8px; line-height:1.4}
+    .menu-item .ex{display:none}
+    .menu-item .btn{margin-top:7px; padding:5px 11px; font-size:12px}
+    .grid2{gap:8px}
+    .mini{padding:12px 14px}
+    .mini h3{font-size:15px}
+    .mini p{font-size:12.8px; line-height:1.45}
+    .bubble{font-size:13.8px; padding:9px 13px}
+    .bubble.b1,.bubble.b2{display:none}
+    .bubble.bM{display:block}
+    .served .bubble.bM{animation:fadeUp .55s ease .25s forwards}
+    .cform textarea{height:40px}
+    .cartbox .note{display:none}
+    .cartbox{padding:13px 17px}
+    .lede{font-size:14px; margin-bottom:12px}
+    .menu-item p{display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+    .mini p{display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden}
+    .inc{display:block}
+    .inc li{display:block; border:0; border-bottom:1px solid var(--line); border-radius:0; background:transparent; padding:5px 2px; font-size:14px}
+    .dirhint{display:none}
+    .addrow .btn{padding:8px 14px; font-size:13.5px}
+  }
+  @media (max-height:800px){
+    .sec{padding-top:64px; padding-bottom:74px}
+    h1.room{font-size:clamp(23px,3vw,31px); margin-bottom:7px}
+    .lede{margin-bottom:12px}
+    .servo{margin-bottom:11px}
+    .bubble{padding:8px 13px; font-size:14px}
+    .svc{padding:10px 13px} .svc p{margin-bottom:8px; font-size:12.8px; line-height:1.4}
+    .svc h3{font-size:15.5px; margin-bottom:3px}
+    .cards{gap:8px}
+    .menu-item{padding:10px 14px}
+    .menu-item p{line-height:1.42}
+    .menu-item .ex{display:none}
+    .cartbox{padding:14px 17px}
+    .cartbox .note{display:none}
+    h2.block{margin:14px 0 7px}
+  }
+  @media (max-width:900px) and (max-height:780px){
+    .sec{padding-top:50px; padding-bottom:50px}
+    .servo{gap:9px; margin-bottom:8px}
+    .servo .face{width:38px; height:38px}
+    .bubble{font-size:12.8px; padding:6px 11px; line-height:1.4}
+    .cards{gap:4px}
+    .svc{min-height:28px; padding:3px 10px}
+    .svc .btn{padding:2px 8px; font-size:11.5px}
+    .cartbox{padding:11px 15px}
+    .cartbox h2{font-size:17px}
+    .cform label{margin:6px 0 4px}
+    #cartList{margin-bottom:8px}
+    #cartList li{font-size:12.2px; padding:3px 4px 3px 9px}
+    #sendBtn{margin-top:10px}
+    #sendNote{line-height:1.35; font-size:11.5px}
+    .bubble.bM{font-size:12.2px; line-height:1.35}
+    h1.room{font-size:22px}
+    .cform input,.cform textarea{padding:7px 10px}
+    .cform textarea{height:38px}
+    #sendBtn{padding:10px}
+    .work{font-size:13.5px}
+    .menu-item p{-webkit-line-clamp:2}
+    .sec[data-name="Menu Board"] .lede{display:none}
+    .lede{display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+    h2.block{margin:11px 0 6px; font-size:16.5px}
+  }
 </style>
 </head>
 <body>
 <div class="viewport" id="viewport">
  <div class="world" id="world">
 
-  <!-- MAIN (0,0) -->
+  <!-- MAIN (0,0): logo animation only -->
   <section class="sec main" data-x="0" data-y="0" data-name="Main">
-    <img class="mark" src="/assets/usedesign-logo.svg" alt="UseDesign logo">
-    <svg class="word" viewBox="0 0 680 104" role="img" aria-label="USEDESIGN"><text x="340" y="74" text-anchor="middle" font-size="64"><tspan style="animation-delay:.15s">U</tspan><tspan style="animation-delay:.30s">S</tspan><tspan style="animation-delay:.45s">E</tspan><tspan style="animation-delay:.60s">D</tspan><tspan style="animation-delay:.75s">E</tspan><tspan style="animation-delay:.90s">S</tspan><tspan style="animation-delay:1.05s">I</tspan><tspan style="animation-delay:1.20s">G</tspan><tspan style="animation-delay:1.35s">N</tspan></text></svg>
-    <p class="tagline">All In One - AIO</p>
-    <p class="def"><b>Chatbot, messenger, CRM, dashboard, cart, login and menu</b> - everything a business runs on, inside one web app. No app store, no installs. This page is the working demo, with <b>UseDesign</b> as the example: the cart is above, the menu board above that, and the production rooms branch off from there.</p>
-    <div class="guide" id="guide">
-      <div class="keypad" aria-hidden="false">
-        <div class="row"><button class="key live" data-go="up" aria-label="Go up">↑</button></div>
-        <div class="row"><button class="key" data-go="left" aria-label="Go left">←</button><button class="key" data-go="down" aria-label="Go down">↓</button><button class="key" data-go="right" aria-label="Go right">→</button></div>
-        <p class="guide-cap">Use the arrow keys, or click. Start by going up - the cart is waiting.</p>
-      </div>
-      <div class="swipe">
-        <div><span class="chev c1">⌄</span><br><span class="chev c2">⌄</span><br><span class="chev c3">⌄</span></div>
-        <p class="guide-cap">Drag the world to explore - drag down, and the cart above slides into view.</p>
-      </div>
+    <div class="stage">
+      <img class="mark" src="/assets/usedesign-logo.svg" alt="UseDesign logo">
+      <svg class="word" viewBox="0 0 680 104" role="img" aria-label="USEDESIGN"><text x="340" y="74" text-anchor="middle" font-size="64"><tspan style="animation-delay:.15s">U</tspan><tspan style="animation-delay:.30s">S</tspan><tspan style="animation-delay:.45s">E</tspan><tspan style="animation-delay:.60s">D</tspan><tspan style="animation-delay:.75s">E</tspan><tspan style="animation-delay:.90s">S</tspan><tspan style="animation-delay:1.05s">I</tspan><tspan style="animation-delay:1.20s">G</tspan><tspan style="animation-delay:1.35s">N</tspan></text></svg>
+      <p class="tagline">All In One - AIO</p>
     </div>
   </section>
 
-  <!-- CART (0,1) -->
+  <!-- FIRST SCREEN: SERVO + CART (0,1) -->
   <section class="sec" data-x="0" data-y="1" data-name="Cart">
     <div class="inner">
+      <div class="servo" id="servo">
+        <div class="face"><img src="/assets/usedesign-icon.svg" alt="Servo"></div>
+        <div class="bubbles">
+          <div class="bubble b1"><span class="nm">Servo</span> · 안녕하세요! Hello - I am <b>Servo</b>, your guide. <b>AIO</b> means <b>All In One</b>: chatbot, messenger, CRM, dashboard, cart, login and menu in one web app. This demo runs on <b>UseDesign</b>.</div>
+          <div class="bubble b2">This screen is the <b>shopping cart</b> - add services and send them to Han in one email. <span class="only-pc">Then press the <b>↑ arrow key</b> to go up to the menu board.</span><span class="only-touch">Then <b>swipe down</b> for the menu board above.</span></div>
+          <div class="bubble bM"><span class="nm">Servo</span> · 안녕하세요! I am <b>Servo</b>, your guide. <b>AIO</b> is <b>All In One</b> - chatbot, messenger, CRM, dashboard, cart, login, menu in one web app (example: <b>UseDesign</b>). Add services to the cart and email them to Han - <span class="only-pc">then press <b>↑</b> for the menu board.</span><span class="only-touch">then <b>swipe down</b> for the menu board.</span></div>
+        </div>
+      </div>
       <p class="kicker">UseDesign · Shopping Cart</p>
       <h1 class="room">Digital services, in one cart.</h1>
-      <p class="lede">Seven services cover most of what a business needs online. Add what you need, then send the whole cart to me in one email - no checkout, no card. The menu board one floor up explains each service with examples.</p>
-      <div class="cards" id="svcCards"></div>
-      <div class="cartbox">
-        <h2>Your cart</h2>
-        <p class="note">No fixed prices on the shelf - every project is scoped first. Send the cart and I will reply with an estimate and a timeline.</p>
-        <ul id="cartList"></ul>
-        <form class="cform" id="cartForm" novalidate>
-          <div><label for="cfName">Your name</label><input id="cfName" type="text" autocomplete="name" placeholder="Jane Cooper"></div>
-          <div><label for="cfMail">Your email</label><input id="cfMail" type="email" autocomplete="email" placeholder="jane@example.com"></div>
-          <div class="full"><label for="cfMsg">Anything I should know? (optional)</label><textarea id="cfMsg" rows="3" placeholder="Our bakery needs a new site and online orders by spring..."></textarea></div>
-        </form>
-        <button class="btn" id="sendBtn" type="button">Send this cart to me by email</button>
-        <p id="sendNote">The button opens your mail app with everything filled in - the cart, your name and your note. Nothing is sent until you press send there.</p>
+      <div class="cartwrap">
+        <div class="cards" id="svcCards"></div>
+        <div class="cartbox">
+          <h2>Your cart</h2>
+          <p class="note">No fixed prices - every project is scoped first. Send the cart and I reply with an estimate and a timeline.</p>
+          <ul id="cartList"></ul>
+          <form class="cform" id="cartForm" novalidate>
+            <div class="fld"><label for="cfName">Your name</label><input id="cfName" type="text" autocomplete="name" placeholder="Jane Cooper"></div>
+            <div class="fld"><label for="cfMail">Your email</label><input id="cfMail" type="email" autocomplete="email" placeholder="jane@example.com"></div>
+            <div class="fld full"><label for="cfMsg">Note (optional)</label><textarea id="cfMsg" rows="2" placeholder="Our bakery needs a new site and online orders by spring..."></textarea></div>
+          </form>
+          <button class="btn" id="sendBtn" type="button">Send this cart to me by email</button>
+          <p id="sendNote"><span class="only-pc">Opens your mail app with the cart filled in - nothing sends until you press send there.</span><span class="only-touch">Your mail app opens with the cart filled in.</span></p>
+        </div>
       </div>
-      <p class="dirhint">↑ Menu board - descriptions and examples · ↓ Main</p>
+      <p class="dirhint">↑ Menu board · ↓ Main</p>
     </div>
   </section>
 
@@ -215,9 +297,9 @@
     <div class="inner">
       <p class="kicker">UseDesign · Menu Board</p>
       <h1 class="room">What each service is.</h1>
-      <p class="lede">The same seven services as the cart below, explained - with the work that proves them. From here the building branches: game and music production to the left, operations and systems to the right, branding and marketing further up.</p>
-      <div id="menuList"></div>
-      <p class="dirhint">← Game production, then Music · → Operations &amp; AI, then CRM · OCR · POS · ↑ Branding &amp; Marketing · ↓ Cart</p>
+      <p class="lede">The same seven services as the cart below, explained with the work that proves them. From here the building branches: game and music to the left, operations and systems to the right, branding further up.</p>
+      <div class="menugrid" id="menuList"></div>
+      <p class="dirhint">← Game · Music · → Operations &amp; AI · CRM · OCR · POS · ↑ Branding &amp; Marketing · ↓ Cart</p>
     </div>
   </section>
 
@@ -236,7 +318,7 @@
         <li>Character and asset pipelines</li>
       </ul>
       <h2 class="block">Selected work</h2>
-      <p class="work"><b>Espil.Online</b> - a living replica of real cities with real-time sky, weather and transit, built and operated end to end. <a href="https://espil.online" target="_blank" rel="noopener">Visit the world</a> · <a href="/case-espil-online/">Read the case study</a><br>
+      <p class="work"><b>Espil.Online</b> - a living replica of real cities with real-time sky, weather and transit, built and operated end to end. <a href="https://espil.online" target="_blank" rel="noopener">Visit the world</a> · <a href="/case-espil-online/">Case study</a><br>
       <b>Zealandia</b> - the game world of Espil.Online, set on New Zealand's hidden land. In production now.<br>
       <b>Character Customizer</b> - a paper-doll character studio with layered parts and exports. <a href="/character-customizer/">See how it works</a></p>
       <div class="addrow"><button class="btn addbtn" data-add="game" type="button">+ Add Game Production to cart</button></div>
@@ -283,7 +365,7 @@
       </ul>
       <h2 class="block">Selected work</h2>
       <p class="work"><b>UseDesign client network</b> - fifty or more business sites designed, built and kept to one standard.<br>
-      <b>Nohproblem Consulting</b> - started as the only employee; on early-child-care searches it filled the first pages of both Naver and Google, the YouTube channel grew to its first 1,000 subscribers, and my videos are still its most-watched.</p>
+      <b>Nohproblem Consulting</b> - started as the only employee; on early-child-care searches it filled the first pages of both Naver and Google, and my videos are still its most-watched.</p>
       <div class="addrow"><button class="btn addbtn" data-add="branding" type="button">+ Add Branding &amp; Marketing to cart</button></div>
       <p class="dirhint">↑ Logo · Video · SNS · Blog · ↓ Menu board</p>
     </div>
@@ -328,7 +410,7 @@
       </ul>
       <h2 class="block">Selected work</h2>
       <p class="work"><b>HMC (Han Mobility)</b> - an intranet that began as spreadsheets and CSV and grew into an API-based system; work that might have required hiring interns became a permanently automated task.<br>
-      <b>Discover Holidays</b> - two regions' tariffs produced by one pair of hands, with the style guide enforced by automation.<br>
+      <b>Discover Holidays</b> - two regions' tariffs produced by one pair of hands, the style guide enforced by automation.<br>
       <b>Plushy AI + Ollama</b> - my own local AI assistants: private, on my machines, no data leaving the building.</p>
       <div class="addrow">
         <button class="btn addbtn" data-add="operations" type="button">+ Add Automate Operations to cart</button>
@@ -366,7 +448,6 @@
 <button class="edge" id="edgeLeft" type="button"></button>
 <button class="edge" id="edgeRight" type="button"></button>
 <button id="cartChip" type="button">Cart · <b id="cartCount">0</b></button>
-<div id="aio-track" aria-hidden="true"><span class="cap top"></span><span id="aio-shadow"></span><span id="aio-diamond"></span><span class="cap bot"></span></div>
 <div id="minimap" aria-hidden="true"><div class="mm-grid" id="mmGrid"></div><div class="mm-name" id="mmName">Main</div></div>
 <script src="/chrome/site-chrome.js?v=9" defer></script>
 <script>
@@ -376,25 +457,25 @@
 
   var SERVICES = [
     { id: 'music',      name: 'Music Production',      short: 'Original tracks, themes and sound for games, video and brands.',
-      desc: 'Composed, arranged and mixed in-house, from a two-second interface sting to a full soundtrack set that can play for hours without repeating itself.',
-      ex: 'The Espil.Online soundtrack - an owned set of original tracks in random rotation inside the world.' },
+      menu: 'Composed, arranged and mixed in-house - from a UI sting to a soundtrack set that plays for hours without repeating.',
+      ex: 'The Espil.Online soundtrack: an owned set of original tracks in random rotation inside the world.' },
     { id: 'game',       name: 'Game Production',       short: 'Complete web games and living worlds, built end to end.',
-      desc: 'Design, engine, UI, sound and live data shipped as one product by one pair of hands. Browser-first, so anyone with a link can play.',
+      menu: 'Design, engine, UI, sound and live data shipped as one product. Browser-first, so anyone with a link can play.',
       ex: 'Espil.Online, a living replica of real cities - and Zealandia, its game world, now in production.' },
     { id: 'branding',   name: 'Branding & Marketing',  short: 'Identity, SEO and content that make a business the answer.',
-      desc: 'A brand is a standard kept everywhere at once: identity, site, search and social pulling in one direction, so a small business reads as a name people already know.',
-      ex: 'Nohproblem - on early-child-care searches it filled the first pages of both Naver and Google, and the local businesses promoted with it grew into names Vancouver knows.' },
+      menu: 'Identity, site, search and social held to one standard, so a small business reads as a name people already know.',
+      ex: 'Nohproblem filled the first pages of Naver and Google on early-child-care searches; partner businesses grew into Vancouver names.' },
     { id: 'operations', name: 'Automate Operations',   short: 'Repetitive office work turned into systems that run themselves.',
-      desc: 'The work your team repeats every day - sorting, copying, checking, generating - rebuilt as a system that does it the same way every time, with AI inside it where AI helps.',
-      ex: 'At HMC, an intranet that grew from CSV sheets into an API system and did work that would otherwise have needed interns.' },
+      menu: 'The daily repeat work - sorting, copying, checking, generating - rebuilt as a system, with AI inside where AI helps.',
+      ex: 'At HMC, an intranet that grew from CSV sheets into an API system and did work that would have needed interns.' },
     { id: 'dashboards', name: 'Business Dashboards',   short: 'Your numbers on one screen, current every time you look.',
-      desc: 'Sales, prices, bookings and stock on one screen, fed by the systems you already use and readable at a glance - no spreadsheet archaeology.',
-      ex: 'At Discover Holidays, tariff data for two whole regions and a partner-hotel map, kept current by one pair of hands.' },
+      menu: 'Sales, prices, bookings and stock on one screen, fed by the systems you already use, readable at a glance.',
+      ex: 'At Discover Holidays, tariff data for two regions and a partner-hotel map, kept current by one pair of hands.' },
     { id: 'web3d',      name: '3D Web Production',     short: 'Real 3D in the browser - cities, products and spaces, no installs.',
-      desc: 'Interactive 3D that runs in a normal browser: real-time light, weather and data on real places, built with Three.js and shipped as ordinary web pages.',
-      ex: 'Espil.Online\u2019s Vancouver replica - and the /system room on this site, a 3D documentation of how it is built.' },
+      menu: 'Interactive 3D in a normal browser: real-time light, weather and data on real places, built with Three.js.',
+      ex: 'Espil.Online\u2019s Vancouver replica - and the /system room here, a 3D documentation of how it is built.' },
     { id: 'video',      name: 'Video Production',      short: 'Dev-logs, brand films and shorts, shot and edited in-house.',
-      desc: 'Planning, shooting and editing under one roof, sized for the feed: development logs, product films, shorts and channel series.',
+      menu: 'Planning, shooting and editing under one roof, sized for the feed: dev-logs, product films, shorts, series.',
       ex: 'The Nohproblem channel - my videos passed 500,000 views combined and are still its most-watched.' }
   ];
   function svc(id) { for (var i = 0; i < SERVICES.length; i++) if (SERVICES[i].id === id) return SERVICES[i]; return null; }
@@ -423,26 +504,15 @@
     mmGrid.appendChild(c); mmCells[key] = c;
   }
 
-  var track = document.getElementById('aio-track'), diamond = document.getElementById('aio-diamond'), shadow = document.getElementById('aio-shadow');
-  function updTrack() {
-    var s = byPos[cur]; if (!s) return;
-    var max = s.scrollHeight - s.clientHeight;
-    if (max <= 4) { track.classList.remove('on'); return; }
-    track.classList.add('on');
-    var f = Math.max(0, Math.min(1, s.scrollTop / max));
-    diamond.style.top = (f * 100) + '%'; shadow.style.height = (f * 100) + '%';
-  }
-  secs.forEach(function (s) { s.addEventListener('scroll', function () { if (s === byPos[cur]) updTrack(); }, { passive: true }); });
-
+  var servoEl = document.getElementById('servo'), servoServed = false;
   function refreshChrome() {
     var L = LINKS[cur];
     Object.keys(edges).forEach(function (d) {
-      if (L[d]) { edges[d].innerHTML = ARROW[d] + ' ' + NAMES[L[d]] + (d === 'up' || d === 'down' ? '' : ''); edges[d].classList.add('on'); }
+      if (L[d]) { edges[d].textContent = ARROW[d] + ' ' + NAMES[L[d]]; edges[d].classList.add('on'); }
       else edges[d].classList.remove('on');
     });
     Object.keys(mmCells).forEach(function (k) { mmCells[k].classList.toggle('cur', k === cur); });
     mmName.textContent = NAMES[cur];
-    updTrack();
   }
   function go(key) {
     if (!byPos[key] || key === cur) return;
@@ -451,20 +521,18 @@
     cur = key;
     var p = key.split(','), x = +p[0], y = +p[1];
     world.style.transform = 'translate(' + (-(x + 2) * 100) + 'vw,' + (-(4 - y) * 100) + 'vh)';
+    if (key === '0,1' && !servoServed) { servoServed = true; setTimeout(function () { servoEl.classList.add('served'); }, 450); }
     refreshChrome();
   }
   function step(dir) { var t = LINKS[cur][dir]; if (t) { introDone(); go(t); } }
   Object.keys(edges).forEach(function (d) { edges[d].addEventListener('click', function () { step(d); }); });
-  document.querySelectorAll('.key').forEach(function (k) {
-    k.addEventListener('click', function () { if (LINKS[cur][k.dataset.go]) step(k.dataset.go); });
-  });
   document.addEventListener('keydown', function (e) {
     var t = e.target, tag = t && t.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
     var map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
     if (map[e.key]) { e.preventDefault(); step(map[e.key]); }
   });
-  /* swipe: drag-the-world. Vertical moves fire only at the room's scroll edge. */
+  /* swipe: drag the world (rooms are one page, nothing scrolls) */
   var ts = null;
   var vp = document.getElementById('viewport');
   vp.addEventListener('touchstart', function (e) { if (e.touches.length === 1) ts = { x: e.touches[0].clientX, y: e.touches[0].clientY }; }, { passive: true });
@@ -472,22 +540,23 @@
     if (!ts) return;
     var dx = e.changedTouches[0].clientX - ts.x, dy = e.changedTouches[0].clientY - ts.y; ts = null;
     if (Math.max(Math.abs(dx), Math.abs(dy)) < 48) return;
-    var s = byPos[cur];
-    if (Math.abs(dx) > Math.abs(dy)) { step(dx > 0 ? 'left' : 'right'); return; }
-    if (dy > 0) { if (s.scrollTop <= 4) step('up'); }
-    else { if (s.scrollTop + s.clientHeight >= s.scrollHeight - 4) step('down'); }
+    if (Math.abs(dx) > Math.abs(dy)) step(dx > 0 ? 'left' : 'right');
+    else step(dy > 0 ? 'up' : 'down');
   }, { passive: true });
 
-  /* ---------- intro ---------- */
-  var mainSec = byPos['0,0'], introFinished = false;
+  /* ---------- intro: logo animation, then rise on its own ---------- */
+  var mainSec = byPos['0,0'], introFinished = false, autoUpFired = false;
   function introDone() {
     if (introFinished) return; introFinished = true;
     mainSec.classList.add('intro-done');
+    setTimeout(function () {
+      if (!autoUpFired && cur === '0,0') { autoUpFired = true; go('0,1'); }
+    }, 800);
   }
   function startIntro() {
     if (mainSec.classList.contains('play')) return;
     mainSec.classList.add('play');
-    setTimeout(introDone, 3400);
+    setTimeout(introDone, 2700);
   }
   var introWaitStart = Date.now();
   var waitLoader = setInterval(function () {
@@ -518,7 +587,7 @@
     d.innerHTML = '<h3><span class="no"></span><span class="nm"></span></h3><p class="ds"></p><p class="ex"><b>EXAMPLE&nbsp;&nbsp;</b><span class="xt"></span></p>';
     d.querySelector('.no').textContent = '0' + (i + 1);
     d.querySelector('.nm').textContent = s.name;
-    d.querySelector('.ds').textContent = s.desc;
+    d.querySelector('.ds').textContent = s.menu;
     d.querySelector('.xt').textContent = s.ex;
     var b = document.createElement('button'); b.type = 'button'; b.className = 'btn addbtn'; b.dataset.add = s.id;
     d.appendChild(b); menuBox.appendChild(d);
@@ -530,21 +599,22 @@
     cartList.innerHTML = '';
     if (!cart.length) {
       var li = document.createElement('li'); li.className = 'empty';
-      li.textContent = 'Nothing yet - add a service above and it will wait for you here.';
+      li.textContent = 'Nothing yet - add a service and it waits for you here.';
       cartList.appendChild(li);
     }
     cart.forEach(function (id) {
       var li = document.createElement('li');
       var nm = document.createElement('span'); nm.textContent = svc(id).name;
-      var rm = document.createElement('button'); rm.type = 'button'; rm.className = 'rm'; rm.textContent = 'Remove';
+      var rm = document.createElement('button'); rm.type = 'button'; rm.className = 'rm'; rm.textContent = '✕';
+      rm.setAttribute('aria-label', 'Remove ' + svc(id).name);
       rm.addEventListener('click', function () { toggle(id); });
       li.appendChild(nm); li.appendChild(rm); cartList.appendChild(li);
     });
     document.querySelectorAll('.addbtn').forEach(function (b) {
       var on = cart.indexOf(b.dataset.add) > -1;
       b.classList.toggle('added', on);
-      b.textContent = (on ? '✓ In cart - ' : '+ Add ') + svc(b.dataset.add).name + (on ? '' : ' to cart');
       if (b.closest('.svc') || b.closest('.menu-item')) b.textContent = on ? '✓ In the cart' : '+ Add to cart';
+      else b.textContent = (on ? '✓ In cart - ' : '+ Add ') + svc(b.dataset.add).name + (on ? '' : ' to cart');
     });
   }
   function toggle(id) {
@@ -555,14 +625,19 @@
   document.querySelectorAll('.addbtn').forEach(function (b) {
     b.addEventListener('click', function () { toggle(b.dataset.add); });
   });
+  cardsBox.addEventListener('click', function (e) {
+    if (e.target.closest('.addbtn')) return;
+    var card = e.target.closest('.svc');
+    if (card) toggle(card.querySelector('.addbtn').dataset.add);
+  });
   document.getElementById('cartChip').addEventListener('click', function () { introDone(); go('0,1'); });
 
   /* ---------- send by email ---------- */
-  var sendNote = document.getElementById('sendNote'), SEND_DEFAULT = sendNote.textContent;
+  var sendNote = document.getElementById('sendNote'), SEND_DEFAULT = sendNote.innerHTML;
   document.getElementById('sendBtn').addEventListener('click', function () {
     var nameEl = document.getElementById('cfName'), mailEl = document.getElementById('cfMail'), msgEl = document.getElementById('cfMsg');
     nameEl.classList.remove('bad'); mailEl.classList.remove('bad');
-    if (!cart.length) { sendNote.textContent = 'Your cart is empty - add at least one service first.'; go('0,1'); byPos['0,1'].scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (!cart.length) { sendNote.textContent = 'Your cart is empty - add at least one service first.'; return; }
     var bad = null;
     if (!nameEl.value.trim()) bad = nameEl;
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mailEl.value.trim())) bad = bad || mailEl;
@@ -576,7 +651,7 @@
                '&body=' + encodeURIComponent(lines.join('\n'));
     sendNote.textContent = 'Opening your mail app - the cart is in the message, ready to send.';
     window.location.href = href;
-    setTimeout(function () { sendNote.textContent = SEND_DEFAULT; }, 6000);
+    setTimeout(function () { sendNote.innerHTML = SEND_DEFAULT; }, 6000);
   });
 
   refreshChrome();
