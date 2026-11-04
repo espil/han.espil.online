@@ -948,16 +948,28 @@ html, body { overflow-x: hidden !important; }
   function markDot() { if (!dotsBox) return; var cur = 0, best = 1e18;
     slides.forEach(function (sl, k) { var d = Math.abs(dotLeft(k) - slider.scrollLeft); if (d < best) { best = d; cur = k; } });
     Array.prototype.forEach.call(dotsBox.children, function (b, k) { b.classList.toggle('on', k === cur); }); }
+  var sliderAnim = 0;
+  function animateSliderTo(target) {
+    var start = slider.scrollLeft, t0 = null, token = ++sliderAnim;
+    function step(ts) {
+      if (token !== sliderAnim) return;
+      if (!t0) t0 = ts;
+      var p = Math.min(1, (ts - t0) / 300), e = 1 - Math.pow(1 - p, 3);
+      slider.scrollLeft = Math.round(start + (target - start) * e);
+      if (p < 1) requestAnimationFrame(step); else slider.scrollLeft = target;
+    }
+    requestAnimationFrame(step);
+  }
   if (slider && slides.length) {
     dotsBox = document.createElement('div'); dotsBox.className = 'apex-dots';
     slides.forEach(function (sl, k) { var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Business card ' + (k + 1));
-      b.addEventListener('click', function () { slider.scrollTo({ left: dotLeft(k), behavior: 'smooth' }); });
+      b.addEventListener('click', function () { animateSliderTo(dotLeft(k)); });
       dotsBox.appendChild(b); });
     slider.parentNode.insertBefore(dotsBox, slider.nextSibling);
     slider.addEventListener('scroll', markDot, { passive: true }); markDot();
     slider.addEventListener('dragstart', function (e) { e.preventDefault(); });
     var drag = null;
-    slider.addEventListener('pointerdown', function (e) { drag = { x: e.clientX, l: slider.scrollLeft }; slider.classList.add('dragging'); try { slider.setPointerCapture(e.pointerId); } catch (err) {} });
+    slider.addEventListener('pointerdown', function (e) { sliderAnim++; drag = { x: e.clientX, l: slider.scrollLeft }; slider.classList.add('dragging'); try { slider.setPointerCapture(e.pointerId); } catch (err) {} });
     window.addEventListener('pointermove', function (e) { if (drag) slider.scrollLeft = drag.l - (e.clientX - drag.x); });
     window.addEventListener('pointerup', function () { if (drag) { drag = null; slider.classList.remove('dragging'); } });
   }
@@ -975,7 +987,7 @@ html, body { overflow-x: hidden !important; }
     }
     if (slider && t.closest && t.closest('#movers-2')) {
       var canL = slider.scrollLeft > 0, canR = slider.scrollLeft < slider.scrollWidth - slider.clientWidth - 1;
-      if ((e.deltaY > 0 && canR) || (e.deltaY < 0 && canL)) { slider.scrollLeft += e.deltaY; e.preventDefault(); return; }
+      if ((e.deltaY > 0 && canR) || (e.deltaY < 0 && canL)) { sliderAnim++; slider.scrollLeft += e.deltaY; e.preventDefault(); return; }
     }
     var sec = t.closest ? t.closest('main > section') : null;
     if (sec && sec.scrollHeight > sec.clientHeight + 2) {
