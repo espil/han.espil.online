@@ -21,15 +21,15 @@
 
   /* ---------- directional stage ---------- */
   .viewport{position:fixed; inset:0; overflow:hidden; background:var(--paper)}
-  .world{position:absolute; width:500vw; height:500vh; left:0; top:0;
-    transform:translate(-200vw,-400vh); transition:transform .9s cubic-bezier(.7,0,.2,1)}
+  .world{position:absolute; width:500vw; height:600vh; left:0; top:0;
+    transform:translate(-200vw,-500vh); transition:transform .9s cubic-bezier(.7,0,.2,1)}
   .sec{position:absolute; width:100vw; height:100vh; height:100dvh; overflow-y:auto; overflow-x:hidden;
     background:var(--paper); padding:74px 20px 86px; scrollbar-width:none}
   .sec::-webkit-scrollbar{width:0; height:0}
   .sec[data-x="-2"]{left:0} .sec[data-x="-1"]{left:100vw} .sec[data-x="0"]{left:200vw}
   .sec[data-x="1"]{left:300vw} .sec[data-x="2"]{left:400vw}
-  .sec[data-y="4"]{top:0} .sec[data-y="3"]{top:100vh} .sec[data-y="2"]{top:200vh}
-  .sec[data-y="1"]{top:300vh} .sec[data-y="0"]{top:400vh}
+  .sec[data-y="5"]{top:0} .sec[data-y="4"]{top:100vh} .sec[data-y="3"]{top:200vh}
+  .sec[data-y="2"]{top:300vh} .sec[data-y="1"]{top:400vh} .sec[data-y="0"]{top:500vh}
   .inner{max-width:1060px; margin:0 auto; height:100%; display:flex; flex-direction:column}
   .kicker{font-size:11.5px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); margin:0 0 8px}
   h1.room{font-size:clamp(25px,3.6vw,38px); line-height:1.1; margin:0 0 10px; font-weight:700}
@@ -82,6 +82,66 @@
   .bubble .only-touch{display:none}
   html.touch .bubble .only-touch{display:inline}
   html.touch .bubble .only-pc{display:none}
+
+  /* ---------- Servo section (the guide room) ---------- */
+  .servo-sec .inner{justify-content:center}
+  .sec[data-name="Servo"] .servo{max-width:780px; margin:0 auto 20px; width:100%}
+  .sec[data-name="Servo"] .servo .face{width:76px; height:76px}
+  .sec[data-name="Servo"] .bubble{font-size:16.5px}
+  .guide{max-width:780px; margin:0 auto; width:100%}
+  .keypad{display:none; grid-template-columns:repeat(3,52px); grid-template-rows:repeat(3,52px); gap:6px; justify-content:center; margin:0 auto 12px}
+  html:not(.touch) .keypad{display:grid}
+  .kp{border:1.5px solid var(--ink); background:var(--card); border-radius:12px; font-size:19px; color:var(--ink); padding:0}
+  .kp.off{opacity:.25}
+  .kp:active{transform:scale(.93)}
+  .kp-dot{display:block}
+  .touch-cue{display:none; text-align:center; margin-bottom:10px}
+  html.touch .touch-cue{display:block}
+  .touch-cue .chev{font-size:26px; color:var(--red); line-height:.8; animation:chevDown 1.6s ease-in-out infinite}
+  .touch-cue .chev.c2{animation-delay:.18s} .touch-cue .chev.c3{animation-delay:.36s}
+  .guide-cap{text-align:center; font-size:14px; color:var(--mut); margin:0 0 16px}
+  .maplist{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:8px 20px}
+  .maplist li{font-size:14.5px; line-height:1.45; display:flex; gap:9px; align-items:baseline}
+  .maplist .ar{color:var(--red); font-weight:700; min-width:20px}
+  @media (max-width:700px){ .maplist{grid-template-columns:1fr} }
+  @media (max-width:900px){
+    .sec[data-name="Servo"] .servo .face{width:52px; height:52px}
+    .sec[data-name="Servo"] .bubble{font-size:14px}
+    .keypad{grid-template-columns:repeat(3,46px); grid-template-rows:repeat(3,46px)}
+  }
+
+  /* ---------- menu board: screenshots + Servo notes ---------- */
+  .menu-servo{margin-bottom:14px}
+  .menu-servo .bubble{opacity:1; transform:none; animation:none}
+  .menu-servo .face{width:44px; height:44px}
+  .menu-item{display:grid; grid-template-columns:128px 1fr; gap:13px; align-items:stretch; min-width:0}
+  .mbody,.mbub{min-width:0}
+  .mthumb{width:128px; height:100%; min-height:92px; object-fit:cover; border-radius:9px; border:1px solid var(--line); display:block}
+  .mthumb[src*="menu-"]{object-position:top left}
+  .mbody{display:flex; flex-direction:column}
+  .mbub{display:flex; gap:7px; align-items:flex-start}
+  .mface{width:20px; height:20px; border-radius:50%; border:1px solid var(--ink); flex:0 0 auto; margin-top:2px; background:var(--paper)}
+  .mbub p{background:#fff; border:1px solid var(--line); border-radius:3px 12px 12px 12px; padding:7px 11px; flex:1}
+  .menu-item .btn{align-self:flex-start}
+  @media (max-width:900px){
+    .menu-item{gap:9px}
+    .menu-servo .face{width:36px; height:36px}
+    .menu-servo{margin-bottom:10px}
+    .mbub p{padding:6px 9px}
+  }
+
+  /* ---------- service icons ---------- */
+  .sic{display:inline-flex; color:var(--red); flex:0 0 auto}
+  .sic svg{width:26px; height:26px; display:block}
+  .svc .sic{margin-bottom:8px}
+  .menu-item .sic svg{width:19px; height:19px}
+  .menu-item h3{display:flex; align-items:center; gap:8px}
+  #cartList .sic svg{width:13px; height:13px}
+  #cartList li .sic{margin-right:1px}
+  @media (max-width:900px){
+    .svc .sic{margin-bottom:0}
+    .svc .sic svg{width:20px; height:20px}
+  }
   .only-touch{display:none}
   html.touch .only-touch{display:inline}
   html.touch .only-pc{display:none}
@@ -105,13 +165,13 @@
     color:#fff; border-radius:999px; padding:9px 16px; font-size:14px; letter-spacing:.4px; box-shadow:0 4px 18px rgba(200,16,46,.3)}
   #minimap{position:fixed; right:16px; bottom:16px; z-index:56; background:rgba(22,22,22,.45);
     border:1px solid rgba(240,238,233,.35); border-radius:8px; padding:7px; backdrop-filter:blur(2px)}
-  #minimap .mm-grid{display:grid; grid-template-columns:repeat(5,15px); grid-template-rows:repeat(5,15px); gap:2px}
+  #minimap .mm-grid{display:grid; grid-template-columns:repeat(5,15px); grid-template-rows:repeat(6,15px); gap:2px}
   #minimap .mm-cell{border-radius:2px; background:transparent; border:0; padding:0}
   #minimap .mm-cell.room{background:rgba(240,238,233,.34); cursor:pointer}
   #minimap .mm-cell.cur{background:var(--red); box-shadow:0 0 0 1px rgba(240,238,233,.85)}
   #minimap .mm-name{margin-top:5px; font-size:9.5px; letter-spacing:.4px; color:rgba(240,238,233,.92);
     text-align:center; max-width:89px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  @media (max-width:700px){ #minimap .mm-grid{grid-template-columns:repeat(5,11px); grid-template-rows:repeat(5,11px)} }
+  @media (max-width:700px){ #minimap .mm-grid{grid-template-columns:repeat(5,11px); grid-template-rows:repeat(6,11px)} }
 
   /* ---------- cart screen ---------- */
   .cartwrap{display:grid; grid-template-columns:1fr 348px; gap:16px; flex:1; min-height:0; align-items:start}
@@ -141,8 +201,10 @@
   #sendNote{font-size:12.5px; color:var(--mut); margin-top:8px; min-height:17px; line-height:1.4}
 
   /* ---------- menu board ---------- */
-  .menugrid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-  .menu-item{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:14px 17px}
+  .menugrid{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+  .menu-item{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:12px 17px}
+  .menu-item .ds{display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+  .menu-item .ex{display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden}
   .menu-item h3{margin:0 0 5px; font-size:17px}
   .menu-item h3 .no{color:var(--red); margin-right:7px}
   .menu-item p{margin:0 0 6px; font-size:13.8px; line-height:1.45; color:#2c2a26}
@@ -162,7 +224,7 @@
     .bubble.bM{font-size:12.5px; line-height:1.38}
     #sendBtn{padding:10px}
     h1.room{font-size:24px}
-    #minimap .mm-grid{grid-template-columns:repeat(5,9px); grid-template-rows:repeat(5,9px)}
+    #minimap .mm-grid{grid-template-columns:repeat(5,9px); grid-template-rows:repeat(6,9px)}
     .svc,.cartbox,.fld{min-width:0}
     .cform input,.cform textarea{min-width:0}
     .servo{margin-bottom:12px}
@@ -178,8 +240,14 @@
     .svc h3{margin:0; font-size:14.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:1}
     .svc p{display:none}
     .svc .btn{padding:3px 10px; font-size:12px; flex:0 0 auto}
-    .menugrid{gap:8px}
-    .menu-item{padding:11px 13px}
+    .menugrid{grid-template-columns:1fr; gap:5px}
+    .menu-item{grid-template-columns:48px 1fr; padding:6px 10px; align-items:center}
+    .mthumb{width:48px; height:48px; min-height:48px}
+    .mface{width:16px; height:16px}
+    .mbub p{padding:3px 8px; font-size:11.5px}
+    .menu-item .ds{-webkit-line-clamp:1}
+    .menu-item .btn{display:none}
+    .menu-item h3{margin-bottom:3px}
     .menu-item h3{font-size:15.5px}
     .menu-item p{font-size:12.8px; line-height:1.4}
     .menu-item .ex{display:none}
@@ -196,7 +264,7 @@
     .cartbox .note{display:none}
     .cartbox{padding:13px 17px}
     .lede{font-size:14px; margin-bottom:12px}
-    .menu-item p{display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+    .menu-item p{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
     .mini p{display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden}
     .inc{display:block}
     .inc li{display:block; border:0; border-bottom:1px solid var(--line); border-radius:0; background:transparent; padding:5px 2px; font-size:14px}
@@ -204,7 +272,7 @@
     .addrow .btn{padding:8px 14px; font-size:13.5px}
   }
   @media (max-height:800px){
-    .sec{padding-top:64px; padding-bottom:74px}
+    .sec{padding-top:64px; padding-bottom:66px}
     h1.room{font-size:clamp(23px,3vw,31px); margin-bottom:7px}
     .lede{margin-bottom:12px}
     .servo{margin-bottom:11px}
@@ -212,8 +280,15 @@
     .svc{padding:10px 13px} .svc p{margin-bottom:8px; font-size:12.8px; line-height:1.4}
     .svc h3{font-size:15.5px; margin-bottom:3px}
     .cards{gap:8px}
-    .menu-item{padding:10px 14px}
+    .menu-item{padding:6px 14px}
+    .menu-item h3{margin-bottom:3px}
+    .menu-servo .bubble{padding:8px 13px}
     .menu-item p{line-height:1.42}
+    .menu-item .ds{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+    .mbub p{padding:5px 10px}
+    .menu-servo{margin-bottom:8px}
+    .menu-servo .bubble{line-height:1.45}
+    .menugrid{gap:5px}
     .menu-item .ex{display:none}
     .cartbox{padding:14px 17px}
     .cartbox .note{display:none}
@@ -244,6 +319,11 @@
     .sec[data-name="Menu Board"] .lede{display:none}
     .lede{display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
     h2.block{margin:11px 0 6px; font-size:16.5px}
+    .menu-item .ds{-webkit-line-clamp:1}
+    .menu-item{padding:5px 10px}
+    .menugrid{gap:4px}
+    .menu-servo .bubble{font-size:12.5px; line-height:1.45}
+    .menu-servo{margin-bottom:8px}
   }
 </style>
 </head>
@@ -260,17 +340,40 @@
     </div>
   </section>
 
-  <!-- FIRST SCREEN: SERVO + CART (0,1) -->
-  <section class="sec" data-x="0" data-y="1" data-name="Cart">
+  <!-- SERVO (0,1): the guide -->
+  <section class="sec servo-sec" data-x="0" data-y="1" data-name="Servo">
     <div class="inner">
       <div class="servo" id="servo">
         <div class="face"><img src="/assets/usedesign-icon.svg" alt="Servo"></div>
         <div class="bubbles">
           <div class="bubble b1"><span class="nm">Servo</span> · 안녕하세요! Hello - I am <b>Servo</b>, your guide. <b>AIO</b> means <b>All In One</b>: chatbot, messenger, CRM, dashboard, cart, login and menu in one web app. This demo runs on <b>UseDesign</b>.</div>
-          <div class="bubble b2">This screen is the <b>shopping cart</b> - add services and send them to Han in one email. <span class="only-pc">Then press the <b>↑ arrow key</b> to go up to the menu board.</span><span class="only-touch">Then <b>swipe down</b> for the menu board above.</span></div>
-          <div class="bubble bM"><span class="nm">Servo</span> · 안녕하세요! I am <b>Servo</b>, your guide. <b>AIO</b> is <b>All In One</b> - chatbot, messenger, CRM, dashboard, cart, login, menu in one web app (example: <b>UseDesign</b>). Add services to the cart and email them to Han - <span class="only-pc">then press <b>↑</b> for the menu board.</span><span class="only-touch">then <b>swipe down</b> for the menu board.</span></div>
+          <div class="bubble b2">Guiding you is my job. Every room here is a single screen - nothing scrolls, nothing hides. <span class="only-pc">Move with the <b>arrow keys</b>: up first, to the shopping cart.</span><span class="only-touch"><b>Drag the world</b> to move: drag down, and the shopping cart above slides in.</span></div>
+          <div class="bubble bM"><span class="nm">Servo</span> · 안녕하세요! I am <b>Servo</b>, your guide. <b>AIO</b> is <b>All In One</b> - chatbot, messenger, CRM, dashboard, cart, login, menu in one web app (example: <b>UseDesign</b>). <span class="only-pc">Press <b>↑</b> and the shopping cart is next.</span><span class="only-touch">Drag down, and the shopping cart above slides in.</span></div>
         </div>
       </div>
+      <div class="guide">
+        <div class="keypad" aria-hidden="true">
+          <span></span><button class="kp" data-dir="up" type="button">↑</button><span></span>
+          <button class="kp off" data-dir="left" type="button">←</button><span class="kp-dot"></span><button class="kp off" data-dir="right" type="button">→</button>
+          <span></span><button class="kp" data-dir="down" type="button">↓</button><span></span>
+        </div>
+        <div class="touch-cue"><span class="chev c1">⌄</span><br><span class="chev c2">⌄</span><br><span class="chev c3">⌄</span></div>
+        <p class="guide-cap"><span class="only-pc">Use the arrow keys, or tap the arrows above.</span><span class="only-touch">Drag the world in any direction to explore.</span></p>
+        <ul class="maplist">
+          <li><span class="ar">↑</span><span><b>Shopping Cart</b> - the seven services, ready to send as one email</span></li>
+          <li><span class="ar">↑</span><span><b>Menu Board</b> - each service explained, with examples</span></li>
+          <li><span class="ar">←</span><span><b>Game &amp; Music</b> - the production rooms, off the menu board</span></li>
+          <li><span class="ar">→</span><span><b>Operations &amp; Systems</b> - automation, AI, CRM, OCR, POS</span></li>
+          <li><span class="ar">↑</span><span><b>Branding &amp; Channels</b> - identity, logo, video, SNS and blog, further up</span></li>
+        </ul>
+      </div>
+      <p class="dirhint">↑ Shopping cart · ↓ Main</p>
+    </div>
+  </section>
+
+  <!-- CART (0,2) -->
+  <section class="sec" data-x="0" data-y="2" data-name="Cart">
+    <div class="inner">
       <p class="kicker">UseDesign · Shopping Cart</p>
       <h1 class="room">Digital services, in one cart.</h1>
       <div class="cartwrap">
@@ -288,23 +391,28 @@
           <p id="sendNote"><span class="only-pc">Opens your mail app with the cart filled in - nothing sends until you press send there.</span><span class="only-touch">Your mail app opens with the cart filled in.</span></p>
         </div>
       </div>
-      <p class="dirhint">↑ Menu board · ↓ Main</p>
+      <p class="dirhint">↑ Menu board · ↓ Servo</p>
     </div>
   </section>
 
   <!-- MENU BOARD (0,2) -->
-  <section class="sec" data-x="0" data-y="2" data-name="Menu Board">
+  <section class="sec" data-x="0" data-y="3" data-name="Menu Board">
     <div class="inner">
       <p class="kicker">UseDesign · Menu Board</p>
       <h1 class="room">What each service is.</h1>
-      <p class="lede">The same seven services as the cart below, explained with the work that proves them. From here the building branches: game and music to the left, operations and systems to the right, branding further up.</p>
+      <div class="servo menu-servo">
+        <div class="face"><img src="/assets/usedesign-icon.svg" alt="Servo"></div>
+        <div class="bubbles">
+          <div class="bubble"><span class="nm">Servo</span> · The menu board. Seven services - a picture and a few words from me for each. Add to the cart below, or wander: games and music left, systems right, branding up.</div>
+        </div>
+      </div>
       <div class="menugrid" id="menuList"></div>
       <p class="dirhint">← Game · Music · → Operations &amp; AI · CRM · OCR · POS · ↑ Branding &amp; Marketing · ↓ Cart</p>
     </div>
   </section>
 
   <!-- GAME PRODUCTION (-1,2) -->
-  <section class="sec" data-x="-1" data-y="2" data-name="Game Production">
+  <section class="sec" data-x="-1" data-y="3" data-name="Game Production">
     <div class="inner">
       <p class="kicker">Production Room · Games</p>
       <h1 class="room">Game production.</h1>
@@ -327,7 +435,7 @@
   </section>
 
   <!-- MUSIC PRODUCTION (-2,2) -->
-  <section class="sec" data-x="-2" data-y="2" data-name="Music Production">
+  <section class="sec" data-x="-2" data-y="3" data-name="Music Production">
     <div class="inner">
       <p class="kicker">Production Room · Music</p>
       <h1 class="room">Music production.</h1>
@@ -350,7 +458,7 @@
   </section>
 
   <!-- BRANDING & MARKETING (0,3) -->
-  <section class="sec" data-x="0" data-y="3" data-name="Branding &amp; Marketing">
+  <section class="sec" data-x="0" data-y="4" data-name="Branding &amp; Marketing">
     <div class="inner">
       <p class="kicker">Production Room · Brand</p>
       <h1 class="room">Branding &amp; marketing.</h1>
@@ -372,7 +480,7 @@
   </section>
 
   <!-- LOGO / VIDEO / SNS / BLOG (0,4) -->
-  <section class="sec" data-x="0" data-y="4" data-name="Logo · Video · SNS · Blog">
+  <section class="sec" data-x="0" data-y="5" data-name="Logo · Video · SNS · Blog">
     <div class="inner">
       <p class="kicker">Production Room · Channels</p>
       <h1 class="room">Logo design, video production, SNS &amp; blog maintenance.</h1>
@@ -395,7 +503,7 @@
   </section>
 
   <!-- OPERATIONS AUTOMATION / AI (1,2) -->
-  <section class="sec" data-x="1" data-y="2" data-name="Operations &amp; AI">
+  <section class="sec" data-x="1" data-y="3" data-name="Operations &amp; AI">
     <div class="inner">
       <p class="kicker">Production Room · Operations</p>
       <h1 class="room">Automate operations, AI integration.</h1>
@@ -421,7 +529,7 @@
   </section>
 
   <!-- CRM / OCR / POS (2,2) -->
-  <section class="sec" data-x="2" data-y="2" data-name="CRM · OCR · POS">
+  <section class="sec" data-x="2" data-y="3" data-name="CRM · OCR · POS">
     <div class="inner">
       <p class="kicker">Production Room · Systems</p>
       <h1 class="room">CRM, OCR, POS.</h1>
@@ -456,48 +564,59 @@
   if ('ontouchstart' in window || navigator.maxTouchPoints > 0) document.documentElement.classList.add('touch');
 
   var SERVICES = [
-    { id: 'music',      name: 'Music Production',      short: 'Original tracks, themes and sound for games, video and brands.',
+    { id: 'music', img: '/aio/img/menu-music.jpg', alt: 'Onggijonggi, the musical - artwork',       name: 'Music Production',      short: 'Original tracks, themes and sound for games, video and brands.',
       menu: 'Composed, arranged and mixed in-house - from a UI sting to a soundtrack set that plays for hours without repeating.',
       ex: 'The Espil.Online soundtrack: an owned set of original tracks in random rotation inside the world.' },
-    { id: 'game',       name: 'Game Production',       short: 'Complete web games and living worlds, built end to end.',
+    { id: 'game', img: '/assets/display/render-day.jpg', alt: 'Espil.Online - the Vancouver replica by day',        name: 'Game Production',       short: 'Complete web games and living worlds, built end to end.',
       menu: 'Design, engine, UI, sound and live data shipped as one product. Browser-first, so anyone with a link can play.',
       ex: 'Espil.Online, a living replica of real cities - and Zealandia, its game world, now in production.' },
-    { id: 'branding',   name: 'Branding & Marketing',  short: 'Identity, SEO and content that make a business the answer.',
+    { id: 'branding', img: '/aio/img/menu-branding.jpg', alt: 'The Espil masthead - brand and editorial design',    name: 'Branding & Marketing',  short: 'Identity, SEO and content that make a business the answer.',
       menu: 'Identity, site, search and social held to one standard, so a small business reads as a name people already know.',
       ex: 'Nohproblem filled the first pages of Naver and Google on early-child-care searches; partner businesses grew into Vancouver names.' },
-    { id: 'operations', name: 'Automate Operations',   short: 'Repetitive office work turned into systems that run themselves.',
+    { id: 'operations', img: '/aio/img/menu-operations.jpg', alt: 'Case study - rebuilding the Discover Holidays tariff system',  name: 'Automate Operations',   short: 'Repetitive office work turned into systems that run themselves.',
       menu: 'The daily repeat work - sorting, copying, checking, generating - rebuilt as a system, with AI inside where AI helps.',
       ex: 'At HMC, an intranet that grew from CSV sheets into an API system and did work that would have needed interns.' },
-    { id: 'dashboards', name: 'Business Dashboards',   short: 'Your numbers on one screen, current every time you look.',
+    { id: 'dashboards', img: '/aio/img/menu-dashboards.jpg', alt: 'The System - the Espil.Online documentation hub',  name: 'Business Dashboards',   short: 'Your numbers on one screen, current every time you look.',
       menu: 'Sales, prices, bookings and stock on one screen, fed by the systems you already use, readable at a glance.',
       ex: 'At Discover Holidays, tariff data for two regions and a partner-hotel map, kept current by one pair of hands.' },
-    { id: 'web3d',      name: '3D Web Production',     short: 'Real 3D in the browser - cities, products and spaces, no installs.',
+    { id: 'web3d', img: '/assets/display/render-night.jpg', alt: 'Espil.Online by night',       name: '3D Web Production',     short: 'Real 3D in the browser - cities, products and spaces, no installs.',
       menu: 'Interactive 3D in a normal browser: real-time light, weather and data on real places, built with Three.js.',
       ex: 'Espil.Online\u2019s Vancouver replica - and the /system room here, a 3D documentation of how it is built.' },
-    { id: 'video',      name: 'Video Production',      short: 'Dev-logs, brand films and shorts, shot and edited in-house.',
+    { id: 'video', img: '/aio/img/menu-video.jpg', alt: 'Onggijonggi production stills',       name: 'Video Production',      short: 'Dev-logs, brand films and shorts, shot and edited in-house.',
       menu: 'Planning, shooting and editing under one roof, sized for the feed: dev-logs, product films, shorts, series.',
       ex: 'The Nohproblem channel - my videos passed 500,000 views combined and are still its most-watched.' }
   ];
   function svc(id) { for (var i = 0; i < SERVICES.length; i++) if (SERVICES[i].id === id) return SERVICES[i]; return null; }
+  var ICONS = {
+    music: '<path d="M9 18.5V6l11-2v12.5"/><circle cx="6.8" cy="18.5" r="2.4"/><circle cx="17.8" cy="16.5" r="2.4"/>',
+    game: '<rect x="2.5" y="7.5" width="19" height="10" rx="5"/><path d="M8 11v3M6.5 12.5h3"/><circle cx="15.8" cy="11.4" r="1" fill="currentColor" stroke="none"/><circle cx="18.1" cy="13.9" r="1" fill="currentColor" stroke="none"/>',
+    branding: '<path d="M4 10.2v3.6l3 .6V9.6l-3 .6z"/><path d="M7 9.6l12-4.1v13l-12-4.1"/><path d="M7 14.4v3.1a1.6 1.6 0 0 0 3.2 0v-2.4"/>',
+    operations: '<path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M20.5 2.8v4h-4"/>',
+    dashboards: '<path d="M4 4v16h16"/><path d="M8.5 20v-4.5M12.5 20V12M16.5 20v-2.5"/>',
+    web3d: '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/>',
+    video: '<rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M10.5 9.3l5.2 2.7-5.2 2.7z" fill="currentColor" stroke="none"/>'
+  };
+  function iconSvg(id) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[id] || '') + '</svg>'; }
 
   /* ---------- rooms + navigation ---------- */
   var world = document.getElementById('world');
   var secs = Array.prototype.slice.call(document.querySelectorAll('.sec'));
   var byPos = {};
   secs.forEach(function (s) { byPos[s.dataset.x + ',' + s.dataset.y] = s; });
-  var NAMES = { '0,0': 'Main', '0,1': 'Cart', '0,2': 'Menu Board', '-1,2': 'Game Production', '-2,2': 'Music Production', '0,3': 'Branding & Marketing', '0,4': 'Logo · Video · SNS · Blog', '1,2': 'Operations & AI', '2,2': 'CRM · OCR · POS' };
+  var NAMES = { '0,0': 'Main', '0,1': 'Servo', '0,2': 'Cart', '0,3': 'Menu Board', '-1,3': 'Game Production', '-2,3': 'Music Production', '0,4': 'Branding & Marketing', '0,5': 'Logo · Video · SNS · Blog', '1,3': 'Operations & AI', '2,3': 'CRM · OCR · POS' };
   var LINKS = { '0,0': { up: '0,1' }, '0,1': { up: '0,2', down: '0,0' },
-    '0,2': { down: '0,1', left: '-1,2', right: '1,2', up: '0,3' },
-    '-1,2': { right: '0,2', left: '-2,2' }, '-2,2': { right: '-1,2' },
-    '0,3': { down: '0,2', up: '0,4' }, '0,4': { down: '0,3' },
-    '1,2': { left: '0,2', right: '2,2' }, '2,2': { left: '1,2' } };
+    '0,2': { up: '0,3', down: '0,1' },
+    '0,3': { down: '0,2', left: '-1,3', right: '1,3', up: '0,4' },
+    '-1,3': { right: '0,3', left: '-2,3' }, '-2,3': { right: '-1,3' },
+    '0,4': { down: '0,3', up: '0,5' }, '0,5': { down: '0,4' },
+    '1,3': { left: '0,3', right: '2,3' }, '2,3': { left: '1,3' } };
   var cur = '0,0';
   var edges = { up: document.getElementById('edgeUp'), down: document.getElementById('edgeDown'),
                 left: document.getElementById('edgeLeft'), right: document.getElementById('edgeRight') };
   var ARROW = { up: '↑', down: '↓', left: '←', right: '→' };
 
   var mmGrid = document.getElementById('mmGrid'), mmName = document.getElementById('mmName'), mmCells = {};
-  for (var gy = 4; gy >= 0; gy--) for (var gx = -2; gx <= 2; gx++) {
+  for (var gy = 5; gy >= 0; gy--) for (var gx = -2; gx <= 2; gx++) {
     var c = document.createElement('button'); c.type = 'button'; c.className = 'mm-cell';
     var key = gx + ',' + gy;
     if (byPos[key]) { c.classList.add('room'); c.setAttribute('aria-label', NAMES[key]); (function (k) { c.addEventListener('click', function () { go(k); }); })(key); }
@@ -520,7 +639,7 @@
     if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA')) ae.blur();
     cur = key;
     var p = key.split(','), x = +p[0], y = +p[1];
-    world.style.transform = 'translate(' + (-(x + 2) * 100) + 'vw,' + (-(4 - y) * 100) + 'vh)';
+    world.style.transform = 'translate(' + (-(x + 2) * 100) + 'vw,' + (-(5 - y) * 100) + 'vh)';
     if (key === '0,1' && !servoServed) { servoServed = true; setTimeout(function () { servoEl.classList.add('served'); }, 450); }
     refreshChrome();
   }
@@ -575,7 +694,7 @@
   var cardsBox = document.getElementById('svcCards');
   SERVICES.forEach(function (s) {
     var d = document.createElement('div'); d.className = 'svc';
-    d.innerHTML = '<h3></h3><p></p>';
+    d.innerHTML = '<span class="sic">' + iconSvg(s.id) + '</span><h3></h3><p></p>';
     d.querySelector('h3').textContent = s.name;
     d.querySelector('p').textContent = s.short;
     var b = document.createElement('button'); b.type = 'button'; b.className = 'btn addbtn'; b.dataset.add = s.id;
@@ -584,13 +703,15 @@
   var menuBox = document.getElementById('menuList');
   SERVICES.forEach(function (s, i) {
     var d = document.createElement('div'); d.className = 'menu-item';
-    d.innerHTML = '<h3><span class="no"></span><span class="nm"></span></h3><p class="ds"></p><p class="ex"><b>EXAMPLE&nbsp;&nbsp;</b><span class="xt"></span></p>';
+    d.innerHTML = '<img class="mthumb" alt="" loading="lazy" decoding="async"><div class="mbody"><h3><span class="sic">' + iconSvg(s.id) + '</span><span class="no"></span><span class="nm"></span></h3><div class="mbub"><img class="mface" src="/assets/usedesign-icon.svg" alt=""><p class="ds"></p></div><p class="ex"><b>EXAMPLE&nbsp;&nbsp;</b><span class="xt"></span></p></div>';
+    d.querySelector('.mthumb').src = s.img;
+    d.querySelector('.mthumb').alt = s.alt;
     d.querySelector('.no').textContent = '0' + (i + 1);
     d.querySelector('.nm').textContent = s.name;
     d.querySelector('.ds').textContent = s.menu;
     d.querySelector('.xt').textContent = s.ex;
     var b = document.createElement('button'); b.type = 'button'; b.className = 'btn addbtn'; b.dataset.add = s.id;
-    d.appendChild(b); menuBox.appendChild(d);
+    d.querySelector('.mbody').appendChild(b); menuBox.appendChild(d);
   });
 
   function saveCart() { try { localStorage.setItem(LS, JSON.stringify(cart)); } catch (e) {} }
@@ -604,11 +725,12 @@
     }
     cart.forEach(function (id) {
       var li = document.createElement('li');
+      var ic = document.createElement('span'); ic.className = 'sic'; ic.innerHTML = iconSvg(id);
       var nm = document.createElement('span'); nm.textContent = svc(id).name;
       var rm = document.createElement('button'); rm.type = 'button'; rm.className = 'rm'; rm.textContent = '✕';
       rm.setAttribute('aria-label', 'Remove ' + svc(id).name);
       rm.addEventListener('click', function () { toggle(id); });
-      li.appendChild(nm); li.appendChild(rm); cartList.appendChild(li);
+      li.appendChild(ic); li.appendChild(nm); li.appendChild(rm); cartList.appendChild(li);
     });
     document.querySelectorAll('.addbtn').forEach(function (b) {
       var on = cart.indexOf(b.dataset.add) > -1;
@@ -630,7 +752,10 @@
     var card = e.target.closest('.svc');
     if (card) toggle(card.querySelector('.addbtn').dataset.add);
   });
-  document.getElementById('cartChip').addEventListener('click', function () { introDone(); go('0,1'); });
+  document.getElementById('cartChip').addEventListener('click', function () { introDone(); go('0,2'); });
+  document.querySelectorAll('.kp').forEach(function (b) {
+    b.addEventListener('click', function () { step(b.dataset.dir); });
+  });
 
   /* ---------- send by email ---------- */
   var sendNote = document.getElementById('sendNote'), SEND_DEFAULT = sendNote.innerHTML;
