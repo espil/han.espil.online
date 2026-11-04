@@ -382,11 +382,11 @@
             alt="pexels-polina-tankilevitch-3738349 1"
           /><img
             class="background"
-            src="/apex/img/ext/background@1x.svg"
+            src="/apex/img/background@1x.svg"
             alt="Background"
           /><img
             class="mask-group"
-            src="/apex/img/ext/mask-group@1x.svg"
+            src="/apex/img/mask-group@1x.svg"
             alt="Mask group"
           /><img
             class="pexels-polina-tankilevitch-3738349-1"
@@ -519,11 +519,11 @@
         alt="pexels-polina-tankilevitch-3738349 1"
       /><img
         class="background"
-        src="/apex/img/ext/background@1x.svg"
+        src="/apex/img/background@1x.svg"
         alt="Background"
       /><img
         class="mask-group"
-        src="/apex/img/ext/mask-group@1x.svg"
+        src="/apex/img/mask-group@1x.svg"
         alt="Mask group"
       /><img
         class="pexels-polina-tankilevitch-3738349-1"
@@ -594,13 +594,13 @@
             </div>
             <img
               class="teamline-5"
-              src="/apex/img/ext/line-5@2x.svg"
+              src="/apex/img/line-5@2x.svg"
               alt="Line 5"
             />
             <div class="teamceo">CEO</div>
             <img
               class="teamline-5"
-              src="/apex/img/ext/line-5@2x.svg"
+              src="/apex/img/line-5@2x.svg"
               alt="Line 5"
             />
             <p class="teamname generalsans-medium-brandy-16px">
@@ -617,7 +617,7 @@
           </div>
           <img
             class="teamline-5"
-            src="/apex/img/ext/line-5@2x.svg"
+            src="/apex/img/line-5@2x.svg"
             alt="Line 5"
           />
           <div class="teamceo">
@@ -625,7 +625,7 @@
           </div>
           <img
             class="teamline-5"
-            src="/apex/img/ext/line-5@2x.svg"
+            src="/apex/img/line-5@2x.svg"
             alt="Line 5"
           />
           <p class="teamname-2 generalsans-medium-brandy-16px">
@@ -640,7 +640,7 @@
           <div class="teamname-3 suisseworks-book-normal-white-36px">John Kim</div>
           <img
             class="teamline-5"
-            src="/apex/img/ext/line-5@2x.svg"
+            src="/apex/img/line-5@2x.svg"
             alt="Line 5"
           />
           <div class="teamceo">
@@ -648,7 +648,7 @@
           </div>
           <img
             class="teamline-5"
-            src="/apex/img/ext/line-5@2x.svg"
+            src="/apex/img/line-5@2x.svg"
             alt="Line 5"
           />
           <p class="teamat-apexderm-ventures generalsans-medium-brandy-16px">
@@ -756,7 +756,7 @@
           <div class="group-2049">
             <img
               class="group-59"
-              src="/apex/img/ext/group-59@2x.svg"
+              src="/apex/img/group-59@2x.svg"
               alt="Group 59"
             />
             <div class="follow-us generalsans-regular-normal-white-24px">
@@ -768,7 +768,7 @@
               <div class="group-22660">
                 <img
                   class="circle"
-                  src="/apex/img/ext/check-circle@2x.svg"
+                  src="/apex/img/check-circle@2x.svg"
                   alt="check-circle"
                 />
                 <div class="design-branding poppins-light-white-14px">
@@ -778,7 +778,7 @@
               <div class="group-22662">
                 <img
                   class="circle"
-                  src="/apex/img/ext/circle-1@2x.svg"
+                  src="/apex/img/circle-1@2x.svg"
                   alt="circle"
                 />
                 <div class="consmetic poppins-light-white-14px">Consmetic</div>
@@ -789,7 +789,7 @@
                 <div class="group-22661">
                   <img
                     class="circle"
-                    src="/apex/img/ext/circle@2x.svg"
+                    src="/apex/img/circle@2x.svg"
                     alt="circle"
                   />
                   <div class="construction poppins-light-white-14px">
@@ -799,7 +799,7 @@
                 <div class="group-22663">
                   <img
                     class="circle"
-                    src="/apex/img/ext/circle@2x.svg"
+                    src="/apex/img/circle@2x.svg"
                     alt="circle"
                   />
                   <div class="medical poppins-light-white-14px">Medical</div>
@@ -808,7 +808,7 @@
               <div class="group-22664">
                 <img
                   class="circle"
-                  src="/apex/img/ext/circle-1@2x.svg"
+                  src="/apex/img/circle-1@2x.svg"
                   alt="circle"
                 />
                 <div class="others-please-type-details poppins-light-white-14px">
@@ -827,29 +827,41 @@
   </main>
   
 <style id="apex-upgrade">
-/* Apex upgrade (2026-11-03, han.espil.online): repairs applied on top of the
-   rf.gd export. The export freezes on its logo screen in current browsers
-   (body overflow hidden, broken script choreography, dead references).
-   1) plain document scrolling restored, sections separated as full panels
-   2) horizontal sliders: hidden scrollbars, grab cursor
-   3) custom cursor rebuilt as a self-contained SVG (the original references
-      pattern images and never renders as a cursor)
-   4) contact form given one consistent field style and a real button look */
-html, body { overflow-y: auto !important; }
+/* Apex upgrade v3 (2026-11-03, han.espil.online): the export's own design is a
+   100vh <main> scroller with 100vh sections, but its logo SVG is position:fixed
+   over the whole viewport and the script that lifts it listens to the document
+   scroll, which never happens - so the page froze on the logo. This layer
+   un-fixes the logo, pins the nav bar, repairs the contact form, sliders and
+   cursor, and keeps the page private on mobile by Han's order. The page's own
+   structure (main scroller, sections, artboards) is left as designed. */
 .section__content > * { opacity: 1 !important; transform: none !important; }
 .section__img { opacity: 0.75 !important; }
-body { cursor: url('/apex/logo/cursor-clean.svg') 13 13, auto; }
-a, button, .place { cursor: url('/apex/logo/cursor-clean.svg') 13 13, pointer; }
-.section { position: relative !important; box-shadow: inset 0 1px 0 rgba(130,145,180,.35); }
-#about, #business-2 { overflow-y: visible !important; height: auto !important; min-height: 100vh; }
-[id^="movers"] { overflow-x: auto !important; scrollbar-width: none; cursor: grab; }
+body, body * { cursor: url('/apex/logo/cursor-clean.svg') 13 13, auto !important; }
+a, button, .place { cursor: url('/apex/logo/cursor-clean.svg') 13 13, pointer !important; }
+[id^="movers"] { overflow-x: auto !important; scrollbar-width: none; cursor: grab !important; }
 [id^="movers"]::-webkit-scrollbar { display: none; }
-[id^="movers"].dragging { cursor: grabbing; }
+[id^="movers"].dragging { cursor: grabbing !important; }
 #contact input, #contact textarea { background: rgba(255,255,255,.07) !important; border: 1px solid rgba(255,255,255,.38) !important; border-radius: 6px; color: #fff !important; padding: 12px 14px; width: 100%; box-sizing: border-box; font: inherit; }
 #contact input::placeholder, #contact textarea::placeholder { color: rgba(255,255,255,.55); }
 #contact .place { display: inline-block; background: #fff; color: #0f1e47 !important; padding: 12px 38px; border-radius: 999px; font-weight: 600; letter-spacing: .06em; height: auto !important; line-height: 1.2 !important; }
 #contact-note { color: rgba(255,255,255,.85); font-size: 13px; margin-top: 12px; min-height: 18px; }
+#contact input, #contact textarea { width: 100% !important; }
+#contact div:has(> input), #contact div:has(> textarea) { flex: 1 1 auto; width: 100%; }
+#contact { padding-left: 80px; }
+main { overflow-x: hidden !important; }
+#contact [class*="overlap-group"] { overflow: visible !important; }
+#contact .screen { overflow: visible !important; }
+@media (min-width: 700px) {
+  .logo svg { position: relative !important; left: auto !important; top: auto !important; transform: none !important; display: block; margin: 0 auto; max-width: min(606px, 84vw); height: auto; }
+  #navbar { top: 0 !important; opacity: 1 !important; background: rgba(15,30,71,.94); padding: 10px 0; }
+}
+@media (max-width: 699px) {
+  .screen { display: none !important; }
+  body::after { content: "APEXDERM VENTURES INC.\A\A This page is private on mobile.\A Please visit on a desktop browser."; white-space: pre-wrap; position: fixed; inset: 0; background: #0f1e47; color: #fff; display: grid; place-items: center; text-align: center; font-family: Georgia, serif; font-size: 17px; line-height: 1.7; padding: 24px; z-index: 99999; }
+}
 </style>
+
+
 <script id="apex-upgrade-js">
 (function () {
   function dragScroll(el) {
