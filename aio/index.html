@@ -304,6 +304,7 @@
   @media (max-width:900px){
     .menu-layout{grid-template-columns:1fr; gap:12px}
     .menu-layout .menu-item{grid-template-columns:44px 1fr auto; padding:5px 9px}
+    .menu-layout .menu-item:hover, .menu-layout .menu-item.open{padding-top:11px; padding-bottom:11px}
     .menu-layout .mthumb{width:44px; height:40px; min-height:40px}
     .menu-layout .menu-item h3{font-size:14.5px}
     .menu-layout .mbub p{padding:2px 7px; font-size:11px}
@@ -329,10 +330,17 @@
     background:transparent; transform:translate(-50%,-50%) scale(1,1.5) rotate(45deg); transition:background .15s ease}
   .cart-track.moving .cdiamond{background:var(--ink)}
   @media (max-width:719px){ .cart-track{display:none} }
-  .menu-layout .menu-item{cursor:pointer; transition:background .2s ease}
-  .menu-layout .menu-item:hover, .menu-layout .menu-item.open{background:#fff}
+  .menu-layout .menu-item{cursor:pointer; transition:background .25s ease, box-shadow .25s ease, padding .25s ease, transform .25s ease}
+  .menu-layout .menu-item:hover, .menu-layout .menu-item.open{background:#fff; box-shadow:0 16px 38px rgba(22,22,22,.18);
+    padding-top:17px; padding-bottom:17px; transform:scale(1.015); position:relative; z-index:2}
+  .menu-layout .menu-item .mthumb img{transition:transform .3s ease}
+  .menu-layout .menu-item:hover .mthumb img, .menu-layout .menu-item.open .mthumb img{transform:scale(1.18)}
   .menu-layout .menu-item:hover .ds, .menu-layout .menu-item.open .ds{white-space:normal; overflow:visible}
   .menu-layout .menu-item:hover .ex, .menu-layout .menu-item.open .ex{display:block; -webkit-line-clamp:unset}
+  /* the cart lists the chosen services by name, one per row */
+  #cartList{display:flex; flex-direction:column; flex-wrap:nowrap; overflow:visible; gap:6px; padding-bottom:0}
+  #cartList li{width:100%; justify-content:flex-start}
+  #cartList li span{flex:1; text-align:left}
 
   /* ---------- Servo widget (bottom right) + chat ---------- */
   #servoWidget{position:fixed; right:16px; bottom:16px; z-index:60; display:none; align-items:flex-end; gap:10px}
@@ -642,6 +650,23 @@
     refreshChrome();
   }
   function step(dir) { var t = LINKS[cur][dir]; if (t) { introDone(); go(t); } }
+  /* wheel inside the cart room scrolls the cart; at its edge it moves on */
+  var menuInner = document.querySelector('.sec[data-name="Menu Board"] .inner'), wheelLock = 0;
+  document.addEventListener('wheel', function (e) {
+    if (cur !== '0,2' || !menuInner) return;
+    if (e.target.closest && e.target.closest('#chatPanel')) return;
+    var dy = e.deltaY * (e.deltaMode === 1 ? 16 : 1);
+    var max = menuInner.scrollHeight - menuInner.clientHeight;
+    if (max > 2) {
+      var atTop = menuInner.scrollTop <= 0, atBot = menuInner.scrollTop >= max - 1;
+      if ((dy > 0 && !atBot) || (dy < 0 && !atTop)) { e.preventDefault(); menuInner.scrollTop += dy; return; }
+    }
+    e.preventDefault();
+    var now = Date.now();
+    if (now - wheelLock < 650) return;
+    wheelLock = now;
+    step(dy > 0 ? 'down' : 'up');
+  }, { passive: false });
   Object.keys(edges).forEach(function (d) { edges[d].addEventListener('click', function () { step(d); }); });
   document.addEventListener('keydown', function (e) {
     var t = e.target, tag = t && t.tagName;
