@@ -330,6 +330,37 @@
     background:transparent; transform:translate(-50%,-50%) scale(1,1.5) rotate(45deg); transition:background .15s ease}
   .cart-track.moving .cdiamond{background:var(--ink)}
   @media (max-width:719px){ .cart-track{display:none} }
+  .sec[data-name="CRM · OCR · POS"] .inner{justify-content:flex-start; overflow-y:auto; scrollbar-width:none; -ms-overflow-style:none; touch-action:pan-y}
+  .sec[data-name="CRM · OCR · POS"] .inner::-webkit-scrollbar{display:none}
+  .crmdemo{margin-top:14px; border:1px solid var(--line); background:var(--card); padding:16px; text-align:left}
+  .crm-head{display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap}
+  .crm-head h3{margin:0; font-size:19px}
+  .crm-badge{font-size:11px; letter-spacing:.07em; color:var(--red); border:1px solid var(--red); padding:2.5px 9px; border-radius:999px; white-space:nowrap}
+  .crm-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin:13px 0}
+  .crm-stat{border:1px solid var(--line); padding:9px 11px}
+  .crm-stat b{display:block; font-size:21px; line-height:1.1}
+  .crm-stat span{font-size:10.5px; color:var(--mut); letter-spacing:.07em; text-transform:uppercase}
+  .crm-tools{display:flex; gap:8px; flex-wrap:wrap}
+  .crm-tools input, .crm-tools select{padding:8px 9px; border:1px solid var(--line); background:var(--paper); color:var(--ink); font-size:13.5px}
+  .crm-tools input{flex:1 1 170px}
+  .crm-list{margin-top:11px; border-top:1px solid var(--line)}
+  .crm-row{display:flex; gap:9px; align-items:baseline; padding:8px 4px; border-bottom:1px solid var(--line); cursor:pointer; flex-wrap:wrap}
+  .crm-row:hover{background:rgba(22,22,22,.035)}
+  .crm-row .nm{font-weight:700}
+  .crm-row .co{color:var(--mut)}
+  .crm-row .amt{margin-left:auto; font-weight:700}
+  .crm-row .chip{font-size:10.5px; padding:1.5px 8px; border-radius:999px; border:1px solid var(--line); color:var(--mut); white-space:nowrap}
+  .crm-row .chip.src{background:var(--paper)}
+  .crm-detail{border-bottom:1px solid var(--line); padding:10px 13px; background:var(--paper)}
+  .crm-detail p{margin:3px 0; font-size:14px}
+  .crm-empty{color:var(--mut); padding:12px 4px}
+  .crm-ocr{margin-top:15px; border-top:1px solid var(--line); padding-top:12px}
+  .crm-ocr h4{margin:0 0 5px; font-size:15.5px}
+  .crm-small{font-size:13px; color:var(--mut); line-height:1.55; margin:0 0 9px}
+  .crm-ocrrow{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+  .crm-msg{font-size:13.5px}
+  .crm-note{font-size:12.5px; color:var(--mut); line-height:1.55; margin:12px 0 0}
+  @media (max-width:719px){ .crm-stats{grid-template-columns:repeat(2,1fr)} }
   .menu-layout .menu-item{cursor:pointer; transition:background .25s ease, box-shadow .25s ease, padding .25s ease, transform .25s ease}
   .menu-layout .menu-item:hover, .menu-layout .menu-item.open{background:#fff; box-shadow:0 16px 38px rgba(22,22,22,.18);
     padding-top:17px; padding-bottom:17px; transform:scale(1.015); position:relative; z-index:2}
@@ -422,7 +453,7 @@
 
   <!-- MENU BOARD (0,2) -->
   <section class="sec" data-x="0" data-y="2" data-name="Menu Board">
-    <div class="inner">
+    <div class="inner" data-scroll="1">
       <div class="menu-layout">
         <div class="menugrid" id="menuList"></div>
         <div class="cartbox">
@@ -552,20 +583,40 @@
 
   <!-- CRM / OCR / POS (2,2) -->
   <section class="sec" data-x="2" data-y="2" data-name="CRM · OCR · POS">
-    <div class="inner">
-      <p class="lede">The three systems a storefront business lives on: who your customers are, what your paper says, and how the till thinks. Built and tested from both sides of the counter.</p>
-      <div class="grid2">
-        <div class="mini"><h3>CRM</h3><p>Customer records, pipelines and booking systems a small team will actually use. I built a clinic's requested booking system solo - React, a JSON API and a local database - and tested CRM tools professionally at Higgs Creative.</p></div>
-        <div class="mini"><h3>OCR</h3><p>Paper and PDFs in, clean data out: contracts, invoices, price lists. At HMC I scanned and verified standard contract documents by system; at Higgs I evaluated OCR tools for medical records.</p></div>
-        <div class="mini"><h3>POS</h3><p>Point-of-sale and in-store flow designed from the operator's side: eight years in restaurant kitchens and service taught me where the till slows a Friday night down.</p></div>
-        <div class="mini"><h3>Dashboards</h3><p>All three feed one screen: sales, prices, bookings and stock, current every time you look. That is the Business Dashboards service in the cart.</p></div>
+    <div class="inner" data-scroll="1">
+      <p class="lede">The three systems a storefront business lives on: who your customers are, what your paper says, and how the till thinks. Built and tested from both sides of the counter - and below, running.</p>
+      <div class="crmdemo" id="crmDemo">
+        <div class="crm-head"><h3>CRM · OCR - live demo</h3><span class="crm-badge">Static demo · runs in your browser</span></div>
+        <div class="crm-stats">
+          <div class="crm-stat"><b id="stTotal">0</b><span>Total records</span></div>
+          <div class="crm-stat"><b id="stOcr">0</b><span>From OCR</span></div>
+          <div class="crm-stat"><b id="stCart">0</b><span>From cart</span></div>
+          <div class="crm-stat"><b id="stWon">0</b><span>Won</span></div>
+        </div>
+        <div class="crm-tools">
+          <input id="crmSearch" type="search" placeholder="Search name, company, email" aria-label="Search records">
+          <select id="crmStatus" aria-label="Filter by status"><option value="">All statuses</option><option>New</option><option>Contacted</option><option>In Progress</option><option>Won</option><option>Archived</option></select>
+          <select id="crmSource" aria-label="Filter by source"><option value="">All sources</option><option value="manual">manual</option><option value="cart">cart</option><option value="ocr">ocr</option></select>
+          <button class="btn ghost" id="crmReset" type="button">Reset demo data</button>
+        </div>
+        <div class="crm-list" id="crmList"></div>
+        <div class="crm-ocr">
+          <h4>OCR intake - a formatted PDF in, records out</h4>
+          <p class="crm-small">The format: one record per block of "Label: value" lines - Name, Company, Email, Phone, Amount, Date, Status, Notes - with blocks separated by a line of dashes. The PDF is read on your device; nothing is uploaded.</p>
+          <div class="crm-ocrrow">
+            <label class="btn ghost">Choose a PDF<input id="ocrFile" type="file" accept="application/pdf,.pdf" hidden></label>
+            <button class="btn" id="ocrSample" type="button">Try the sample PDF</button>
+            <span class="crm-msg" id="ocrMsg" role="status"></span>
+          </div>
+        </div>
+        <p class="crm-note">Demo records live only in this browser (local storage). This room mirrors a full build I completed locally: the same cart, CRM dashboard and PDF intake rebuilt in Next.js 15 + TypeScript (strict), where all three share one SQLite ledger on a server. Sending the cart from the Menu Board also opens its record here, marked "cart".</p>
       </div>
       <div class="addrow">
         <button class="btn addbtn" data-add="operations" type="button">+ Add Automate Operations to cart</button>
         <button class="btn ghost addbtn" data-add="dashboards" type="button">+ Add Business Dashboards to cart</button>
       </div>
-      <p class="dirhint">← Operations &amp; AI</p>
     </div>
+    <div class="cart-track" id="crmTrack" aria-hidden="true"><span class="cap top"></span><span class="cshadow" id="crmShadow"></span><span class="cdiamond" id="crmDiamond"></span><span class="cap bot"></span></div>
   </section>
 
  </div>
@@ -704,7 +755,7 @@
   var vp = document.getElementById('viewport');
   var tsIn = false, tsEdge = '';
   vp.addEventListener('touchstart', function (e) {
-    var sc = e.target.closest && e.target.closest('.sec[data-name="Menu Board"] .inner');
+    var sc = e.target.closest && e.target.closest('.inner[data-scroll]');
     tsIn = !!sc; tsEdge = '';
     if (sc) {
       var max = sc.scrollHeight - sc.clientHeight;
@@ -816,6 +867,7 @@
     lines.push('', 'Name: ' + nameEl.value.trim(), 'Email: ' + mailEl.value.trim());
     if (msgEl.value.trim()) lines.push('', 'Note:', msgEl.value.trim());
     lines.push('', 'Sent from the AIO cart at han.espil.online/aio');
+    try { if (window.__aioCrmFromCart) window.__aioCrmFromCart({ name: nameEl.value.trim(), email: mailEl.value.trim(), items: cart.map(function (id) { return svc(id).name; }), note: msgEl.value.trim() }); } catch (e) {}
     var href = 'mailto:han@espil.online?subject=' + encodeURIComponent('UseDesign service cart - ' + nameEl.value.trim()) +
                '&body=' + encodeURIComponent(lines.join('\n'));
     sendNote.textContent = 'Opening your mail app - the cart is in the message, ready to send.';
@@ -1221,7 +1273,7 @@ setTimeout(function(){
     '0,3': 'Branding & marketing - identity, search and social held to one standard.',
     '0,4': 'Logo, video, SNS and blog - the brand\u2019s ongoing face, run as one desk.',
     '1,2': 'Operations & AI - the daily repeat work, rebuilt as systems.',
-    '2,2': 'CRM, OCR, POS - the three systems a storefront business lives on.'
+    '2,2': 'CRM · OCR · POS - and this room runs: a live CRM demo with PDF intake, all in your browser. Try the sample PDF.'
   };
   var widget = document.getElementById('servoWidget'), bubble = document.getElementById('swBubble');
   var panel = document.getElementById('chatPanel'), msgs = document.getElementById('chatMsgs');
@@ -1233,6 +1285,7 @@ setTimeout(function(){
     if (on) bubble.textContent = NOTES[key] || '';
     if (!on) panel.classList.remove('open');
     if (key === '0,2') requestAnimationFrame(updateTrack);
+    if (key === '2,2') requestAnimationFrame(updateCrmTrack);
   };
 
   /* the cart room's diamond scrollbar - the same indicator as han.espil.online */
@@ -1256,6 +1309,27 @@ setTimeout(function(){
   }, { passive: true });
   addEventListener('resize', updateTrack);
   if (scroller) scroller.addEventListener('click', function () { setTimeout(updateTrack, 60); });
+  var crmScroller = document.querySelector('.sec[data-name="CRM · OCR · POS"] .inner');
+  var crmTr = document.getElementById('crmTrack'), crmDia = document.getElementById('crmDiamond'), crmSh = document.getElementById('crmShadow');
+  var crmTicking = false, crmIdle = null;
+  function updateCrmTrack() {
+    crmTicking = false;
+    if (!crmScroller || !crmTr) return;
+    var m = crmScroller.scrollHeight - crmScroller.clientHeight;
+    if (m <= 40) { crmTr.classList.remove('on'); return; }
+    crmTr.classList.add('on');
+    var f = Math.min(1, Math.max(0, crmScroller.scrollTop / m));
+    var y = 12 + f * (crmTr.clientHeight - 24);
+    crmDia.style.top = y + 'px'; crmSh.style.top = (y + 11) + 'px';
+  }
+  if (crmScroller) crmScroller.addEventListener('scroll', function () {
+    if (!crmTicking) { crmTicking = true; requestAnimationFrame(updateCrmTrack); }
+    crmTr.classList.add('moving');
+    clearTimeout(crmIdle); crmIdle = setTimeout(function () { crmTr.classList.remove('moving'); }, 160);
+  }, { passive: true });
+  addEventListener('resize', updateCrmTrack);
+  if (crmScroller) crmScroller.addEventListener('click', function () { setTimeout(updateCrmTrack, 60); });
+  requestAnimationFrame(updateCrmTrack);
   function addMsg(text, who) {
     var d = document.createElement('div'); d.className = 'msg ' + who; d.textContent = text;
     msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
@@ -1302,5 +1376,171 @@ setTimeout(function(){
   });
 })();
 </script>
+<script>
+/* AIO CRM · OCR static demo (Han decision B, 2026-11-05): mirrors the locally
+   completed Next.js + TypeScript build's behaviour in the browser only.
+   Records live in localStorage; PDFs are parsed on-device with vendored pdf.js. */
+(function () {
+  var LS_KEY = 'aio-crm-demo-v1';
+  var STATUSES = ['New', 'Contacted', 'In Progress', 'Won', 'Archived'];
+  var listEl = document.getElementById('crmList');
+  if (!listEl) return;
+  var searchEl = document.getElementById('crmSearch'), statusEl = document.getElementById('crmStatus'),
+      sourceEl = document.getElementById('crmSource'), msgEl = document.getElementById('ocrMsg');
+  var DAY = 24 * 60 * 60 * 1000;
+  function iso(daysAgo) { return new Date(Date.now() - daysAgo * DAY).toISOString(); }
+  function seeds() {
+    return [
+      { name: 'Marina Castellan', company: 'Castellan Ceramics', email: 'marina@castellanceramics.ca', phone: '604-555-0119', status: 'In Progress', source: 'manual', amount: 2100, notes: '3D Web inquiry from the portfolio site. Wants a rotating kiln-room scene for the studio page.', createdAt: iso(2) },
+      { name: 'Devon Achieng', company: 'Northlight Tutoring', email: 'devon@northlighttutoring.com', phone: '778-555-0142', status: 'Contacted', source: 'manual', amount: 1800, notes: 'Business Dashboards: enrolment and tutor-hours reporting, refreshed nightly.', createdAt: iso(4) },
+      { name: 'Sofia Lindqvist', company: 'Fjord & Fern Interiors', email: 'sofia@fjordandfern.ca', phone: '604-555-0173', status: 'Won', source: 'cart', amount: 1250, notes: 'Branding & Marketing order placed through the AIO cart.', createdAt: iso(6) },
+      { name: 'Harper Yoon', company: 'Yoon Family Dental', email: 'office@yoonfamilydental.ca', phone: '604-555-0126', status: 'New', source: 'ocr', amount: 950, notes: 'Imported from a formatted intake PDF (OCR pipeline). Video Production interest noted on the form.', createdAt: iso(1) },
+      { name: 'Mateo Alvarez', company: 'Alvarez Coffee Roasters', email: 'mateo@alvarezroasters.ca', phone: '778-555-0198', status: 'Contacted', source: 'ocr', amount: 1600, notes: 'Imported from a formatted intake PDF (OCR pipeline). Operations Automation: roast-log data entry.', createdAt: iso(3) },
+      { name: 'Priya Raman', company: 'Raman Physiotherapy', email: 'priya@ramanphysio.ca', phone: '604-555-0151', status: 'Archived', source: 'manual', amount: null, notes: 'Asked for a quote in spring; paused until the new clinic opens.', createdAt: iso(21) }
+    ].map(function (r, i) { r.id = i + 1; return r; });
+  }
+  var store;
+  function load() {
+    try { store = JSON.parse(localStorage.getItem(LS_KEY)); } catch (e) { store = null; }
+    if (!store || !Array.isArray(store.records)) { store = { records: seeds(), seq: 7 }; save(); }
+  }
+  function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(store)); } catch (e) {} }
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function money(n) { return n == null ? '' : 'CAD ' + Number(n).toLocaleString('en-CA'); }
+  function addRecord(r) {
+    r.id = store.seq++; r.status = STATUSES.indexOf(r.status) >= 0 ? r.status : 'New';
+    r.createdAt = r.createdAt || new Date().toISOString();
+    store.records.unshift(r); save(); return r;
+  }
+  function render() {
+    var recs = store.records.slice().sort(function (a, b) { return (b.createdAt || '').localeCompare(a.createdAt || '') || b.id - a.id; });
+    document.getElementById('stTotal').textContent = store.records.length;
+    document.getElementById('stOcr').textContent = store.records.filter(function (r) { return r.source === 'ocr'; }).length;
+    document.getElementById('stCart').textContent = store.records.filter(function (r) { return r.source === 'cart'; }).length;
+    document.getElementById('stWon').textContent = store.records.filter(function (r) { return r.status === 'Won'; }).length;
+    var q = (searchEl.value || '').toLowerCase(), fs = statusEl.value, fo = sourceEl.value;
+    var shown = recs.filter(function (r) {
+      if (fs && r.status !== fs) return false;
+      if (fo && r.source !== fo) return false;
+      if (q && (r.name + ' ' + r.company + ' ' + r.email).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+    if (!shown.length) { listEl.innerHTML = '<p class="crm-empty">No records match. Import a formatted PDF below, send the cart from the Menu Board, or reset the demo data.</p>'; return; }
+    listEl.innerHTML = shown.map(function (r) {
+      return '<div class="crm-rec"><div class="crm-row" data-id="' + r.id + '" role="button" tabindex="0">' +
+        '<span class="nm">' + esc(r.name) + '</span>' +
+        (r.company ? '<span class="co">' + esc(r.company) + '</span>' : '') +
+        '<span class="chip">' + esc(r.status) + '</span>' +
+        '<span class="chip src">' + esc(r.source) + '</span>' +
+        (r.amount != null ? '<span class="amt">' + money(r.amount) + '</span>' : '') +
+        '</div><div class="crm-detail" hidden>' +
+        (r.email ? '<p><b>Email</b> ' + esc(r.email) + '</p>' : '') +
+        (r.phone ? '<p><b>Phone</b> ' + esc(r.phone) + '</p>' : '') +
+        (r.amount != null ? '<p><b>Amount</b> ' + money(r.amount) + '</p>' : '') +
+        '<p><b>Added</b> ' + esc(new Date(r.createdAt).toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' })) + ' · via ' + esc(r.source) + '</p>' +
+        (r.notes ? '<p class="crm-notes">' + esc(r.notes) + '</p>' : '') +
+        '</div></div>';
+    }).join('');
+    listEl.querySelectorAll('.crm-row').forEach(function (row) {
+      function toggle() { var d = row.parentElement.querySelector('.crm-detail'); d.hidden = !d.hidden; }
+      row.addEventListener('click', toggle);
+      row.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+    });
+  }
+  /* ---------- OCR: the same label format + parse rules as the Next build ---------- */
+  var LABEL_RE = /^\s*(Name|Company|Email|Phone|Amount|Date|Status|Notes)\s*:\s*(.+?)\s*$/i;
+  function parseAmount(raw) { var v = parseFloat(String(raw).replace(/[^0-9.]/g, '')); return isFinite(v) ? v : null; }
+  function parseText(text) {
+    var blocks = text.split(/^\s*-{3,}\s*$/m), out = [], skipped = 0;
+    blocks.forEach(function (block) {
+      var f = {};
+      block.split(/\r?\n/).forEach(function (line) { var m = line.match(LABEL_RE); if (m) f[m[1].toLowerCase()] = m[2]; });
+      if (!Object.keys(f).length) return;
+      if (!f.name && !f.email) { skipped++; return; }
+      var d = f.date ? new Date(f.date) : null;
+      out.push({
+        name: f.name || f.email, company: f.company || '', email: f.email || '', phone: f.phone || '',
+        status: STATUSES.filter(function (s) { return s.toLowerCase() === (f.status || '').trim().toLowerCase(); })[0] || 'New',
+        source: 'ocr', amount: f.amount ? parseAmount(f.amount) : null, notes: f.notes || '',
+        createdAt: d && !isNaN(d.getTime()) ? d.toISOString() : undefined
+      });
+    });
+    return { records: out, skipped: skipped };
+  }
+  var pdfjs = null;
+  function loadPdfjs() {
+    if (pdfjs) return Promise.resolve(pdfjs);
+    return import('/aio/vendor/pdf.min.mjs').then(function (m) {
+      m.GlobalWorkerOptions.workerSrc = '/aio/vendor/pdf.worker.min.mjs';
+      pdfjs = m; return m;
+    });
+  }
+  function extractText(buf) {
+    return loadPdfjs().then(function (lib) {
+      return lib.getDocument({ data: buf }).promise.then(function (pdf) {
+        var chain = Promise.resolve('');
+        for (var p = 1; p <= pdf.numPages; p++) {
+          (function (pageNo) {
+            chain = chain.then(function (acc) {
+              return pdf.getPage(pageNo).then(function (page) {
+                return page.getTextContent().then(function (content) {
+                  var lines = [], cur = '', lastY = null;
+                  content.items.forEach(function (item) {
+                    if (!('str' in item)) return;
+                    var y = Math.round(item.transform[5]);
+                    if (lastY !== null && y !== lastY) { lines.push(cur); cur = ''; }
+                    cur += (cur && !cur.endsWith(' ') ? ' ' : '') + item.str;
+                    lastY = y;
+                  });
+                  if (cur) lines.push(cur);
+                  return acc + lines.join('\n') + '\n';
+                });
+              });
+            });
+          })(p);
+        }
+        return chain;
+      });
+    });
+  }
+  function importPdf(buf, filename) {
+    msgEl.textContent = 'Reading ' + filename + ' ...';
+    return extractText(buf).then(function (text) {
+      var res = parseText(text);
+      res.records.forEach(addRecord);
+      render();
+      msgEl.textContent = res.records.length
+        ? 'Imported ' + res.records.length + ' record' + (res.records.length > 1 ? 's' : '') + ' from ' + filename + (res.skipped ? ' (' + res.skipped + ' block' + (res.skipped > 1 ? 's' : '') + ' skipped - no name or email)' : '') + '.'
+        : 'No records found in ' + filename + ' - the PDF needs the label format described above.';
+    }).catch(function () { msgEl.textContent = 'That file could not be read as a PDF.'; });
+  }
+  document.getElementById('ocrFile').addEventListener('change', function (e) {
+    var f = e.target.files && e.target.files[0];
+    if (f) f.arrayBuffer().then(function (buf) { importPdf(buf, f.name); });
+    e.target.value = '';
+  });
+  document.getElementById('ocrSample').addEventListener('click', function () {
+    fetch('/aio/sample-intake.pdf').then(function (r) { return r.arrayBuffer(); })
+      .then(function (buf) { importPdf(buf, 'sample-intake.pdf'); })
+      .catch(function () { msgEl.textContent = 'The sample PDF could not be loaded.'; });
+  });
+  /* ---------- cart link: sending the board cart also opens its CRM record ---------- */
+  window.__aioCrmFromCart = function (info) {
+    addRecord({
+      name: info.name || 'AIO cart inquiry', company: '', email: info.email || '', phone: '',
+      status: 'New', source: 'cart', amount: null,
+      notes: 'Cart inquiry sent from the AIO Menu Board: ' + (info.items || []).join(', ') + (info.note ? '. Note: ' + info.note : '')
+    });
+    render();
+  };
+  [searchEl, statusEl, sourceEl].forEach(function (el) { el.addEventListener('input', render); el.addEventListener('change', render); });
+  document.getElementById('crmReset').addEventListener('click', function () {
+    store = { records: seeds(), seq: 7 }; save(); render();
+    msgEl.textContent = 'Demo data reset to the six sample records.';
+  });
+  load(); render();
+})();
+</script>
+
 </body>
 </html>
