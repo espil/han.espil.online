@@ -366,22 +366,10 @@
   #cpForm{display:flex; gap:7px; padding:10px 12px; border-top:1px solid var(--line)}
   #cpInput{flex:1; min-width:0; border:1px solid var(--line); border-radius:9px; padding:9px 11px; font-size:13.5px; font-family:inherit}
   #cpForm .btn{padding:9px 14px}
-  /* ---------- mobile d-pad + responsive layout (Han, 2026-11-04) ---------- */
-  #dpad{display:none; position:fixed; left:50%; bottom:12px; transform:translateX(-50%); z-index:66;
-    grid-template-columns:repeat(3,42px); grid-template-rows:repeat(2,42px); gap:5px;
-    background:rgba(255,255,255,.85); backdrop-filter:blur(8px); border:1px solid var(--line);
-    border-radius:16px; padding:7px; box-shadow:0 10px 26px rgba(22,22,22,.16)}
-  #dpad button{border:1px solid var(--line); background:#fff; border-radius:11px; font-size:17px; color:var(--ink); cursor:pointer; line-height:1; padding:0}
-  #dpad button:active{background:var(--ink); color:#fff}
-  #dpad .dp-up{grid-column:2; grid-row:1}
-  #dpad .dp-left{grid-column:1; grid-row:2}
-  #dpad .dp-down{grid-column:2; grid-row:2}
-  #dpad .dp-right{grid-column:3; grid-row:2}
-  #dpad button.off{opacity:.25; pointer-events:none}
+  /* ---------- mobile responsive layout (Han, 2026-11-04) ---------- */
   @media (max-width:719px){
     .edge{display:none !important}
-    #dpad{display:grid}
-    .sec .inner{padding:58px 14px 138px}
+    .sec .inner{padding:58px 14px 104px}
     .minimap{left:10px; bottom:10px; padding:6px 7px}
     .mm-cell{width:9px; height:9px}
     .mm-name{font-size:9px; margin-top:4px}
@@ -392,7 +380,7 @@
     .grid2{grid-template-columns:1fr}
     .lede{font-size:13.5px}
     .work{font-size:13.5px}
-    #servoWidget{right:10px; bottom:126px}
+    #servoWidget{right:10px; bottom:10px}
     .sw-bubble{max-width:150px; font-size:11px; padding:7px 9px}
     .sw-btn{width:48px; height:48px}
     #chatPanel{right:10px; bottom:76px; width:calc(100vw - 20px); height:min(430px,60vh)}
@@ -590,12 +578,6 @@
 <button id="cartChip" type="button">Cart · <b id="cartCount">0</b></button>
 <div id="minimap" aria-hidden="true"><div class="mm-grid" id="mmGrid"></div><div class="mm-name" id="mmName">Main</div></div>
 
-<nav id="dpad" aria-label="Move between rooms">
-  <button type="button" class="dp-up" data-step="up" aria-label="Room above">↑</button>
-  <button type="button" class="dp-left" data-step="left" aria-label="Room to the left">←</button>
-  <button type="button" class="dp-down" data-step="down" aria-label="Room below">↓</button>
-  <button type="button" class="dp-right" data-step="right" aria-label="Room to the right">→</button>
-</nav>
 <div id="servoWidget" aria-live="polite">
   <div class="sw-bubble" id="swBubble"></div>
   <button class="sw-btn" id="swBtn" type="button" aria-label="Chat with Servo"><img src="/assets/usedesign-icon.svg" alt=""></button>
@@ -678,7 +660,6 @@
       if (L[d]) { edges[d].textContent = ARROW[d] + ' ' + NAMES[L[d]]; edges[d].classList.add('on'); }
       else edges[d].classList.remove('on');
     });
-    Object.keys(dpBtns).forEach(function (d) { dpBtns[d].classList.toggle('off', !L[d]); });
     Object.keys(mmCells).forEach(function (k) { mmCells[k].classList.toggle('cur', k === cur); });
     mmName.textContent = NAMES[cur];
     if (window.__roomHook) window.__roomHook(cur);
@@ -712,8 +693,6 @@
     step(dy > 0 ? 'down' : 'up');
   }, { passive: false });
   Object.keys(edges).forEach(function (d) { edges[d].addEventListener('click', function () { step(d); }); });
-  var dpBtns = {};
-  document.querySelectorAll('#dpad [data-step]').forEach(function (b) { dpBtns[b.dataset.step] = b; b.addEventListener('click', function () { step(b.dataset.step); }); });
   document.addEventListener('keydown', function (e) {
     var t = e.target, tag = t && t.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
@@ -723,8 +702,15 @@
   /* swipe: drag the world (rooms are one page, nothing scrolls) */
   var ts = null;
   var vp = document.getElementById('viewport');
+  var tsIn = false, tsEdge = '';
   vp.addEventListener('touchstart', function (e) {
-    if (e.target.closest && e.target.closest('.sec[data-name="Menu Board"] .inner')) { ts = null; return; }
+    var sc = e.target.closest && e.target.closest('.sec[data-name="Menu Board"] .inner');
+    tsIn = !!sc; tsEdge = '';
+    if (sc) {
+      var max = sc.scrollHeight - sc.clientHeight;
+      if (max > 2 && sc.scrollTop >= max - 1) tsEdge = 'bot';
+      else if (sc.scrollTop <= 0) tsEdge = 'top';
+    }
     if (e.touches.length === 1) ts = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, { passive: true });
   vp.addEventListener('touchend', function (e) {
@@ -732,7 +718,9 @@
     var dx = e.changedTouches[0].clientX - ts.x, dy = e.changedTouches[0].clientY - ts.y; ts = null;
     if (Math.max(Math.abs(dx), Math.abs(dy)) < 48) return;
     if (Math.abs(dx) > Math.abs(dy)) step(dx > 0 ? 'left' : 'right');
-    else step(dy > 0 ? 'up' : 'down');
+    else if (!tsIn) step(dy > 0 ? 'up' : 'down');
+    else if (dy < 0 && tsEdge === 'bot') step('down');
+    else if (dy > 0 && tsEdge === 'top') step('up');
   }, { passive: true });
 
   /* ---------- intro: logo animation, then rise on its own ---------- */
