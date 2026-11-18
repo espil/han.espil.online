@@ -921,4 +921,30 @@ modal.style.display = "none";
 
 <script src="./script.js"></script>
 
+<script>
+// han.espil.online replica repair: the original handlers listen to the
+// window scroll, but this page scrolls inside <main>, so they never fired.
+// Bind the same behaviours to the real scroller.
+(function () {
+  function bind() {
+    var main = document.getElementById('main');
+    var logo = document.querySelector('.logo-center');
+    var nav = document.getElementById('navbar');
+    if (!main) { return; }
+    main.addEventListener('scroll', function () {
+      if (logo) {
+        if (main.scrollTop > 50) { logo.classList.add('up'); }
+        else { logo.classList.remove('up'); }
+      }
+      if (nav) {
+        if (main.scrollTop > 2) { nav.style.top = '60px'; nav.style.opacity = '1'; }
+        else { nav.style.top = ''; nav.style.opacity = ''; }
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else { bind(); }
+})();
+</script>
 </html>

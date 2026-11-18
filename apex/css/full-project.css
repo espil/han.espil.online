@@ -558,12 +558,12 @@
   gap: 24px;
 }
 
-@media screen and (max-width: 1439px) {
+@media screen and (max-width: 699px) {
   .screen.full-project { 
     display: none;
    }
 }
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 700px) {
   .screen.iphone-14-1 { 
     display: none;
    }
