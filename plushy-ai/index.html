@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plushy AI - Free Local AI Sprite &amp; 3D Generator for Games</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/assets/usedesign-icon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="Free, local AI asset generation on your own GPU. Text to transparent sprites and image to game-ready 3D GLB. No cloud, no fees. Get it on GitHub.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://han.espil.online/plushy-ai">
+<meta property="og:title" content="Plushy AI - Free Local AI Sprite &amp; 3D Generator for Games">
+<meta property="og:description" content="Free, local AI asset generation on your own GPU. Text to transparent sprites and image to game-ready 3D GLB. No cloud, no fees. Get it on GitHub.">
+<link rel="canonical" href="https://han.espil.online/plushy-ai">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Plushy AI",
+  "url": "https://han.espil.online/plushy-ai",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Windows, Linux",
+  "description": "Free, local AI asset generation for game developers on their own GPU. Text prompts to transparent PNG sprites and single images to game-ready textured 3D GLB models. No cloud, no per-generation fees, nothing uploaded.",
+  "softwareVersion": "1.0",
+  "downloadUrl": "https://github.com/espil/plushy-ai",
+  "codeRepository": "https://github.com/espil/plushy-ai",
+  "license": "https://opensource.org/licenses/MIT",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Espil",
+    "url": "https://espil.online"
+  },
+  "featureList": "Text to transparent sprite generation (SDXL-Turbo + rembg), image to textured 3D GLB (Stable Fast 3D) decimated to game triangle budgets, batch production from folder and JSON manifest, one-page web UI with in-browser 3D preview, runs locally via Docker on an NVIDIA GPU"
+}
+</script>
+<style>
+:root{
+  --paper:#f0eee9;
+  --paper-2:#e8e4da;
+  --ink:#161616;
+  --muted:#6e6a61;
+  --rule:#d5d0c4;
+  --highlight:#c8102e;
+  --highlight-ink:#a50d26;
+  --masthead-bg:#161616;
+  --masthead-fg:#f0eee9;
+  --sans:Helvetica,Arial,"Helvetica Neue",sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141412; --paper-2:#1c1c19; --ink:#f0eee9; --muted:#a8a296;
+    --rule:#3b3a35; --highlight:#ef6461; --highlight-ink:#ef6461;
+    --masthead-bg:#f0eee9; --masthead-fg:#161616;
+  }
+}
+html[data-theme="dark"]{
+  --paper:#141412; --paper-2:#1c1c19; --ink:#f0eee9; --muted:#a8a296;
+  --rule:#3b3a35; --highlight:#ef6461; --highlight-ink:#ef6461;
+  --masthead-bg:#f0eee9; --masthead-fg:#161616;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--serif); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased}
+::selection{background:var(--highlight); color:#f0eee9}
+a{color:var(--highlight-ink); text-decoration:none}
+a:hover{text-decoration:underline; text-underline-offset:3px}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px}
+.folio{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; padding:9px 0 8px; border-bottom:1px solid var(--ink); font-family:var(--sans); font-size:10.5px; font-weight:700; letter-spacing:.24em; text-transform:uppercase}
+.folio .folio-mid{color:var(--highlight-ink)}
+.folio .folio-end{display:inline-flex; align-items:center; gap:12px}
+.theme-toggle{font-family:var(--sans); font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; background:transparent; color:var(--ink); border:1px solid var(--ink); border-radius:999px; padding:3px 10px; cursor:pointer; line-height:1.5}
+.theme-toggle:hover{background:var(--ink); color:var(--paper)}
+.masthead{background:var(--masthead-bg); color:var(--masthead-fg); margin:0 -28px; padding:44px 28px 34px; text-align:center}
+.masthead .brand{font-family:var(--serif); font-size:clamp(40px,7vw,72px); font-weight:700; letter-spacing:.01em; line-height:1.05}
+.masthead .brand span{color:var(--highlight)}
+.masthead .tagline{font-family:var(--sans); font-size:12px; letter-spacing:.22em; text-transform:uppercase; margin-top:12px; opacity:.85}
+main{padding:38px 0 8px}
+.kicker{font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.26em; text-transform:uppercase; color:var(--highlight-ink); margin:0 0 10px}
+h1{font-size:clamp(30px,4.6vw,46px); line-height:1.16; margin:0 0 18px; font-weight:700}
+h2{font-size:clamp(24px,3.4vw,32px); line-height:1.25; margin:44px 0 12px; font-weight:700}
+p{margin:0 0 16px}
+.lede{font-size:20px; line-height:1.55}
+ul{margin:0 0 18px; padding-left:22px}
+li{margin-bottom:7px}
+li::marker{color:var(--highlight)}
+.cta{display:inline-block; font-family:var(--sans); font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; background:var(--ink); color:var(--paper); padding:13px 26px; border-radius:999px; margin:6px 0 10px}
+.cta:hover{background:var(--highlight); color:#fff; text-decoration:none}
+.factbox{background:var(--paper-2); border:1px solid var(--rule); padding:20px 24px 8px; margin:26px 0 8px}
+.factbox dl{display:grid; grid-template-columns:130px 1fr; gap:6px 18px; margin:0}
+.factbox dt{font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); padding-top:4px}
+.factbox dd{margin:0 0 10px}
+pre{background:var(--ink); color:var(--paper); font-family:var(--mono); font-size:14px; line-height:1.6; padding:18px 20px; overflow-x:auto; border-radius:4px; margin:0 0 18px}
+.faq p{margin-bottom:20px}
+.faq strong{display:block; font-size:18px; margin-bottom:4px}
+.backline{margin-top:44px; font-family:var(--sans); font-size:12px; letter-spacing:.14em; text-transform:uppercase}
+footer{border-top:1px solid var(--ink); margin-top:34px; padding:18px 0 30px; font-family:var(--sans); font-size:12px; color:var(--muted)}
+footer .colophon{margin-top:6px; font-size:11.5px}
+@media (max-width:719px){
+  .wrap{padding:0 18px}
+  .masthead{margin:0 -18px; padding:34px 18px 26px}
+  .factbox dl{grid-template-columns:1fr}
+  .factbox dt{padding-top:10px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="folio">
+    <span><a href="/">han.espil.online</a></span>
+    <span class="folio-mid">Plushy AI - Local AI Asset Generation</span>
+    <span class="folio-end">Espil <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch between day and night mode">&#9790; Night</button></span>
+  </div>
+
+  <header class="masthead">
+    <div class="brand">Plushy<span> AI</span></div>
+    <div class="tagline">Free local AI sprite &amp; 3D generator for games</div>
+  </header>
+
+  <main>
+    <p class="kicker">Open Source - MIT License</p>
+    <h1>Plushy AI - free, local AI asset generation for game developers</h1>
+    <p class="lede"><strong>Your GPU makes your game assets. No cloud, no per-generation fees, nothing uploaded.</strong></p>
+    <p>Plushy AI is a free, open-source tool (MIT) that turns text prompts into transparent game sprites and single images into textured 3D models, entirely on your own machine. It is the tool we built to produce assets for our own games, released so other developers can use it too.</p>
+    <p><a class="cta" href="https://github.com/espil/plushy-ai">Get Plushy AI on GitHub</a></p>
+
+    <div class="factbox">
+      <dl>
+        <dt>Price</dt><dd>Free - open source under the MIT license</dd>
+        <dt>Runs on</dt><dd>Your own machine - an NVIDIA GPU with 8 GB VRAM or more, via Docker</dd>
+        <dt>Outputs</dt><dd>Transparent PNG sprites; textured 3D models in GLB, decimated to game triangle budgets</dd>
+        <dt>Version</dt><dd>1.0 available now on GitHub; 2.0 in development</dd>
+        <dt>Repository</dt><dd><a href="https://github.com/espil/plushy-ai">github.com/espil/plushy-ai</a></dd>
+      </dl>
+    </div>
+
+    <h2>Mode 1 - Text to sprite</h2>
+    <p>Type a prompt, get a transparent PNG sprite.</p>
+    <ul>
+      <li>SDXL-Turbo generation with automatic background removal (rembg)</li>
+      <li>About 5 seconds per sprite on an RTX 4060</li>
+      <li>Transparent background, ready to drop into a 2D game</li>
+      <li>Set the seed to reproduce a result, and the size from 64 to 1024 px</li>
+    </ul>
+    <p>Prompt in, game sprite out - no subscription counter ticking while you iterate.</p>
+
+    <h2>Mode 2 - Image to 3D model</h2>
+    <p>Give it one image, get a textured 3D model in GLB format.</p>
+    <ul>
+      <li>Stable Fast 3D reconstruction from a single image (a plain white background works best)</li>
+      <li>Decimated to a game triangle budget: 8,000 triangles by default, 20,000 for landmark models</li>
+      <li>Textures at 1024-2048</li>
+      <li>Ships meshopt-compressed, plus an uncompressed twin for loaders without meshopt support (for example Unity glTFast)</li>
+      <li>A JSON spec sidecar is written next to every model</li>
+    </ul>
+    <p>Cloud image-to-3D tools hand you whatever mesh they feel like. Plushy AI hands you a model sized for a game engine.</p>
+
+    <h2>Mode 3 - Batch production</h2>
+    <p>Point it at a folder of images and a JSON manifest, and convert the whole set unattended.</p>
+    <ul>
+      <li>Every asset produces a compressed GLB, an uncompressed GLB, and a spec sidecar</li>
+      <li>Re-running skips finished assets, so a batch can be stopped and resumed at any point</li>
+      <li>Ready-made launcher scripts are included</li>
+      <li>This is the mode we use for production runs on our own games</li>
+    </ul>
+
+    <h2>Plushy AI Studio - one page does everything</h2>
+    <p>Plushy AI runs as a local web app. The Studio page gives you:</p>
+    <ul>
+      <li>A prompt box with live job progress</li>
+      <li>Sprite and image-to-3D modes in one place</li>
+      <li>An in-browser 3D preview of generated models</li>
+      <li>A gallery of your output folder with downloads</li>
+      <li>Job history and cancel</li>
+    </ul>
+    <p>Open it at http://localhost:8000/studio once the container is up. On Windows, the included start-gui.bat also serves the Studio to other devices on your LAN.</p>
+
+    <h2>Requirements</h2>
+    <ul>
+      <li>An NVIDIA GPU with 8 GB VRAM or more</li>
+      <li>Docker Desktop, or Docker Engine with the NVIDIA container toolkit</li>
+      <li>A Hugging Face token, needed once on the first run to download the gated SDXL-Turbo model</li>
+      <li>About 18 GB of downloads on the first run (all model weights, downloaded visibly, cached in a Docker volume, then used offline)</li>
+    </ul>
+    <p>Quick start:</p>
+    <pre>git clone https://github.com/espil/plushy-ai.git
+cd plushy-ai
+docker compose up --build</pre>
+
+    <h2>Version 2.0 is in development</h2>
+    <p>Plushy AI 2.0 is being built now. Its reference analysis and style/asset generation phases are in place; the GPU generation path is still being verified on real hardware, so we are not announcing a release date. Version 1.0 above is available on GitHub today and is the version these instructions describe. Star the repo to follow 2.0 as it lands.</p>
+
+    <h2>FAQ</h2>
+    <div class="faq">
+      <p><strong>Is Plushy AI really free?</strong>
+      Yes. Plushy AI is open source under the MIT license, free for personal and commercial use. There are no per-generation fees and no subscription, because generation happens on your own GPU instead of a cloud service.</p>
+      <p><strong>Does Plushy AI upload my images or prompts anywhere?</strong>
+      No. Generation runs locally in a Docker container on your machine and outputs stay in your own output folder. Model weights are downloaded once on the first run and cached; after that the tool works offline.</p>
+      <p><strong>What GPU do I need for Plushy AI?</strong>
+      An NVIDIA GPU with 8 GB of VRAM or more, plus Docker. As a reference point from our own testing in the README: a sprite takes about 5 seconds on an RTX 4060, and a 3D conversion takes roughly 4 minutes per model on the same card.</p>
+      <p><strong>What formats does Plushy AI output?</strong>
+      Sprites are transparent PNG files. 3D models are GLB files - meshopt-compressed by default, with an uncompressed twin for loaders without meshopt support - plus a JSON spec sidecar for each model. Models are decimated to game triangle budgets: 8,000 triangles by default, 20,000 for landmarks.</p>
+      <p><strong>Can I use Plushy AI assets in a commercial game?</strong>
+      Yes. The tool is MIT-licensed for personal and commercial use, and it exists to make assets for real games - we use it for our own. As with any AI tool, you are responsible for checking that your inputs and use comply with the licenses of the underlying models and your own obligations.</p>
+    </div>
+
+    <h2>Get Plushy AI</h2>
+    <p>Free, local, and yours to run:</p>
+    <p><a class="cta" href="https://github.com/espil/plushy-ai">github.com/espil/plushy-ai</a></p>
+    <p>Plushy AI is made by Espil (<a href="https://espil.online">espil.online</a>). If it helps you, a star on the repo is the best thank-you.</p>
+
+    <p class="backline"><a href="/#works">&larr; Back to Selected Works</a></p>
+  </main>
+
+  <footer>
+    <div>han.espil.online - my portfolio. Built and maintained by me.</div>
+    <div class="colophon">Plushy AI is free and open source under the MIT license. Version 1.0 is on GitHub; version 2.0 is in development.</div>
+  </footer>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('themeToggle');
+  try{
+    var t = localStorage.getItem('espil-theme');
+    if(t) document.documentElement.setAttribute('data-theme', t);
+  }catch(e){}
+  if(btn){
+    btn.addEventListener('click', function(){
+      var cur = document.documentElement.getAttribute('data-theme');
+      var next = (cur === 'dark') ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try{ localStorage.setItem('espil-theme', next); }catch(e){}
+    });
+  }
+})();
+</script>
+</body>
+</html>
