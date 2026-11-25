@@ -655,7 +655,7 @@ section[id]{scroll-snap-align:start; scroll-margin-top:64px}
 <noscript><style>#espil-loader{display:none}</style></noscript>
 <script>
 /* Loader watchdog (2026-10-24): independent of the loader's own scripts.
-   If the cover is still up after 5.5s for any reason - a stalled script,
+   If the cover is still up after 2.2s for any reason - a stalled script,
    a poisoned cache entry, an extension - dismiss it here. */
 setTimeout(function(){
   var L = document.getElementById('espil-loader');
@@ -664,7 +664,7 @@ setTimeout(function(){
     document.documentElement.classList.remove('el-lock');
     setTimeout(function(){ if(L.parentNode) L.parentNode.removeChild(L); }, 600);
   }
-}, 5500);
+}, 2200);
 </script>
 </head>
 <body>
@@ -801,7 +801,7 @@ setTimeout(function(){
   var G=L.querySelector('.el-glass');
     document.documentElement.classList.add('el-lock');
   var start=Date.now(), shown=0, finished=false;
-  setTimeout(function(){ finish(); }, 7000); /* absolute failsafe */
+  setTimeout(function(){ finish(); }, 2500); /* absolute failsafe */
   function real(){
     var imgs=document.images, t=imgs.length, c=0;
     for(var i=0;i<t;i++){ if(imgs[i].complete) c++; }
@@ -829,7 +829,7 @@ setTimeout(function(){
       if(shown>target) shown=target;
       if(shown>99) shown=99;
       paint();
-      if((real()>=1 && el>900) || el>6000){ clearInterval(tick); finish(); }
+      if(((real()>=1 || document.readyState==='interactive') && el>600) || el>1800){ clearInterval(tick); finish(); }
     }catch(e){ clearInterval(tick); finish(); }
   }, 50);
 })();
